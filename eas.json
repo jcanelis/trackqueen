@@ -1,0 +1,34 @@
+{
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "cache": {
+        "key": "random-value-here"
+      }
+    },
+    "development-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview": {
+      "channel": "preview",
+      "distribution": "internal",
+      "cache": {
+        "key": "random-value-here"
+      }
+    },
+    "production": {
+      "channel": "main",
+      "cache": {
+        "key": "random-value-here"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
