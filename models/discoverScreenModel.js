@@ -20,7 +20,7 @@ const DiscoverScreenModel = async ({ spotifyData }) => {
     const trackID = spotifyData.id
     const relatedTracks = await SpotifyGetSimilarTracks(token, trackID)
 
-    // Get popular tracks from Spotify
+    // Get the artists' popular tracks from Spotify
     const { tracks } = await SpotifyArtistTopTracks(token, artistID)
     const artistTopTracks = tracks
 
