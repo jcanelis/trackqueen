@@ -165,7 +165,7 @@ function VideoScreen() {
             title: `${currentlyPlaying.track} by ${currentlyPlaying.artist} live`,
             videos: data.performances,
             token: data.nextPageToken,
-            query: `${currentlyPlaying.track} by ${currentlyPlaying.artist} live`,
+            query: `${currentlyPlaying.track} ${currentlyPlaying.artist} live`,
           })
         }}
       />
@@ -196,10 +196,10 @@ function VideoScreen() {
         copy={"Reactions"}
         func={() => {
           navigation.navigate(`${currentlyPlaying.track} YouTube videos`, {
-            title: `${currentlyPlaying.track} by ${currentlyPlaying.artist} reactions`,
+            title: `Reactions to ${currentlyPlaying.track} by ${currentlyPlaying.artist}`,
             videos: data.reactions,
             token: data.nextPageToken,
-            query: `${currentlyPlaying.track} by ${currentlyPlaying.artist} reactions`,
+            query: `${currentlyPlaying.track} ${currentlyPlaying.artist} reactions`,
           })
         }}
       />
