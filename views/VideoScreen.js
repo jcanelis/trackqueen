@@ -162,15 +162,15 @@ function VideoScreen() {
         copy={"Live"}
         func={() => {
           navigation.navigate(`${currentlyPlaying.track} YouTube videos`, {
-            title: `${currentlyPlaying.artist} live`,
-            videos: data.videosLive,
+            title: `${currentlyPlaying.track} by ${currentlyPlaying.artist} live`,
+            videos: data.performances,
             token: data.nextPageToken,
-            query: `${currentlyPlaying.track}`,
+            query: `${currentlyPlaying.track} ${currentlyPlaying.artist} live`,
           })
         }}
       />
 
-      <YouTubeList fullWidth={false} videos={data.videosLive} />
+      <YouTubeList fullWidth={false} videos={data.performances} />
 
       <Header
         border={true}
@@ -180,14 +180,14 @@ function VideoScreen() {
         func={() => {
           navigation.navigate(`${currentlyPlaying.track} YouTube videos`, {
             title: `${currentlyPlaying.artist} interviews`,
-            videos: data.videosInterviews,
+            videos: data.interviews,
             token: data.nextPageToken,
             query: `${currentlyPlaying.artist} interviews`,
           })
         }}
       />
 
-      <YouTubeList fullWidth={false} videos={data.videosInterviews} />
+      <YouTubeList fullWidth={false} videos={data.interviews} />
 
       <Header
         border={true}
@@ -196,15 +196,15 @@ function VideoScreen() {
         copy={"Reactions"}
         func={() => {
           navigation.navigate(`${currentlyPlaying.track} YouTube videos`, {
-            title: `${currentlyPlaying.artist} reactions`,
-            videos: data.videosReactions,
+            title: `Reactions to ${currentlyPlaying.track} by ${currentlyPlaying.artist}`,
+            videos: data.reactions,
             token: data.nextPageToken,
-            query: `${currentlyPlaying.artist} reactions`,
+            query: `${currentlyPlaying.track} ${currentlyPlaying.artist} reactions`,
           })
         }}
       />
 
-      <YouTubeList fullWidth={false} videos={data.videosReactions} />
+      <YouTubeList fullWidth={false} videos={data.reactions} />
     </ScrollView>
   )
 }

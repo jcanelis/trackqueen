@@ -25,7 +25,6 @@ const ChatGPT = async (query, signal) => {
       body: JSON.stringify(body),
       signal,
     })
-
     let responseJSON = await response.json()
 
     return responseJSON

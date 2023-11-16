@@ -1,9 +1,15 @@
 // Services
+
+// Genius
 import GeniusArtist from "../services/Genius/getArtist"
 import GeniusAnnotations from "../services/Genius/getAnnotations"
 import GeniusSearch from "../services/Genius/getSearch"
+
+// Musixmatch
 import MusixmatchSearch from "../services/Musixmatch/getSearch"
 import MusixmatchGetTrack from "../services/Musixmatch/getTrack"
+
+// Spotify
 import SpotifyArtist from "../services/Spotify/getArtist"
 
 const LyricsScreenModel = async ({ track, artist, spotifyData }) => {
@@ -14,11 +20,11 @@ const LyricsScreenModel = async ({ track, artist, spotifyData }) => {
     // Fetch lyrics from Musixmatch
     const { lyrics, lyricsData } = await MusixmatchSearch(artist, track)
 
+    // This gets a URL to send the user to the Musixmatch website
+    const musixMatchTrack = await MusixmatchGetTrack(artist, track)
+
     // Search Genius for the track
     const geniusTrackSearch = await GeniusSearch(artist, track)
-
-    // This gets a URL to send the user to the site
-    const musixMatchTrack = await MusixmatchGetTrack(artist, track)
 
     const artistId =
       geniusTrackSearch.response.hits.length > 0
