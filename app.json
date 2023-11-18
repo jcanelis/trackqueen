@@ -8,7 +8,7 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": ["ios"],
+    "platforms": ["android", "ios"],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "privacy": "hidden",
     "owner": "jcanelis",
@@ -43,6 +43,8 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
-    "android": {}
+    "android": {
+      "package": "com.jcanelis.tq22"
+    }
   }
 }
