@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react"
 
 // React Navigation
+// https://reactnavigation.org/docs/native-stack-navigator
 import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()

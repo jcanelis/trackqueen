@@ -169,6 +169,7 @@ function CommentsScreen() {
       }}
     >
       <FlatList
+        ref={ref}
         style={{ flex: 1 }}
         scrollsToTop={true}
         scrollToOverflowEnabled={true}

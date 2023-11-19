@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { Button } from "react-native"
 
 // React Navigation
+// https://reactnavigation.org/docs/native-stack-navigator
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 

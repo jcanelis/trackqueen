@@ -1,11 +1,14 @@
 import React from "react"
 
 // React Navigation
+// https://reactnavigation.org/docs/native-stack-navigator
 import { useTheme } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 const Tabs = createBottomTabNavigator()
 
 // Expo
+// @expo/vector-icons
+// https://icons.expo.fyi/Index
 import { Ionicons } from "@expo/vector-icons"
 
 // Stacks
@@ -31,16 +34,16 @@ const AppTabs = () => {
 
           if (route.name === "About") {
             iconName = focused
-              ? "ios-information-circle"
-              : "ios-information-circle-outline"
+              ? "md-information-circle"
+              : "md-information-circle-outline"
           } else if (route.name === "Lyrics") {
             iconName = focused ? "musical-notes" : "musical-notes-outline"
           } else if (route.name === "Comments") {
-            iconName = focused ? "ios-chatbubbles" : "ios-chatbubbles-outline"
+            iconName = focused ? "md-chatbubbles" : "md-chatbubbles-outline"
           } else if (route.name === "Videos") {
-            iconName = focused ? "ios-videocam" : "ios-videocam-outline"
+            iconName = focused ? "md-videocam" : "md-videocam-outline"
           } else if (route.name === "Discover") {
-            iconName = focused ? "ios-git-network-outline" : "ios-git-network"
+            iconName = focused ? "md-git-network-outline" : "md-git-network"
           }
 
           return <Ionicons name={iconName} size={27} color={color} />

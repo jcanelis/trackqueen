@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 
 // React Navigation
+// https://reactnavigation.org/docs/native-stack-navigator
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -55,7 +56,13 @@ const DiscoverStack = () => {
         navigationKey={track}
       />
 
-      <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
+      <Stack.Screen
+        name={"Powered by GPT-4 API"}
+        component={GPTResponse}
+        options={{
+          presentation: "card",
+        }}
+      />
     </Stack.Navigator>
   )
 }
