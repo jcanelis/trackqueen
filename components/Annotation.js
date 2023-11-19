@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react"
-import { Button, Text, Pressable, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { Text, Pressable, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
 import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { blurhash, baseUnit, GOLD } from "../constants/Base"
@@ -49,8 +52,8 @@ const Annotation = ({ data }) => {
         style={({ pressed }) => [
           {
             borderRadius: baseUnit * 2,
-            borderColor: colors.border,
-            backgroundColor: colors.card,
+            borderColor: colors.tertiary,
+            backgroundColor: colors.tertiary,
             borderWidth: 1,
             opacity: pressed ? 0.7 : 1,
           },
@@ -62,7 +65,7 @@ const Annotation = ({ data }) => {
             fontSize: baseUnit * 2.1,
             lineHeight: baseUnit * 3,
             fontWeight: 500,
-            color: annotation.verified ? GOLD : colors.text,
+            color: annotation.verified ? GOLD : colors.tertiary,
             borderRadius: baseUnit * 2,
           }}
         >
@@ -98,7 +101,7 @@ const Annotation = ({ data }) => {
                 style={{
                   marginTop: baseUnit,
                   fontWeight: 600,
-                  color: colors.text,
+                  color: colors.tertiary,
                 }}
               >
                 {user.user.name}
@@ -113,7 +116,7 @@ const Annotation = ({ data }) => {
               fontSize: baseUnit * 2.3,
               lineHeight: baseUnit * 4,
               fontWeight: 400,
-              color: colors.text,
+              color: colors.tertiary,
               opacity: 0.85,
             }}
           >
@@ -130,7 +133,7 @@ const Annotation = ({ data }) => {
             >
               <Ionicons
                 name={"ios-heart-outline"}
-                color={colors.text}
+                color={colors.tertiary}
                 size={26}
               />
               <Text
@@ -139,7 +142,7 @@ const Annotation = ({ data }) => {
                   fontSize: baseUnit * 2,
                   lineHeight: baseUnit * 3,
                   fontWeight: 600,
-                  color: colors.text,
+                  color: colors.tertiary,
                   opacity: 0.85,
                 }}
               >

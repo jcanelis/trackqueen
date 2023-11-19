@@ -2,13 +2,11 @@ import React, { useState, useRef, useEffect } from "react"
 import {
   ActivityIndicator,
   AppState,
-  Button,
   Pressable,
   ScrollView,
   Text,
   View,
 } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import PropTypes from "prop-types"
 
@@ -22,6 +20,10 @@ import ChatGPT from "../../services/ChatGPT/getAnswers"
 
 // Components
 import StatusText from "../../components/StatusText"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm, GOLD } from "../../constants/Base"
@@ -122,7 +124,7 @@ function GPTResponse({ route }) {
             fontSize: baseUnit * 1.8,
             lineHeight: verticalRhythm * 5,
             fontWeight: 400,
-            color: colors.text,
+            color: colors.tertiary,
             opacity: 0.5,
           }}
         >
@@ -142,7 +144,7 @@ function GPTResponse({ route }) {
   if (isError)
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ color: colors.text }}>
+        <Text style={{ color: colors.tertiary }}>
           Unfortunately an error occured.
         </Text>
         <Button
@@ -160,7 +162,7 @@ function GPTResponse({ route }) {
   if (data && data.error)
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ color: colors.text }}>
+        <Text style={{ color: colors.tertiary }}>
           Unfortunately an error occured.
         </Text>
         <Button
@@ -190,7 +192,7 @@ function GPTResponse({ route }) {
           fontSize: baseUnit * 2.3,
           lineHeight: verticalRhythm * 7,
           fontWeight: 400,
-          color: colors.text,
+          color: colors.tertiary,
           opacity: 0.85,
         }}
       >

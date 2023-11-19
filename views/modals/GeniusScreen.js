@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import { Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
 
@@ -9,6 +8,9 @@ import SearchContext from "../../context/search"
 
 // Components
 import Annotation from "../../components/Annotation"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"
@@ -44,7 +46,7 @@ function GeniusScreen({ route }) {
                 fontSize: baseUnit * 2,
                 lineHeight: baseUnit * 3,
                 fontWeight: 400,
-                color: colors.text,
+                color: colors.tertiary,
                 opacity: 0.85,
               }}
             >

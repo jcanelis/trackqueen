@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
-import { Button, Text, View } from "react-native"
-import { useTheme, useNavigation } from "@react-navigation/native"
+import { Text, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import * as WebBrowser from "expo-web-browser"
 import PropTypes from "prop-types"
 
@@ -9,6 +9,10 @@ import SpotifyContext from "../context/spotify"
 
 // Components
 import Chip from "../components/Chip"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm, GOLD } from "../constants/Base"
@@ -47,7 +51,7 @@ const Notes = ({ data }) => {
             fontSize: baseUnit * 1.9,
             lineHeight: verticalRhythm * 5,
             fontWeight: 700,
-            color: colors.text,
+            color: colors.surfaceVariant,
             opacity: 0.9,
           }}
         >
@@ -60,7 +64,7 @@ const Notes = ({ data }) => {
           fontSize: baseUnit * 2.3,
           lineHeight: verticalRhythm * 7,
           fontWeight: 400,
-          color: colors.text,
+          color: colors.surfaceVariant,
           opacity: 0.85,
         }}
       >

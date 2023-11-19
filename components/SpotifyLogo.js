@@ -1,11 +1,13 @@
 import React from "react"
 import { Pressable } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { Image } from "expo-image"
 
 // Expo
 import * as Linking from "expo-linking"
 import { useAssets } from "expo-asset"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 function SpotifyLogo() {
   const { dark } = useTheme()

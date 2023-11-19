@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { Pressable, View, Text } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { FlashList } from "@shopify/flash-list"
 
@@ -16,6 +15,9 @@ import Header from "../../components/Header"
 import Loader from "../../components/Loader"
 import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, blurhash } from "../../constants/Base"
@@ -142,7 +144,7 @@ function ProfileScreen() {
                           letterSpacing: 0.4,
                           fontWeight: 600,
                           textTransform: "uppercase",
-                          color: colors.text,
+                          color: colors.tertiary,
                           opacity: 0.65,
                         }}
                       >
@@ -154,7 +156,7 @@ function ProfileScreen() {
                           fontSize: baseUnit * 1.8,
                           lineHeight: baseUnit * 3,
                           fontWeight: 500,
-                          color: colors.text,
+                          color: colors.tertiary,
                         }}
                       >
                         {data.user.email}

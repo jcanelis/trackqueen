@@ -1,13 +1,8 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
 import { AppState, FlatList, RefreshControl, Text, View } from "react-native"
-import SegmentedControl from "@react-native-segmented-control/segmented-control"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
@@ -27,6 +22,10 @@ import Comment from "../components/Comment"
 import Header from "../components/Header"
 import Loader from "../components/Loader"
 import VideoThumbnail from "../components/VideoThumbnail"
+
+// Paper
+import { SegmentedButtons } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, lightGrey } from "../constants/Base"
@@ -184,7 +183,7 @@ function CommentsScreen() {
               style={{
                 marginTop: baseUnit * 2,
                 textAlign: "center",
-                color: colors.text,
+                color: colors.tertiary,
                 opacity: 0.7,
               }}
             >
@@ -216,33 +215,21 @@ function CommentsScreen() {
             />
 
             {commentsToShow.length > 0 && (
-              <SegmentedControl
-                style={{
-                  flex: 1,
-                  marginTop: baseUnit * 2,
-                  marginRight: baseUnit * 3,
-                  marginLeft: baseUnit * 3,
-                  marginBottom: baseUnit * 1,
-                  fontWeight: 800,
+              <SegmentedButtons
+                value={index}
+                onChange={async (value) => {
+                  console.log(value)
                 }}
-                values={["Popular", "Recent"]}
-                height={baseUnit * 5}
-                appearance={"dark"}
-                backgroundColor={colors.card}
-                fontStyle={{ fontSize: 14, fontWeight: 900 }}
-                activeFontStyle={{
-                  fontSize: 14,
-                  fontWeight: 900,
-                }}
-                selectedIndex={0}
-                onChange={async (event) => {
-                  const indexData =
-                    event.nativeEvent.selectedSegmentIndex == 0
-                      ? commentsRelevant
-                      : commentsRecent
-                  setCommentsToShow(indexData)
-                  setIndex(event.nativeEvent.selectedSegmentIndex)
-                }}
+                buttons={[
+                  {
+                    value: 0,
+                    label: "Popular",
+                  },
+                  {
+                    value: 1,
+                    label: "Recent",
+                  },
+                ]}
               />
             )}
           </>

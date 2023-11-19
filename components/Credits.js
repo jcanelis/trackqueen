@@ -1,11 +1,13 @@
 import React from "react"
 import { ScrollView, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
 // Components
 import Artist from "../components/Artist"
 import SpotifyLogo from "../components/SpotifyLogo"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
@@ -23,7 +25,7 @@ const Credits = ({ data }) => {
       letterSpacing: 0.16,
       textTransform: "uppercase",
       textAlign: "center",
-      color: colors.text,
+      color: colors.tertiary,
     },
 
     paragraph: {
@@ -32,7 +34,7 @@ const Credits = ({ data }) => {
       lineHeight: baseUnit * 6,
       fontWeight: 400,
       textAlign: "center",
-      color: colors.text,
+      color: colors.tertiary,
       opacity: 0.75,
     },
   }

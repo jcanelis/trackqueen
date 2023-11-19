@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { AppState, RefreshControl, ScrollView, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // Expo
@@ -17,6 +16,9 @@ import TokenCheck from "../../services/Custom/checkToken"
 import { Heading, SubHeading, Wrapper } from "../../components/Basics"
 import Spinner from "../../components/Spinner"
 import SpotifyButton from "../../components/SpotifyButton"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { lightGrey } from "../../constants/Base"

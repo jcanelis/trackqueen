@@ -3,11 +3,7 @@ import { AppState, RefreshControl, ScrollView } from "react-native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
 // Context
 import SpotifyContext from "../context/spotify"
@@ -21,6 +17,9 @@ import TokenCheck from "../services/Custom/checkToken"
 import Header from "../components/Header"
 import Loader from "../components/Loader"
 import YouTubeList from "../components/YouTubeList"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { lightGrey } from "../constants/Base"

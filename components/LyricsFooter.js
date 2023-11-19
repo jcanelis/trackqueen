@@ -1,11 +1,14 @@
 import React from "react"
-import { Button, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { Text, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
 import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, GOLD } from "../constants/Base"
@@ -63,7 +66,7 @@ const LyricsFooter = ({ data, hasLyrics }) => {
                 fontSize: baseUnit * 2.2,
                 lineHeight: baseUnit * 3,
                 fontWeight: 600,
-                color: colors.text,
+                color: colors.tertiary,
               }}
             >
               Where are the rest of the lyrics?
@@ -74,7 +77,7 @@ const LyricsFooter = ({ data, hasLyrics }) => {
                 fontSize: baseUnit * 2,
                 lineHeight: baseUnit * 3,
                 fontWeight: 400,
-                color: colors.text,
+                color: colors.tertiary,
                 opacity: 0.65,
               }}
             >

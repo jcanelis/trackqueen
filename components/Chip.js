@@ -1,7 +1,9 @@
 import React from "react"
 import { Pressable, Text } from "react-native"
-// import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
+
+// Paper
+// import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, GOLD } from "../constants/Base"
@@ -19,9 +21,9 @@ const Chip = ({ text, action }) => {
         {
           opacity: pressed ? 0.7 : 1,
           borderRadius: baseUnit * 2,
-          // borderColor: colors.border,
+          // borderColor: colors.tertiary,
           borderColor: "rgba(50,50,50,1)",
-          // backgroundColor: colors.card,
+          // backgroundColor: colors.tertiary,
           backgroundColor: "rgba(20,20,20,1)",
           borderWidth: 1,
         },

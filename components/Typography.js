@@ -1,7 +1,9 @@
 import React from "react"
 import { Text } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
@@ -18,7 +20,7 @@ export function Paragraph({ children }) {
         fontSize: baseUnit * 2.5,
         lineHeight: baseUnit * 4,
         fontWeight: 400,
-        color: colors.text,
+        color: colors.tertiary,
       }}
     >
       {children}
@@ -39,7 +41,7 @@ export function SectionHeading({ children }) {
         fontSize: baseUnit * 3,
         lineHeight: baseUnit * 6,
         fontWeight: 700,
-        color: colors.text,
+        color: colors.tertiary,
       }}
     >
       {children}

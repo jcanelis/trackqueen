@@ -1,7 +1,9 @@
 import React from "react"
-import { Button } from "react-native"
 import * as Linking from "expo-linking"
 import PropTypes from "prop-types"
+
+// Paper
+import { Button } from "react-native-paper"
 
 const SocialButtons = ({ data }) => (
   <Button

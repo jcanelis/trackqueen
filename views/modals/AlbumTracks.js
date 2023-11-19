@@ -4,7 +4,7 @@ import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
 
 // React Navigation
-import { useNavigation, useTheme } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 
 // Expo
 import * as Linking from "expo-linking"
@@ -16,6 +16,9 @@ import SpotifyContext from "../../context/spotify"
 import Header from "../../components/Header"
 import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"

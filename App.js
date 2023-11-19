@@ -6,6 +6,13 @@ import React, { useEffect, useMemo, useReducer } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 const queryClient = new QueryClient()
 
+// Paper
+// import {
+//   MD3LightTheme as DefaultTheme,
+//   PaperProvider,
+// } from "react-native-paper"
+import { PaperProvider } from "react-native-paper"
+
 // Expo
 import * as SecureStore from "expo-secure-store"
 import * as SplashScreen from "expo-splash-screen"
@@ -100,13 +107,25 @@ export default function App() {
   }, [])
 
   const { isSignedIn, currentlyPlaying } = state
+
+  // const theme = {
+  //   ...DefaultTheme,
+  //   colors: {
+  //     ...DefaultTheme.colors,
+  //     primary: "tomato",
+  //     secondary: "yellow",
+  //   },
+  // }
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
         <SpotifyContext.Provider value={spotifyContext}>
-          {!isSignedIn && <LoginStack />}
-          {isSignedIn && currentlyPlaying.track === null && <LoadingStack />}
-          {isSignedIn && currentlyPlaying.track !== null && <AppNavigation />}
+          <PaperProvider>
+            {!isSignedIn && <LoginStack />}
+            {isSignedIn && currentlyPlaying.track === null && <LoadingStack />}
+            {isSignedIn && currentlyPlaying.track !== null && <AppNavigation />}
+          </PaperProvider>
         </SpotifyContext.Provider>
       </AuthContext.Provider>
     </QueryClientProvider>

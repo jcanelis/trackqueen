@@ -1,11 +1,13 @@
 import React from "react"
 import { Text, Pressable, useWindowDimensions } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
 // Expo
 import * as Linking from "expo-linking"
 import { Image } from "expo-image"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { blurhash, baseUnit } from "../constants/Base"
@@ -50,7 +52,7 @@ export default function YouTubes({ item, fullWidth }) {
           fontSize: baseUnit * 2,
           lineHeight: baseUnit * 2.6,
           fontWeight: 500,
-          color: colors.text,
+          color: colors.tertiary,
           textAlign: "left",
           opacity: 0.85,
         }}

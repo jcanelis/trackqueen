@@ -1,10 +1,13 @@
 import React from "react"
 import { Pressable, Text, useWindowDimensions } from "react-native"
-import { useNavigation, useTheme } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import { Image } from "expo-image"
 import PropTypes from "prop-types"
 
-// Custom
+// Paper
+import { useTheme } from "react-native-paper"
+
+// Design
 import { blurhash, baseUnit } from "../constants/Base"
 
 const Artist = ({ item }) => {
@@ -51,7 +54,7 @@ const Artist = ({ item }) => {
             lineHeight: baseUnit * 4,
             fontWeight: 600,
             letterSpacing: -0.1,
-            color: colors.text,
+            color: colors.tertiary,
             opacity: 0.75,
           }}
         >

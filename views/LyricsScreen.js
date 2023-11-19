@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import {
   AppState,
-  Button,
   FlatList,
   Pressable,
   RefreshControl,
@@ -11,11 +10,7 @@ import {
 } from "react-native"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
 // Expo
 import * as WebBrowser from "expo-web-browser"
@@ -38,6 +33,10 @@ import Loader from "../components/Loader"
 import Lyric from "../components/Lyric"
 import LyricsFooter from "../components/LyricsFooter"
 import SpotifyLogo from "../components/SpotifyLogo"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, blurhash, GOLD, lightGrey } from "../constants/Base"
@@ -248,7 +247,7 @@ function LyricsScreen() {
             textAlign: "center",
           }}
         >
-          <Text style={{ color: colors.text, opacity: 0.7 }}>
+          <Text style={{ color: colors.tertiary, opacity: 0.7 }}>
             No lyrics were found for this track.
           </Text>
         </View>

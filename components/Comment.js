@@ -1,7 +1,10 @@
 import React from "react"
 import { Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+
 import PropTypes from "prop-types"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm } from "../constants/Base"
@@ -32,7 +35,7 @@ const Comment = ({ data }) => {
           lineHeight: verticalRhythm * 7,
           fontWeight: 500,
           textAlign: "left",
-          color: colors.text,
+          color: colors.tertiary,
           opacity: 0.95,
         }}
       >
@@ -50,7 +53,7 @@ const Comment = ({ data }) => {
         <Ionicons
           style={{ opacity: 0.65 }}
           name={"ios-heart-outline"}
-          color={colors.text}
+          color={colors.tertiary}
           size={22}
         />
         <Text
@@ -59,7 +62,7 @@ const Comment = ({ data }) => {
             lineHeight: baseUnit * 4,
             fontWeight: 500,
             textAlign: "left",
-            color: colors.text,
+            color: colors.tertiary,
             opacity: 0.85,
           }}
         >

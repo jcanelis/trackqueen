@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ActivityIndicator, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 
 // Expo
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
@@ -19,6 +18,9 @@ import spotifyAuthScopes from "../../constants/SpotifyAuthScopes"
 import { Heading, SubHeading, Wrapper } from "../../components/Basics"
 import Spinner from "../../components/Spinner"
 import SpotifyButton from "../../components/SpotifyButton"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { GOLD } from "../../constants/Base"

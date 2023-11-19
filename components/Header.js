@@ -1,14 +1,17 @@
 import React from "react"
-import { Button, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { Text, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
 import { useAssets } from "expo-asset"
 import { Image } from "expo-image"
 
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
+
 // Design
-import { baseUnit, GOLD } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function Header({ copy, func, type, buttonTitle, border }) {
   const { dark, colors } = useTheme()
@@ -56,7 +59,7 @@ function Header({ copy, func, type, buttonTitle, border }) {
             marginRight: baseUnit * 3,
             marginBottom: baseUnit * 2,
             marginLeft: baseUnit * 3,
-            backgroundColor: colors.border,
+            backgroundColor: colors.tertiary,
           }}
         ></View>
       )}
@@ -88,7 +91,7 @@ function Header({ copy, func, type, buttonTitle, border }) {
             style={{
               fontSize: baseUnit * 2.8,
               lineHeight: baseUnit * 3,
-              color: colors.text,
+              color: colors.tertiary,
               fontWeight: 700,
             }}
           >
@@ -97,7 +100,13 @@ function Header({ copy, func, type, buttonTitle, border }) {
         </View>
 
         {func && (
-          <Button title={buttonTitle} color={GOLD} onPress={() => func()} />
+          <Button
+            mode={"text"}
+            textColor={colors.onSecondaryContainer}
+            onPress={() => func()}
+          >
+            {buttonTitle}
+          </Button>
         )}
       </View>
     </View>

@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
-import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -20,6 +19,9 @@ import LyricsScreen from "../views/LyricsScreen"
 // Components
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 // import { GOLD } from "../constants/Base"
@@ -81,8 +83,8 @@ const LyricsStack = () => {
               obscureBackground: true,
               placeholder: "Search Genius.com annotations",
               barTintColor: dark ? colors.background : "#cccccc",
-              textColor: colors.text,
-              headerIconColor: colors.text,
+              textColor: colors.tertiary,
+              headerIconColor: colors.tertiary,
               autoCapitalize: "none",
               onChangeText: (event) => {
                 updateText(event.nativeEvent.text)

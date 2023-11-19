@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
 
@@ -9,6 +8,9 @@ import YouTubeSearch from "../../services/YouTube/getSearch"
 
 // Components
 import YouTubes from "../../components/YouTubes"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 const VideoListScreen = ({ route, navigation }) => {
   const colors = useTheme()

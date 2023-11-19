@@ -1,6 +1,6 @@
 import React from "react"
 import { Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { useTheme } from "react-native-paper"
 import PropTypes from "prop-types"
 
 // Design
@@ -34,7 +34,7 @@ export function Heading({ children }) {
         fontSize: baseUnit * 3.4,
         lineHeight: baseUnit * 5,
         fontWeight: 600,
-        color: colors.text,
+        color: colors.tertiary,
       }}
     >
       {children}
@@ -54,7 +54,7 @@ export function SubHeading({ children }) {
         fontSize: baseUnit * 2,
         lineHeight: baseUnit * 3,
         fontWeight: 600,
-        color: colors.text,
+        color: colors.tertiary,
         opacity: 0.7,
       }}
     >

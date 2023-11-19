@@ -2,7 +2,6 @@ import React from "react"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
-import { useTheme } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 const Tabs = createBottomTabNavigator()
 
@@ -17,6 +16,9 @@ import LyricsStack from "./LyricsStack"
 import CommentsStack from "./CommentsStack"
 import VideoStack from "./VideoStack"
 import DiscoverStack from "./DiscoverStack"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { grey } from "../constants/Base"
@@ -48,7 +50,7 @@ const AppTabs = () => {
 
           return <Ionicons name={iconName} size={27} color={color} />
         },
-        tabBarActiveTintColor: colors.text,
+        tabBarActiveTintColor: colors.tertiary,
         tabBarInactiveTintColor: grey,
         tabBarStyle: {
           position: "absolute",

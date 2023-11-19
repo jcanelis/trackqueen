@@ -1,9 +1,11 @@
 import React from "react"
 import { Text } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
-// Custom
+// Paper
+import { useTheme } from "react-native-paper"
+
+// Design
 import { baseUnit, verticalRhythm } from "../constants/Base"
 
 const Lyric = ({ content }) => {
@@ -19,7 +21,7 @@ const Lyric = ({ content }) => {
         fontSize: baseUnit * 2.8,
         lineHeight: verticalRhythm * 8,
         fontWeight: 500,
-        color: colors.text,
+        color: colors.tertiary,
         opacity: 0.95,
       }}
       selectable={true}

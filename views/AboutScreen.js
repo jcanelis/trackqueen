@@ -1,18 +1,8 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
-import {
-  AppState,
-  Button,
-  RefreshControl,
-  ScrollView,
-  View,
-} from "react-native"
+import { AppState, RefreshControl, ScrollView, View } from "react-native"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
@@ -30,6 +20,10 @@ import AlbumCover from "../components/AlbumCover"
 import Loader from "../components/Loader"
 import Notes from "../components/Notes"
 import SpotifyLogo from "../components/SpotifyLogo"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, GOLD, lightGrey } from "../constants/Base"

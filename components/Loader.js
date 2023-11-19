@@ -1,7 +1,9 @@
 import React from "react"
 import { View, useWindowDimensions, Text } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import LottieView from "lottie-react-native"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
@@ -26,7 +28,9 @@ export default function Loader() {
         autoPlay={true}
         loop={true}
       />
-      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.7 }}>
+      <Text
+        style={{ textAlign: "center", color: colors.tertiary, opacity: 0.7 }}
+      >
         Loading content...
       </Text>
     </View>

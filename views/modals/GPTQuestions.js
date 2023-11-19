@@ -2,13 +2,16 @@ import React, { useContext } from "react"
 import { Text, ScrollView, View } from "react-native"
 
 // React Navigation
-import { useNavigation, useTheme } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 
 // Context
 import SpotifyContext from "../../context/spotify"
 
 // Components
 import Chip from "../../components/Chip"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"
@@ -26,7 +29,7 @@ function GPTQuestions() {
   const headerStyles = {
     fontSize: baseUnit * 2.8,
     lineHeight: baseUnit * 3,
-    color: colors.text,
+    color: colors.tertiary,
     fontWeight: 700,
   }
 
@@ -131,7 +134,7 @@ function GPTQuestions() {
           style={{
             fontSize: baseUnit * 2.8,
             lineHeight: baseUnit * 3,
-            color: colors.text,
+            color: colors.tertiary,
             fontWeight: 700,
           }}
         >

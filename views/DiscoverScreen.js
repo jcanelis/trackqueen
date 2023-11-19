@@ -2,11 +2,10 @@ import React, { useEffect, useContext, useRef, useState } from "react"
 import { AppState, FlatList, RefreshControl, View } from "react-native"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"

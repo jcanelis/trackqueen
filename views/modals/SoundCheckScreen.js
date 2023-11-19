@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import {
   ActivityIndicator,
-  Button,
   Pressable,
   useWindowDimensions,
   View,
 } from "react-native"
-import { useNavigation, useTheme } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import LottieView from "lottie-react-native"
 
@@ -29,6 +28,10 @@ import audioConfig from "../../constants/AudioConfig"
 
 // Components
 import StatusText from "../../components/StatusText"
+
+// Paper
+import { Button } from "react-native-paper"
+import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, GOLD } from "../../constants/Base"

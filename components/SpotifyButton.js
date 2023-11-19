@@ -1,6 +1,6 @@
 import React from "react"
 import { Pressable, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { useTheme } from "react-native-paper"
 import PropTypes from "prop-types"
 
 // Expo
@@ -35,8 +35,8 @@ export default function SpotifyButton({ func, text }) {
                 padding: baseUnit * 2,
                 height: baseUnit * 7,
                 borderWidth: dark ? 1 : 0,
-                borderColor: colors.border,
-                backgroundColor: dark ? "transparent" : colors.text,
+                borderColor: colors.tertiary,
+                backgroundColor: dark ? "transparent" : colors.tertiary,
                 borderRadius: baseUnit * 7,
                 opacity: pressed ? 0.7 : 1,
                 shadowOffset: { width: 3, height: 3 },
@@ -57,7 +57,7 @@ export default function SpotifyButton({ func, text }) {
                 fontSize: baseUnit * 1.9,
                 lineHeight: baseUnit * 3,
                 fontWeight: 600,
-                color: dark ? colors.text : colors.background,
+                color: dark ? colors.tertiary : colors.background,
               }}
             >
               {text}
