@@ -8,7 +8,9 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": ["android"],
+    "platforms": [
+      "android"
+    ],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "privacy": "hidden",
     "owner": "trackqueen",
@@ -17,8 +19,12 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
-    "plugins": ["expo-build-properties"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-build-properties"
+    ],
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
@@ -33,6 +39,10 @@
       "eas": {
         "projectId": "2443c229-a8e4-4778-bdee-55c51d3186cc"
       }
-    }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2443c229-a8e4-4778-bdee-55c51d3186cc"
+    },
+    "ios": {}
   }
 }
