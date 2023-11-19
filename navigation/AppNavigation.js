@@ -30,13 +30,7 @@ const AppNavigation = ({ theme }) => (
       >
         <Stack.Screen name="AppTabs" component={AppTabs} />
         <Stack.Screen name="ProfileStack" component={ProfileStack} />
-        <Stack.Screen
-          name="Search nearby audio"
-          component={SoundCheckScreen}
-          options={{
-            header: (props) => <CustomNavigationBar {...props} />,
-          }}
-        />
+        <Stack.Screen name="Search nearby audio" component={SoundCheckScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   </>

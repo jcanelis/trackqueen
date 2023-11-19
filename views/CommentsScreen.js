@@ -41,11 +41,11 @@ function CommentsScreen() {
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
 
-  // Ref
+  // Scroll reference
   const ref = useRef(null)
   useScrollToTop(
     useRef({
-      scrollToTop: () => ref.current?.scrollTo({ y: -143 }),
+      scrollToTop: () => ref.current?.scrollToOffset({ offset: -143 }),
     })
   )
 
@@ -170,8 +170,6 @@ function CommentsScreen() {
       <FlatList
         ref={ref}
         style={{ flex: 1 }}
-        scrollsToTop={true}
-        scrollToOverflowEnabled={true}
         ListEmptyComponent={
           <View
             style={{
@@ -183,8 +181,6 @@ function CommentsScreen() {
               style={{
                 marginTop: baseUnit * 2,
                 textAlign: "center",
-                color: colors.tertiary,
-                opacity: 0.7,
               }}
             >
               No comments found for this track.
@@ -215,22 +211,24 @@ function CommentsScreen() {
             />
 
             {commentsToShow.length > 0 && (
-              <SegmentedButtons
-                value={index}
-                onChange={async (value) => {
-                  console.log(value)
-                }}
-                buttons={[
-                  {
-                    value: 0,
-                    label: "Popular",
-                  },
-                  {
-                    value: 1,
-                    label: "Recent",
-                  },
-                ]}
-              />
+              <View style={{ margin: baseUnit * 3 }}>
+                <SegmentedButtons
+                  value={index}
+                  onChange={async (value) => {
+                    console.log(value)
+                  }}
+                  buttons={[
+                    {
+                      value: 0,
+                      label: "Popular",
+                    },
+                    {
+                      value: 1,
+                      label: "Recent",
+                    },
+                  ]}
+                />
+              </View>
             )}
           </>
         }
@@ -267,8 +265,8 @@ function CommentsScreen() {
         refreshControl={
           <RefreshControl
             title="Checking your current Spotify track..."
-            tintColor={lightGrey}
-            titleColor={lightGrey}
+            tintColor={colors.secondary}
+            titleColor={colors.secondary}
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true)

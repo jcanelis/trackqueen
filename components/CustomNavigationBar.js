@@ -31,7 +31,10 @@ export default function CustomNavigationBar({
       />
 
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} />
+      <Appbar.Content
+        titleStyle={{ fontSize: 15, fontWeight: 600, color: colors.tertiary }}
+        title={title}
+      />
       <Appbar.Action
         icon={() => (
           <Icon name={"waveform"} color={colors.primary} size={baseUnit * 3} />

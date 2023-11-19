@@ -44,7 +44,7 @@ function TrackListScreen({ route, navigation }) {
           />
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 4 }}>
+          <View style={{ margin: baseUnit * 3 }}>
             <SpotifyButton
               text={"Open Spotify"}
               func={() => Linking.openURL("https://open.spotify.com")}

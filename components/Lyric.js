@@ -1,9 +1,9 @@
 import React from "react"
-import { Text } from "react-native"
 import PropTypes from "prop-types"
+import { View } from "react-native"
 
 // Paper
-import { useTheme } from "react-native-paper"
+import { useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm } from "../constants/Base"
@@ -12,22 +12,17 @@ const Lyric = ({ content }) => {
   const { colors } = useTheme()
 
   return (
-    <Text
+    <View
       style={{
-        paddingTop: baseUnit * 2,
-        paddingRight: baseUnit * 4,
-        paddingBottom: baseUnit * 2,
-        paddingLeft: baseUnit * 4,
-        fontSize: baseUnit * 2.8,
-        lineHeight: verticalRhythm * 8,
-        fontWeight: 500,
-        color: colors.tertiary,
-        opacity: 0.95,
+        paddingLeft: baseUnit * 3,
+        paddingRight: baseUnit * 3,
+        paddingTop: baseUnit * 3,
+        paddingBOttom: baseUnit * 3,
       }}
       selectable={true}
     >
-      {content}
-    </Text>
+      <Text variant="titleLarge">{content}</Text>
+    </View>
   )
 }
 

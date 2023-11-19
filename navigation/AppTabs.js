@@ -26,6 +26,7 @@ const AppTabs = () => {
     <Tabs.Navigator
       screenOptions={{
         headerShown: false,
+        lazy: false,
       }}
       tabBar={({ navigation, state, descriptors, insets }) => (
         <BottomNavigation.Bar

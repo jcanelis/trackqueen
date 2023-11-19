@@ -1,14 +1,9 @@
 import React, { useState, useRef, useEffect } from "react"
-import {
-  ActivityIndicator,
-  AppState,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from "react-native"
+import { AppState, Pressable, ScrollView, Text, View } from "react-native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import PropTypes from "prop-types"
+
+import { ActivityIndicator } from "react-native-paper"
 
 // Expo
 import * as WebBrowser from "expo-web-browser"

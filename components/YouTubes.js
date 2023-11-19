@@ -1,5 +1,5 @@
 import React from "react"
-import { Text, Pressable, useWindowDimensions } from "react-native"
+import { Pressable, useWindowDimensions } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
@@ -7,7 +7,7 @@ import * as Linking from "expo-linking"
 import { Image } from "expo-image"
 
 // Paper
-import { useTheme } from "react-native-paper"
+import { useTheme, Text } from "react-native-paper"
 
 // Design
 import { blurhash, baseUnit } from "../constants/Base"
@@ -43,15 +43,13 @@ export default function YouTubes({ item, fullWidth }) {
       />
 
       <Text
+        variant={"bodyLarge"}
         numberOfLines={2}
         style={{
           paddingTop: baseUnit * 2,
           paddingRight: baseUnit * 2,
           paddingBottom: fullWidth ? baseUnit * 3 : 0,
           paddingLeft: fullWidth ? baseUnit * 2 : 0,
-          fontSize: baseUnit * 2,
-          lineHeight: baseUnit * 2.6,
-          fontWeight: 500,
           color: colors.tertiary,
           textAlign: "left",
           opacity: 0.85,

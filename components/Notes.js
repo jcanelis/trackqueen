@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import * as WebBrowser from "expo-web-browser"
 import PropTypes from "prop-types"
@@ -11,8 +11,7 @@ import SpotifyContext from "../context/spotify"
 import Chip from "../components/Chip"
 
 // Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
+import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm, GOLD } from "../constants/Base"
@@ -47,11 +46,9 @@ const Notes = ({ data }) => {
     >
       {data.artists[0].genres[0] !== "classical" && (
         <Text
+          variant={"labelLarge"}
           style={{
-            fontSize: baseUnit * 1.9,
-            lineHeight: verticalRhythm * 5,
-            fontWeight: 700,
-            color: colors.surfaceVariant,
+            color: colors.tertiary,
             opacity: 0.9,
           }}
         >
@@ -60,11 +57,9 @@ const Notes = ({ data }) => {
       )}
 
       <Text
+        variant={"bodyLarge"}
         style={{
-          fontSize: baseUnit * 2.3,
-          lineHeight: verticalRhythm * 7,
-          fontWeight: 400,
-          color: colors.surfaceVariant,
+          color: colors.tertiary,
           opacity: 0.85,
         }}
       >

@@ -128,8 +128,6 @@ function VideoScreen() {
   return (
     <ScrollView
       ref={ref}
-      scrollsToTop={true}
-      scrollToOverflowEnabled={true}
       style={{
         flex: 1,
         backgroundColor: colors.background,

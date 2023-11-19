@@ -1,5 +1,5 @@
 import React from "react"
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
@@ -7,8 +7,7 @@ import { useAssets } from "expo-asset"
 import { Image } from "expo-image"
 
 // Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
+import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
@@ -59,7 +58,7 @@ function Header({ copy, func, type, buttonTitle, border }) {
             marginRight: baseUnit * 3,
             marginBottom: baseUnit * 2,
             marginLeft: baseUnit * 3,
-            backgroundColor: colors.tertiary,
+            backgroundColor: colors.primary,
           }}
         ></View>
       )}
@@ -86,11 +85,10 @@ function Header({ copy, func, type, buttonTitle, border }) {
           />
 
           <Text
+            variant={"bodyLarge"}
             numberOfLines={1}
             ellipsizeMode={"tail"}
             style={{
-              fontSize: baseUnit * 2.8,
-              lineHeight: baseUnit * 3,
               color: colors.tertiary,
               fontWeight: 700,
             }}

@@ -130,7 +130,8 @@ function LoadingScreen() {
         <View
           style={{
             gap: baseUnit * 4,
-            paddingBottom: baseUnit * 3,
+            padding: baseUnit * 4,
+            alignItems: "center",
           }}
         >
           <View
@@ -143,23 +144,16 @@ function LoadingScreen() {
             <Text variant="titleMedium"> Pull down to refresh.</Text>
           </View>
 
-          <View
-            style={{
-              paddingLeft: baseUnit * 3,
-              paddingRight: baseUnit * 3,
-            }}
+          <Button
+            icon={"spotify"}
+            mode={"outlined"}
+            accessibilityLabel={"Open Spotify"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
+            onPress={() => Linking.openURL("https://open.spotify.com")}
           >
-            <Button
-              icon={"spotify"}
-              mode={"outlined"}
-              accessibilityLabel={"Open Spotify"}
-              textColor={colors.onSecondaryContainer}
-              rippleColor={colors.tertiary}
-              onPress={() => Linking.openURL("https://open.spotify.com")}
-            >
-              Open Spotify
-            </Button>
-          </View>
+            Open Spotify
+          </Button>
         </View>
       </ScrollView>
     </View>
