@@ -57,10 +57,6 @@ function ArtistTracksScreen({ route }) {
     >
       <FlashList
         estimatedItemSize={10}
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInset={{ bottom: baseUnit * 2 }}
-        scrollToOverflowEnabled={true}
         ListHeaderComponent={
           <View style={{ flex: 1 }}>
             <Image

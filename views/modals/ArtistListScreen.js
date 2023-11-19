@@ -26,10 +26,6 @@ const ArtistListScreen = ({ route }) => {
       }}
     >
       <FlashList
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInsetAdjustmentBehavior={"automatic"}
-        contentInset={{ bottom: baseUnit * 8 }}
         numColumns={2}
         initialNumToRender={6}
         estimatedItemSize={20}

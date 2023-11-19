@@ -10,17 +10,14 @@ import { baseUnit } from "../constants/Base"
 
 const ArtistList = ({ data }) => (
   <FlatList
-    scrollToOverflowEnabled={false}
+    initialNumToRender={4}
     horizontal={true}
-    directionalLockEnabled={true}
     pagingEnabled={false}
-    estimatedItemSize={5}
+    data={data}
     contentContainerStyle={{
       paddingLeft: baseUnit * 3,
       gap: baseUnit * 4,
     }}
-    initialNumToRender={4}
-    data={data}
     keyExtractor={(item, index) => index}
     renderItem={({ item }) => <Artist item={item} />}
   />

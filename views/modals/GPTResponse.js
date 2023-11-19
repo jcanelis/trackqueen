@@ -177,10 +177,6 @@ function GPTResponse({ route }) {
 
   return (
     <ScrollView
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 12 }}
       contentContainerStyle={{
         gap: baseUnit * 2,
       }}

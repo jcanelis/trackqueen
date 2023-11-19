@@ -31,10 +31,6 @@ function TrackListScreen({ route, navigation }) {
     >
       <FlashList
         estimatedItemSize={route.params.tracks.length}
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInsetAdjustmentBehavior={"automatic"}
-        contentInset={{ bottom: baseUnit * 6 }}
         refreshing={false}
         ListHeaderComponent={
           <Header

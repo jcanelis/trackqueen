@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 const Tabs = createBottomTabNavigator()
 
 // Expo
-import { BlurView } from "expo-blur"
 import { Ionicons } from "@expo/vector-icons"
 
 // Stacks
@@ -20,7 +19,7 @@ import DiscoverStack from "./DiscoverStack"
 import { grey } from "../constants/Base"
 
 const AppTabs = () => {
-  const { dark, colors } = useTheme()
+  const { colors } = useTheme()
 
   return (
     <Tabs.Navigator
@@ -52,15 +51,6 @@ const AppTabs = () => {
           position: "absolute",
           borderTopColor: "rgba(0,0,0,0.1)",
         },
-        tabBarBackground: () => (
-          <BlurView
-            tint={dark ? "dark" : "default"}
-            style={{
-              height: 80,
-            }}
-            intensity={50}
-          />
-        ),
       })}
     >
       <Tabs.Screen name="About" component={AboutStack} />

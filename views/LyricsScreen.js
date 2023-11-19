@@ -152,10 +152,6 @@ function LyricsScreen() {
   return (
     <FlatList
       ref={ref}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 8 }}
       contentContainerStyle={{
         gap: baseUnit,
       }}
@@ -163,8 +159,6 @@ function LyricsScreen() {
         flex: 1,
         backgroundColor: colors.background,
       }}
-      scrollsToTop={true}
-      scrollToOverflowEnabled={true}
       data={data.lyrics}
       keyExtractor={(item, index) => index}
       renderItem={({ item }) =>

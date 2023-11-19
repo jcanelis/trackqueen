@@ -32,25 +32,11 @@ const LoadingStack = () => {
             })}
           />
 
-          <Stack.Screen
-            name="ProfileStack"
-            component={ProfileStack}
-            options={{
-              presentation: "modal",
-              headerShown: false,
-              headerBlurEffect: "systemChromeMaterialDark",
-            }}
-          />
+          <Stack.Screen name="ProfileStack" component={ProfileStack} />
 
           <Stack.Screen
             name="Search nearby audio"
             component={SoundCheckScreen}
-            options={{
-              presentation: "modal",
-              headerShown: true,
-              headerLargeTitle: true,
-              headerBlurEffect: "systemChromeMaterialDark",
-            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

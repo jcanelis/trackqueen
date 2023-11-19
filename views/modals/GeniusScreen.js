@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react"
-import { Text, useWindowDimensions, View } from "react-native"
-import { useTheme, useNavigation } from "@react-navigation/native"
-import { useHeaderHeight } from "@react-navigation/elements"
+import React, { useContext } from "react"
+import { Text, View } from "react-native"
+import { useTheme } from "@react-navigation/native"
 import { FlashList } from "@shopify/flash-list"
-import { Image } from "expo-image"
 import PropTypes from "prop-types"
 
 // Context
@@ -13,31 +11,13 @@ import SearchContext from "../../context/search"
 import Annotation from "../../components/Annotation"
 
 // Design
-import { baseUnit, blurhash } from "../../constants/Base"
+import { baseUnit } from "../../constants/Base"
 
 function GeniusScreen({ route }) {
-  const navigation = useNavigation()
   const { colors } = useTheme()
-  const { width } = useWindowDimensions()
-  const headerHeight = useHeaderHeight()
 
   // Context
   const inputText = useContext(SearchContext)
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerBackground: () => (
-        <Image
-          source={route.params.data.spotifyArtistData.images[0].url}
-          placeholder={blurhash}
-          transition={250}
-          width={width}
-          height={headerHeight}
-          contentFit={"cover"}
-        />
-      ),
-    })
-  }, [colors, navigation, headerHeight, route.params, width])
 
   return (
     <View
@@ -47,10 +27,6 @@ function GeniusScreen({ route }) {
       }}
     >
       <FlashList
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInsetAdjustmentBehavior={"automatic"}
-        contentInset={{ top: baseUnit * 2, bottom: baseUnit * 8 }}
         estimatedItemSize={route.params.data.annotations.length}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => <Annotation data={item} />}

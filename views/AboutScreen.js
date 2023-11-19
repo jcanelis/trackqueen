@@ -137,16 +137,10 @@ function AboutScreen() {
   return (
     <ScrollView
       ref={ref}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 16 }}
       contentContainerStyle={{
         padding: baseUnit * 3,
         gap: baseUnit * 3,
       }}
-      scrollsToTop={true}
-      scrollToOverflowEnabled={true}
       style={{
         flex: 1,
         backgroundColor: colors.background,

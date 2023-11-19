@@ -26,6 +26,8 @@ import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 const LyricsStack = () => {
   const { dark, colors } = useTheme()
   const { currentlyPlaying } = useContext(SpotifyContext)
+  const { track } = currentlyPlaying
+  const { artist } = currentlyPlaying
   let [text, updateText] = useState("")
 
   return (
@@ -41,19 +43,9 @@ const LyricsStack = () => {
         })}
       >
         <Stack.Screen
-          name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
+          name={`${track} by ${artist}`}
           component={LyricsScreen}
           options={{
-            animation: "none",
-            headerShown: true,
-            headerLargeTitle: true,
-            headerTransparent: true,
-            headerLargeTitleShadowVisible: true,
-            headerTintColor: colors.text,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-            headerLargeTitleStyle: { color: colors.text },
             headerLeft: () => <ToolbarProfile />,
             headerRight: () => <ToolbarAudioSearch />,
           }}
@@ -62,63 +54,26 @@ const LyricsStack = () => {
         <Stack.Screen
           name={"Powered by GPT-4 API"}
           component={GPTResponse}
-          navigationKey={currentlyPlaying.track}
-          options={{
-            presentation: "modal",
-            headerShown: true,
-            headerTransparent: true,
-            headerTintColor: colors.text,
-            headerLargeTitle: false,
-            headerLargeTitleStyle: { color: colors.text },
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
+          navigationKey={track}
         />
 
         <Stack.Screen
-          name={currentlyPlaying.artist}
+          name={artist}
           component={BioScreen}
-          navigationKey={currentlyPlaying.track}
-          options={{
-            headerShown: true,
-            headerLargeTitle: true,
-            headerBackTitle: "Back",
-            headerTintColor: colors.text,
-            headerLargeTitleStyle: { color: colors.text },
-            headerTransparent: true,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
+          navigationKey={track}
         />
 
         <Stack.Screen
           name="Top Tracks"
           component={ArtistTracksScreen}
-          navigationKey={currentlyPlaying.track}
-          options={{
-            presentation: "modal",
-            headerTransparent: true,
-            headerTintColor: colors.text,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
+          navigationKey={track}
         />
 
         <Stack.Screen
-          name={`${currentlyPlaying.track} on Genius`}
+          name={`${track} on Genius`}
           component={GeniusScreen}
-          navigationKey={currentlyPlaying.track}
+          navigationKey={track}
           options={{
-            headerShown: true,
-            headerBackTitle: "Back",
-            headerTintColor: colors.text,
-            headerLargeTitle: true,
-            headerLargeTitleStyle: { color: colors.text },
-            headerTransparent: true,
-            headerBlurEffect: "dark",
             headerSearchBarOptions: {
               hideNavigationBar: true,
               hideWhenScrolling: false,

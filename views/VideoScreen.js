@@ -23,7 +23,7 @@ import Loader from "../components/Loader"
 import YouTubeList from "../components/YouTubeList"
 
 // Design
-import { baseUnit, lightGrey } from "../constants/Base"
+import { lightGrey } from "../constants/Base"
 
 function VideoScreen() {
   const navigation = useNavigation()
@@ -129,10 +129,6 @@ function VideoScreen() {
   return (
     <ScrollView
       ref={ref}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 16 }}
       scrollsToTop={true}
       scrollToOverflowEnabled={true}
       style={{

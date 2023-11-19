@@ -89,10 +89,6 @@ function ProfileScreen() {
     >
       <FlashList
         estimatedItemSize={20}
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInsetAdjustmentBehavior={"automatic"}
-        contentInset={{ bottom: baseUnit * 6 }}
         ListHeaderComponent={
           <View>
             {data && data.recentTracks > 0 && (

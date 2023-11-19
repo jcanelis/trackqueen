@@ -42,6 +42,14 @@ function CommentsScreen() {
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
 
+  // Ref
+  const ref = useRef(null)
+  useScrollToTop(
+    useRef({
+      scrollToTop: () => ref.current?.scrollTo({ y: -143 }),
+    })
+  )
+
   // AppState listener: https://reactnative.dev/docs/appstate
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
@@ -62,14 +70,6 @@ function CommentsScreen() {
 
   // Tab index
   let [index, setIndex] = useState(0)
-
-  // Scroll reference
-  const ref = useRef(null)
-  useScrollToTop(
-    useRef({
-      scrollToTop: () => ref.current?.scrollToOffset({ offset: -143 }),
-    })
-  )
 
   // Check current track function
   useQuery({
@@ -169,11 +169,6 @@ function CommentsScreen() {
       }}
     >
       <FlatList
-        ref={ref}
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInset={{ bottom: baseUnit * 6 }}
-        contentInsetAdjustmentBehavior={"automatic"}
         style={{ flex: 1 }}
         scrollsToTop={true}
         scrollToOverflowEnabled={true}

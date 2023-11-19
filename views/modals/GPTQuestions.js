@@ -32,10 +32,6 @@ function GPTQuestions() {
 
   return (
     <ScrollView
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 16 }}
       style={{
         flex: 1,
         padding: baseUnit * 3,

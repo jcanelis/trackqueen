@@ -144,12 +144,6 @@ function DiscoverScreen() {
         flex: 1,
         backgroundColor: colors.background,
       }}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInset={{ bottom: baseUnit * 10 }}
-      contentInsetAdjustmentBehavior={"automatic"}
-      scrollsToTop={true}
-      scrollToOverflowEnabled={true}
       ListHeaderComponent={
         <>
           <Header

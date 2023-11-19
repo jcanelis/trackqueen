@@ -59,9 +59,6 @@ function BioScreen({ route }) {
 
   return (
     <ScrollView
-      automaticallyAdjustContentInsets={true}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      contentInset={{ bottom: baseUnit * 16 }}
       stickyHeaderHiddenOnScroll={true}
       contentContainerStyle={{
         alignItems: "center",

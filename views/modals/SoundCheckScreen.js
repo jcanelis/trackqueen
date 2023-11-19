@@ -93,12 +93,6 @@ function SoundCheckScreen() {
               await recording.stopAndUnloadAsync()
             }
 
-            // Turn off device recordings
-            await Audio.setAudioModeAsync({
-              allowsRecordingIOS: false,
-              playsInSilentModeIOS: false,
-            })
-
             // Cancel the query wrapper
             queryClient.cancelQueries({ queryKey: ["Search-nearby-audio"] })
 
@@ -138,12 +132,6 @@ function SoundCheckScreen() {
               setFailed(false)
             }
 
-            // Prep device to record
-            await Audio.setAudioModeAsync({
-              allowsRecordingIOS: true,
-              playsInSilentModeIOS: true,
-            })
-
             // Create a recording
             const { recording } = await Audio.Recording.createAsync(
               audioConfig,
@@ -162,10 +150,6 @@ function SoundCheckScreen() {
 
             // Stop the recording
             await recording.stopAndUnloadAsync()
-            await Audio.setAudioModeAsync({
-              allowsRecordingIOS: false,
-              playsInSilentModeIOS: false,
-            })
 
             // Get the file
             let audioFile = recording.getURI()

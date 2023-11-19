@@ -25,28 +25,8 @@ const AppNavigation = () => (
           component={AppTabs}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="ProfileStack"
-          component={ProfileStack}
-          options={{
-            presentation: "modal",
-            headerShown: false,
-            headerTransparent: true,
-            headerLargeTitle: false,
-            headerBlurEffect: "systemChromeMaterialDark",
-          }}
-        />
-        <Stack.Screen
-          name="Search nearby audio"
-          component={SoundCheckScreen}
-          options={{
-            presentation: "modal",
-            headerShown: true,
-            headerTransparent: true,
-            headerLargeTitle: true,
-            headerBlurEffect: "systemChromeMaterialDark",
-          }}
-        />
+        <Stack.Screen name="ProfileStack" component={ProfileStack} />
+        <Stack.Screen name="Search nearby audio" component={SoundCheckScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   </>
