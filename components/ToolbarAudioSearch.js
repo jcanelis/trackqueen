@@ -2,11 +2,15 @@ import React from "react"
 import { Pressable } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
+// Paper
+import { useTheme } from "react-native-paper"
+
 // Design
-import { Ionicons } from "@expo/vector-icons"
-import { baseUnit, GOLD } from "../constants/Base"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import { baseUnit } from "../constants/Base"
 
 const ToolbarAudioSearch = () => {
+  const { colors } = useTheme()
   const navigation = useNavigation()
 
   return (
@@ -20,7 +24,7 @@ const ToolbarAudioSearch = () => {
         },
       ]}
     >
-      <Ionicons name={"ios-pulse-outline"} color={GOLD} size={baseUnit * 3.4} />
+      <Icon name={"waveform"} color={colors.primary} size={baseUnit * 3.4} />
     </Pressable>
   )
 }
