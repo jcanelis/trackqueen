@@ -17,6 +17,7 @@ import GPTResponse from "../views/modals/GPTResponse"
 import LyricsScreen from "../views/LyricsScreen"
 
 // Components
+import CustomNavigationBar from "../components/CustomNavigationBar"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
@@ -49,8 +50,7 @@ const LyricsStack = () => {
           name={`${track} by ${artist}`}
           component={LyricsScreen}
           options={{
-            headerLeft: () => <ToolbarProfile />,
-            headerRight: () => <ToolbarAudioSearch />,
+            header: (props) => <CustomNavigationBar {...props} />,
           }}
         />
 

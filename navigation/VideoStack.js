@@ -13,6 +13,8 @@ import VideoListScreen from "../views/modals/VideoListScreen"
 import SpotifyContext from "../context/spotify"
 
 // Components
+import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
@@ -27,14 +29,16 @@ const VideoStack = () => {
         name={`${track} by ${artist}`}
         component={VideoScreen}
         options={{
-          headerLeft: () => <ToolbarProfile />,
-          headerRight: () => <ToolbarAudioSearch />,
+          header: (props) => <CustomNavigationBar {...props} />,
         }}
       />
 
       <Stack.Screen
         name={`${track} YouTube videos`}
         component={VideoListScreen}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
     </Stack.Navigator>
   )

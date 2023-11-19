@@ -2,7 +2,7 @@ import React from "react"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
-import { DarkTheme, NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -15,15 +15,20 @@ import ProfileStack from "../navigation/ProfileStack"
 import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
 // Components
+import CustomNavigationBar from "../components/CustomNavigationBar"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 import ToolbarProfile from "../components/ToolbarProfile"
 
-const LoadingStack = () => {
+const LoadingStack = ({ theme }) => {
   return (
     <>
       <StatusBar style={"light"} />
-      <NavigationContainer theme={DarkTheme}>
-        <Stack.Navigator>
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator
+          screenOptions={{
+            header: (props) => <CustomNavigationBar {...props} />,
+          }}
+        >
           <Stack.Screen
             name="TrackQueen"
             component={LoadingScreen}

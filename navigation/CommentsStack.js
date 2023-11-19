@@ -13,6 +13,7 @@ import CommentsScreen from "../views/CommentsScreen"
 import GPTResponse from "../views/modals/GPTResponse"
 
 // Components
+import CustomNavigationBar from "../components/CustomNavigationBar"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
@@ -27,8 +28,7 @@ const CommentsStack = () => {
         name={`${track} by ${artist}`}
         component={CommentsScreen}
         options={{
-          headerLeft: () => <ToolbarProfile />,
-          headerRight: () => <ToolbarAudioSearch />,
+          header: (props) => <CustomNavigationBar {...props} />,
         }}
       />
       <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />

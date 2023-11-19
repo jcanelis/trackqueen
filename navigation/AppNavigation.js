@@ -2,7 +2,7 @@ import React from "react"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
-import { DarkTheme, NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -16,18 +16,27 @@ import ProfileStack from "./ProfileStack"
 // Screens
 import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
-const AppNavigation = () => (
+// Components
+import CustomNavigationBar from "../components/CustomNavigationBar"
+
+const AppNavigation = ({ theme }) => (
   <>
     <StatusBar style={"light"} />
-    <NavigationContainer theme={DarkTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="AppTabs"
-          component={AppTabs}
-          options={{ headerShown: false }}
-        />
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="AppTabs" component={AppTabs} />
         <Stack.Screen name="ProfileStack" component={ProfileStack} />
-        <Stack.Screen name="Search nearby audio" component={SoundCheckScreen} />
+        <Stack.Screen
+          name="Search nearby audio"
+          component={SoundCheckScreen}
+          options={{
+            header: (props) => <CustomNavigationBar {...props} />,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   </>

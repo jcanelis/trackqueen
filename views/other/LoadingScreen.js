@@ -18,10 +18,10 @@ import Spinner from "../../components/Spinner"
 import SpotifyButton from "../../components/SpotifyButton"
 
 // Paper
-import { useTheme } from "react-native-paper"
+import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
-import { lightGrey } from "../../constants/Base"
+import { baseUnit, lightGrey, verticalRhythm } from "../../constants/Base"
 
 function LoadingScreen() {
   const { colors } = useTheme()
@@ -126,16 +126,41 @@ function LoadingScreen() {
         }
       >
         <Spinner />
-        <Wrapper>
-          <Heading>Play a song with Spotify</Heading>
-          <SubHeading>Pull down to refresh.</SubHeading>
-          <SpotifyButton
-            text={"Open Spotify"}
-            func={() => {
-              Linking.openURL("https://open.spotify.com")
+
+        <View
+          style={{
+            gap: baseUnit * 4,
+            paddingBottom: baseUnit * 3,
+          }}
+        >
+          <View
+            style={{
+              gap: verticalRhythm * 2,
+              alignItems: "center",
             }}
-          />
-        </Wrapper>
+          >
+            <Text variant="titleLarge">Play a song with Spotify</Text>
+            <Text variant="titleMedium"> Pull down to refresh.</Text>
+          </View>
+
+          <View
+            style={{
+              paddingLeft: baseUnit * 3,
+              paddingRight: baseUnit * 3,
+            }}
+          >
+            <Button
+              icon={"spotify"}
+              mode={"outlined"}
+              accessibilityLabel={"Open Spotify"}
+              textColor={colors.onSecondaryContainer}
+              rippleColor={colors.tertiary}
+              onPress={() => Linking.openURL("https://open.spotify.com")}
+            >
+              Open Spotify
+            </Button>
+          </View>
+        </View>
       </ScrollView>
     </View>
   )

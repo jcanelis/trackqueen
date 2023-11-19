@@ -22,7 +22,6 @@ import { useTheme } from "react-native-paper"
 
 const AppTabs = () => {
   const { colors } = useTheme()
-  console.log(colors)
   return (
     <Tabs.Navigator
       screenOptions={{

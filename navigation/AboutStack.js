@@ -19,6 +19,7 @@ import GPTResponse from "../views/modals/GPTResponse"
 import GPTStack from "./GPTStack"
 
 // Components
+import CustomNavigationBar from "../components/CustomNavigationBar"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 import ToolbarProfile from "../components/ToolbarProfile"
 
@@ -34,8 +35,7 @@ const AboutStack = () => {
         name={`${track} by ${artist}`}
         component={AboutScreen}
         options={{
-          headerLeft: () => <ToolbarProfile />,
-          headerRight: () => <ToolbarAudioSearch />,
+          header: (props) => <CustomNavigationBar {...props} />,
         }}
       />
 

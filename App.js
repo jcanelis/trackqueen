@@ -1,17 +1,19 @@
 // React
 import "react-native-gesture-handler"
 import React, { useEffect, useMemo, useReducer } from "react"
+import { useColorScheme } from "react-native"
 
 // React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 const queryClient = new QueryClient()
 
 // Paper
-// import {
-//   MD3LightTheme as DefaultTheme,
-//   PaperProvider,
-// } from "react-native-paper"
-import { PaperProvider } from "react-native-paper"
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  Provider as PaperProvider,
+} from "react-native-paper"
+import { useMaterial3Theme } from "@pchmn/expo-material3-theme"
 
 // Expo
 import * as SecureStore from "expo-secure-store"
@@ -108,23 +110,29 @@ export default function App() {
 
   const { isSignedIn, currentlyPlaying } = state
 
-  // const theme = {
-  //   ...DefaultTheme,
-  //   colors: {
-  //     ...DefaultTheme.colors,
-  //     primary: "tomato",
-  //     secondary: "yellow",
-  //   },
-  // }
+  // Theme
+  const colorScheme = useColorScheme()
+  const { theme } = useMaterial3Theme()
+  const paperTheme = useMemo(
+    () =>
+      colorScheme === "dark"
+        ? { ...MD3DarkTheme, colors: theme.dark }
+        : { ...MD3LightTheme, colors: theme.light },
+    [colorScheme, theme]
+  )
 
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
         <SpotifyContext.Provider value={spotifyContext}>
-          <PaperProvider>
-            {!isSignedIn && <LoginStack />}
-            {isSignedIn && currentlyPlaying.track === null && <LoadingStack />}
-            {isSignedIn && currentlyPlaying.track !== null && <AppNavigation />}
+          <PaperProvider theme={paperTheme}>
+            {!isSignedIn && <LoginStack theme={paperTheme} />}
+            {isSignedIn && currentlyPlaying.track === null && (
+              <LoadingStack theme={paperTheme} />
+            )}
+            {isSignedIn && currentlyPlaying.track !== null && (
+              <AppNavigation theme={paperTheme} />
+            )}
           </PaperProvider>
         </SpotifyContext.Provider>
       </AuthContext.Provider>
