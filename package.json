@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Learn more about your music.",
   "scripts": {
-    "build": "npx eas-cli build --platform ios",
-    "start": "npx expo start --ios -c",
-    "submit": "npx eas-cli submit -p ios",
+    "build": "npx eas-cli build --platform android",
+    "start": "npx expo start --android -c",
+    "submit": "npx eas-cli submit -p android",
     "test": "jest",
     "eject": "expo eject",
     "format": "prettier --write *.{js,json}",

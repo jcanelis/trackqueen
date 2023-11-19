@@ -79,22 +79,22 @@ TrackQueen uses Google Cloud [Secret Manager](https://cloud.google.com/functions
 
 Create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/) for iOS Simulator:
 
-`npx eas-cli build --profile development-simulator --platform ios`
+`npx eas-cli build --profile development-simulator --platform android`
 
 Run build on iOS Simulator
 
-`npx expo run:ios`
+`npx expo run:android`
 
 Create a build for a device:
 
-`npx eas-cli build --profile development --platform ios`
+`npx eas-cli build --profile development --platform android`
 
 ### Build for App Store with Expo's [EAS Build](https://docs.expo.dev/build/introduction/)
 
-`npx eas-cli build --platform ios`
+`npx eas-cli build --platform android`
 
 ## Submit to App Store
 
 Use Expo's [EAS Submit](https://docs.expo.dev/submit/ios/) with the command below to send a build to App Store Connect, where the app can be distributed to users with TestFlight or to the App Store.
 
-`npx eas-cli submit -p ios`
+`npx eas-cli submit -p android`
