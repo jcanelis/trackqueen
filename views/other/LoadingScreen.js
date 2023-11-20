@@ -138,8 +138,19 @@ function LoadingScreen() {
               alignItems: "center",
             }}
           >
-            <Text variant="titleLarge">Play a song with Spotify</Text>
-            <Text variant="titleMedium"> Pull down to refresh.</Text>
+            <Text
+              variant="headlineSmall"
+              style={{ color: colors.onSurface, fontWeight: 600 }}
+            >
+              Play a song with Spotify
+            </Text>
+            <Text
+              variant="labelLarge"
+              style={{ color: colors.tertiary, fontWeight: 500 }}
+            >
+              {" "}
+              Pull down to refresh.
+            </Text>
           </View>
 
           <Button

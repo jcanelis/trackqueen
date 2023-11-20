@@ -139,6 +139,7 @@ function DiscoverScreen() {
   return (
     <FlatList
       ref={ref}
+      contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
       style={{
         flex: 1,
         backgroundColor: colors.background,

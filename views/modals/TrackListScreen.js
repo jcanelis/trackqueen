@@ -34,6 +34,7 @@ function TrackListScreen({ route, navigation }) {
       }}
     >
       <FlashList
+        contentContainerStyle={{ paddingBottom: baseUnit * 6 }}
         estimatedItemSize={route.params.tracks.length}
         refreshing={false}
         ListHeaderComponent={

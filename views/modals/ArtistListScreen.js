@@ -28,6 +28,7 @@ const ArtistListScreen = ({ route }) => {
       }}
     >
       <FlashList
+        contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
         numColumns={2}
         initialNumToRender={6}
         estimatedItemSize={20}

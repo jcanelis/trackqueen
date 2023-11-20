@@ -29,6 +29,7 @@ const AppNavigation = ({ theme }) => (
           name="AppTabs"
           component={AppTabs}
           options={{
+            animation: "none",
             headerShown: false,
           }}
         />

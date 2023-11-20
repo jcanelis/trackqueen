@@ -235,7 +235,7 @@ function CommentsScreen() {
             )}
           </>
         }
-        onEndReachedThreshold={0.6}
+        onEndReachedThreshold={0.3}
         onEndReached={async () => {
           const queryType = index === 0 ? "relevance" : "time"
           const pageToken =

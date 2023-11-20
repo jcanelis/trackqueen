@@ -132,6 +132,7 @@ function AboutScreen() {
       ref={ref}
       contentContainerStyle={{
         padding: baseUnit * 3,
+        paddingBottom: baseUnit * 8,
         gap: baseUnit * 3,
       }}
       style={{

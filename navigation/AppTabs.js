@@ -21,6 +21,7 @@ const AppTabs = () => {
   return (
     <Tabs.Navigator
       screenOptions={{
+        animation: "none",
         headerShown: false,
         lazy: false,
       }}
@@ -70,6 +71,7 @@ const AppTabs = () => {
         name="About"
         component={AboutStack}
         options={{
+          animation: "none",
           tabBarLabel: "About",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="information" size={size} color={color} />
@@ -80,6 +82,7 @@ const AppTabs = () => {
         name="Lyrics"
         component={LyricsStack}
         options={{
+          animation: "none",
           tabBarLabel: "Lyrics",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="music" size={size} color={color} />
@@ -90,9 +93,10 @@ const AppTabs = () => {
         name="Comments"
         component={CommentsStack}
         options={{
+          animation: "none",
           tabBarLabel: "Comments",
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="comment" size={size} color={color} />
+            return <Icon name="chat" size={size} color={color} />
           },
         }}
       />
@@ -101,6 +105,7 @@ const AppTabs = () => {
         name="Videos"
         component={VideoStack}
         options={{
+          animation: "none",
           tabBarLabel: "Videos",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="video" size={size} color={color} />
@@ -112,6 +117,7 @@ const AppTabs = () => {
         name="Discover"
         component={DiscoverStack}
         options={{
+          animation: "none",
           tabBarLabel: "Discover",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="shape" size={size} color={color} />

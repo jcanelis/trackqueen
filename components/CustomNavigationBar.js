@@ -18,7 +18,11 @@ const CustomNavigationBar = function ({ navigation, route, options, back }) {
     <Appbar.Header mode={"center-aligned"} theme={theme}>
       <Appbar.Action
         icon={() => (
-          <Icon name={"account"} color={colors.primary} size={baseUnit * 3.4} />
+          <Icon
+            name={"account"}
+            color={colors.onSurface}
+            size={baseUnit * 3.5}
+          />
         )}
         onPress={() => {
           navigation.navigate("Your recent tracks")
@@ -27,15 +31,15 @@ const CustomNavigationBar = function ({ navigation, route, options, back }) {
 
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content
-        titleStyle={{ fontSize: 16, fontWeight: 500, color: colors.tertiary }}
+        titleStyle={{ fontSize: 15, fontWeight: 700, color: colors.secondary }}
         title={title}
       />
       <Appbar.Action
         icon={() => (
           <Icon
             name={"waveform"}
-            color={colors.primary}
-            size={baseUnit * 3.4}
+            color={colors.onSurface}
+            size={baseUnit * 3.5}
           />
         )}
         onPress={() => {

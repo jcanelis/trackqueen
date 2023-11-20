@@ -40,6 +40,7 @@ const AlbumTracks = ({ route }) => {
       }}
     >
       <FlashList
+        contentContainerStyle={{ paddingBottom: baseUnit * 6 }}
         estimatedItemSize={20}
         data={route.params.tracks}
         keyExtractor={(item, index) => index}

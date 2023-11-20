@@ -59,6 +59,7 @@ function ArtistTracksScreen({ route }) {
       }}
     >
       <FlashList
+        contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
         estimatedItemSize={10}
         ListHeaderComponent={
           <View style={{ flex: 1 }}>

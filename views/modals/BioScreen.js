@@ -44,7 +44,7 @@ function BioScreen({ route }) {
       contentContainerStyle={{
         alignItems: "center",
         gap: baseUnit * 3,
-        paddingTop: baseUnit * 12,
+        paddingTop: baseUnit * 3,
       }}
       scrollToOverflowEnabled={true}
       style={{
