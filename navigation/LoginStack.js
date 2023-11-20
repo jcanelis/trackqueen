@@ -29,7 +29,7 @@ const LoginStack = ({ theme }) => (
 )
 
 LoginStack.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.object,
 }
 
 export default LoginStack

@@ -51,24 +51,36 @@ const AboutStack = () => {
         name="Credits"
         component={CreditsScreen}
         navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
 
       <Stack.Screen
         name={"Ask ChatGPT"}
         component={GPTStack}
         navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
 
       <Stack.Screen
         name={"Powered by GPT-4 API"}
         component={GPTResponse}
         navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
 
       <Stack.Screen
         name="Top Tracks"
         component={ArtistTracksScreen}
         navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
     </Stack.Navigator>
   )

@@ -58,7 +58,7 @@ function Header({ copy, func, type, buttonTitle, border }) {
             marginRight: baseUnit * 3,
             marginBottom: baseUnit * 2,
             marginLeft: baseUnit * 3,
-            backgroundColor: colors.primary,
+            backgroundColor: colors.onPrimary,
           }}
         ></View>
       )}

@@ -11,6 +11,7 @@ import { baseUnit } from "../constants/Base"
 const ArtistList = ({ data }) => (
   <FlatList
     initialNumToRender={4}
+    showsHorizontalScrollIndicator={false}
     horizontal={true}
     pagingEnabled={false}
     contentContainerStyle={{

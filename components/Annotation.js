@@ -55,12 +55,10 @@ const Annotation = ({ data }) => {
       />
 
       {expanded && (
-        <View style={{ margin: baseUnit * 3 }}>
-          <View>
-            <Text style={{ color: colors.primary }} variant={"bodyLarge"}>
-              {lyric}
-            </Text>
-          </View>
+        <View style={{ margin: baseUnit * 3, gap: baseUnit * 3 }}>
+          <Text variant={"bodyLarge"} style={{ color: colors.primary }}>
+            {lyric}
+          </Text>
           {annotation.verified && (
             <Pressable
               onPress={() => {
@@ -72,7 +70,6 @@ const Annotation = ({ data }) => {
                 alignItems: "center",
                 marginLeft: baseUnit * 3,
                 marginRight: baseUnit * 3,
-                marginBottom: baseUnit * 2,
               }}
             >
               <Image
@@ -98,7 +95,6 @@ const Annotation = ({ data }) => {
           <Text
             variant={"bodyLarge"}
             style={{
-              paddingTop: baseUnit,
               paddingBottom: baseUnit * 2,
               color: colors.tertiary,
               opacity: 0.85,
@@ -110,7 +106,6 @@ const Annotation = ({ data }) => {
           <View style={{ alignItems: "center" }}>
             <View
               style={{
-                marginTop: baseUnit * 2,
                 flexDirection: "row",
                 alignItems: "center",
               }}

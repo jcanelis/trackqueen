@@ -27,13 +27,16 @@ function GPTQuestions() {
 
   return (
     <ScrollView
+      contentContainerStyle={{
+        paddingBottom: baseUnit * 16,
+      }}
       style={{
         flex: 1,
         padding: baseUnit * 3,
       }}
     >
       <View style={{ flex: 1, gap: baseUnit * 3 }}>
-        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Track
         </Text>
 
@@ -55,7 +58,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Album
         </Text>
         <Chip
@@ -76,7 +79,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Artist
         </Text>
 
@@ -89,7 +92,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Sound
         </Text>
 
@@ -120,7 +123,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Other
         </Text>
 

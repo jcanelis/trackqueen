@@ -74,7 +74,6 @@ const Notes = ({ data }) => {
       {data.geniusData && data.geniusData.result.url && (
         <Button
           mode={"text"}
-          title="View this track on Genius"
           accessibilityLabel={"View this track on Genius"}
           textColor={colors.onSecondaryContainer}
           rippleColor={colors.tertiary}

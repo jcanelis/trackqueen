@@ -45,7 +45,7 @@ const Credits = ({ data }) => {
 
       {producers.length > 0 && (
         <>
-          <Text variant={"labelMedum"}>Producers</Text>
+          <Text variant={"labelMedium"}>Producers</Text>
           {producers.map((item, index) => (
             <Text variant={"bodyLarge"} key={index}>
               {item.name}

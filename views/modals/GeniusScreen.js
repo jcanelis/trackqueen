@@ -1,25 +1,24 @@
-import React, { useContext } from "react"
+import React from "react"
 import { View } from "react-native"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
-
-// Context
-import SearchContext from "../../context/search"
 
 // Components
 import Annotation from "../../components/Annotation"
 
 // Paper
-import { useTheme, Text } from "react-native-paper"
+import { useTheme, Text, TextInput } from "react-native-paper"
+
+// Context
+// import SearchContext from "../../context/search"
 
 // Design
 import { baseUnit } from "../../constants/Base"
 
 function GeniusScreen({ route }) {
+  // const inputText = useContext(SearchContext)
   const { colors } = useTheme()
-
-  // Context
-  const inputText = useContext(SearchContext)
+  const [text, setText] = React.useState("")
 
   return (
     <View
@@ -29,13 +28,30 @@ function GeniusScreen({ route }) {
       }}
     >
       <FlashList
+        contentContainerStyle={{
+          paddingBottom: baseUnit * 8,
+        }}
         estimatedItemSize={route.params.data.annotations.length}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => <Annotation data={item} />}
         refreshing={false}
         data={route.params.data.annotations.filter(
-          (d) => inputText === "" || d.range.content.includes(inputText)
+          (d) => text === "" || d.range.content.includes(text)
         )}
+        ListHeaderComponent={
+          <View style={{ padding: baseUnit * 3 }}>
+            <TextInput
+              autoCapitalize={"none"}
+              maxLength={20}
+              numberOfLines={1}
+              label="Search Genius annotations"
+              value={text}
+              inputMode={"text"}
+              autoFocus={false}
+              onChangeText={(text) => setText(text)}
+            />
+          </View>
+        }
         ListEmptyComponent={
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}

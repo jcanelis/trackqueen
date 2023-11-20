@@ -28,6 +28,8 @@ const LyricsFooter = ({ data }) => {
   return (
     <View
       style={{
+        marginTop: baseUnit,
+        marginBottom: baseUnit * 3,
         padding: baseUnit * 3,
         paddingTop: baseUnit * 3,
         paddingBottom: baseUnit * 3,

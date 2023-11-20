@@ -22,7 +22,7 @@ import YouTubeList from "../components/YouTubeList"
 import { useTheme } from "react-native-paper"
 
 // Design
-import { lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function VideoScreen() {
   const navigation = useNavigation()
@@ -128,6 +128,7 @@ function VideoScreen() {
   return (
     <ScrollView
       ref={ref}
+      contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
       style={{
         flex: 1,
         backgroundColor: colors.background,
@@ -136,8 +137,8 @@ function VideoScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={colors.primary}
+          titleColor={colors.primary}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)

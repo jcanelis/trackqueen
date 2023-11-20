@@ -236,7 +236,7 @@ function LyricsScreen() {
           {data.lyrics.length > 0 && (
             <>
               <Button
-                mode={"outlined"}
+                mode={"text"}
                 textColor={colors.onSecondaryContainer}
                 rippleColor={colors.tertiary}
                 onPress={() => {

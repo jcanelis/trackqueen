@@ -89,7 +89,7 @@ function ArtistTracksScreen({ route }) {
           </View>
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 6 }}>
+          <View style={{ margin: baseUnit * 3 }}>
             <SpotifyButton
               text={"Play on Spotify"}
               func={() => {

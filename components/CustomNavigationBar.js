@@ -50,7 +50,7 @@ CustomNavigationBar.propTypes = {
   navigation: PropTypes.object,
   route: PropTypes.object,
   options: PropTypes.object,
-  back: PropTypes.func,
+  back: PropTypes.object,
 }
 
 export default CustomNavigationBar

@@ -49,7 +49,7 @@ const LoadingStack = ({ theme }) => {
 }
 
 LoadingStack.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.object,
 }
 
 export default LoadingStack

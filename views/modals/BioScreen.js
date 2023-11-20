@@ -17,10 +17,11 @@ import { Image } from "expo-image"
 
 // Components
 import Chip from "../../components/Chip"
+
 import SpotifyLogo from "../../components/SpotifyLogo"
 
 // Design
-import { baseUnit, blurhash, GOLD } from "../../constants/Base"
+import { baseUnit, blurhash } from "../../constants/Base"
 
 function BioScreen({ route }) {
   const navigation = useNavigation()
@@ -71,39 +72,52 @@ function BioScreen({ route }) {
       </View>
 
       <View style={{ flexDirection: "row" }}>
-        {route.params.instagram && (
-          <Button
-            color={GOLD}
-            title={"Instagram"}
-            onPress={() => {
-              Linking.openURL(
-                `https://instagram.com/${route.params.data.artistInfo.artist.instagram_name}`
-              )
-            }}
-          />
-        )}
-
         <Button
-          color={GOLD}
-          title={"Top tracks"}
+          mode={"text"}
+          accessibilityLabel={"Top tracks"}
+          textColor={colors.onSecondaryContainer}
+          rippleColor={colors.tertiary}
           onPress={() => {
             navigation.navigate("Top Tracks", {
               item: currentlyPlaying.spotifyData.artists[0],
               coverImage: route.params.image,
             })
           }}
-        />
+        >
+          Top tracks
+        </Button>
+
+        {route.params.instagram && (
+          <Button
+            mode={"text"}
+            accessibilityLabel={"Instagram"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
+            onPress={() => {
+              Linking.openURL(
+                `https://instagram.com/${route.params.data.artistInfo.artist.instagram_name}`
+              )
+            }}
+          >
+            Instagram
+          </Button>
+        )}
 
         <Button
-          color={GOLD}
-          title={"Ask ChatGPT"}
+          mode={"text"}
+          accessibilityLabel={"Ask ChatGPT"}
+          textColor={colors.onSecondaryContainer}
+          rippleColor={colors.tertiary}
           onPress={() => {
             navigation.navigate("Powered by GPT-4 API", {
               query: `Tell me about the musician ${artist}.`,
             })
           }}
-        />
+        >
+          Ask ChatGPT
+        </Button>
       </View>
+
       <Text
         variant={"bodyLarge"}
         style={{

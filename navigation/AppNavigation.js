@@ -56,7 +56,7 @@ const AppNavigation = ({ theme }) => (
 )
 
 AppNavigation.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.object,
 }
 
 export default AppNavigation

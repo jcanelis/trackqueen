@@ -179,9 +179,11 @@ function CommentsScreen() {
             }}
           >
             <Text
+              variant={"labelSmall"}
               style={{
                 marginTop: baseUnit * 2,
                 textAlign: "center",
+                color: colors.tertiary,
               }}
             >
               No comments found for this track.

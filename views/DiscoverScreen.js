@@ -26,7 +26,7 @@ import Loader from "../components/Loader"
 import Track from "../components/Track"
 
 // Design
-import { baseUnit, lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function DiscoverScreen() {
   const navigation = useNavigation()
@@ -249,8 +249,8 @@ function DiscoverScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={colors.primary}
+          titleColor={colors.primary}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)
