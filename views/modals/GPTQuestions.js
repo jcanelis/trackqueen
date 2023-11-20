@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { ScrollView, View } from "react-native"
 
 // Paper
-import { useTheme, Text } from "react-native-paper"
+import { Text } from "react-native-paper"
 
 // React Navigation
 import { useNavigation } from "@react-navigation/native"
@@ -17,7 +17,6 @@ import Chip from "../../components/Chip"
 import { baseUnit } from "../../constants/Base"
 
 function GPTQuestions() {
-  const { colors } = useTheme()
   const navigation = useNavigation()
 
   // Context

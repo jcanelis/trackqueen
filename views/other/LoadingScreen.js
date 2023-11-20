@@ -14,7 +14,6 @@ import TokenCheck from "../../services/Custom/checkToken"
 
 // Components
 import Spinner from "../../components/Spinner"
-import SpotifyButton from "../../components/SpotifyButton"
 
 // Paper
 import { Button, useTheme, Text } from "react-native-paper"

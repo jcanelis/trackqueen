@@ -8,6 +8,9 @@ import {
   View,
 } from "react-native"
 
+// Paper
+import { Button, useTheme } from "react-native-paper"
+
 // React Navigation
 import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
@@ -32,9 +35,6 @@ import Loader from "../components/Loader"
 import Lyric from "../components/Lyric"
 import LyricsFooter from "../components/LyricsFooter"
 import SpotifyLogo from "../components/SpotifyLogo"
-
-// Paper
-import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit, blurhash } from "../constants/Base"

@@ -17,11 +17,7 @@ import CommentsStack from "./CommentsStack"
 import VideoStack from "./VideoStack"
 import DiscoverStack from "./DiscoverStack"
 
-// Paper
-import { useTheme } from "react-native-paper"
-
 const AppTabs = () => {
-  const { colors } = useTheme()
   return (
     <Tabs.Navigator
       screenOptions={{

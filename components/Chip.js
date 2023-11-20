@@ -1,15 +1,13 @@
 import React from "react"
-import { Pressable, Text } from "react-native"
 import PropTypes from "prop-types"
 
 // Paper
-import { useTheme, Chip as Chipper } from "react-native-paper"
+import { Chip as Chipper } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
 
 const Chip = ({ text, action }) => {
-  const { colors } = useTheme()
   return (
     <Chipper
       mode={"flat"}

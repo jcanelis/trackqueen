@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
 // Context
-import SearchContext from "../context/search"
 import SpotifyContext from "../context/spotify"
 
 // Screens
@@ -20,63 +19,57 @@ import LyricsScreen from "../views/LyricsScreen"
 import CustomNavigationBar from "../components/CustomNavigationBar"
 import DetailNavigationBar from "../components/DetailNavigationBar"
 
-// Paper
-import { useTheme } from "react-native-paper"
-
 const LyricsStack = () => {
-  const { dark, colors } = useTheme()
   const { currentlyPlaying } = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
 
   return (
-    <SearchContext.Provider value={text}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name={`${track} by ${artist}`}
-          component={LyricsScreen}
-          options={{
-            header: (props) => <CustomNavigationBar {...props} />,
-          }}
-        />
+    <Stack.Navigator>
+      <Stack.Screen
+        name={`${track} by ${artist}`}
+        component={LyricsScreen}
+        options={{
+          header: (props) => <CustomNavigationBar {...props} />,
+        }}
+      />
 
-        <Stack.Screen
-          name={"Powered by GPT-4 API"}
-          component={GPTResponse}
-          navigationKey={track}
-          options={{
-            header: (props) => <DetailNavigationBar {...props} />,
-          }}
-        />
+      <Stack.Screen
+        name={"Powered by GPT-4 API"}
+        component={GPTResponse}
+        navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
+      />
 
-        <Stack.Screen
-          name={artist}
-          component={BioScreen}
-          navigationKey={track}
-          options={{
-            header: (props) => <DetailNavigationBar {...props} />,
-          }}
-        />
+      <Stack.Screen
+        name={artist}
+        component={BioScreen}
+        navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
+      />
 
-        <Stack.Screen
-          name="Top Tracks"
-          component={ArtistTracksScreen}
-          navigationKey={track}
-          options={{
-            header: (props) => <DetailNavigationBar {...props} />,
-          }}
-        />
+      <Stack.Screen
+        name="Top Tracks"
+        component={ArtistTracksScreen}
+        navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
+      />
 
-        <Stack.Screen
-          name={`${track} on Genius`}
-          component={GeniusScreen}
-          navigationKey={track}
-          options={{
-            header: (props) => <DetailNavigationBar {...props} />,
-          }}
-        />
-      </Stack.Navigator>
-    </SearchContext.Provider>
+      <Stack.Screen
+        name={`${track} on Genius`}
+        component={GeniusScreen}
+        navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
+      />
+    </Stack.Navigator>
   )
 }
 

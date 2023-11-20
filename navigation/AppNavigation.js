@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
@@ -11,7 +12,6 @@ import { StatusBar } from "expo-status-bar"
 
 // Stacks
 import AppTabs from "./AppTabs"
-import ProfileStack from "./ProfileStack"
 
 // Screens
 import ProfileScreen from "../views/modals/ProfileScreen"
@@ -54,5 +54,9 @@ const AppNavigation = ({ theme }) => (
     </NavigationContainer>
   </>
 )
+
+AppNavigation.propTypes = {
+  theme: PropTypes.string,
+}
 
 export default AppNavigation

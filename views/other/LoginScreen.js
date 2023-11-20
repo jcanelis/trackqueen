@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ActivityIndicator, View } from "react-native"
 
+// Paper
+import { Button, useTheme, Text } from "react-native-paper"
+
 // Expo
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
 
@@ -16,10 +19,9 @@ import spotifyAuthScopes from "../../constants/SpotifyAuthScopes"
 
 // Components
 import Spinner from "../../components/Spinner"
-import SpotifyButton from "../../components/SpotifyButton"
 
-// Paper
-import { useTheme } from "react-native-paper"
+// Design
+import { baseUnit, verticalRhythm } from "../../constants/Base"
 
 function LoginScreen() {
   const { colors } = useTheme()

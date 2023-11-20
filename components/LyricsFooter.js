@@ -2,22 +2,17 @@ import React from "react"
 import { View } from "react-native"
 import PropTypes from "prop-types"
 
+// Paper
+import { useTheme, Text } from "react-native-paper"
+
 // Expo
 import { useAssets } from "expo-asset"
-import * as WebBrowser from "expo-web-browser"
-
-// Paper
-import { Button, useTheme, Text } from "react-native-paper"
-
-// Design
-import { baseUnit } from "../constants/Base"
 
 // Components
 import Musixmatch from "./Musixmatch"
 
-const _handlePressButtonAsync = async (url) => {
-  await WebBrowser.openBrowserAsync(url)
-}
+// Design
+import { baseUnit } from "../constants/Base"
 
 const LyricsFooter = ({ data }) => {
   const { colors } = useTheme()

@@ -7,7 +7,7 @@ import PropTypes from "prop-types"
 import { useTheme, Text } from "react-native-paper"
 
 // Design
-import { baseUnit, verticalRhythm } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 import { Ionicons } from "@expo/vector-icons"
 
 const Comment = ({ data }) => {

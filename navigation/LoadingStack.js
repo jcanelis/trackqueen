@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 // React Navigation
 // https://reactnavigation.org/docs/native-stack-navigator
@@ -45,6 +46,10 @@ const LoadingStack = ({ theme }) => {
       </NavigationContainer>
     </>
   )
+}
+
+LoadingStack.propTypes = {
+  theme: PropTypes.string,
 }
 
 export default LoadingStack

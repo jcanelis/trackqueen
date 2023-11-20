@@ -9,9 +9,6 @@ const Stack = createNativeStackNavigator()
 import GPTQuestions from "../views/modals/GPTQuestions"
 import GPTResponse from "../views/modals/GPTResponse"
 
-// Components
-import DetailNavigationBar from "../components/DetailNavigationBar"
-
 const GPTStack = () => {
   return (
     <Stack.Navigator

@@ -1,5 +1,5 @@
 import React from "react"
-import { Text, useWindowDimensions, View } from "react-native"
+import { useWindowDimensions, View } from "react-native"
 import LottieView from "lottie-react-native"
 
 // Paper

@@ -1,17 +1,13 @@
 import React, { useContext } from "react"
-import { Pressable, View } from "react-native"
+import { View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import PropTypes from "prop-types"
-
-// Context
-import SpotifyContext from "../context/spotify"
 
 // Paper
 import { Button, useTheme } from "react-native-paper"
 
-// Design
-import { baseUnit } from "../constants/Base"
-import { Ionicons } from "@expo/vector-icons"
+// Context
+import SpotifyContext from "../context/spotify"
 
 const GeniusLink = ({ data }) => {
   const { colors } = useTheme()

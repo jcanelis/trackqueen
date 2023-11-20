@@ -1,19 +1,15 @@
 import React from "react"
 import { getHeaderTitle } from "@react-navigation/elements"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import PropTypes from "prop-types"
 
 // Paper
 import { Appbar, useTheme } from "react-native-paper"
 
 // Custom
-import { blurhash, baseUnit } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
-export default function CustomNavigationBar({
-  navigation,
-  route,
-  options,
-  back,
-}) {
+const CustomNavigationBar = function ({ navigation, route, options, back }) {
   const title = getHeaderTitle(options, route.name)
   const { colors } = useTheme()
   const theme = useTheme()
@@ -49,3 +45,12 @@ export default function CustomNavigationBar({
     </Appbar.Header>
   )
 }
+
+CustomNavigationBar.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
+  options: PropTypes.object,
+  back: PropTypes.func,
+}
+
+export default CustomNavigationBar

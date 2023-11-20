@@ -1,5 +1,4 @@
 import React from "react"
-import { Pressable, Text, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Paper
@@ -14,9 +13,9 @@ export default function SpotifyButton({ func, text }) {
       accessibilityLabel={"Open Spotify"}
       textColor={colors.onSecondaryContainer}
       rippleColor={colors.tertiary}
-      onPress={() => Linking.openURL("https://open.spotify.com")}
+      onPress={() => func()}
     >
-      Open Spotify
+      {text}
     </Button>
   )
 }

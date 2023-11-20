@@ -1,21 +1,14 @@
 import React from "react"
 import { getHeaderTitle } from "@react-navigation/elements"
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import PropTypes from "prop-types"
+// import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 // Paper
 import { Appbar, useTheme } from "react-native-paper"
 
-// Custom
-import { blurhash, baseUnit } from "../constants/Base"
-
-export default function DetailNavigationBar({
-  navigation,
-  route,
-  options,
-  back,
-}) {
+const DetailNavigationBar = function ({ navigation, route, options, back }) {
   const title = getHeaderTitle(options, route.name)
-  const { colors } = useTheme()
+
   const theme = useTheme()
 
   return (
@@ -25,3 +18,12 @@ export default function DetailNavigationBar({
     </Appbar.Header>
   )
 }
+
+DetailNavigationBar.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
+  options: PropTypes.object,
+  back: PropTypes.func,
+}
+
+export default DetailNavigationBar

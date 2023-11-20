@@ -16,7 +16,7 @@ import SpotifyContext from "../context/spotify"
 import Chip from "../components/Chip"
 
 // Design
-import { baseUnit, verticalRhythm } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 const Notes = ({ data }) => {
   const navigation = useNavigation()

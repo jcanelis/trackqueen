@@ -27,7 +27,7 @@ import Loader from "../components/Loader"
 import VideoThumbnail from "../components/VideoThumbnail"
 
 // Design
-import { baseUnit, lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function CommentsScreen() {
   const navigation = useNavigation()
@@ -58,6 +58,7 @@ function CommentsScreen() {
   // Save each array of comments
   let [commentsRelevant, setCommentsRelevant] = useState([])
   let [commentsRecent, setCommentsRecent] = useState([])
+  console.log(commentsRecent)
 
   // Comments to be displayed
   let [commentsToShow, setCommentsToShow] = useState(commentsRelevant)
@@ -68,6 +69,7 @@ function CommentsScreen() {
 
   // Tab index
   let [index, setIndex] = useState(0)
+  console.log(setIndex)
 
   // Check current track function
   useQuery({

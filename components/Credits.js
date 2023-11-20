@@ -7,13 +7,12 @@ import Artist from "../components/Artist"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Paper
-import { useTheme, Text } from "react-native-paper"
+import { Text } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
 
 const Credits = ({ data }) => {
-  const { colors } = useTheme()
   const { producers, writers } = data
 
   return (
@@ -22,7 +21,7 @@ const Credits = ({ data }) => {
         <View style={{ paddingTop: baseUnit * 6, paddingBottom: baseUnit * 2 }}>
           <SpotifyLogo />
         </View>
-        <Text style={styles.heading}>Performers</Text>
+        <Text>Performers</Text>
         <ScrollView
           horizontal={true}
           centerContent={true}
@@ -48,7 +47,7 @@ const Credits = ({ data }) => {
         <>
           <Text variant={"labelMedum"}>Producers</Text>
           {producers.map((item, index) => (
-            <Text variant={"bodyLarge"} key={index} style={styles.paragraph}>
+            <Text variant={"bodyLarge"} key={index}>
               {item.name}
             </Text>
           ))}

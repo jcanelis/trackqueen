@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { ScrollView, useWindowDimensions, View } from "react-native"
 import PropTypes from "prop-types"
 
@@ -20,7 +20,7 @@ import Chip from "../../components/Chip"
 import SpotifyLogo from "../../components/SpotifyLogo"
 
 // Design
-import { baseUnit, blurhash, GOLD, verticalRhythm } from "../../constants/Base"
+import { baseUnit, blurhash, GOLD } from "../../constants/Base"
 
 function BioScreen({ route }) {
   const navigation = useNavigation()
@@ -62,7 +62,7 @@ function BioScreen({ route }) {
           placeholder={blurhash}
           source={route.params.image}
           transition={250}
-          style={{ marginTop: headerHeight, borderRadius: width / 2 }}
+          style={{ borderRadius: width / 2 }}
           height={width / 2}
           width={width / 2}
         />
