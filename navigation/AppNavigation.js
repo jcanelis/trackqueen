@@ -14,23 +14,42 @@ import AppTabs from "./AppTabs"
 import ProfileStack from "./ProfileStack"
 
 // Screens
+import ProfileScreen from "../views/modals/ProfileScreen"
 import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
 // Components
-import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 
 const AppNavigation = ({ theme }) => (
   <>
     <StatusBar style={"light"} />
     <NavigationContainer theme={theme}>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="AppTabs" component={AppTabs} />
-        <Stack.Screen name="ProfileStack" component={ProfileStack} />
-        <Stack.Screen name="Search nearby audio" component={SoundCheckScreen} />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="AppTabs"
+          component={AppTabs}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="Your recent tracks"
+          component={ProfileScreen}
+          options={{
+            headerShown: true,
+            header: (props) => <DetailNavigationBar {...props} />,
+          }}
+        />
+
+        <Stack.Screen
+          name="Search nearby audio"
+          component={SoundCheckScreen}
+          options={{
+            headerShown: true,
+            header: (props) => <DetailNavigationBar {...props} />,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   </>

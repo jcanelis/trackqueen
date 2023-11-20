@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator()
 import AuthContext from "../context/auth"
 
 // Screens
-import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 import ProfileScreen from "../views/modals/ProfileScreen"
 
 // Design
@@ -20,25 +20,12 @@ const ProfileStack = () => {
   const { signOut } = useContext(AuthContext)
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="Your recent tracks"
         component={ProfileScreen}
         options={{
-          header: (props) => <CustomNavigationBar {...props} />,
-          headerRight: () => (
-            <Button
-              title="Logout"
-              onPress={() => {
-                signOut()
-              }}
-              color={GOLD}
-            />
-          ),
+          header: (props) => <DetailNavigationBar {...props} />,
         }}
       />
     </Stack.Navigator>

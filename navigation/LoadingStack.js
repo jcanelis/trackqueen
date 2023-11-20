@@ -11,11 +11,12 @@ import { StatusBar } from "expo-status-bar"
 
 // Screens
 import LoadingScreen from "../views/other/LoadingScreen"
-import ProfileStack from "../navigation/ProfileStack"
+import ProfileScreen from "../views/modals/ProfileScreen"
 import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 import ToolbarProfile from "../components/ToolbarProfile"
 
@@ -29,16 +30,14 @@ const LoadingStack = ({ theme }) => {
             header: (props) => <CustomNavigationBar {...props} />,
           }}
         >
+          <Stack.Screen name="TrackQueen" component={LoadingScreen} />
           <Stack.Screen
-            name="TrackQueen"
-            component={LoadingScreen}
-            options={() => ({
-              headerLeft: () => <ToolbarProfile />,
-              headerRight: () => <ToolbarAudioSearch />,
-            })}
+            name="Your recent tracks"
+            component={ProfileScreen}
+            options={{
+              header: (props) => <DetailNavigationBar {...props} />,
+            }}
           />
-
-          <Stack.Screen name="ProfileStack" component={ProfileStack} />
 
           <Stack.Screen
             name="Search nearby audio"

@@ -23,21 +23,25 @@ export default function CustomNavigationBar({
     <Appbar.Header mode={"center-aligned"} theme={theme}>
       <Appbar.Action
         icon={() => (
-          <Icon name={"account"} color={colors.primary} size={baseUnit * 3} />
+          <Icon name={"account"} color={colors.primary} size={baseUnit * 3.4} />
         )}
         onPress={() => {
-          navigation.navigate("ProfileStack")
+          navigation.navigate("Your recent tracks")
         }}
       />
 
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content
-        titleStyle={{ fontSize: 15, fontWeight: 600, color: colors.tertiary }}
+        titleStyle={{ fontSize: 16, fontWeight: 500, color: colors.tertiary }}
         title={title}
       />
       <Appbar.Action
         icon={() => (
-          <Icon name={"waveform"} color={colors.primary} size={baseUnit * 3} />
+          <Icon
+            name={"waveform"}
+            color={colors.primary}
+            size={baseUnit * 3.4}
+          />
         )}
         onPress={() => {
           navigation.navigate("Search nearby audio")

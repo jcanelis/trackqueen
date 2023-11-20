@@ -20,6 +20,7 @@ import GPTStack from "./GPTStack"
 
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 import ToolbarProfile from "../components/ToolbarProfile"
 
@@ -43,6 +44,9 @@ const AboutStack = () => {
         name={album}
         component={AlbumTracks}
         navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
 
       <Stack.Screen

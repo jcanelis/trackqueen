@@ -3,8 +3,6 @@ import { AppState, Pressable, ScrollView, Text, View } from "react-native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import PropTypes from "prop-types"
 
-import { ActivityIndicator } from "react-native-paper"
-
 // Expo
 import * as WebBrowser from "expo-web-browser"
 import { useAssets } from "expo-asset"
@@ -17,8 +15,7 @@ import ChatGPT from "../../services/ChatGPT/getAnswers"
 import StatusText from "../../components/StatusText"
 
 // Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
+import { ActivityIndicator, Button, useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm, GOLD } from "../../constants/Base"

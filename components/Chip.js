@@ -13,8 +13,8 @@ const Chip = ({ text, action }) => {
   return (
     <Chipper
       mode={"flat"}
+      ellipsizeMode={"tail"}
       compact={false}
-      rippleColor={colors.primary}
       textStyle={{ padding: baseUnit * 1 }}
       onPress={() => {
         action()

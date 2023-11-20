@@ -9,23 +9,18 @@ const Stack = createNativeStackNavigator()
 import GPTQuestions from "../views/modals/GPTQuestions"
 import GPTResponse from "../views/modals/GPTResponse"
 
+// Components
+import DetailNavigationBar from "../components/DetailNavigationBar"
+
 const GPTStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name={"GPT Questions"}
-        component={GPTQuestions}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name={"Powered by GPT-4 API"}
-        component={GPTResponse}
-        options={{
-          headerShown: false,
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name={"GPT Questions"} component={GPTQuestions} />
+      <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
     </Stack.Navigator>
   )
 }

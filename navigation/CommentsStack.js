@@ -14,6 +14,7 @@ import GPTResponse from "../views/modals/GPTResponse"
 
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
@@ -31,7 +32,13 @@ const CommentsStack = () => {
           header: (props) => <CustomNavigationBar {...props} />,
         }}
       />
-      <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
+      <Stack.Screen
+        name={"Powered by GPT-4 API"}
+        component={GPTResponse}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
+      />
     </Stack.Navigator>
   )
 }

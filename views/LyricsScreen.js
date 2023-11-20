@@ -4,7 +4,6 @@ import {
   FlatList,
   Pressable,
   RefreshControl,
-  Text,
   useWindowDimensions,
   View,
 } from "react-native"
@@ -35,8 +34,7 @@ import LyricsFooter from "../components/LyricsFooter"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
+import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit, blurhash, GOLD, lightGrey } from "../constants/Base"
@@ -217,25 +215,39 @@ function LyricsScreen() {
         </View>
       }
       ListFooterComponent={
-        <View style={{ gap: baseUnit * 2 }}>
-          {data.lyrics.length > 0 &&
-            data.geniusTrackSearch &&
-            data.geniusTrackSearch.result.url && (
-              <View style={{ marginTop: baseUnit * 3 }}>
+        <View style={{ gap: baseUnit * 3, padding: baseUnit * 3 }}>
+          <>
+            {data.lyrics.length > 0 &&
+              data.geniusTrackSearch &&
+              data.geniusTrackSearch.result.url && (
                 <Button
-                  title="View this track on Genius"
-                  color={GOLD}
+                  mode={"outlined"}
+                  textColor={colors.onSecondaryContainer}
+                  rippleColor={colors.tertiary}
                   onPress={() => {
                     _handlePressButtonAsync(data.geniusTrackSearch.result.url)
                   }}
-                />
-              </View>
-            )}
+                >
+                  View this track on Genius
+                </Button>
+              )}
+          </>
 
-          <LyricsFooter
-            data={data}
-            hasLyrics={data.lyrics.length > 0 ? true : false}
-          />
+          {data.lyrics.length > 0 && (
+            <>
+              <Button
+                mode={"outlined"}
+                textColor={colors.onSecondaryContainer}
+                rippleColor={colors.tertiary}
+                onPress={() => {
+                  _handlePressButtonAsync(data.musixMatchTrack.track_share_url)
+                }}
+              >
+                View all lyrics on Musixmatch
+              </Button>
+              <LyricsFooter data={data} />
+            </>
+          )}
         </View>
       }
       ListEmptyComponent={
@@ -246,11 +258,7 @@ function LyricsScreen() {
             paddingBottom: baseUnit * 8,
             textAlign: "center",
           }}
-        >
-          <Text style={{ color: colors.tertiary, opacity: 0.7 }}>
-            No lyrics were found for this track.
-          </Text>
-        </View>
+        ></View>
       }
     />
   )

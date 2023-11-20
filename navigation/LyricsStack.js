@@ -18,6 +18,7 @@ import LyricsScreen from "../views/LyricsScreen"
 
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
@@ -77,20 +78,7 @@ const LyricsStack = () => {
           component={GeniusScreen}
           navigationKey={track}
           options={{
-            headerSearchBarOptions: {
-              hideNavigationBar: true,
-              hideWhenScrolling: false,
-              obscureBackground: true,
-              placeholder: "Search Genius.com annotations",
-              barTintColor: dark ? colors.background : "#cccccc",
-              textColor: colors.tertiary,
-              headerIconColor: colors.tertiary,
-              autoCapitalize: "none",
-              onChangeText: (event) => {
-                updateText(event.nativeEvent.text)
-              },
-              onCancelButtonPress: () => true,
-            },
+            header: (props) => <DetailNavigationBar {...props} />,
           }}
         />
       </Stack.Navigator>

@@ -67,13 +67,16 @@ const DiscoverStack = () => {
         name={"Ask ChatGPT"}
         component={GPTStack}
         navigationKey={track}
+        options={{
+          header: (props) => <DetailNavigationBar {...props} />,
+        }}
       />
 
       <Stack.Screen
         name={"Powered by GPT-4 API"}
         component={GPTResponse}
         options={{
-          presentation: "card",
+          header: (props) => <DetailNavigationBar {...props} />,
         }}
       />
     </Stack.Navigator>
