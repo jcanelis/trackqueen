@@ -13,7 +13,7 @@ import { Button, useTheme, Text } from "react-native-paper"
 import Chip from "../components/Chip"
 
 // Design
-import { blurhash, baseUnit, GOLD } from "../constants/Base"
+import { blurhash, baseUnit } from "../constants/Base"
 import { Ionicons } from "@expo/vector-icons"
 
 const Annotation = ({ data }) => {

@@ -10,7 +10,7 @@ import SpotifyContext from "../context/spotify"
 import { Button, useTheme } from "react-native-paper"
 
 // Design
-import { baseUnit, GOLD } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 import { Ionicons } from "@expo/vector-icons"
 
 const GeniusLink = ({ data }) => {

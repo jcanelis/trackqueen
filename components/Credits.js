@@ -1,5 +1,5 @@
 import React from "react"
-import { ScrollView, Text, View } from "react-native"
+import { ScrollView, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Components
@@ -7,7 +7,7 @@ import Artist from "../components/Artist"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Paper
-import { useTheme } from "react-native-paper"
+import { useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../constants/Base"
@@ -16,31 +16,8 @@ const Credits = ({ data }) => {
   const { colors } = useTheme()
   const { producers, writers } = data
 
-  const styles = {
-    heading: {
-      marginTop: baseUnit * 3,
-      fontSize: baseUnit * 2,
-      lineHeight: baseUnit * 8,
-      fontWeight: 600,
-      letterSpacing: 0.16,
-      textTransform: "uppercase",
-      textAlign: "center",
-      color: colors.tertiary,
-    },
-
-    paragraph: {
-      padding: baseUnit * 1,
-      fontSize: baseUnit * 2.2,
-      lineHeight: baseUnit * 6,
-      fontWeight: 400,
-      textAlign: "center",
-      color: colors.tertiary,
-      opacity: 0.75,
-    },
-  }
-
   return (
-    <View>
+    <>
       <View style={{ alignItems: "center" }}>
         <View style={{ paddingTop: baseUnit * 6, paddingBottom: baseUnit * 2 }}>
           <SpotifyLogo />
@@ -69,9 +46,9 @@ const Credits = ({ data }) => {
 
       {producers.length > 0 && (
         <>
-          <Text style={styles.heading}>Producers</Text>
+          <Text variant={"labelMedum"}>Producers</Text>
           {producers.map((item, index) => (
-            <Text key={index} style={styles.paragraph}>
+            <Text variant={"bodyLarge"} key={index} style={styles.paragraph}>
               {item.name}
             </Text>
           ))}
@@ -80,18 +57,18 @@ const Credits = ({ data }) => {
 
       {writers.length > 0 && (
         <>
-          <Text style={styles.heading}>Writers</Text>
+          <Text variant={"labelMedium"}>Writers</Text>
           {writers.map((item, index) => (
-            <Text key={index} style={styles.paragraph}>
+            <Text variant={"bodyLarge"} key={index}>
               {item.name}
             </Text>
           ))}
         </>
       )}
 
-      <Text style={styles.heading}>Label</Text>
-      <Text style={styles.paragraph}>{data.label}</Text>
-    </View>
+      <Text variant={"bodyLarge"}>Label</Text>
+      <Text variant={"bodyLarge"}>{data.label}</Text>
+    </>
   )
 }
 

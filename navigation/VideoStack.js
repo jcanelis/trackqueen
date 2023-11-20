@@ -15,8 +15,6 @@ import SpotifyContext from "../context/spotify"
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
 import DetailNavigationBar from "../components/DetailNavigationBar"
-import ToolbarProfile from "../components/ToolbarProfile"
-import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const VideoStack = () => {
   const { currentlyPlaying } = useContext(SpotifyContext)

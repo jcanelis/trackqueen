@@ -269,7 +269,7 @@ function SoundCheckScreen() {
 
           {fetchingData && !failed ? (
             <View style={{ padding: baseUnit * 2 }}>
-              <ActivityIndicator size="large" color={GOLD} />
+              <ActivityIndicator size="large" color={colors.tertiary} />
             </View>
           ) : null}
 

@@ -42,22 +42,11 @@ const LyricsFooter = ({ data }) => {
         gap: baseUnit * 3,
       }}
     >
-      <Text
-        variant="labelLarge"
-        style={{
-          color: colors.tertiary,
-        }}
-      >
+      <Text variant={"labelLarge"} style={{ color: colors.tertiary }}>
         {"Where are the rest of the lyrics?"}
       </Text>
 
-      <Text
-        variant="bodyLarge"
-        style={{
-          color: colors.tertiary,
-          opacity: 0.65,
-        }}
-      >
+      <Text variant="bodyLarge" style={{ color: colors.tertiary }}>
         {
           "Displaying lyrics requires a license. We are in contact with Musixmatch to obtain full lyrics access with proper licensing coverage."
         }

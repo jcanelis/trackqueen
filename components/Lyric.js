@@ -17,7 +17,7 @@ const Lyric = ({ content }) => {
         paddingLeft: baseUnit * 3,
         paddingRight: baseUnit * 3,
         paddingTop: baseUnit * 3,
-        paddingBOttom: baseUnit * 3,
+        paddingBottom: baseUnit * 3,
       }}
       selectable={true}
     >

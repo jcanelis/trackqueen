@@ -19,34 +19,19 @@ import LyricsScreen from "../views/LyricsScreen"
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
 import DetailNavigationBar from "../components/DetailNavigationBar"
-import ToolbarProfile from "../components/ToolbarProfile"
-import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 // Paper
 import { useTheme } from "react-native-paper"
-
-// Design
-// import { GOLD } from "../constants/Base"
 
 const LyricsStack = () => {
   const { dark, colors } = useTheme()
   const { currentlyPlaying } = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
-  let [text, updateText] = useState("")
 
   return (
     <SearchContext.Provider value={text}>
-      <Stack.Navigator
-        screenListeners={() => ({
-          state: (e) => {
-            // Clear the search text
-            if (e.data.state.index == 0) {
-              updateText("")
-            }
-          },
-        })}
-      >
+      <Stack.Navigator>
         <Stack.Screen
           name={`${track} by ${artist}`}
           component={LyricsScreen}
@@ -59,18 +44,27 @@ const LyricsStack = () => {
           name={"Powered by GPT-4 API"}
           component={GPTResponse}
           navigationKey={track}
+          options={{
+            header: (props) => <DetailNavigationBar {...props} />,
+          }}
         />
 
         <Stack.Screen
           name={artist}
           component={BioScreen}
           navigationKey={track}
+          options={{
+            header: (props) => <DetailNavigationBar {...props} />,
+          }}
         />
 
         <Stack.Screen
           name="Top Tracks"
           component={ArtistTracksScreen}
           navigationKey={track}
+          options={{
+            header: (props) => <DetailNavigationBar {...props} />,
+          }}
         />
 
         <Stack.Screen

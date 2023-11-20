@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
 
@@ -10,7 +10,7 @@ import SearchContext from "../../context/search"
 import Annotation from "../../components/Annotation"
 
 // Paper
-import { useTheme } from "react-native-paper"
+import { useTheme, Text } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"

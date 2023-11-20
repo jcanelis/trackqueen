@@ -13,7 +13,6 @@ import SpotifyCurrentTrack from "../../services/Spotify/getCurrentTrack"
 import TokenCheck from "../../services/Custom/checkToken"
 
 // Components
-import { Heading, SubHeading, Wrapper } from "../../components/Basics"
 import Spinner from "../../components/Spinner"
 import SpotifyButton from "../../components/SpotifyButton"
 
@@ -21,7 +20,7 @@ import SpotifyButton from "../../components/SpotifyButton"
 import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
-import { baseUnit, lightGrey, verticalRhythm } from "../../constants/Base"
+import { baseUnit, verticalRhythm } from "../../constants/Base"
 
 function LoadingScreen() {
   const { colors } = useTheme()
@@ -113,8 +112,8 @@ function LoadingScreen() {
         refreshControl={
           <RefreshControl
             title="Checking your current Spotify track..."
-            tintColor={lightGrey}
-            titleColor={lightGrey}
+            tintColor={colors.primary}
+            titleColor={colors.primary}
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true)

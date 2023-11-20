@@ -13,9 +13,6 @@ import AuthContext from "../context/auth"
 import DetailNavigationBar from "../components/DetailNavigationBar"
 import ProfileScreen from "../views/modals/ProfileScreen"
 
-// Design
-import { GOLD } from "../constants/Base"
-
 const ProfileStack = () => {
   const { signOut } = useContext(AuthContext)
 

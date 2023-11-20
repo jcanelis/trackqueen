@@ -13,11 +13,11 @@ const ArtistList = ({ data }) => (
     initialNumToRender={4}
     horizontal={true}
     pagingEnabled={false}
-    data={data}
     contentContainerStyle={{
       paddingLeft: baseUnit * 3,
       gap: baseUnit * 4,
     }}
+    data={data}
     keyExtractor={(item, index) => index}
     renderItem={({ item }) => <Artist item={item} />}
   />

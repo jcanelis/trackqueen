@@ -37,7 +37,7 @@ import SpotifyLogo from "../components/SpotifyLogo"
 import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
-import { baseUnit, blurhash, GOLD, lightGrey } from "../constants/Base"
+import { baseUnit, blurhash } from "../constants/Base"
 
 function LyricsScreen() {
   const navigation = useNavigation()
@@ -165,8 +165,8 @@ function LyricsScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={colors.primary}
+          titleColor={colors.primary}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)

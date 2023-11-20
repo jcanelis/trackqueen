@@ -15,15 +15,11 @@ import Keys from "../../constants/Keys"
 import spotifyAuthScopes from "../../constants/SpotifyAuthScopes"
 
 // Components
-import { Heading, SubHeading, Wrapper } from "../../components/Basics"
 import Spinner from "../../components/Spinner"
 import SpotifyButton from "../../components/SpotifyButton"
 
 // Paper
 import { useTheme } from "react-native-paper"
-
-// Design
-import { GOLD } from "../../constants/Base"
 
 function LoginScreen() {
   const { colors } = useTheme()
@@ -80,12 +76,35 @@ function LoginScreen() {
       {!loading && (
         <>
           <Spinner />
-          <Wrapper>
-            <Heading>📀 👑</Heading>
-            <Heading>Welcome to TrackQueen</Heading>
-            <SubHeading>Learn more about your music.</SubHeading>
-            <SpotifyButton func={promptAsync} text={"Login with Spotify"} />
-          </Wrapper>
+
+          <View
+            style={{
+              gap: baseUnit * 4,
+              padding: baseUnit * 4,
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                gap: verticalRhythm * 2,
+                alignItems: "center",
+              }}
+            >
+              <Text variant="titleLarge">Play a song with Spotify</Text>
+              <Text variant="titleMedium"> Pull down to refresh.</Text>
+            </View>
+
+            <Button
+              icon={"spotify"}
+              mode={"outlined"}
+              accessibilityLabel={"Open Spotify"}
+              textColor={colors.onSecondaryContainer}
+              rippleColor={colors.tertiary}
+              onPress={() => promptAsync()}
+            >
+              Open Spotify
+            </Button>
+          </View>
         </>
       )}
 
@@ -97,7 +116,7 @@ function LoginScreen() {
             justifyContent: "center",
           }}
         >
-          <ActivityIndicator size="large" color={GOLD} />
+          <ActivityIndicator size="large" color={colors.tertiary} />
         </View>
       )}
     </View>

@@ -17,8 +17,6 @@ import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
 import DetailNavigationBar from "../components/DetailNavigationBar"
-import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
-import ToolbarProfile from "../components/ToolbarProfile"
 
 const LoadingStack = ({ theme }) => {
   return (

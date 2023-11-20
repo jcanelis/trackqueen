@@ -1,8 +1,13 @@
 import React, { useContext } from "react"
 import { View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import * as WebBrowser from "expo-web-browser"
 import PropTypes from "prop-types"
+
+// Paper
+import { Button, useTheme, Text } from "react-native-paper"
+
+// Expo
+import * as WebBrowser from "expo-web-browser"
 
 // Context
 import SpotifyContext from "../context/spotify"
@@ -10,11 +15,8 @@ import SpotifyContext from "../context/spotify"
 // Components
 import Chip from "../components/Chip"
 
-// Paper
-import { Button, useTheme, Text } from "react-native-paper"
-
 // Design
-import { baseUnit, verticalRhythm, GOLD } from "../constants/Base"
+import { baseUnit, verticalRhythm } from "../constants/Base"
 
 const Notes = ({ data }) => {
   const navigation = useNavigation()
@@ -56,13 +58,7 @@ const Notes = ({ data }) => {
         </Text>
       )}
 
-      <Text
-        variant={"bodyLarge"}
-        style={{
-          color: colors.tertiary,
-          opacity: 0.85,
-        }}
-      >
+      <Text variant={"bodyLarge"} style={{ color: colors.tertiary }}>
         {data.description}
       </Text>
 
@@ -77,12 +73,17 @@ const Notes = ({ data }) => {
 
       {data.geniusData && data.geniusData.result.url && (
         <Button
+          mode={"text"}
           title="View this track on Genius"
-          color={GOLD}
+          accessibilityLabel={"View this track on Genius"}
+          textColor={colors.onSecondaryContainer}
+          rippleColor={colors.tertiary}
           onPress={() => {
             _handlePressButtonAsync(data.geniusData.result.url)
           }}
-        />
+        >
+          View this track on Genius
+        </Button>
       )}
     </View>
   )

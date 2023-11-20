@@ -1,8 +1,10 @@
 import React, { useContext } from "react"
 import { Pressable, useWindowDimensions } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { Image } from "expo-image"
 import PropTypes from "prop-types"
+
+// Expo
+import { Image } from "expo-image"
 
 // Context
 import SpotifyContext from "../context/spotify"

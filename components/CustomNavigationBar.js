@@ -1,10 +1,9 @@
 import React from "react"
-import { Appbar } from "react-native-paper"
 import { getHeaderTitle } from "@react-navigation/elements"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 // Paper
-import { useTheme } from "react-native-paper"
+import { Appbar, useTheme } from "react-native-paper"
 
 // Custom
 import { blurhash, baseUnit } from "../constants/Base"

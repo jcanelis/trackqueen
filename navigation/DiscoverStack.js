@@ -21,8 +21,6 @@ import GPTStack from "./GPTStack"
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
 import DetailNavigationBar from "../components/DetailNavigationBar"
-import ToolbarProfile from "../components/ToolbarProfile"
-import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const DiscoverStack = () => {
   const { currentlyPlaying } = useContext(SpotifyContext)

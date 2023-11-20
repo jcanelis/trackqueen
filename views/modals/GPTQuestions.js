@@ -1,5 +1,8 @@
 import React, { useContext } from "react"
-import { Text, ScrollView, View } from "react-native"
+import { ScrollView, View } from "react-native"
+
+// Paper
+import { useTheme, Text } from "react-native-paper"
 
 // React Navigation
 import { useNavigation } from "@react-navigation/native"
@@ -9,9 +12,6 @@ import SpotifyContext from "../../context/spotify"
 
 // Components
 import Chip from "../../components/Chip"
-
-// Paper
-import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"
@@ -26,13 +26,6 @@ function GPTQuestions() {
   const { artist, track } = currentlyPlaying
   const album = currentlyPlaying.spotifyData.album.name
 
-  const headerStyles = {
-    fontSize: baseUnit * 2.8,
-    lineHeight: baseUnit * 3,
-    color: colors.tertiary,
-    fontWeight: 700,
-  }
-
   return (
     <ScrollView
       style={{
@@ -41,7 +34,7 @@ function GPTQuestions() {
       }}
     >
       <View style={{ flex: 1, gap: baseUnit * 3 }}>
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Track
         </Text>
 
@@ -63,7 +56,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Album
         </Text>
         <Chip
@@ -84,7 +77,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Artist
         </Text>
 
@@ -97,7 +90,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Sound
         </Text>
 
@@ -128,16 +121,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text
-          numberOfLines={1}
-          ellipsizeMode={"tail"}
-          style={{
-            fontSize: baseUnit * 2.8,
-            lineHeight: baseUnit * 3,
-            color: colors.tertiary,
-            fontWeight: 700,
-          }}
-        >
+        <Text variant={"bodylarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Other
         </Text>
 

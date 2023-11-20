@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react"
-import { ScrollView, Text, useWindowDimensions, View } from "react-native"
+import { ScrollView, useWindowDimensions, View } from "react-native"
 import PropTypes from "prop-types"
+
+// Paper
+import { Button, useTheme, Text } from "react-native-paper"
 
 // React Navigation
 import { useNavigation } from "@react-navigation/native"
-import { useHeaderHeight } from "@react-navigation/elements"
 
 // Context
 import SpotifyContext from "../../context/spotify"
@@ -17,10 +19,6 @@ import { Image } from "expo-image"
 import Chip from "../../components/Chip"
 import SpotifyLogo from "../../components/SpotifyLogo"
 
-// Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
-
 // Design
 import { baseUnit, blurhash, GOLD, verticalRhythm } from "../../constants/Base"
 
@@ -28,22 +26,6 @@ function BioScreen({ route }) {
   const navigation = useNavigation()
   const { colors } = useTheme()
   const { width } = useWindowDimensions()
-  const headerHeight = useHeaderHeight()
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerBackground: () => (
-        <Image
-          source={route.params.data.spotifyArtistData.images[0].url}
-          placeholder={blurhash}
-          transition={250}
-          width={width}
-          height={headerHeight - baseUnit}
-          contentFit={"cover"}
-        />
-      ),
-    })
-  }, [colors, navigation, headerHeight, route.params, width])
 
   // Context
   const spotifyContext = useContext(SpotifyContext)
@@ -123,14 +105,12 @@ function BioScreen({ route }) {
         />
       </View>
       <Text
+        variant={"bodyLarge"}
         style={{
           paddingLeft: baseUnit * 3,
           paddingRight: baseUnit * 3,
-          fontSize: baseUnit * 2.2,
-          lineHeight: verticalRhythm * 7,
-          fontWeight: 400,
+
           color: colors.tertiary,
-          opacity: 0.85,
         }}
       >
         {bioText}
@@ -138,14 +118,11 @@ function BioScreen({ route }) {
 
       {bioText !== "No information found on Genius.com." && (
         <Text
+          variant={"labelSmall"}
           style={{
             paddingLeft: baseUnit * 3,
             paddingRight: baseUnit * 3,
-            fontSize: baseUnit * 2,
-            lineHeight: verticalRhythm * 5,
-            fontWeight: 500,
             color: colors.tertiary,
-            opacity: 0.65,
           }}
         >
           Source: Genius.com

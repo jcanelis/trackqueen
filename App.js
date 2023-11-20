@@ -3,10 +3,6 @@ import "react-native-gesture-handler"
 import React, { useEffect, useMemo, useReducer } from "react"
 import { useColorScheme } from "react-native"
 
-// React Query
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-const queryClient = new QueryClient()
-
 // Paper
 import {
   MD3DarkTheme,
@@ -14,6 +10,10 @@ import {
   Provider as PaperProvider,
 } from "react-native-paper"
 import { useMaterial3Theme } from "@pchmn/expo-material3-theme"
+
+// React Query
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+const queryClient = new QueryClient()
 
 // Expo
 import * as SecureStore from "expo-secure-store"
@@ -110,7 +110,7 @@ export default function App() {
 
   const { isSignedIn, currentlyPlaying } = state
 
-  // Theme
+  // Theme merging with React Navigation and Paper
   const colorScheme = useColorScheme()
   const { theme } = useMaterial3Theme()
   const paperTheme = useMemo(

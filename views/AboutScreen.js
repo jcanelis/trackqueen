@@ -22,11 +22,10 @@ import Notes from "../components/Notes"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
+import { Button, useTheme } from "react-native-paper"
 
 // Design
-import { baseUnit, GOLD, lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function AboutScreen() {
   const { colors } = useTheme()
@@ -143,8 +142,8 @@ function AboutScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={colors.primary}
+          titleColor={colors.primary}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)
@@ -176,8 +175,10 @@ function AboutScreen() {
           }}
         >
           <Button
-            title="Credits"
-            color={GOLD}
+            mode={"text"}
+            accessibilityLabel={"Credits"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
             onPress={() => {
               const creditsData = {
                 performers: data.artists,
@@ -189,15 +190,19 @@ function AboutScreen() {
                 data: creditsData,
               })
             }}
-          />
+          >
+            Credits
+          </Button>
 
           <Button
-            title="ChatGPT"
-            color={GOLD}
-            onPress={() => {
-              navigation.navigate("Ask ChatGPT")
-            }}
-          />
+            mode={"text"}
+            accessibilityLabel={"Ask ChatGPT"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
+            onPress={() => navigation.navigate("Ask ChatGPT")}
+          >
+            Ask ChatGPT
+          </Button>
         </View>
       </View>
 

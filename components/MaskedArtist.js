@@ -1,8 +1,10 @@
 import React from "react"
 import { Text, View } from "react-native"
 import MaskedView from "@react-native-masked-view/masked-view"
-import { Image } from "expo-image"
 import PropTypes from "prop-types"
+
+// Expo
+import { Image } from "expo-image"
 
 // Custom
 import { baseUnit } from "../constants/Base"

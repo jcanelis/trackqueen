@@ -15,8 +15,6 @@ import GPTResponse from "../views/modals/GPTResponse"
 // Components
 import CustomNavigationBar from "../components/CustomNavigationBar"
 import DetailNavigationBar from "../components/DetailNavigationBar"
-import ToolbarProfile from "../components/ToolbarProfile"
-import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const CommentsStack = () => {
   const { currentlyPlaying } = useContext(SpotifyContext)

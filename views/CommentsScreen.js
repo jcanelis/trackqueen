@@ -4,6 +4,9 @@ import { AppState, FlatList, RefreshControl, Text, View } from "react-native"
 // React Navigation
 import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
+// Paper
+import { SegmentedButtons, useTheme } from "react-native-paper"
+
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import CommentsScreenModel from "../models/commentsScreenModel"
@@ -22,10 +25,6 @@ import Comment from "../components/Comment"
 import Header from "../components/Header"
 import Loader from "../components/Loader"
 import VideoThumbnail from "../components/VideoThumbnail"
-
-// Paper
-import { SegmentedButtons } from "react-native-paper"
-import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, lightGrey } from "../constants/Base"

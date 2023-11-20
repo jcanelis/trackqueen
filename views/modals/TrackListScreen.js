@@ -1,16 +1,18 @@
 import React, { useEffect } from "react"
 import { View } from "react-native"
-import * as Linking from "expo-linking"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
+
+// Paper
+import { useTheme } from "react-native-paper"
+
+// Expo
+import * as Linking from "expo-linking"
 
 // Components
 import Header from "../../components/Header"
 import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
-
-// Paper
-import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"
