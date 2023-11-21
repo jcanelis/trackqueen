@@ -90,6 +90,9 @@ function ProfileScreen() {
       }}
     >
       <FlashList
+        contentContainerStyle={{
+          paddingBottom: baseUnit * 4,
+        }}
         estimatedItemSize={20}
         ListHeaderComponent={
           <View>
@@ -177,7 +180,7 @@ function ProfileScreen() {
           </View>
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 4 }}>
+          <View style={{ margin: baseUnit * 3, alignItems: "center" }}>
             <SpotifyButton
               text={"Open Spotify"}
               func={() => {

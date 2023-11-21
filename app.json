@@ -8,30 +8,25 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": [
-      "android"
-    ],
+    "platforms": ["android"],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "privacy": "hidden",
     "owner": "trackqueen",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#cecece"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "plugins": [
-      "expo-build-properties"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "plugins": ["expo-build-properties"],
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon-foreground.png",
+        "monochromeImage": "./assets/icon-monochrome.png",
+        "backgroundColor": "#cecece"
       },
       "package": "com.trackqueen.tq22"
     },

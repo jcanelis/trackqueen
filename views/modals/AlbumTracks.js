@@ -70,7 +70,7 @@ const AlbumTracks = ({ route }) => {
           />
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 3 }}>
+          <View style={{ margin: baseUnit * 4, alignItems: "center" }}>
             <SpotifyButton
               text={"Play on Spotify"}
               func={() => {

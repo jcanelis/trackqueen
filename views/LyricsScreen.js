@@ -215,7 +215,13 @@ function LyricsScreen() {
         </View>
       }
       ListFooterComponent={
-        <View style={{ gap: baseUnit * 3, padding: baseUnit * 3 }}>
+        <View
+          style={{
+            gap: baseUnit * 3,
+            padding: baseUnit * 3,
+            alignItems: "center",
+          }}
+        >
           <>
             {data.lyrics.length > 0 &&
               data.geniusTrackSearch &&
