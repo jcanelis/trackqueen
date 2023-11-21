@@ -23,7 +23,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "129",
+      "buildNumber": "130",
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
