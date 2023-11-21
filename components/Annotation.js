@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react"
-import { Button, Text, Pressable, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { Pressable, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
 import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
 
+// Paper
+import { Button, useTheme, Text } from "react-native-paper"
+
+// Components
+import Chip from "../components/Chip"
+
 // Design
-import { blurhash, baseUnit, GOLD } from "../constants/Base"
+import { blurhash, baseUnit } from "../constants/Base"
 import { Ionicons } from "@expo/vector-icons"
 
 const Annotation = ({ data }) => {
@@ -42,36 +47,18 @@ const Annotation = ({ data }) => {
         paddingBottom: baseUnit * 2,
       }}
     >
-      <Pressable
-        onPress={() => {
+      <Chip
+        text={lyric}
+        action={() => {
           setExpanded(expanded ? false : true)
         }}
-        style={({ pressed }) => [
-          {
-            borderRadius: baseUnit * 2,
-            borderColor: colors.border,
-            backgroundColor: colors.card,
-            borderWidth: 1,
-            opacity: pressed ? 0.7 : 1,
-          },
-        ]}
-      >
-        <Text
-          style={{
-            padding: baseUnit * 3,
-            fontSize: baseUnit * 2.1,
-            lineHeight: baseUnit * 3,
-            fontWeight: 500,
-            color: annotation.verified ? GOLD : colors.text,
-            borderRadius: baseUnit * 2,
-          }}
-        >
-          {lyric}
-        </Text>
-      </Pressable>
+      />
 
       {expanded && (
-        <View style={{ margin: baseUnit * 3 }}>
+        <View style={{ margin: baseUnit * 3, gap: baseUnit * 3 }}>
+          <Text variant={"bodyLarge"} style={{ color: colors.primary }}>
+            {lyric}
+          </Text>
           {annotation.verified && (
             <Pressable
               onPress={() => {
@@ -83,7 +70,6 @@ const Annotation = ({ data }) => {
                 alignItems: "center",
                 marginLeft: baseUnit * 3,
                 marginRight: baseUnit * 3,
-                marginBottom: baseUnit * 2,
               }}
             >
               <Image
@@ -95,10 +81,10 @@ const Annotation = ({ data }) => {
                 style={{ borderRadius: baseUnit * 9 }}
               />
               <Text
+                variant={"labelLarge"}
                 style={{
                   marginTop: baseUnit,
-                  fontWeight: 600,
-                  color: colors.text,
+                  color: colors.tertiary,
                 }}
               >
                 {user.user.name}
@@ -107,13 +93,10 @@ const Annotation = ({ data }) => {
           )}
 
           <Text
+            variant={"bodyLarge"}
             style={{
-              paddingTop: baseUnit,
               paddingBottom: baseUnit * 2,
-              fontSize: baseUnit * 2.3,
-              lineHeight: baseUnit * 4,
-              fontWeight: 400,
-              color: colors.text,
+              color: colors.tertiary,
               opacity: 0.85,
             }}
           >
@@ -123,37 +106,38 @@ const Annotation = ({ data }) => {
           <View style={{ alignItems: "center" }}>
             <View
               style={{
-                marginTop: baseUnit * 2,
                 flexDirection: "row",
                 alignItems: "center",
               }}
             >
               <Ionicons
-                name={"ios-heart-outline"}
-                color={colors.text}
+                name={"md-heart-outline"}
+                color={colors.tertiary}
                 size={26}
               />
               <Text
+                variant={"labelSmall"}
                 style={{
                   marginLeft: baseUnit / 2,
-                  fontSize: baseUnit * 2,
-                  lineHeight: baseUnit * 3,
-                  fontWeight: 600,
-                  color: colors.text,
+                  color: colors.tertiary,
                   opacity: 0.85,
                 }}
               >
                 {annotation.votes_total}
               </Text>
             </View>
-            <View style={{ padding: baseUnit }}>
+            <View style={{ paddingTop: baseUnit * 2 }}>
               <Button
-                title={"View on Genius"}
-                color={GOLD}
+                mode={"outlined"}
+                accessibilityLabel={"View on Genius"}
+                textColor={colors.onSecondaryContainer}
+                rippleColor={colors.tertiary}
                 onPress={() => {
                   _handlePressButtonAsync(annotation.url)
                 }}
-              />
+              >
+                View on Genius
+              </Button>
             </View>
           </View>
         </View>

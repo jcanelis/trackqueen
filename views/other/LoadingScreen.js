@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { AppState, RefreshControl, ScrollView, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // Expo
@@ -14,12 +13,13 @@ import SpotifyCurrentTrack from "../../services/Spotify/getCurrentTrack"
 import TokenCheck from "../../services/Custom/checkToken"
 
 // Components
-import { Heading, SubHeading, Wrapper } from "../../components/Basics"
 import Spinner from "../../components/Spinner"
-import SpotifyButton from "../../components/SpotifyButton"
+
+// Paper
+import { Button, useTheme, Text } from "react-native-paper"
 
 // Design
-import { lightGrey } from "../../constants/Base"
+import { baseUnit, verticalRhythm } from "../../constants/Base"
 
 function LoadingScreen() {
   const { colors } = useTheme()
@@ -111,8 +111,8 @@ function LoadingScreen() {
         refreshControl={
           <RefreshControl
             title="Checking your current Spotify track..."
-            tintColor={lightGrey}
-            titleColor={lightGrey}
+            tintColor={colors.primary}
+            titleColor={colors.primary}
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true)
@@ -124,16 +124,46 @@ function LoadingScreen() {
         }
       >
         <Spinner />
-        <Wrapper>
-          <Heading>Play a song with Spotify</Heading>
-          <SubHeading>Pull down to refresh.</SubHeading>
-          <SpotifyButton
-            text={"Open Spotify"}
-            func={() => {
-              Linking.openURL("https://open.spotify.com")
+
+        <View
+          style={{
+            gap: baseUnit * 4,
+            padding: baseUnit * 4,
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              gap: verticalRhythm * 2,
+              alignItems: "center",
             }}
-          />
-        </Wrapper>
+          >
+            <Text
+              variant="headlineSmall"
+              style={{ color: colors.onSurface, fontWeight: 600 }}
+            >
+              Play a song with Spotify
+            </Text>
+            <Text
+              variant="labelLarge"
+              style={{ color: colors.tertiary, fontWeight: 500 }}
+            >
+              {" "}
+              Pull down to refresh.
+            </Text>
+          </View>
+
+          <Button
+            icon={"spotify"}
+            mode={"outlined"}
+            accessibilityLabel={"Open Spotify"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
+            onPress={() => Linking.openURL("https://open.spotify.com")}
+          >
+            Open Spotify
+          </Button>
+        </View>
       </ScrollView>
     </View>
   )

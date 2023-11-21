@@ -2,11 +2,10 @@ import React, { useEffect, useContext, useRef, useState } from "react"
 import { AppState, FlatList, RefreshControl, View } from "react-native"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
+
+// Paper
+import { useTheme } from "react-native-paper"
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
@@ -27,7 +26,7 @@ import Loader from "../components/Loader"
 import Track from "../components/Track"
 
 // Design
-import { baseUnit, lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function DiscoverScreen() {
   const navigation = useNavigation()
@@ -140,16 +139,11 @@ function DiscoverScreen() {
   return (
     <FlatList
       ref={ref}
+      contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
       style={{
         flex: 1,
         backgroundColor: colors.background,
       }}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInset={{ bottom: baseUnit * 10 }}
-      contentInsetAdjustmentBehavior={"automatic"}
-      scrollsToTop={true}
-      scrollToOverflowEnabled={true}
       ListHeaderComponent={
         <>
           <Header
@@ -256,8 +250,8 @@ function DiscoverScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={colors.primary}
+          titleColor={colors.primary}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)

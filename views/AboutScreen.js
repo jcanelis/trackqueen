@@ -1,18 +1,8 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
-import {
-  AppState,
-  Button,
-  RefreshControl,
-  ScrollView,
-  View,
-} from "react-native"
+import { AppState, RefreshControl, ScrollView, View } from "react-native"
 
 // React Navigation
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from "@react-navigation/native"
+import { useNavigation, useScrollToTop } from "@react-navigation/native"
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
@@ -31,8 +21,11 @@ import Loader from "../components/Loader"
 import Notes from "../components/Notes"
 import SpotifyLogo from "../components/SpotifyLogo"
 
+// Paper
+import { Button, useTheme } from "react-native-paper"
+
 // Design
-import { baseUnit, GOLD, lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function AboutScreen() {
   const { colors } = useTheme()
@@ -137,16 +130,11 @@ function AboutScreen() {
   return (
     <ScrollView
       ref={ref}
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 16 }}
       contentContainerStyle={{
         padding: baseUnit * 3,
+        paddingBottom: baseUnit * 8,
         gap: baseUnit * 3,
       }}
-      scrollsToTop={true}
-      scrollToOverflowEnabled={true}
       style={{
         flex: 1,
         backgroundColor: colors.background,
@@ -155,8 +143,8 @@ function AboutScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={colors.primary}
+          titleColor={colors.primary}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)
@@ -188,8 +176,10 @@ function AboutScreen() {
           }}
         >
           <Button
-            title="Credits"
-            color={GOLD}
+            mode={"text"}
+            accessibilityLabel={"Credits"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
             onPress={() => {
               const creditsData = {
                 performers: data.artists,
@@ -201,15 +191,19 @@ function AboutScreen() {
                 data: creditsData,
               })
             }}
-          />
+          >
+            Credits
+          </Button>
 
           <Button
-            title="ChatGPT"
-            color={GOLD}
-            onPress={() => {
-              navigation.navigate("Ask ChatGPT")
-            }}
-          />
+            mode={"text"}
+            accessibilityLabel={"Ask ChatGPT"}
+            textColor={colors.onSecondaryContainer}
+            rippleColor={colors.tertiary}
+            onPress={() => navigation.navigate("Ask ChatGPT")}
+          >
+            Ask ChatGPT
+          </Button>
         </View>
       </View>
 

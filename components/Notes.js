@@ -1,8 +1,13 @@
 import React, { useContext } from "react"
-import { Button, Text, View } from "react-native"
-import { useTheme, useNavigation } from "@react-navigation/native"
-import * as WebBrowser from "expo-web-browser"
+import { View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import PropTypes from "prop-types"
+
+// Paper
+import { Button, useTheme, Text } from "react-native-paper"
+
+// Expo
+import * as WebBrowser from "expo-web-browser"
 
 // Context
 import SpotifyContext from "../context/spotify"
@@ -11,7 +16,7 @@ import SpotifyContext from "../context/spotify"
 import Chip from "../components/Chip"
 
 // Design
-import { baseUnit, verticalRhythm, GOLD } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 const Notes = ({ data }) => {
   const navigation = useNavigation()
@@ -43,11 +48,9 @@ const Notes = ({ data }) => {
     >
       {data.artists[0].genres[0] !== "classical" && (
         <Text
+          variant={"labelLarge"}
           style={{
-            fontSize: baseUnit * 1.9,
-            lineHeight: verticalRhythm * 5,
-            fontWeight: 700,
-            color: colors.text,
+            color: colors.tertiary,
             opacity: 0.9,
           }}
         >
@@ -55,20 +58,12 @@ const Notes = ({ data }) => {
         </Text>
       )}
 
-      <Text
-        style={{
-          fontSize: baseUnit * 2.3,
-          lineHeight: verticalRhythm * 7,
-          fontWeight: 400,
-          color: colors.text,
-          opacity: 0.85,
-        }}
-      >
+      <Text variant={"bodyLarge"} style={{ color: colors.tertiary }}>
         {data.description}
       </Text>
 
       <Chip
-        text={`Ask ChatGPT about this song.`}
+        text={"Ask ChatGPT about this song."}
         action={() => {
           navigation.navigate("Powered by GPT-4 API", {
             query: `Tell me about the song, ”${track}” by ${artist}.`,
@@ -78,12 +73,16 @@ const Notes = ({ data }) => {
 
       {data.geniusData && data.geniusData.result.url && (
         <Button
-          title="View this track on Genius"
-          color={GOLD}
+          mode={"text"}
+          accessibilityLabel={"View this track on Genius"}
+          textColor={colors.onSecondaryContainer}
+          rippleColor={colors.tertiary}
           onPress={() => {
             _handlePressButtonAsync(data.geniusData.result.url)
           }}
-        />
+        >
+          View this track on Genius
+        </Button>
       )}
     </View>
   )

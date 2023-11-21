@@ -1,7 +1,9 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 // React Navigation
-import { DarkTheme, NavigationContainer } from "@react-navigation/native"
+// https://reactnavigation.org/docs/native-stack-navigator
+import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -10,52 +12,44 @@ import { StatusBar } from "expo-status-bar"
 
 // Screens
 import LoadingScreen from "../views/other/LoadingScreen"
-import ProfileStack from "../navigation/ProfileStack"
+import ProfileScreen from "../views/modals/ProfileScreen"
 import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
 // Components
-import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
-import ToolbarProfile from "../components/ToolbarProfile"
+import CustomNavigationBar from "../components/CustomNavigationBar"
+import DetailNavigationBar from "../components/DetailNavigationBar"
 
-const LoadingStack = () => {
+const LoadingStack = ({ theme }) => {
   return (
     <>
       <StatusBar style={"light"} />
-      <NavigationContainer theme={DarkTheme}>
-        <Stack.Navigator>
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator
+          screenOptions={{
+            header: (props) => <CustomNavigationBar {...props} />,
+          }}
+        >
+          <Stack.Screen name="TrackQueen" component={LoadingScreen} />
           <Stack.Screen
-            name="TrackQueen"
-            component={LoadingScreen}
-            options={() => ({
-              headerLeft: () => <ToolbarProfile />,
-              headerRight: () => <ToolbarAudioSearch />,
-            })}
-          />
-
-          <Stack.Screen
-            name="ProfileStack"
-            component={ProfileStack}
+            name="Your recent tracks"
+            component={ProfileScreen}
             options={{
-              presentation: "modal",
-              headerShown: false,
-              headerBlurEffect: "systemChromeMaterialDark",
+              header: (props) => <DetailNavigationBar {...props} />,
             }}
           />
 
           <Stack.Screen
             name="Search nearby audio"
             component={SoundCheckScreen}
-            options={{
-              presentation: "modal",
-              headerShown: true,
-              headerLargeTitle: true,
-              headerBlurEffect: "systemChromeMaterialDark",
-            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
     </>
   )
+}
+
+LoadingStack.propTypes = {
+  theme: PropTypes.object,
 }
 
 export default LoadingStack

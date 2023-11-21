@@ -1,10 +1,13 @@
 import React from "react"
-import { Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { View } from "react-native"
+
 import PropTypes from "prop-types"
 
+// Paper
+import { useTheme, Text } from "react-native-paper"
+
 // Design
-import { baseUnit, verticalRhythm } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 import { Ionicons } from "@expo/vector-icons"
 
 const Comment = ({ data }) => {
@@ -20,49 +23,23 @@ const Comment = ({ data }) => {
     <View
       style={{
         gap: baseUnit,
-        paddingTop: baseUnit * 3,
-        paddingRight: baseUnit * 3,
+        paddingTop: baseUnit * 2,
+        paddingRight: baseUnit * 1,
         paddingBottom: baseUnit * 3,
         paddingLeft: baseUnit * 3,
       }}
     >
-      <Text
-        style={{
-          fontSize: 19,
-          lineHeight: verticalRhythm * 7,
-          fontWeight: 500,
-          textAlign: "left",
-          color: colors.text,
-          opacity: 0.95,
-        }}
-      >
-        {content}
-      </Text>
+      <Text variant="bodyLarge">{content}</Text>
 
       <View
         style={{
           flexDirection: "row",
           alignItems: "center",
           columnGap: baseUnit / 2,
-          opacity: 0.85,
         }}
       >
-        <Ionicons
-          style={{ opacity: 0.65 }}
-          name={"ios-heart-outline"}
-          color={colors.text}
-          size={22}
-        />
-        <Text
-          style={{
-            fontSize: baseUnit * 2,
-            lineHeight: baseUnit * 4,
-            fontWeight: 500,
-            textAlign: "left",
-            color: colors.text,
-            opacity: 0.85,
-          }}
-        >
+        <Ionicons name={"md-heart-outline"} color={colors.tertiary} size={22} />
+        <Text>
           {likes} • {newDate}
         </Text>
       </View>

@@ -1,11 +1,13 @@
 import React from "react"
-import { Pressable, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { Pressable, View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
 import * as Linking from "expo-linking"
 import { Image } from "expo-image"
+
+// Paper
+import { useTheme, Text } from "react-native-paper"
 
 // Design
 import { verticalRhythm, blurhash, baseUnit } from "../constants/Base"
@@ -48,11 +50,9 @@ const Track = ({ artists, coverArt, link, title }) => {
         <Text
           numberOfLines={1}
           ellipsizeMode={"tail"}
+          variant={"bodyLarge"}
           style={{
-            fontSize: 19,
-            lineHeight: baseUnit * 3,
-            fontWeight: 500,
-            color: colors.text,
+            color: colors.tertiary,
           }}
         >
           {title}
@@ -60,12 +60,10 @@ const Track = ({ artists, coverArt, link, title }) => {
 
         <Text
           numberOfLines={1}
+          variant={"bodyMedium"}
           ellipsizeMode={"middle"}
           style={{
-            fontSize: 14,
-            lineHeight: baseUnit * 3,
-            fontWeight: 500,
-            color: colors.text,
+            color: colors.tertiary,
             opacity: 0.65,
           }}
         >

@@ -1,8 +1,11 @@
 import React, { useContext } from "react"
-import { Text, ScrollView, View } from "react-native"
+import { ScrollView, View } from "react-native"
+
+// Paper
+import { Text } from "react-native-paper"
 
 // React Navigation
-import { useNavigation, useTheme } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 
 // Context
 import SpotifyContext from "../../context/spotify"
@@ -14,7 +17,6 @@ import Chip from "../../components/Chip"
 import { baseUnit } from "../../constants/Base"
 
 function GPTQuestions() {
-  const { colors } = useTheme()
   const navigation = useNavigation()
 
   // Context
@@ -23,26 +25,18 @@ function GPTQuestions() {
   const { artist, track } = currentlyPlaying
   const album = currentlyPlaying.spotifyData.album.name
 
-  const headerStyles = {
-    fontSize: baseUnit * 2.8,
-    lineHeight: baseUnit * 3,
-    color: colors.text,
-    fontWeight: 700,
-  }
-
   return (
     <ScrollView
-      automaticallyAdjustsScrollIndicatorInsets={true}
-      automaticallyAdjustContentInsets={true}
-      contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 16 }}
+      contentContainerStyle={{
+        paddingBottom: baseUnit * 16,
+      }}
       style={{
         flex: 1,
         padding: baseUnit * 3,
       }}
     >
       <View style={{ flex: 1, gap: baseUnit * 3 }}>
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Track
         </Text>
 
@@ -64,7 +58,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Album
         </Text>
         <Chip
@@ -85,7 +79,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Artist
         </Text>
 
@@ -98,7 +92,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text numberOfLines={1} ellipsizeMode={"tail"} style={headerStyles}>
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Sound
         </Text>
 
@@ -129,16 +123,7 @@ function GPTQuestions() {
           }}
         />
 
-        <Text
-          numberOfLines={1}
-          ellipsizeMode={"tail"}
-          style={{
-            fontSize: baseUnit * 2.8,
-            lineHeight: baseUnit * 3,
-            color: colors.text,
-            fontWeight: 700,
-          }}
-        >
+        <Text variant={"bodyLarge"} numberOfLines={1} ellipsizeMode={"tail"}>
           Other
         </Text>
 

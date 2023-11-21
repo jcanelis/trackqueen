@@ -1,6 +1,15 @@
 // React
 import "react-native-gesture-handler"
 import React, { useEffect, useMemo, useReducer } from "react"
+import { useColorScheme } from "react-native"
+
+// Paper
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  Provider as PaperProvider,
+} from "react-native-paper"
+import { useMaterial3Theme } from "@pchmn/expo-material3-theme"
 
 // React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -100,13 +109,31 @@ export default function App() {
   }, [])
 
   const { isSignedIn, currentlyPlaying } = state
+
+  // Theme merging with React Navigation and Paper
+  const colorScheme = useColorScheme()
+  const { theme } = useMaterial3Theme()
+  const paperTheme = useMemo(
+    () =>
+      colorScheme === "dark"
+        ? { ...MD3DarkTheme, colors: theme.dark }
+        : { ...MD3LightTheme, colors: theme.light },
+    [colorScheme, theme]
+  )
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
         <SpotifyContext.Provider value={spotifyContext}>
-          {!isSignedIn && <LoginStack />}
-          {isSignedIn && currentlyPlaying.track === null && <LoadingStack />}
-          {isSignedIn && currentlyPlaying.track !== null && <AppNavigation />}
+          <PaperProvider theme={paperTheme}>
+            {!isSignedIn && <LoginStack theme={paperTheme} />}
+            {isSignedIn && currentlyPlaying.track === null && (
+              <LoadingStack theme={paperTheme} />
+            )}
+            {isSignedIn && currentlyPlaying.track !== null && (
+              <AppNavigation theme={paperTheme} />
+            )}
+          </PaperProvider>
         </SpotifyContext.Provider>
       </AuthContext.Provider>
     </QueryClientProvider>

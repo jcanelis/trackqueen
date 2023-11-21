@@ -1,7 +1,9 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 // React Navigation
-import { DarkTheme, NavigationContainer } from "@react-navigation/native"
+// https://reactnavigation.org/docs/native-stack-navigator
+import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -11,10 +13,10 @@ import { StatusBar } from "expo-status-bar"
 // Screens
 import LoginScreen from "../views/other/LoginScreen"
 
-const LoginStack = () => (
+const LoginStack = ({ theme }) => (
   <>
     <StatusBar style={"light"} />
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer theme={theme}>
       <Stack.Navigator>
         <Stack.Screen
           name="LoginScreen"
@@ -25,5 +27,9 @@ const LoginStack = () => (
     </NavigationContainer>
   </>
 )
+
+LoginStack.propTypes = {
+  theme: PropTypes.object,
+}
 
 export default LoginStack

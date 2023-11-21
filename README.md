@@ -1,6 +1,6 @@
 [![update](https://github.com/jcanelis/trackqueen/actions/workflows/update.yml/badge.svg)](https://github.com/jcanelis/trackqueen/actions/workflows/update.yml)
 
-# TrackQueen
+# TrackQueen (for Android)
 
 ## Learn more about your music.
 
@@ -77,24 +77,20 @@ TrackQueen uses Google Cloud [Secret Manager](https://cloud.google.com/functions
 
 ### Development builds
 
-Create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/) for iOS Simulator:
+Create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/) for a simulator:
 
-`npx eas-cli build --profile development-simulator --platform ios`
-
-Run build on iOS Simulator
-
-`npx expo run:ios`
+`npx eas-cli build --profile development-simulator --platform android`
 
 Create a build for a device:
 
-`npx eas-cli build --profile development --platform ios`
+`npx eas-cli build --profile development --platform android`
 
-### Build for App Store with Expo's [EAS Build](https://docs.expo.dev/build/introduction/)
+### Build for Google Play with Expo's [EAS Build](https://docs.expo.dev/build/introduction/)
 
-`npx eas-cli build --platform ios`
+`npx eas-cli build --platform android`
 
-## Submit to App Store
+## Submit to Google Play
 
-Use Expo's [EAS Submit](https://docs.expo.dev/submit/ios/) with the command below to send a build to App Store Connect, where the app can be distributed to users with TestFlight or to the App Store.
+Use Expo's [EAS Submit](https://docs.expo.dev/submit/android/) with the command below to send a build to Google Play.
 
-`npx eas-cli submit -p ios`
+`npx eas-cli submit -p android`

@@ -12,6 +12,7 @@ const YouTubeList = ({ fullWidth, videos }) => {
   return (
     <FlatList
       horizontal={true}
+      showsHorizontalScrollIndicator={false}
       pagingEnabled={false}
       directionalLockEnabled={true}
       data={videos}

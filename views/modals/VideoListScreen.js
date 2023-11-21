@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
 
@@ -10,8 +9,8 @@ import YouTubeSearch from "../../services/YouTube/getSearch"
 // Components
 import YouTubes from "../../components/YouTubes"
 
-// Design
-import { baseUnit } from "../../constants/Base"
+// Paper
+import { useTheme } from "react-native-paper"
 
 const VideoListScreen = ({ route, navigation }) => {
   const colors = useTheme()
@@ -36,10 +35,6 @@ const VideoListScreen = ({ route, navigation }) => {
       <FlashList
         initialNumToRender={3}
         estimatedItemSize={videosToShow.length}
-        automaticallyAdjustsScrollIndicatorInsets={true}
-        automaticallyAdjustContentInsets={true}
-        contentInsetAdjustmentBehavior={"automatic"}
-        contentInset={{ bottom: baseUnit * 8 }}
         data={videosToShow}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => <YouTubes fullWidth={true} item={item} />}
