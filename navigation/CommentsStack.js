@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 
 // React Navigation
-// https://reactnavigation.org/docs/native-stack-navigator
+import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -13,28 +13,47 @@ import CommentsScreen from "../views/CommentsScreen"
 import GPTResponse from "../views/modals/GPTResponse"
 
 // Components
-import CustomNavigationBar from "../components/CustomNavigationBar"
-import DetailNavigationBar from "../components/DetailNavigationBar"
+import ToolbarProfile from "../components/ToolbarProfile"
+import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const CommentsStack = () => {
+  const { dark, colors } = useTheme()
   const { currentlyPlaying } = useContext(SpotifyContext)
-  const { track } = currentlyPlaying
-  const { artist } = currentlyPlaying
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={`${track} by ${artist}`}
+        name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
         component={CommentsScreen}
         options={{
-          header: (props) => <CustomNavigationBar {...props} />,
+          animation: "none",
+          headerShown: true,
+          headerLargeTitle: true,
+          headerTransparent: true,
+          headerLargeTitleShadowVisible: true,
+          headerTintColor: colors.text,
+          headerBlurEffect: dark
+            ? "systemChromeMaterialDark"
+            : "systemUltraThinMaterial",
+          headerLargeTitleStyle: { color: colors.text },
+          headerLeft: () => <ToolbarProfile />,
+          headerRight: () => <ToolbarAudioSearch />,
         }}
       />
+
       <Stack.Screen
         name={"Powered by GPT-4 API"}
         component={GPTResponse}
         options={{
-          header: (props) => <DetailNavigationBar {...props} />,
+          presentation: "modal",
+          headerShown: true,
+          headerTransparent: true,
+          headerTintColor: colors.text,
+          headerLargeTitle: false,
+          headerLargeTitleStyle: { color: colors.text },
+          headerBlurEffect: dark
+            ? "systemChromeMaterialDark"
+            : "systemUltraThinMaterial",
         }}
       />
     </Stack.Navigator>

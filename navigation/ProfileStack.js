@@ -1,20 +1,23 @@
-// import React, { useContext } from "react"
-import React from "react"
+import React, { useContext } from "react"
+import { Button } from "react-native"
 
 // React Navigation
-// https://reactnavigation.org/docs/native-stack-navigator
+import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
 // Context
-// import AuthContext from "../context/auth"
+import AuthContext from "../context/auth"
 
 // Screens
-import DetailNavigationBar from "../components/DetailNavigationBar"
 import ProfileScreen from "../views/modals/ProfileScreen"
 
+// Design
+import { GOLD } from "../constants/Base"
+
 const ProfileStack = () => {
-  // const { signOut } = useContext(AuthContext)
+  const { signOut } = useContext(AuthContext)
+  const { dark, colors } = useTheme()
 
   return (
     <Stack.Navigator>
@@ -22,7 +25,23 @@ const ProfileStack = () => {
         name="Your recent tracks"
         component={ProfileScreen}
         options={{
-          header: (props) => <DetailNavigationBar {...props} />,
+          headerRight: () => (
+            <Button
+              title="Logout"
+              onPress={() => {
+                signOut()
+              }}
+              color={GOLD}
+            />
+          ),
+          headerShown: true,
+          headerTransparent: true,
+          headerTintColor: colors.text,
+          headerLargeTitle: true,
+          headerLargeTitleStyle: { color: colors.text },
+          headerBlurEffect: dark
+            ? "systemChromeMaterialDark"
+            : "systemUltraThinMaterial",
         }}
       />
     </Stack.Navigator>

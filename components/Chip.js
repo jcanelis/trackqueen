@@ -1,28 +1,45 @@
 import React from "react"
+import { Pressable, Text } from "react-native"
+// import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
-// Paper
-import { useTheme, Chip as Chipper } from "react-native-paper"
-
 // Design
-import { baseUnit } from "../constants/Base"
+import { baseUnit, GOLD } from "../constants/Base"
 
 const Chip = ({ text, action }) => {
-  const { colors } = useTheme()
+  // Testing alternate colors here.
+  // const { colors } = useTheme()
 
   return (
-    <Chipper
-      mode={"flat"}
-      ellipsizeMode={"tail"}
-      compact={false}
-      style={{ backgroundColor: colors.tertiary }}
-      textStyle={{ color: colors.onPrimary, padding: baseUnit * 1 }}
+    <Pressable
       onPress={() => {
         action()
       }}
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.7 : 1,
+          borderRadius: baseUnit * 2,
+          // borderColor: colors.border,
+          borderColor: "rgba(50,50,50,1)",
+          // backgroundColor: colors.card,
+          backgroundColor: "rgba(20,20,20,1)",
+          borderWidth: 1,
+        },
+      ]}
     >
-      {text}
-    </Chipper>
+      <Text
+        style={{
+          padding: baseUnit * 3,
+          fontSize: baseUnit * 2.1,
+          lineHeight: baseUnit * 3,
+          fontWeight: 500,
+          color: GOLD,
+          borderRadius: baseUnit * 2,
+        }}
+      >
+        {text}
+      </Text>
+    </Pressable>
   )
 }
 

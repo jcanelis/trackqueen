@@ -1,9 +1,7 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 // React Navigation
-// https://reactnavigation.org/docs/native-stack-navigator
-import { NavigationContainer } from "@react-navigation/native"
+import { DarkTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -12,52 +10,46 @@ import { StatusBar } from "expo-status-bar"
 
 // Stacks
 import AppTabs from "./AppTabs"
+import ProfileStack from "./ProfileStack"
 
 // Screens
-import ProfileScreen from "../views/modals/ProfileScreen"
 import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
-// Components
-import DetailNavigationBar from "../components/DetailNavigationBar"
-
-const AppNavigation = ({ theme }) => (
+const AppNavigation = () => (
   <>
     <StatusBar style={"light"} />
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator>
         <Stack.Screen
           name="AppTabs"
           component={AppTabs}
-          options={{
-            animation: "none",
-            headerShown: false,
-          }}
+          options={{ headerShown: false }}
         />
-
         <Stack.Screen
-          name="Your recent tracks"
-          component={ProfileScreen}
+          name="ProfileStack"
+          component={ProfileStack}
           options={{
-            headerShown: true,
-            header: (props) => <DetailNavigationBar {...props} />,
+            presentation: "modal",
+            headerShown: false,
+            headerTransparent: true,
+            headerLargeTitle: false,
+            headerBlurEffect: "systemChromeMaterialDark",
           }}
         />
-
         <Stack.Screen
           name="Search nearby audio"
           component={SoundCheckScreen}
           options={{
+            presentation: "modal",
             headerShown: true,
-            header: (props) => <DetailNavigationBar {...props} />,
+            headerTransparent: true,
+            headerLargeTitle: true,
+            headerBlurEffect: "systemChromeMaterialDark",
           }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   </>
 )
-
-AppNavigation.propTypes = {
-  theme: PropTypes.object,
-}
 
 export default AppNavigation

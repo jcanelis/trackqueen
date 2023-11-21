@@ -1,26 +1,33 @@
 import React from "react"
+import { Text } from "react-native"
+import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
-import { View } from "react-native"
 
-// Paper
-import { Text } from "react-native-paper"
+// Custom
+import { baseUnit, verticalRhythm } from "../constants/Base"
 
-// Design
-import { baseUnit } from "../constants/Base"
+const Lyric = ({ content }) => {
+  const { colors } = useTheme()
 
-const Lyric = ({ content }) => (
-  <View
-    style={{
-      paddingLeft: baseUnit * 3,
-      paddingRight: baseUnit * 3,
-      paddingTop: baseUnit * 3,
-      paddingBottom: baseUnit * 3,
-    }}
-    selectable={true}
-  >
-    <Text variant="titleLarge">{content}</Text>
-  </View>
-)
+  return (
+    <Text
+      style={{
+        paddingTop: baseUnit * 2,
+        paddingRight: baseUnit * 4,
+        paddingBottom: baseUnit * 2,
+        paddingLeft: baseUnit * 4,
+        fontSize: baseUnit * 2.8,
+        lineHeight: verticalRhythm * 8,
+        fontWeight: 500,
+        color: colors.text,
+        opacity: 0.95,
+      }}
+      selectable={true}
+    >
+      {content}
+    </Text>
+  )
+}
 
 Lyric.propTypes = {
   content: PropTypes.string,

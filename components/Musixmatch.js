@@ -1,14 +1,12 @@
 import React from "react"
 import { Pressable } from "react-native"
+import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
 // Expo
 import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
-
-// Paper
-import { useTheme } from "react-native-paper"
 
 export default function Musixmatch({ data }) {
   const { dark } = useTheme()

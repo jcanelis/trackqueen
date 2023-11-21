@@ -3,7 +3,11 @@ import { AppState, RefreshControl, ScrollView } from "react-native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // React Navigation
-import { useNavigation, useScrollToTop } from "@react-navigation/native"
+import {
+  useNavigation,
+  useScrollToTop,
+  useTheme,
+} from "@react-navigation/native"
 
 // Context
 import SpotifyContext from "../context/spotify"
@@ -18,11 +22,8 @@ import Header from "../components/Header"
 import Loader from "../components/Loader"
 import YouTubeList from "../components/YouTubeList"
 
-// Paper
-import { useTheme } from "react-native-paper"
-
 // Design
-import { baseUnit } from "../constants/Base"
+import { baseUnit, lightGrey } from "../constants/Base"
 
 function VideoScreen() {
   const navigation = useNavigation()
@@ -128,7 +129,12 @@ function VideoScreen() {
   return (
     <ScrollView
       ref={ref}
-      contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
+      automaticallyAdjustsScrollIndicatorInsets={true}
+      automaticallyAdjustContentInsets={true}
+      contentInsetAdjustmentBehavior={"automatic"}
+      contentInset={{ bottom: baseUnit * 16 }}
+      scrollsToTop={true}
+      scrollToOverflowEnabled={true}
       style={{
         flex: 1,
         backgroundColor: colors.background,
@@ -137,8 +143,8 @@ function VideoScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={colors.primary}
-          titleColor={colors.primary}
+          tintColor={lightGrey}
+          titleColor={lightGrey}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)

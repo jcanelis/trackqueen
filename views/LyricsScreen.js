@@ -1,18 +1,21 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import {
   AppState,
+  Button,
   FlatList,
   Pressable,
   RefreshControl,
+  Text,
   useWindowDimensions,
   View,
 } from "react-native"
 
-// Paper
-import { Button, useTheme } from "react-native-paper"
-
 // React Navigation
-import { useNavigation, useScrollToTop } from "@react-navigation/native"
+import {
+  useNavigation,
+  useScrollToTop,
+  useTheme,
+} from "@react-navigation/native"
 
 // Expo
 import * as WebBrowser from "expo-web-browser"
@@ -37,7 +40,7 @@ import LyricsFooter from "../components/LyricsFooter"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Design
-import { baseUnit, blurhash } from "../constants/Base"
+import { baseUnit, blurhash, GOLD, lightGrey } from "../constants/Base"
 
 function LyricsScreen() {
   const navigation = useNavigation()
@@ -149,6 +152,10 @@ function LyricsScreen() {
   return (
     <FlatList
       ref={ref}
+      automaticallyAdjustsScrollIndicatorInsets={true}
+      automaticallyAdjustContentInsets={true}
+      contentInsetAdjustmentBehavior={"automatic"}
+      contentInset={{ bottom: baseUnit * 8 }}
       contentContainerStyle={{
         gap: baseUnit,
       }}
@@ -156,6 +163,8 @@ function LyricsScreen() {
         flex: 1,
         backgroundColor: colors.background,
       }}
+      scrollsToTop={true}
+      scrollToOverflowEnabled={true}
       data={data.lyrics}
       keyExtractor={(item, index) => index}
       renderItem={({ item }) =>
@@ -165,8 +174,8 @@ function LyricsScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={colors.primary}
-          titleColor={colors.primary}
+          tintColor={lightGrey}
+          titleColor={lightGrey}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)
@@ -215,45 +224,25 @@ function LyricsScreen() {
         </View>
       }
       ListFooterComponent={
-        <View
-          style={{
-            gap: baseUnit * 3,
-            padding: baseUnit * 3,
-            alignItems: "center",
-          }}
-        >
-          <>
-            {data.lyrics.length > 0 &&
-              data.geniusTrackSearch &&
-              data.geniusTrackSearch.result.url && (
+        <View style={{ gap: baseUnit * 2 }}>
+          {data.lyrics.length > 0 &&
+            data.geniusTrackSearch &&
+            data.geniusTrackSearch.result.url && (
+              <View style={{ marginTop: baseUnit * 3 }}>
                 <Button
-                  mode={"outlined"}
-                  textColor={colors.onSecondaryContainer}
-                  rippleColor={colors.tertiary}
+                  title="View this track on Genius"
+                  color={GOLD}
                   onPress={() => {
                     _handlePressButtonAsync(data.geniusTrackSearch.result.url)
                   }}
-                >
-                  View this track on Genius
-                </Button>
-              )}
-          </>
+                />
+              </View>
+            )}
 
-          {data.lyrics.length > 0 && (
-            <>
-              <Button
-                mode={"text"}
-                textColor={colors.onSecondaryContainer}
-                rippleColor={colors.tertiary}
-                onPress={() => {
-                  _handlePressButtonAsync(data.musixMatchTrack.track_share_url)
-                }}
-              >
-                View all lyrics on Musixmatch
-              </Button>
-              <LyricsFooter data={data} />
-            </>
-          )}
+          <LyricsFooter
+            data={data}
+            hasLyrics={data.lyrics.length > 0 ? true : false}
+          />
         </View>
       }
       ListEmptyComponent={
@@ -264,7 +253,11 @@ function LyricsScreen() {
             paddingBottom: baseUnit * 8,
             textAlign: "center",
           }}
-        ></View>
+        >
+          <Text style={{ color: colors.text, opacity: 0.7 }}>
+            No lyrics were found for this track.
+          </Text>
+        </View>
       }
     />
   )

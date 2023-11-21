@@ -1,16 +1,14 @@
 import React from "react"
-import { View } from "react-native"
+import { Button, Text, View } from "react-native"
+import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
 // Expo
 import { useAssets } from "expo-asset"
 import { Image } from "expo-image"
 
-// Paper
-import { Button, useTheme, Text } from "react-native-paper"
-
 // Design
-import { baseUnit } from "../constants/Base"
+import { baseUnit, GOLD } from "../constants/Base"
 
 function Header({ copy, func, type, buttonTitle, border }) {
   const { dark, colors } = useTheme()
@@ -58,7 +56,7 @@ function Header({ copy, func, type, buttonTitle, border }) {
             marginRight: baseUnit * 3,
             marginBottom: baseUnit * 2,
             marginLeft: baseUnit * 3,
-            backgroundColor: colors.onPrimary,
+            backgroundColor: colors.border,
           }}
         ></View>
       )}
@@ -85,11 +83,12 @@ function Header({ copy, func, type, buttonTitle, border }) {
           />
 
           <Text
-            variant={"bodyLarge"}
             numberOfLines={1}
             ellipsizeMode={"tail"}
             style={{
-              color: colors.tertiary,
+              fontSize: baseUnit * 2.8,
+              lineHeight: baseUnit * 3,
+              color: colors.text,
               fontWeight: 700,
             }}
           >
@@ -98,13 +97,7 @@ function Header({ copy, func, type, buttonTitle, border }) {
         </View>
 
         {func && (
-          <Button
-            mode={"text"}
-            textColor={colors.onSecondaryContainer}
-            onPress={() => func()}
-          >
-            {buttonTitle}
-          </Button>
+          <Button title={buttonTitle} color={GOLD} onPress={() => func()} />
         )}
       </View>
     </View>

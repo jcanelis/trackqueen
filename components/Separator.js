@@ -1,8 +1,8 @@
 import React from "react"
 import { View } from "react-native"
-import { useTheme } from "react-native-paper"
+import { useTheme } from "@react-navigation/native"
 
 export default function Separator() {
   const { colors } = useTheme()
-  return <View style={{ height: 1, backgroundColor: colors.tertiary }}></View>
+  return <View style={{ height: 1, backgroundColor: colors.border }}></View>
 }

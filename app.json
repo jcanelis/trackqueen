@@ -8,36 +8,41 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": ["android"],
+    "platforms": ["ios"],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "privacy": "hidden",
-    "owner": "trackqueen",
+    "owner": "jcanelis",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#cecece"
+      "resizeMode": "cover"
+    },
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
     },
     "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "buildNumber": "129",
+      "bundleIdentifier": "com.jcanelis.tq22",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": ["audio", "fetch"],
+        "NSMicrophoneUsageDescription": "Enable the microphone to find songs using nearby audio."
+      },
+      "usesIcloudStorage": false,
+      "usesAppleSignIn": false,
+      "accessesContactNotes": false
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
+      }
+    },
     "plugins": ["expo-build-properties"],
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon-foreground.png",
-        "monochromeImage": "./assets/icon-monochrome.png",
-        "backgroundColor": "#cecece"
-      },
-      "package": "com.trackqueen.tq22"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "2443c229-a8e4-4778-bdee-55c51d3186cc"
-      }
-    },
-    "updates": {
-      "url": "https://u.expo.dev/2443c229-a8e4-4778-bdee-55c51d3186cc"
-    },
-    "ios": {}
+    "android": {}
   }
 }
