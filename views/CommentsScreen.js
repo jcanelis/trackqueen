@@ -212,7 +212,13 @@ function CommentsScreen() {
             />
 
             {commentsToShow.length > 0 && (
-              <View style={{ margin: baseUnit * 3 }}>
+              <View
+                style={{
+                  margin: baseUnit * 3,
+                  marginTop: baseUnit,
+                  marginBottom: baseUnit * 2,
+                }}
+              >
                 <SegmentedButtons
                   value={index}
                   onValueChange={(value) => {
