@@ -58,7 +58,6 @@ function CommentsScreen() {
   // Save each array of comments
   let [commentsRelevant, setCommentsRelevant] = useState([])
   let [commentsRecent, setCommentsRecent] = useState([])
-  console.log(commentsRecent)
 
   // Comments to be displayed
   let [commentsToShow, setCommentsToShow] = useState(commentsRelevant)
@@ -69,7 +68,6 @@ function CommentsScreen() {
 
   // Tab index
   let [index, setIndex] = useState(0)
-  console.log(setIndex)
 
   // Check current track function
   useQuery({
@@ -217,8 +215,10 @@ function CommentsScreen() {
               <View style={{ margin: baseUnit * 3 }}>
                 <SegmentedButtons
                   value={index}
-                  onChange={async (value) => {
-                    console.log(value)
+                  onValueChange={(value) => {
+                    const data = value == 0 ? commentsRelevant : commentsRecent
+                    setCommentsToShow(data)
+                    setIndex(value)
                   }}
                   buttons={[
                     {

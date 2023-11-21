@@ -8,13 +8,17 @@ import { Appbar, useTheme } from "react-native-paper"
 
 const DetailNavigationBar = function ({ navigation, route, options, back }) {
   const title = getHeaderTitle(options, route.name)
-
+  const { colors } = useTheme()
   const theme = useTheme()
 
   return (
     <Appbar.Header mode={"center-aligned"} theme={theme}>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} />
+      <Appbar.Content
+        title={title}
+        color={colors.secondary}
+        titleStyle={{ fontSize: 17, fontWeight: 700 }}
+      />
     </Appbar.Header>
   )
 }

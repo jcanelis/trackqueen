@@ -30,11 +30,10 @@ import audioConfig from "../../constants/AudioConfig"
 import StatusText from "../../components/StatusText"
 
 // Paper
-import { Button } from "react-native-paper"
-import { useTheme } from "react-native-paper"
+import { Button, useTheme } from "react-native-paper"
 
 // Design
-import { baseUnit, GOLD } from "../../constants/Base"
+import { baseUnit } from "../../constants/Base"
 
 function SoundCheckScreen() {
   const navigation = useNavigation()
@@ -134,6 +133,7 @@ function SoundCheckScreen() {
             if (failed) {
               setFailed(false)
             }
+            console.log("STARTING!")
 
             // Create a recording
             const { recording } = await Audio.Recording.createAsync(
@@ -144,9 +144,16 @@ function SoundCheckScreen() {
               1000
             )
 
+            console.log("STARTINGSS!")
+
             // Start the recording
             setRecording(recording)
+
+            console.log("dsfsdfdsSTARTINGSS!")
+
             await recording.startAsync()
+
+            console.log("BAAAAdsfsdfdsSTARTINGSS!")
 
             // Let the audio record for six seconds
             await timeout(6000)
@@ -219,7 +226,7 @@ function SoundCheckScreen() {
     >
       <View
         style={{
-          flex: 1.6,
+          flex: 1,
           alignItems: "center",
           justifyContent: "flex-end",
         }}
@@ -261,8 +268,42 @@ function SoundCheckScreen() {
             alignItems: "center",
             justifyContent: "flex-start",
             padding: baseUnit * 2,
+            paddingTop: baseUnit * 3,
           }}
         >
+          {permissionResponse.status === "granted" ? (
+            <Button
+              mode={"outlined"}
+              accessibilityLabel={recording ? "Cancel" : "Start recording"}
+              textColor={colors.onSecondaryContainer}
+              rippleColor={colors.tertiary}
+              onPress={
+                recording
+                  ? stopRecording
+                  : () => {
+                      animationRef.current?.play()
+                      queryClient.fetchQuery({
+                        queryKey: ["Search-nearby-audio"],
+                      })
+                    }
+              }
+            >
+              {recording ? "Cancel" : "Start recording"}
+            </Button>
+          ) : (
+            <Button
+              mode={"outlined"}
+              accessibilityLabel={"Enable audio recording"}
+              textColor={colors.onSecondaryContainer}
+              rippleColor={colors.tertiary}
+              onPress={() => {
+                requestPermission()
+              }}
+            >
+              Enable audio recording
+            </Button>
+          )}
+
           {statusObject.isRecording ? (
             <StatusText content={"Listening to your audio..."} />
           ) : null}
@@ -280,31 +321,6 @@ function SoundCheckScreen() {
           {!fetchingData && failed ? (
             <StatusText content={"Unable to find a song with your audio..."} />
           ) : null}
-
-          {permissionResponse.status === "granted" ? (
-            <Button
-              title={recording ? "Cancel" : "Start recording"}
-              color={GOLD}
-              onPress={
-                recording
-                  ? stopRecording
-                  : () => {
-                      animationRef.current?.play()
-                      queryClient.fetchQuery({
-                        queryKey: ["Search-nearby-audio"],
-                      })
-                    }
-              }
-            />
-          ) : (
-            <Button
-              title="Enable audio recording"
-              color={GOLD}
-              onPress={() => {
-                requestPermission()
-              }}
-            />
-          )}
 
           <View
             style={{

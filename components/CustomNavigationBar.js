@@ -31,7 +31,8 @@ const CustomNavigationBar = function ({ navigation, route, options, back }) {
 
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content
-        titleStyle={{ fontSize: 15, fontWeight: 700, color: colors.secondary }}
+        color={colors.secondary}
+        titleStyle={{ fontSize: 15, fontWeight: 700 }}
         title={title}
       />
       <Appbar.Action
