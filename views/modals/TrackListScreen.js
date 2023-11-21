@@ -1,13 +1,9 @@
 import React, { useEffect } from "react"
 import { View } from "react-native"
+import { useTheme } from "@react-navigation/native"
+import * as Linking from "expo-linking"
 import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
-
-// Paper
-import { useTheme } from "react-native-paper"
-
-// Expo
-import * as Linking from "expo-linking"
 
 // Components
 import Header from "../../components/Header"
@@ -34,8 +30,11 @@ function TrackListScreen({ route, navigation }) {
       }}
     >
       <FlashList
-        contentContainerStyle={{ paddingBottom: baseUnit * 6 }}
         estimatedItemSize={route.params.tracks.length}
+        automaticallyAdjustsScrollIndicatorInsets={true}
+        automaticallyAdjustContentInsets={true}
+        contentInsetAdjustmentBehavior={"automatic"}
+        contentInset={{ bottom: baseUnit * 6 }}
         refreshing={false}
         ListHeaderComponent={
           <Header
@@ -47,7 +46,7 @@ function TrackListScreen({ route, navigation }) {
           />
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 2, alignItems: "center" }}>
+          <View style={{ margin: baseUnit * 4 }}>
             <SpotifyButton
               text={"Open Spotify"}
               func={() => Linking.openURL("https://open.spotify.com")}

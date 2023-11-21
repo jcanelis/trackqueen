@@ -1,12 +1,16 @@
-import React, { useContext } from "react"
-import { ScrollView, useWindowDimensions, View } from "react-native"
+import React, { useContext, useEffect } from "react"
+import {
+  Button,
+  ScrollView,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native"
 import PropTypes from "prop-types"
 
-// Paper
-import { Button, useTheme, Text } from "react-native-paper"
-
 // React Navigation
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useTheme } from "@react-navigation/native"
+import { useHeaderHeight } from "@react-navigation/elements"
 
 // Context
 import SpotifyContext from "../../context/spotify"
@@ -17,16 +21,31 @@ import { Image } from "expo-image"
 
 // Components
 import Chip from "../../components/Chip"
-
 import SpotifyLogo from "../../components/SpotifyLogo"
 
 // Design
-import { baseUnit, blurhash } from "../../constants/Base"
+import { baseUnit, blurhash, GOLD, verticalRhythm } from "../../constants/Base"
 
 function BioScreen({ route }) {
   const navigation = useNavigation()
   const { colors } = useTheme()
   const { width } = useWindowDimensions()
+  const headerHeight = useHeaderHeight()
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerBackground: () => (
+        <Image
+          source={route.params.data.spotifyArtistData.images[0].url}
+          placeholder={blurhash}
+          transition={250}
+          width={width}
+          height={headerHeight - baseUnit}
+          contentFit={"cover"}
+        />
+      ),
+    })
+  }, [colors, navigation, headerHeight, route.params, width])
 
   // Context
   const spotifyContext = useContext(SpotifyContext)
@@ -40,11 +59,14 @@ function BioScreen({ route }) {
 
   return (
     <ScrollView
+      automaticallyAdjustContentInsets={true}
+      automaticallyAdjustsScrollIndicatorInsets={true}
+      contentInset={{ bottom: baseUnit * 16 }}
       stickyHeaderHiddenOnScroll={true}
       contentContainerStyle={{
         alignItems: "center",
         gap: baseUnit * 3,
-        paddingTop: baseUnit * 3,
+        paddingTop: baseUnit * 12,
       }}
       scrollToOverflowEnabled={true}
       style={{
@@ -63,7 +85,7 @@ function BioScreen({ route }) {
           placeholder={blurhash}
           source={route.params.image}
           transition={250}
-          style={{ borderRadius: width / 2 }}
+          style={{ marginTop: headerHeight, borderRadius: width / 2 }}
           height={width / 2}
           width={width / 2}
         />
@@ -72,59 +94,48 @@ function BioScreen({ route }) {
       </View>
 
       <View style={{ flexDirection: "row" }}>
+        {route.params.instagram && (
+          <Button
+            color={GOLD}
+            title={"Instagram"}
+            onPress={() => {
+              Linking.openURL(
+                `https://instagram.com/${route.params.data.artistInfo.artist.instagram_name}`
+              )
+            }}
+          />
+        )}
+
         <Button
-          mode={"text"}
-          accessibilityLabel={"Top tracks"}
-          textColor={colors.onSecondaryContainer}
-          rippleColor={colors.tertiary}
+          color={GOLD}
+          title={"Top tracks"}
           onPress={() => {
             navigation.navigate("Top Tracks", {
               item: currentlyPlaying.spotifyData.artists[0],
               coverImage: route.params.image,
             })
           }}
-        >
-          Top tracks
-        </Button>
-
-        {route.params.instagram && (
-          <Button
-            mode={"text"}
-            accessibilityLabel={"Instagram"}
-            textColor={colors.onSecondaryContainer}
-            rippleColor={colors.tertiary}
-            onPress={() => {
-              Linking.openURL(
-                `https://instagram.com/${route.params.data.artistInfo.artist.instagram_name}`
-              )
-            }}
-          >
-            Instagram
-          </Button>
-        )}
+        />
 
         <Button
-          mode={"text"}
-          accessibilityLabel={"Ask ChatGPT"}
-          textColor={colors.onSecondaryContainer}
-          rippleColor={colors.tertiary}
+          color={GOLD}
+          title={"Ask ChatGPT"}
           onPress={() => {
             navigation.navigate("Powered by GPT-4 API", {
               query: `Tell me about the musician ${artist}.`,
             })
           }}
-        >
-          Ask ChatGPT
-        </Button>
+        />
       </View>
-
       <Text
-        variant={"bodyLarge"}
         style={{
           paddingLeft: baseUnit * 3,
           paddingRight: baseUnit * 3,
-
-          color: colors.tertiary,
+          fontSize: baseUnit * 2.2,
+          lineHeight: verticalRhythm * 7,
+          fontWeight: 400,
+          color: colors.text,
+          opacity: 0.85,
         }}
       >
         {bioText}
@@ -132,11 +143,14 @@ function BioScreen({ route }) {
 
       {bioText !== "No information found on Genius.com." && (
         <Text
-          variant={"labelSmall"}
           style={{
             paddingLeft: baseUnit * 3,
             paddingRight: baseUnit * 3,
-            color: colors.tertiary,
+            fontSize: baseUnit * 2,
+            lineHeight: verticalRhythm * 5,
+            fontWeight: 500,
+            color: colors.text,
+            opacity: 0.65,
           }}
         >
           Source: Genius.com

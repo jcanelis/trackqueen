@@ -1,10 +1,16 @@
 import React, { useState, useRef, useEffect } from "react"
-import { AppState, Pressable, ScrollView, View } from "react-native"
+import {
+  ActivityIndicator,
+  AppState,
+  Button,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native"
+import { useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import PropTypes from "prop-types"
-
-// Paper
-import { ActivityIndicator, Button, useTheme, Text } from "react-native-paper"
 
 // Expo
 import * as WebBrowser from "expo-web-browser"
@@ -18,7 +24,7 @@ import ChatGPT from "../../services/ChatGPT/getAnswers"
 import StatusText from "../../components/StatusText"
 
 // Design
-import { baseUnit, verticalRhythm } from "../../constants/Base"
+import { baseUnit, verticalRhythm, GOLD } from "../../constants/Base"
 
 const _handlePressButtonAsync = async (url) => {
   await WebBrowser.openBrowserAsync(url)
@@ -106,16 +112,17 @@ function GPTResponse({ route }) {
           justifyContent: "center",
         }}
       >
-        <ActivityIndicator size="large" color={colors.tertiary} />
+        <ActivityIndicator size="large" color={GOLD} />
 
         <StatusText content={`”${route.params.query}”`} />
 
         <Text
-          variant={"labelMedium"}
           style={{
             marginBottom: baseUnit * 3,
-            fontWeight: 500,
-            color: colors.tertiary,
+            fontSize: baseUnit * 1.8,
+            lineHeight: verticalRhythm * 5,
+            fontWeight: 400,
+            color: colors.text,
             opacity: 0.5,
           }}
         >
@@ -135,51 +142,45 @@ function GPTResponse({ route }) {
   if (isError)
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text variant={"labelSmall"} style={{ color: colors.tertiary }}>
+        <Text style={{ color: colors.text }}>
           Unfortunately an error occured.
         </Text>
-
         <Button
-          mode={"outlined"}
-          accessibilityLabel={"Try again"}
-          textColor={colors.onSecondaryContainer}
-          rippleColor={colors.tertiary}
+          title={"Try again"}
+          color={GOLD}
           onPress={() =>
             queryClient.resetQueries({
               queryKey: ["chat-gpt-response"],
             })
           }
-        >
-          Try again
-        </Button>
+        />
       </View>
     )
 
   if (data && data.error)
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text variant={"labelSmall"} style={{ color: colors.tertiary }}>
+        <Text style={{ color: colors.text }}>
           Unfortunately an error occured.
         </Text>
-
         <Button
-          mode={"outlined"}
-          accessibilityLabel={"Try again"}
-          textColor={colors.onSecondaryContainer}
-          rippleColor={colors.tertiary}
+          title={"Try again"}
+          color={GOLD}
           onPress={() =>
             queryClient.resetQueries({
               queryKey: ["chat-gpt-response"],
             })
           }
-        >
-          Try again
-        </Button>
+        />
       </View>
     )
 
   return (
     <ScrollView
+      automaticallyAdjustsScrollIndicatorInsets={true}
+      automaticallyAdjustContentInsets={true}
+      contentInsetAdjustmentBehavior={"automatic"}
+      contentInset={{ bottom: baseUnit * 12 }}
       contentContainerStyle={{
         gap: baseUnit * 2,
       }}
@@ -188,7 +189,15 @@ function GPTResponse({ route }) {
         padding: baseUnit * 3,
       }}
     >
-      <Text variant={"labelSmall"} style={{ color: colors.tertiary }}>
+      <Text
+        style={{
+          fontSize: baseUnit * 2.3,
+          lineHeight: verticalRhythm * 7,
+          fontWeight: 400,
+          color: colors.text,
+          opacity: 0.85,
+        }}
+      >
         {data.choices[0].message.content.trim().trim()}
       </Text>
 

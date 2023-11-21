@@ -4,7 +4,7 @@ import { FlashList } from "@shopify/flash-list"
 import PropTypes from "prop-types"
 
 // React Navigation
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useTheme } from "@react-navigation/native"
 
 // Expo
 import * as Linking from "expo-linking"
@@ -16,9 +16,6 @@ import SpotifyContext from "../../context/spotify"
 import Header from "../../components/Header"
 import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
-
-// Paper
-import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit } from "../../constants/Base"
@@ -40,8 +37,11 @@ const AlbumTracks = ({ route }) => {
       }}
     >
       <FlashList
-        contentContainerStyle={{ paddingBottom: baseUnit * 6 }}
         estimatedItemSize={20}
+        automaticallyAdjustsScrollIndicatorInsets={true}
+        automaticallyAdjustContentInsets={true}
+        contentInsetAdjustmentBehavior={"automatic"}
+        contentInset={{ bottom: baseUnit * 8 }}
         data={route.params.tracks}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => {
@@ -70,7 +70,7 @@ const AlbumTracks = ({ route }) => {
           />
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 4, alignItems: "center" }}>
+          <View style={{ margin: baseUnit * 6 }}>
             <SpotifyButton
               text={"Play on Spotify"}
               func={() => {

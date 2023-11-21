@@ -1,13 +1,8 @@
 import React from "react"
-import { Pressable, useWindowDimensions } from "react-native"
-import { useNavigation } from "@react-navigation/native"
-import PropTypes from "prop-types"
-
-// Expo
+import { Pressable, Text, useWindowDimensions } from "react-native"
+import { useNavigation, useTheme } from "@react-navigation/native"
 import { Image } from "expo-image"
-
-// Paper
-import { useTheme, Text } from "react-native-paper"
+import PropTypes from "prop-types"
 
 // Custom
 import { blurhash, baseUnit } from "../constants/Base"
@@ -27,9 +22,8 @@ const ArtistLarge = ({ item, image }) => {
       }}
       style={({ pressed }) => [
         {
-          marginTop: baseUnit * 3,
           flex: 1,
-          gap: baseUnit,
+          marginTop: baseUnit * 3,
           alignItems: "center",
           width: width / 2.4,
           height: width / 2.4 + baseUnit * 5,
@@ -49,9 +43,12 @@ const ArtistLarge = ({ item, image }) => {
       <Text
         numberOfLines={1}
         ellipsizeMode={"tail"}
-        variant={"labelMedium"}
         style={{
-          color: colors.tertiary,
+          fontSize: baseUnit * 1.5,
+          lineHeight: baseUnit * 4,
+          fontWeight: 600,
+          letterSpacing: -0.1,
+          color: colors.text,
           opacity: 0.75,
         }}
       >

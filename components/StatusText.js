@@ -1,9 +1,7 @@
 import React from "react"
 import { Text } from "react-native"
+import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
-
-// Paper
-import { useTheme } from "react-native-paper"
 
 // Design
 import { baseUnit, verticalRhythm } from "../constants/Base"
@@ -18,7 +16,7 @@ const StatusText = ({ content }) => {
         fontSize: baseUnit * 2,
         lineHeight: verticalRhythm * 6,
         fontWeight: 400,
-        color: colors.tertiary,
+        color: colors.text,
         textAlign: "center",
       }}
     >

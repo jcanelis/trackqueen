@@ -1,9 +1,15 @@
 import React, { useContext } from "react"
+import { useWindowDimensions } from "react-native"
 
 // React Navigation
-// https://reactnavigation.org/docs/native-stack-navigator
+import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
+import { HeaderHeightContext } from "@react-navigation/elements"
+
+// Expo
+import { useAssets } from "expo-asset"
+import { Image } from "expo-image"
 
 // Context
 import SpotifyContext from "../context/spotify"
@@ -19,67 +25,156 @@ import GPTResponse from "../views/modals/GPTResponse"
 import GPTStack from "./GPTStack"
 
 // Components
-import CustomNavigationBar from "../components/CustomNavigationBar"
-import DetailNavigationBar from "../components/DetailNavigationBar"
+import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
+import ToolbarProfile from "../components/ToolbarProfile"
+
+// Design
+import { baseUnit, blurhash } from "../constants/Base"
 
 const AboutStack = () => {
+  const { dark, colors } = useTheme()
+  const { width } = useWindowDimensions()
   const { currentlyPlaying } = useContext(SpotifyContext)
-  const { artist } = currentlyPlaying
-  const { track } = currentlyPlaying
-  const album = currentlyPlaying.spotifyData.album.name
+
+  // Local asset with Expo useAssets
+  const [assets, error] = useAssets([require("../assets/tile.png")])
+
+  if (error) {
+    console.error("Error loading local assets", error)
+  }
+
+  if (!assets) {
+    return null
+  }
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={`${track} by ${artist}`}
+        name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
         component={AboutScreen}
         options={{
-          header: (props) => <CustomNavigationBar {...props} />,
+          animation: "none",
+          headerShown: true,
+          headerLargeTitle: true,
+          headerTransparent: true,
+          headerLargeTitleShadowVisible: true,
+          headerTintColor: colors.text,
+          headerBlurEffect: dark
+            ? "systemChromeMaterialDark"
+            : "systemUltraThinMaterial",
+          headerLargeTitleStyle: { color: colors.text },
+          headerLeft: () => <ToolbarProfile />,
+          headerRight: () => <ToolbarAudioSearch />,
         }}
       />
 
       <Stack.Screen
-        name={album}
+        name={`${currentlyPlaying.spotifyData.album.name}`}
         component={AlbumTracks}
-        navigationKey={track}
+        navigationKey={currentlyPlaying.track}
         options={{
-          header: (props) => <DetailNavigationBar {...props} />,
+          headerBackTitle: "Back",
+          headerShown: true,
+          headerTransparent: true,
+          headerTintColor: colors.text,
+          headerLargeTitle: true,
+          headerLargeTitleStyle: { color: colors.text },
+          headerBlurEffect: "systemUltraThinMaterialDark",
+          headerBackground: () => (
+            <HeaderHeightContext.Consumer>
+              {(headerHeight) => {
+                return (
+                  <Image
+                    source={currentlyPlaying.spotifyData.album.images[0].url}
+                    placeholder={blurhash}
+                    transition={250}
+                    width={width}
+                    height={headerHeight - baseUnit}
+                    contentFit={"cover"}
+                  />
+                )
+              }}
+            </HeaderHeightContext.Consumer>
+          ),
         }}
       />
 
       <Stack.Screen
         name="Credits"
         component={CreditsScreen}
-        navigationKey={track}
+        navigationKey={currentlyPlaying.track}
         options={{
-          header: (props) => <DetailNavigationBar {...props} />,
-        }}
-      />
-
-      <Stack.Screen
-        name={"Ask ChatGPT"}
-        component={GPTStack}
-        navigationKey={track}
-        options={{
-          header: (props) => <DetailNavigationBar {...props} />,
-        }}
-      />
-
-      <Stack.Screen
-        name={"Powered by GPT-4 API"}
-        component={GPTResponse}
-        navigationKey={track}
-        options={{
-          header: (props) => <DetailNavigationBar {...props} />,
+          headerBackTitle:
+            currentlyPlaying.track.length > 20
+              ? "Back"
+              : currentlyPlaying.track,
+          headerTransparent: true,
+          headerLargeTitle: true,
+          headerLargeTitleStyle: { color: colors.text },
+          headerTintColor: colors.text,
+          headerBlurEffect: dark
+            ? "systemChromeMaterialDark"
+            : "systemUltraThinMaterial",
         }}
       />
 
       <Stack.Screen
         name="Top Tracks"
         component={ArtistTracksScreen}
-        navigationKey={track}
+        navigationKey={currentlyPlaying.track}
         options={{
-          header: (props) => <DetailNavigationBar {...props} />,
+          presentation: "modal",
+          headerTransparent: true,
+          headerTintColor: colors.text,
+          headerBlurEffect: dark
+            ? "systemChromeMaterialDark"
+            : "systemUltraThinMaterial",
+        }}
+      />
+
+      <Stack.Screen
+        name={"Ask ChatGPT"}
+        component={GPTStack}
+        navigationKey={currentlyPlaying.track}
+        options={{
+          headerShown: true,
+          headerBackTitle: "Back",
+          headerTransparent: true,
+          headerTintColor: colors.text,
+          headerLargeTitle: true,
+          headerLargeTitleStyle: { color: colors.text },
+          headerBlurEffect: "dark",
+          headerBackground: () => (
+            <HeaderHeightContext.Consumer>
+              {(headerHeight) => {
+                return (
+                  <Image
+                    source={assets[0].localUri}
+                    placeholder={blurhash}
+                    transition={250}
+                    width={width}
+                    height={headerHeight - baseUnit}
+                    contentFit={"cover"}
+                  />
+                )
+              }}
+            </HeaderHeightContext.Consumer>
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name={"Powered by GPT-4 API"}
+        component={GPTResponse}
+        navigationKey={currentlyPlaying.track}
+        options={{
+          presentation: "modal",
+          headerShown: true,
+          headerTransparent: true,
+          headerTintColor: colors.text,
+          headerLargeTitle: false,
+          headerLargeTitleStyle: { color: colors.text },
+          headerBlurEffect: "dark",
         }}
       />
     </Stack.Navigator>

@@ -1,11 +1,13 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
 import { AppState, FlatList, RefreshControl, Text, View } from "react-native"
+import SegmentedControl from "@react-native-segmented-control/segmented-control"
 
 // React Navigation
-import { useNavigation, useScrollToTop } from "@react-navigation/native"
-
-// Paper
-import { SegmentedButtons, useTheme } from "react-native-paper"
+import {
+  useNavigation,
+  useScrollToTop,
+  useTheme,
+} from "@react-navigation/native"
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
@@ -27,7 +29,7 @@ import Loader from "../components/Loader"
 import VideoThumbnail from "../components/VideoThumbnail"
 
 // Design
-import { baseUnit } from "../constants/Base"
+import { baseUnit, lightGrey } from "../constants/Base"
 
 function CommentsScreen() {
   const navigation = useNavigation()
@@ -39,14 +41,6 @@ function CommentsScreen() {
   const spotifyContext = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
-
-  // Scroll reference
-  const ref = useRef(null)
-  useScrollToTop(
-    useRef({
-      scrollToTop: () => ref.current?.scrollToOffset({ offset: -143 }),
-    })
-  )
 
   // AppState listener: https://reactnative.dev/docs/appstate
   const appState = useRef(AppState.currentState)
@@ -68,6 +62,14 @@ function CommentsScreen() {
 
   // Tab index
   let [index, setIndex] = useState(0)
+
+  // Scroll reference
+  const ref = useRef(null)
+  useScrollToTop(
+    useRef({
+      scrollToTop: () => ref.current?.scrollToOffset({ offset: -143 }),
+    })
+  )
 
   // Check current track function
   useQuery({
@@ -168,7 +170,13 @@ function CommentsScreen() {
     >
       <FlatList
         ref={ref}
+        automaticallyAdjustsScrollIndicatorInsets={true}
+        automaticallyAdjustContentInsets={true}
+        contentInset={{ bottom: baseUnit * 6 }}
+        contentInsetAdjustmentBehavior={"automatic"}
         style={{ flex: 1 }}
+        scrollsToTop={true}
+        scrollToOverflowEnabled={true}
         ListEmptyComponent={
           <View
             style={{
@@ -177,11 +185,11 @@ function CommentsScreen() {
             }}
           >
             <Text
-              variant={"labelSmall"}
               style={{
                 marginTop: baseUnit * 2,
                 textAlign: "center",
-                color: colors.tertiary,
+                color: colors.text,
+                opacity: 0.7,
               }}
             >
               No comments found for this track.
@@ -212,36 +220,38 @@ function CommentsScreen() {
             />
 
             {commentsToShow.length > 0 && (
-              <View
+              <SegmentedControl
                 style={{
-                  margin: baseUnit * 3,
-                  marginTop: baseUnit,
-                  marginBottom: baseUnit * 2,
+                  flex: 1,
+                  marginTop: baseUnit * 2,
+                  marginRight: baseUnit * 3,
+                  marginLeft: baseUnit * 3,
+                  marginBottom: baseUnit * 1,
+                  fontWeight: 800,
                 }}
-              >
-                <SegmentedButtons
-                  value={index}
-                  onValueChange={(value) => {
-                    const data = value == 0 ? commentsRelevant : commentsRecent
-                    setCommentsToShow(data)
-                    setIndex(value)
-                  }}
-                  buttons={[
-                    {
-                      value: 0,
-                      label: "Popular",
-                    },
-                    {
-                      value: 1,
-                      label: "Recent",
-                    },
-                  ]}
-                />
-              </View>
+                values={["Popular", "Recent"]}
+                height={baseUnit * 5}
+                appearance={"dark"}
+                backgroundColor={colors.card}
+                fontStyle={{ fontSize: 14, fontWeight: 900 }}
+                activeFontStyle={{
+                  fontSize: 14,
+                  fontWeight: 900,
+                }}
+                selectedIndex={0}
+                onChange={async (event) => {
+                  const indexData =
+                    event.nativeEvent.selectedSegmentIndex == 0
+                      ? commentsRelevant
+                      : commentsRecent
+                  setCommentsToShow(indexData)
+                  setIndex(event.nativeEvent.selectedSegmentIndex)
+                }}
+              />
             )}
           </>
         }
-        onEndReachedThreshold={0.3}
+        onEndReachedThreshold={0.6}
         onEndReached={async () => {
           const queryType = index === 0 ? "relevance" : "time"
           const pageToken =
@@ -274,8 +284,8 @@ function CommentsScreen() {
         refreshControl={
           <RefreshControl
             title="Checking your current Spotify track..."
-            tintColor={colors.secondary}
-            titleColor={colors.secondary}
+            tintColor={lightGrey}
+            titleColor={lightGrey}
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true)

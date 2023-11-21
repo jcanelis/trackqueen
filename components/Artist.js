@@ -1,13 +1,10 @@
 import React from "react"
-import { Pressable, useWindowDimensions } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { Pressable, Text, useWindowDimensions } from "react-native"
+import { useNavigation, useTheme } from "@react-navigation/native"
 import { Image } from "expo-image"
 import PropTypes from "prop-types"
 
-// Paper
-import { useTheme, Text } from "react-native-paper"
-
-// Design
+// Custom
 import { blurhash, baseUnit } from "../constants/Base"
 
 const Artist = ({ item }) => {
@@ -47,11 +44,14 @@ const Artist = ({ item }) => {
           accessibilityLabel={item.name}
         />
         <Text
-          variant={"labelSmall"}
           numberOfLines={1}
           ellipsizeMode={"tail"}
           style={{
-            color: colors.tertiary,
+            fontSize: baseUnit * 1.5,
+            lineHeight: baseUnit * 4,
+            fontWeight: 600,
+            letterSpacing: -0.1,
+            color: colors.text,
             opacity: 0.75,
           }}
         >

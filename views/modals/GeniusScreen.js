@@ -1,24 +1,43 @@
-import React from "react"
-import { View } from "react-native"
+import React, { useContext, useEffect } from "react"
+import { Text, useWindowDimensions, View } from "react-native"
+import { useTheme, useNavigation } from "@react-navigation/native"
+import { useHeaderHeight } from "@react-navigation/elements"
 import { FlashList } from "@shopify/flash-list"
+import { Image } from "expo-image"
 import PropTypes from "prop-types"
+
+// Context
+import SearchContext from "../../context/search"
 
 // Components
 import Annotation from "../../components/Annotation"
 
-// Paper
-import { useTheme, Text, TextInput } from "react-native-paper"
-
-// Context
-// import SearchContext from "../../context/search"
-
 // Design
-import { baseUnit } from "../../constants/Base"
+import { baseUnit, blurhash } from "../../constants/Base"
 
 function GeniusScreen({ route }) {
-  // const inputText = useContext(SearchContext)
+  const navigation = useNavigation()
   const { colors } = useTheme()
-  const [text, setText] = React.useState("")
+  const { width } = useWindowDimensions()
+  const headerHeight = useHeaderHeight()
+
+  // Context
+  const inputText = useContext(SearchContext)
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerBackground: () => (
+        <Image
+          source={route.params.data.spotifyArtistData.images[0].url}
+          placeholder={blurhash}
+          transition={250}
+          width={width}
+          height={headerHeight}
+          contentFit={"cover"}
+        />
+      ),
+    })
+  }, [colors, navigation, headerHeight, route.params, width])
 
   return (
     <View
@@ -28,30 +47,17 @@ function GeniusScreen({ route }) {
       }}
     >
       <FlashList
-        contentContainerStyle={{
-          paddingBottom: baseUnit * 8,
-        }}
+        automaticallyAdjustsScrollIndicatorInsets={true}
+        automaticallyAdjustContentInsets={true}
+        contentInsetAdjustmentBehavior={"automatic"}
+        contentInset={{ top: baseUnit * 2, bottom: baseUnit * 8 }}
         estimatedItemSize={route.params.data.annotations.length}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => <Annotation data={item} />}
         refreshing={false}
         data={route.params.data.annotations.filter(
-          (d) => text === "" || d.range.content.includes(text)
+          (d) => inputText === "" || d.range.content.includes(inputText)
         )}
-        ListHeaderComponent={
-          <View style={{ padding: baseUnit * 3 }}>
-            <TextInput
-              autoCapitalize={"none"}
-              maxLength={20}
-              numberOfLines={1}
-              label="Search Genius annotations"
-              value={text}
-              inputMode={"text"}
-              autoFocus={false}
-              onChangeText={(text) => setText(text)}
-            />
-          </View>
-        }
         ListEmptyComponent={
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -62,7 +68,7 @@ function GeniusScreen({ route }) {
                 fontSize: baseUnit * 2,
                 lineHeight: baseUnit * 3,
                 fontWeight: 400,
-                color: colors.tertiary,
+                color: colors.text,
                 opacity: 0.85,
               }}
             >

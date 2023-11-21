@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useWindowDimensions, View } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { useTheme, useNavigation } from "@react-navigation/native"
 import { FlashList } from "@shopify/flash-list"
 import { useQuery } from "@tanstack/react-query"
 import PropTypes from "prop-types"
@@ -18,9 +18,6 @@ import Header from "../../components/Header"
 import Loader from "../../components/Loader"
 import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
-
-// Paper
-import { useTheme } from "react-native-paper"
 
 // Design
 import { blurhash, baseUnit } from "../../constants/Base"
@@ -59,8 +56,11 @@ function ArtistTracksScreen({ route }) {
       }}
     >
       <FlashList
-        contentContainerStyle={{ paddingBottom: baseUnit * 8 }}
         estimatedItemSize={10}
+        automaticallyAdjustsScrollIndicatorInsets={true}
+        automaticallyAdjustContentInsets={true}
+        contentInset={{ bottom: baseUnit * 2 }}
+        scrollToOverflowEnabled={true}
         ListHeaderComponent={
           <View style={{ flex: 1 }}>
             <Image
@@ -90,7 +90,7 @@ function ArtistTracksScreen({ route }) {
           </View>
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 2, alignItems: "center" }}>
+          <View style={{ margin: baseUnit * 6 }}>
             <SpotifyButton
               text={"Play on Spotify"}
               func={() => {
