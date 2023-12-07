@@ -8,6 +8,9 @@ import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
 
+// Design
+import { baseUnit } from "../constants/Base"
+
 export default function Musixmatch({ data }) {
   const { dark } = useTheme()
   const [assets, error] = useAssets([
@@ -28,6 +31,7 @@ export default function Musixmatch({ data }) {
           }}
           style={({ pressed }) => [
             {
+              marginTop: baseUnit * 2,
               opacity: pressed ? 0.7 : 1,
             },
           ]}
@@ -46,10 +50,3 @@ export default function Musixmatch({ data }) {
 Musixmatch.propTypes = {
   data: PropTypes.object,
 }
-
-// This may be required for the Musixmatch API terms of service
-// <Image
-// source={{
-// uri: data.lyricsData.message.body.lyrics.pixel_tracking_url,
-// }}
-// />

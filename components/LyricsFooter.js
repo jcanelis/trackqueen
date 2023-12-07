@@ -4,11 +4,12 @@ import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
 // Expo
+import { Image } from "expo-image"
 import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
 
 // Design
-import { baseUnit, GOLD } from "../constants/Base"
+import { baseUnit, blurhash, GOLD, verticalRhythm } from "../constants/Base"
 
 // Components
 import Musixmatch from "./Musixmatch"
@@ -84,6 +85,39 @@ const LyricsFooter = ({ data, hasLyrics }) => {
             </Text>
 
             <Musixmatch data={data} />
+
+            <Image
+              accessibilityLabel={"Muixmatch pixel tracking"}
+              source={data.lyricsData.message.body.lyrics.pixel_tracking_url}
+              height={1}
+              width={1}
+              style={{ opacity: 0 }}
+              placeholder={blurhash}
+            />
+
+            <Text
+              style={{
+                fontSize: baseUnit * 1.6,
+                lineHeight: verticalRhythm * 5,
+                fontWeight: 600,
+                color: colors.text,
+                opacity: 0.65,
+              }}
+            >
+              Musixmatch copyright disclaimer:
+            </Text>
+
+            <Text
+              style={{
+                fontSize: baseUnit * 1.6,
+                lineHeight: verticalRhythm * 5,
+                fontWeight: 500,
+                color: colors.text,
+                opacity: 0.5,
+              }}
+            >
+              {`“${data.lyricsData.message.body.lyrics.lyrics_copyright}”`}
+            </Text>
           </View>
         </>
       )}
