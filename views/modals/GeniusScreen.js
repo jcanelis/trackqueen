@@ -53,7 +53,9 @@ function GeniusScreen({ route }) {
         contentInset={{ top: baseUnit * 2, bottom: baseUnit * 8 }}
         estimatedItemSize={route.params.data.annotations.length}
         keyExtractor={(item, index) => index}
-        renderItem={({ item }) => <Annotation data={item} />}
+        renderItem={({ item }) => (
+          <Annotation key={item.annotations[0].id} data={item} />
+        )}
         refreshing={false}
         data={route.params.data.annotations.filter(
           (d) => inputText === "" || d.range.content.includes(inputText)
