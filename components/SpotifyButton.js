@@ -36,13 +36,9 @@ export default function SpotifyButton({ func, text }) {
                 height: baseUnit * 7,
                 borderWidth: dark ? 1 : 0,
                 borderColor: colors.border,
-                backgroundColor: dark ? "transparent" : colors.text,
-                borderRadius: baseUnit * 7,
+                backgroundColor: "rgba(255,255,255,0.1)",
+                borderRadius: baseUnit * 8,
                 opacity: pressed ? 0.7 : 1,
-                shadowOffset: { width: 3, height: 3 },
-                shadowColor: "#555",
-                shadowOpacity: dark ? 0 : 0.3,
-                shadowRadius: 5,
               },
             ]}
           >

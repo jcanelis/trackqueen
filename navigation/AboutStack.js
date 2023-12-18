@@ -144,22 +144,6 @@ const AboutStack = () => {
           headerLargeTitle: true,
           headerLargeTitleStyle: { color: colors.text },
           headerBlurEffect: "dark",
-          headerBackground: () => (
-            <HeaderHeightContext.Consumer>
-              {(headerHeight) => {
-                return (
-                  <Image
-                    source={assets[0].localUri}
-                    placeholder={blurhash}
-                    transition={250}
-                    width={width}
-                    height={headerHeight - baseUnit}
-                    contentFit={"cover"}
-                  />
-                )
-              }}
-            </HeaderHeightContext.Consumer>
-          ),
         }}
       />
 

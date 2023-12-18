@@ -67,6 +67,20 @@ const Notes = ({ data }) => {
         {data.description}
       </Text>
 
+      {data.description !== "No track description found from Genius.com." && (
+        <Text
+          style={{
+            fontSize: baseUnit * 1.9,
+            lineHeight: verticalRhythm * 5,
+            fontWeight: 500,
+            color: colors.text,
+            opacity: 0.75,
+          }}
+        >
+          Source: Genius.com
+        </Text>
+      )}
+
       <Chip
         text={`Ask ChatGPT about this song.`}
         action={() => {
