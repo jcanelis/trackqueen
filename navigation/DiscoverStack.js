@@ -1,15 +1,12 @@
 import React, { useContext } from "react"
-import { useWindowDimensions } from "react-native"
 
 // React Navigation
 import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
-import { HeaderHeightContext } from "@react-navigation/elements"
 
 // Expo
 import { useAssets } from "expo-asset"
-import { Image } from "expo-image"
 
 // Context
 import SpotifyContext from "../context/spotify"
@@ -28,12 +25,8 @@ import GPTStack from "./GPTStack"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
-// Design
-import { baseUnit, blurhash } from "../constants/Base"
-
 const DiscoverStack = () => {
   const { colors, dark } = useTheme()
-  const { width } = useWindowDimensions()
   const { currentlyPlaying } = useContext(SpotifyContext)
 
   // Local asset with Expo useAssets
@@ -112,22 +105,6 @@ const DiscoverStack = () => {
           headerLargeTitle: true,
           headerLargeTitleStyle: { color: colors.text },
           headerBlurEffect: "dark",
-          headerBackground: () => (
-            <HeaderHeightContext.Consumer>
-              {(headerHeight) => {
-                return (
-                  <Image
-                    source={assets[0].localUri}
-                    placeholder={blurhash}
-                    transition={250}
-                    width={width}
-                    height={headerHeight - baseUnit}
-                    contentFit={"cover"}
-                  />
-                )
-              }}
-            </HeaderHeightContext.Consumer>
-          ),
         }}
       />
 

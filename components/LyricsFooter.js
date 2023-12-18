@@ -9,7 +9,7 @@ import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
 
 // Design
-import { baseUnit, blurhash, GOLD, verticalRhythm } from "../constants/Base"
+import { baseUnit, blurhash, GOLD } from "../constants/Base"
 
 // Components
 import Musixmatch from "./Musixmatch"
@@ -52,11 +52,11 @@ const LyricsFooter = ({ data, hasLyrics }) => {
               margin: baseUnit * 3,
               padding: baseUnit * 3,
               paddingTop: baseUnit * 3,
-              paddingBottom: baseUnit * 3,
+              paddingBottom: baseUnit * 2,
               textAlign: "left",
               backgroundColor: "rgba(184, 155, 128, 0.2)",
               borderRadius: baseUnit * 2,
-              gap: baseUnit * 2,
+              gap: baseUnit,
             }}
           >
             <Text
@@ -94,30 +94,6 @@ const LyricsFooter = ({ data, hasLyrics }) => {
               style={{ opacity: 0 }}
               placeholder={blurhash}
             />
-
-            <Text
-              style={{
-                fontSize: baseUnit * 1.6,
-                lineHeight: verticalRhythm * 5,
-                fontWeight: 600,
-                color: colors.text,
-                opacity: 0.65,
-              }}
-            >
-              Musixmatch copyright disclaimer:
-            </Text>
-
-            <Text
-              style={{
-                fontSize: baseUnit * 1.6,
-                lineHeight: verticalRhythm * 5,
-                fontWeight: 500,
-                color: colors.text,
-                opacity: 0.5,
-              }}
-            >
-              {`“${data.lyricsData.message.body.lyrics.lyrics_copyright}”`}
-            </Text>
           </View>
         </>
       )}

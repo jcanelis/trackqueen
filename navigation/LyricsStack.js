@@ -20,8 +20,8 @@ import LyricsScreen from "../views/LyricsScreen"
 import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
-// Design
-// import { GOLD } from "../constants/Base"
+// Documentation for React Navigation's headerSearchBarOptions
+// https://reactnavigation.org/docs/native-stack-navigator/#headersearchbaroptions
 
 const LyricsStack = () => {
   const { dark, colors } = useTheme()
@@ -120,9 +120,6 @@ const LyricsStack = () => {
             headerTransparent: true,
             headerBlurEffect: "dark",
             headerSearchBarOptions: {
-              hideNavigationBar: true,
-              hideWhenScrolling: false,
-              obscureBackground: true,
               placeholder: "Search Genius.com annotations",
               barTintColor: dark ? colors.background : "#cccccc",
               textColor: colors.text,

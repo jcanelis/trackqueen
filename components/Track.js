@@ -26,7 +26,7 @@ const Track = ({ artists, coverArt, link, title }) => {
           paddingRight: baseUnit * 5,
           paddingBottom: verticalRhythm * 4,
           paddingLeft: baseUnit * 3,
-          opacity: pressed ? 0.7 : 1,
+          backgroundColor: pressed ? colors.card : colors.background,
         },
       ]}
     >
