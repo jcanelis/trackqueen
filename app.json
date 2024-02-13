@@ -8,7 +8,7 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": ["ios"],
+    "platforms": ["ios", "android"],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "privacy": "hidden",
     "owner": "jcanelis",
