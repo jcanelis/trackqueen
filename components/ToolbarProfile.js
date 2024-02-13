@@ -20,11 +20,7 @@ const ToolbarProfile = () => {
         },
       ]}
     >
-      <Ionicons
-        name={"ios-person-outline"}
-        color={GOLD}
-        size={baseUnit * 3.4}
-      />
+      <Ionicons name={"person-outline"} color={GOLD} size={baseUnit * 3.4} />
     </Pressable>
   )
 }

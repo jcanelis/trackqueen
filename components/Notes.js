@@ -92,7 +92,7 @@ const Notes = ({ data }) => {
 
       {data.geniusData && data.geniusData.result.url && (
         <Button
-          title="View this track on Genius"
+          title="View on Genius"
           color={GOLD}
           onPress={() => {
             _handlePressButtonAsync(data.geniusData.result.url)
