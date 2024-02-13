@@ -23,7 +23,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "130",
+      "buildNumber": "131",
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
@@ -39,7 +39,7 @@
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
       }
     },
-    "plugins": ["expo-build-properties"],
+    "plugins": ["expo-build-properties", "expo-secure-store"],
     "runtimeVersion": {
       "policy": "sdkVersion"
     },

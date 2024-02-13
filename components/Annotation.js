@@ -128,11 +128,7 @@ const Annotation = ({ data }) => {
                 alignItems: "center",
               }}
             >
-              <Ionicons
-                name={"ios-heart-outline"}
-                color={colors.text}
-                size={26}
-              />
+              <Ionicons name={"heart-outline"} color={colors.text} size={26} />
               <Text
                 style={{
                   marginLeft: baseUnit / 2,

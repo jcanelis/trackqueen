@@ -32,16 +32,16 @@ const AppTabs = () => {
 
           if (route.name === "About") {
             iconName = focused
-              ? "ios-information-circle"
-              : "ios-information-circle-outline"
+              ? "information-circle"
+              : "information-circle-outline"
           } else if (route.name === "Lyrics") {
             iconName = focused ? "musical-notes" : "musical-notes-outline"
           } else if (route.name === "Comments") {
-            iconName = focused ? "ios-chatbubbles" : "ios-chatbubbles-outline"
+            iconName = focused ? "chatbubbles" : "chatbubbles-outline"
           } else if (route.name === "Videos") {
-            iconName = focused ? "ios-videocam" : "ios-videocam-outline"
+            iconName = focused ? "videocam" : "videocam-outline"
           } else if (route.name === "Discover") {
-            iconName = focused ? "ios-git-network-outline" : "ios-git-network"
+            iconName = focused ? "git-network-outline" : "git-network"
           }
 
           return <Ionicons name={iconName} size={27} color={color} />

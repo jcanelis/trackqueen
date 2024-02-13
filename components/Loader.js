@@ -22,7 +22,7 @@ export default function Loader() {
     >
       <LottieView
         source={require("../assets/animation.json")}
-        style={{ width: width / 1.6, height: width / 1.6 }}
+        style={{ width: width / 2, height: width / 2 }}
         autoPlay={true}
         loop={true}
       />

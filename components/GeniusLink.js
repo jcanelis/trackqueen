@@ -43,7 +43,7 @@ const GeniusLink = ({ data }) => {
             </Text>
 
             <Ionicons
-              name={"ios-chevron-forward"}
+              name={"chevron-forward"}
               color={GOLD}
               size={baseUnit * 3}
             />

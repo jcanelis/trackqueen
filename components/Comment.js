@@ -49,7 +49,7 @@ const Comment = ({ data }) => {
       >
         <Ionicons
           style={{ opacity: 0.65 }}
-          name={"ios-heart-outline"}
+          name={"heart-outline"}
           color={colors.text}
           size={22}
         />

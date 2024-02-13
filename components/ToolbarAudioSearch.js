@@ -20,7 +20,7 @@ const ToolbarAudioSearch = () => {
         },
       ]}
     >
-      <Ionicons name={"ios-pulse-outline"} color={GOLD} size={baseUnit * 3.4} />
+      <Ionicons name={"pulse-outline"} color={GOLD} size={baseUnit * 3.4} />
     </Pressable>
   )
 }
