@@ -8,7 +8,6 @@ import {
 } from "react-native"
 import { useNavigation, useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import LottieView from "lottie-react-native"
 
 // Expo
 import { Audio } from "expo-av"
@@ -47,6 +46,7 @@ function SoundCheckScreen() {
   // https://docs.expo.dev/versions/latest/sdk/asset/
   const [assets, error] = useAssets([
     require("../../assets/brands/acrcloud/ACRCloud-white.png"),
+    require("../../assets/loader.png"),
   ])
 
   // Get audio recording permissions
@@ -254,16 +254,12 @@ function SoundCheckScreen() {
                 }
           }
         >
-          <LottieView
-            loop
-            autoPlay={false}
-            ref={animationRef}
-            source={require("../../assets/animation.json")}
-            style={{
-              width: width / 2.4,
-              height: width / 2.4,
-            }}
-          />
+          {assets && (
+            <Image
+              style={{ width: width / 2.4, height: width / 2.4 }}
+              source={assets[1].localUri}
+            />
+          )}
         </Pressable>
       </View>
 

@@ -41,8 +41,6 @@
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.10",
     "expo-web-browser": "~12.8.2",
-    "lottie-ios": "4.3.3",
-    "lottie-react-native": "6.5.1",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

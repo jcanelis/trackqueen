@@ -1,7 +1,10 @@
 import React from "react"
 import { View, useWindowDimensions, Text } from "react-native"
 import { useTheme } from "@react-navigation/native"
-import LottieView from "lottie-react-native"
+
+// Expo
+import { useAssets } from "expo-asset"
+import { Image } from "expo-image"
 
 // Design
 import { baseUnit } from "../constants/Base"
@@ -9,6 +12,15 @@ import { baseUnit } from "../constants/Base"
 export default function Loader() {
   const { width } = useWindowDimensions()
   const { colors } = useTheme()
+  const [assets, error] = useAssets([require("../assets/loader.png")])
+
+  if (error) {
+    console.log(error)
+  }
+
+  if (!assets) {
+    return null
+  }
 
   return (
     <View
@@ -20,11 +32,9 @@ export default function Loader() {
         backgroundColor: colors.background,
       }}
     >
-      <LottieView
-        source={require("../assets/animation.json")}
+      <Image
         style={{ width: width / 2, height: width / 2 }}
-        autoPlay={true}
-        loop={true}
+        source={assets[0].localUri}
       />
       <Text style={{ textAlign: "center", color: colors.text, opacity: 0.7 }}>
         Loading content...
