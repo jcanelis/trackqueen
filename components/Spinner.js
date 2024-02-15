@@ -11,12 +11,13 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated"
 
-// Lottie React Native
-// https://github.com/lottie-react-native/lottie-react-native
-import LottieView from "lottie-react-native"
+// Expo
+import { useAssets } from "expo-asset"
+import { Image } from "expo-image"
 
 export default function Spinner() {
   const { width } = useWindowDimensions()
+  const [assets, error] = useAssets([require("../assets/loader.png")])
   const randomWidth = useSharedValue(width / 1.2)
   const config = {
     duration: 500,
@@ -30,6 +31,14 @@ export default function Spinner() {
     }
   })
 
+  if (error) {
+    console.log(error)
+  }
+
+  if (!assets) {
+    return null
+  }
+
   return (
     <View
       style={{
@@ -42,7 +51,6 @@ export default function Spinner() {
         entering={BounceIn.easing(Easing.bezier(0.2, 0.01, 0, 1))}
         style={[
           {
-            flex: 1,
             width: width / 1.2,
             height: width / 1.2,
           },
@@ -52,6 +60,8 @@ export default function Spinner() {
         <Pressable
           style={{
             flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
           }}
           onPress={() => {
             function getRandomInt(min, max) {
@@ -65,11 +75,9 @@ export default function Spinner() {
             randomWidth.value = getRandomInt(88, width - 64)
           }}
         >
-          <LottieView
-            source={require("../assets/animation.json")}
-            style={{ flex: 1 }}
-            autoPlay={true}
-            loop={true}
+          <Image
+            style={{ width: width / 2, height: width / 2 }}
+            source={assets[0].localUri}
           />
         </Pressable>
       </Animated.View>
