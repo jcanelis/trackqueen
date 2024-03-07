@@ -1,5 +1,18 @@
 {
   "build": {
+    "base": {
+      "node": "20.11.0",
+      "yarn": "1.22.19",
+      "env": {
+        "EXAMPLE_ENV": "example value"
+      },
+      "ios": {
+        "image": "latest",
+        "env": {
+          "PLATFORM": "ios"
+        }
+      }
+    },
     "development": {
       "developmentClient": true,
       "distribution": "internal",
