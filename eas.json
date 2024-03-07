@@ -14,6 +14,7 @@
       }
     },
     "development": {
+      "extends": "base",
       "developmentClient": true,
       "distribution": "internal",
       "cache": {
@@ -21,6 +22,7 @@
       }
     },
     "development-simulator": {
+      "extends": "base",
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
@@ -28,6 +30,7 @@
       }
     },
     "preview": {
+      "extends": "base",
       "channel": "preview",
       "distribution": "internal",
       "cache": {
@@ -35,6 +38,7 @@
       }
     },
     "production": {
+      "extends": "base",
       "channel": "main",
       "cache": {
         "key": "random-value-here"
