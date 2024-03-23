@@ -2,7 +2,7 @@
   "expo": {
     "name": "TrackQueen",
     "slug": "tq22",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "description": "Learn more about your music.",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "133",
+      "buildNumber": "134",
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
