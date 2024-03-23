@@ -73,7 +73,7 @@ export default async function Identify(uri, signal) {
     }
 
     let response = await fetch(
-      "http://" + options.host + options.endpoint,
+      "https://" + options.host + options.endpoint,
       postOptions
     )
     let responseJSON = await response.json()
