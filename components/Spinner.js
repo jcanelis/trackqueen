@@ -1,33 +1,46 @@
-import React from "react"
-import { Pressable, useWindowDimensions, View } from "react-native"
+import React, { useEffect } from "react"
+import { Pressable, View } from "react-native"
 
 // React Native Reanimated
 // https://docs.swmansion.com/react-native-reanimated/
 import Animated, {
-  BounceIn,
-  Easing,
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  withRepeat,
 } from "react-native-reanimated"
 
 // Expo
 import { useAssets } from "expo-asset"
-import { Image } from "expo-image"
 
 export default function Spinner() {
-  const { width } = useWindowDimensions()
+  // const { width } = useWindowDimensions()
   const [assets, error] = useAssets([require("../assets/loader.png")])
-  const randomWidth = useSharedValue(width / 1.2)
-  const config = {
-    duration: 500,
-    easing: Easing.bezier(0.5, 0.01, 0, 1),
-  }
 
+  // Timing and easing config
+  // const config = {
+  //   duration: 4000,
+  //   easing: Easing.bezier(0.5, 0.01, 0, 1),
+  // }
+
+  const translateX = useSharedValue(0)
+
+  useEffect(() => {
+    translateX.value = withRepeat(
+      withTiming(720, {
+        duration: 13000,
+      }),
+      0,
+      true
+    )
+  }, [translateX])
+
+  // Style object
   const style = useAnimatedStyle(() => {
     return {
-      width: withTiming(randomWidth.value, config),
-      height: withTiming(randomWidth.value, config),
+      width: 240,
+      height: 240,
+      transform: [{ rotate: `${translateX.value}deg` }],
     }
   })
 
@@ -48,37 +61,18 @@ export default function Spinner() {
       }}
     >
       <Animated.View
-        entering={BounceIn.easing(Easing.bezier(0.2, 0.01, 0, 1))}
-        style={[
-          {
-            width: width / 1.2,
-            height: width / 1.2,
-          },
-          style,
-        ]}
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         <Pressable
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
           onPress={() => {
-            function getRandomInt(min, max) {
-              // Value needs to keep the size smaller than the screen
-              // Value also needs to be large enough for a user tap
-              min = Math.ceil(min)
-              max = Math.floor(max)
-              return Math.floor(Math.random() * (max - min) + min)
-            }
-
-            randomWidth.value = getRandomInt(88, width - 64)
+            console.log("hi")
           }}
         >
-          <Image
-            style={{ width: width / 2, height: width / 2 }}
-            source={assets[0].localUri}
-          />
+          <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
         </Pressable>
       </Animated.View>
     </View>
