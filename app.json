@@ -23,7 +23,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "134",
+      "buildNumber": "135",
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
@@ -32,14 +32,15 @@
       },
       "usesIcloudStorage": false,
       "usesAppleSignIn": false,
-      "accessesContactNotes": false
+      "accessesContactNotes": false,
+      "jsEngine": "jsc"
     },
     "extra": {
       "eas": {
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
       }
     },
-    "plugins": ["expo-build-properties", "expo-secure-store"],
+    "plugins": ["expo-build-properties", "expo-secure-store", "expo-asset"],
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
