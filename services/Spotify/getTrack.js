@@ -20,6 +20,7 @@ const SpotifyGetTrack = async (authToken, id) => {
 
     return responseJSON
   } catch (error) {
+    console.error(error)
     return {
       name: null,
       artists: [{ name: null }],

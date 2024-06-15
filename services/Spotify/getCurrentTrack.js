@@ -38,6 +38,7 @@ const SpotifyCurrentTrack = async (authToken, signal) => {
 
     return responseJSON.item
   } catch (error) {
+    console.error(error)
     return {
       name: null,
       artists: [{ name: null }],

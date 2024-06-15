@@ -104,10 +104,6 @@ function Header({ copy, func, type, buttonTitle, border }) {
   )
 }
 
-Header.defaultProps = {
-  border: true,
-}
-
 Header.propTypes = {
   buttonTitle: PropTypes.string,
   type: PropTypes.string,
