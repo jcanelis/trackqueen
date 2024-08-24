@@ -126,7 +126,7 @@ function LoadingScreen() {
         <Spinner />
         <Wrapper>
           <Heading>Play a song with Spotify</Heading>
-          <SubHeading>Pull down to refresh.</SubHeading>
+          <SubHeading>Pull down to refresh</SubHeading>
           <SpotifyButton
             text={"Open Spotify"}
             func={() => {
