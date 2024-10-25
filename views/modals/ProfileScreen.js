@@ -171,7 +171,9 @@ function ProfileScreen() {
                   copy={`${data.recentTracks.length} tracks`}
                   buttonTitle={"Open Spotify"}
                   func={() => {
-                    Linking.openURL("https://open.spotify.com")
+                    Linking.openURL(
+                      "https://open.spotify.com/collection/tracks"
+                    )
                   }}
                 />
               </>

@@ -39,14 +39,18 @@ const ArtistListScreen = ({ route }) => {
             type={"spotify"}
             buttonTitle={`Open Spotify`}
             copy={"Similar artists"}
-            func={() => Linking.openURL("https://open.spotify.com")}
+            func={() =>
+              Linking.openURL("https://open.spotify.com/collection/tracks")
+            }
           />
         }
         ListFooterComponent={
           <View style={{ margin: baseUnit * 4 }}>
             <SpotifyButton
               text={"Open Spotify"}
-              func={() => Linking.openURL("https://open.spotify.com")}
+              func={() =>
+                Linking.openURL("https://open.spotify.com/collection/tracks")
+              }
             />
           </View>
         }
