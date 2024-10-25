@@ -67,11 +67,7 @@ export default function Spinner() {
           justifyContent: "center",
         }}
       >
-        <Pressable
-          onPress={() => {
-            console.log("hi")
-          }}
-        >
+        <Pressable>
           <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
         </Pressable>
       </Animated.View>

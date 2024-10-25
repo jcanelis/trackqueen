@@ -130,7 +130,7 @@ function LoadingScreen() {
           <SpotifyButton
             text={"Open Spotify"}
             func={() => {
-              Linking.openURL("https://open.spotify.com")
+              Linking.openURL("https://open.spotify.com/collection/tracks")
             }}
           />
         </Wrapper>
