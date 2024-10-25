@@ -41,7 +41,9 @@ function TrackListScreen({ route, navigation }) {
             buttonTitle={`View on Spotify`}
             type={"spotify"}
             copy={`${route.params.tracks.length} tracks`}
-            func={() => Linking.openURL("https://open.spotify.com")}
+            func={() =>
+              Linking.openURL("https://open.spotify.com/collection/tracks")
+            }
             border={false}
           />
         }
@@ -49,7 +51,9 @@ function TrackListScreen({ route, navigation }) {
           <View style={{ margin: baseUnit * 4 }}>
             <SpotifyButton
               text={"Open Spotify"}
-              func={() => Linking.openURL("https://open.spotify.com")}
+              func={() =>
+                Linking.openURL("https://open.spotify.com/collection/tracks")
+              }
             />
           </View>
         }
