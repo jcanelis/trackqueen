@@ -7,8 +7,8 @@ import { useAssets } from "expo-asset"
 
 // React Native Reanimated
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
   withRepeat,
 } from "react-native-reanimated"
@@ -20,6 +20,8 @@ export default function Loader() {
   const { width } = useWindowDimensions()
   const { colors } = useTheme()
   const [assets, error] = useAssets([require("../assets/loader.png")])
+
+  // Setup animation
   const translateX = useSharedValue(0)
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function Loader() {
     )
   }, [translateX])
 
-  // Style object
+  // Dynamic style for animated view
   const style = useAnimatedStyle(() => {
     return {
       width: 240,
@@ -64,14 +66,13 @@ export default function Loader() {
           width: width / 2,
           height: width / 2,
           alignItems: "center",
-          backgroundColor: "pink",
           justifyContent: "center",
         }}
       >
         <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
       </Animated.View>
 
-      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.7 }}>
+      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.75 }}>
         Loading content...
       </Text>
     </View>
