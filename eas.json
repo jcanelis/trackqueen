@@ -1,4 +1,7 @@
 {
+  "cli": {
+    "appVersionSource": "remote"
+  },
   "build": {
     "base": {
       "node": "20.10.0",
@@ -38,6 +41,7 @@
       }
     },
     "production": {
+      "autoIncrement": true,
       "extends": "base",
       "channel": "main",
       "cache": {
