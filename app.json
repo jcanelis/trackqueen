@@ -8,14 +8,14 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": ["ios", "android"],
+    "platforms": ["ios"],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
-    "privacy": "hidden",
     "owner": "jcanelis",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover"
     },
+    "jsEngine": "hermes",
     "updates": {
       "enabled": true,
       "fallbackToCacheTimeout": 0,
@@ -34,8 +34,7 @@
       },
       "usesIcloudStorage": false,
       "usesAppleSignIn": false,
-      "accessesContactNotes": false,
-      "jsEngine": "jsc"
+      "accessesContactNotes": false
     },
     "extra": {
       "eas": {
@@ -43,9 +42,6 @@
       }
     },
     "plugins": ["expo-build-properties", "expo-secure-store", "expo-asset"],
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
-    "android": {}
+    "runtimeVersion": "1.0.0"
   }
 }
