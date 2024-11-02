@@ -8,7 +8,6 @@
     "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
-    "platforms": ["ios, android"],
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
     "splash": {
@@ -41,7 +40,6 @@
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
       }
     },
-    "android": {},
     "plugins": ["expo-build-properties", "expo-secure-store", "expo-asset"],
     "runtimeVersion": "1.0.0"
   }
