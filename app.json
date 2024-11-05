@@ -16,6 +16,9 @@
       "backgroundColor": "#000000"
     },
     "jsEngine": "hermes",
+    "ios": {
+      "jsEngine": "hermes"
+    },
     "updates": {
       "enabled": true,
       "fallbackToCacheTimeout": 0,
