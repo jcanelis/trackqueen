@@ -11,8 +11,9 @@
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover"
+      "image": "./assets/tile.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "jsEngine": "hermes",
     "updates": {
