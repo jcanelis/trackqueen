@@ -35,7 +35,7 @@ TrackQueen is built using:
 
 1. Clone this repo: `git clone https://github.com/jcanelis/trackqueen.git`
 2. Install [NVM](https://github.com/nvm-sh/nvm) `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash`
-3. Set Node version: `nvm use 20.10.0`
+3. Set Node version: `nvm use 22.11.0`
 4. Install dependencies by running `yarn` within the repo.
 5. Install Expo CLI: `yarn global add expo-cli`
 6. Start development: `yarn start` or `npx expo start`
