@@ -43,7 +43,7 @@ export default function SpotifyButton({ func, text }) {
             ]}
           >
             <Image
-              style={{ marginRight: baseUnit * 2 }}
+              style={{ marginRight: baseUnit * 1 }}
               width={baseUnit * 4}
               height={baseUnit * 4}
               source={assets[0].localUri}
