@@ -11,7 +11,7 @@
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
     "splash": {
-      "image": "./assets/images/ios-light.png",
+      "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },

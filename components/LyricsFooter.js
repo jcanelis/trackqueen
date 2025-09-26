@@ -46,7 +46,6 @@ const LyricsFooter = ({ data, hasLyrics }) => {
               _handlePressButtonAsync(data.musixMatchTrack.track_share_url)
             }}
           />
-
           <View
             style={{
               margin: baseUnit * 3,
@@ -59,33 +58,7 @@ const LyricsFooter = ({ data, hasLyrics }) => {
               gap: baseUnit,
             }}
           >
-            <Text
-              style={{
-                fontSize: baseUnit * 2.2,
-                lineHeight: baseUnit * 3,
-                fontWeight: 600,
-                color: colors.text,
-              }}
-            >
-              Where are the rest of the lyrics?
-            </Text>
-
-            <Text
-              style={{
-                fontSize: baseUnit * 2,
-                lineHeight: baseUnit * 3,
-                fontWeight: 400,
-                color: colors.text,
-                opacity: 0.65,
-              }}
-            >
-              Displaying lyrics requires a license. We are in contact with
-              Musixmatch to obtain full lyrics access with proper licensing
-              coverage.
-            </Text>
-
             <Musixmatch data={data} />
-
             <Image
               accessibilityLabel={"Muixmatch pixel tracking"}
               source={data.lyricsData.message.body.lyrics.pixel_tracking_url}
