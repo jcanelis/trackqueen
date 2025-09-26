@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "description": "Learn more about your music.",
     "scheme": "tq22",
-    "icon": "./assets/images/ios-light.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
