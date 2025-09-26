@@ -2,7 +2,7 @@
   "expo": {
     "name": "TrackQueen",
     "slug": "tq22",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "orientation": "portrait",
     "description": "Learn more about your music.",
     "icon": "./assets/icon.png",
@@ -15,17 +15,11 @@
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },
-    "jsEngine": "hermes",
     "ios": {
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio",
-          "fetch",
-          "audio",
-          "fetch"
-        ],
+        "UIBackgroundModes": ["audio", "fetch", "audio", "fetch"],
         "NSMicrophoneUsageDescription": "Enable the microphone to find songs using nearby audio.",
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -41,9 +35,7 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "extra": {
       "eas": {
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
