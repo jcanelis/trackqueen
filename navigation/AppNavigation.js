@@ -31,9 +31,9 @@ const AppNavigation = () => (
           options={{
             presentation: "modal",
             headerShown: false,
-            headerTransparent: true,
-            headerLargeTitle: false,
-            headerBlurEffect: "systemChromeMaterialDark",
+            //headerTransparent: true,
+            // headerLargeTitle: false,
+            // headerBlurEffect: "systemChromeMaterialDark",
           }}
         />
         <Stack.Screen
@@ -41,10 +41,6 @@ const AppNavigation = () => (
           component={SoundCheckScreen}
           options={{
             presentation: "modal",
-            headerShown: true,
-            headerTransparent: true,
-            headerLargeTitle: true,
-            headerBlurEffect: "systemChromeMaterialDark",
           }}
         />
       </Stack.Navigator>

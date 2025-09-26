@@ -27,56 +27,15 @@ const VideoStack = () => {
         name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
         component={VideoScreen}
         options={{
-          animation: "none",
-          headerShown: true,
-          headerLargeTitle: true,
-          headerTransparent: true,
-          headerLargeTitleShadowVisible: true,
-          headerTintColor: colors.text,
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-          headerLargeTitleStyle: { color: colors.text },
           headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />
-      <Stack.Group
-        screenOptions={{
-          headerShown: true,
-          headerBackTitle: "Back",
-          headerLargeTitle: true,
-          headerTransparent: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
-      >
-        <Stack.Screen
-          name={currentlyPlaying.artist}
-          component={BioScreen}
-          options={{
-            headerTintColor: colors.text,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
-        />
+      <Stack.Group>
+        <Stack.Screen name={currentlyPlaying.artist} component={BioScreen} />
         <Stack.Screen
           name={`${currentlyPlaying.track} YouTube videos`}
           component={VideoListScreen}
-          options={{
-            headerShown: true,
-            headerBackTitle: "Back",
-            headerLargeTitle: true,
-            headerTintColor: colors.text,
-            headerTransparent: true,
-            headerLargeTitleStyle: { color: colors.text },
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
         />
       </Stack.Group>
     </Stack.Navigator>

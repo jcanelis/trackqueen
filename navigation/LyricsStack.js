@@ -45,15 +45,6 @@ const LyricsStack = () => {
           component={LyricsScreen}
           options={{
             animation: "none",
-            headerShown: true,
-            headerLargeTitle: true,
-            headerTransparent: true,
-            headerLargeTitleShadowVisible: true,
-            headerTintColor: colors.text,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-            headerLargeTitleStyle: { color: colors.text },
             headerLeft: () => <ToolbarProfile />,
             headerRight: () => <ToolbarAudioSearch />,
           }}
@@ -65,14 +56,6 @@ const LyricsStack = () => {
           navigationKey={currentlyPlaying.track}
           options={{
             presentation: "modal",
-            headerShown: true,
-            headerTransparent: true,
-            headerTintColor: colors.text,
-            headerLargeTitle: false,
-            headerLargeTitleStyle: { color: colors.text },
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
           }}
         />
 

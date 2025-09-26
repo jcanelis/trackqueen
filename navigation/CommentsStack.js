@@ -46,14 +46,6 @@ const CommentsStack = () => {
         component={GPTResponse}
         options={{
           presentation: "modal",
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: false,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
         }}
       />
     </Stack.Navigator>
