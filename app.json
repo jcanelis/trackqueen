@@ -42,7 +42,15 @@
       }
     },
     "plugins": [
-      "expo-build-properties",
+      "react-native-bottom-tabs",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
       "expo-secure-store",
       "expo-asset",
       "expo-web-browser"
