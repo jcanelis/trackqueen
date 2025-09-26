@@ -17,20 +17,17 @@
     },
     "jsEngine": "hermes",
     "ios": {
-      "jsEngine": "hermes"
-    },
-    "updates": {
-      "enabled": true,
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["audio", "fetch"],
-        "NSMicrophoneUsageDescription": "Enable the microphone to find songs using nearby audio."
+        "UIBackgroundModes": [
+          "audio",
+          "fetch",
+          "audio",
+          "fetch"
+        ],
+        "NSMicrophoneUsageDescription": "Enable the microphone to find songs using nearby audio.",
+        "ITSAppUsesNonExemptEncryption": false
       },
       "entitlements": {
         "aps-environment": "development"
@@ -39,12 +36,25 @@
       "usesAppleSignIn": false,
       "accessesContactNotes": false
     },
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "extra": {
       "eas": {
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
       }
     },
-    "plugins": ["expo-build-properties", "expo-secure-store", "expo-asset"],
+    "plugins": [
+      "expo-build-properties",
+      "expo-secure-store",
+      "expo-asset",
+      "expo-web-browser"
+    ],
     "runtimeVersion": "1.0.0"
   }
 }
