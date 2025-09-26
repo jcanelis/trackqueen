@@ -5,13 +5,12 @@
     "version": "1.0.8",
     "orientation": "portrait",
     "description": "Learn more about your music.",
-    "icon": "./assets/icon.png",
     "scheme": "tq22",
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/ios-light.png",
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },
@@ -28,7 +27,12 @@
       },
       "usesIcloudStorage": false,
       "usesAppleSignIn": false,
-      "accessesContactNotes": false
+      "accessesContactNotes": false,
+      "icon": {
+        "dark": "./assets/images/ios-dark.png",
+        "light": "./assets/images/ios-light.png",
+        "tinted": "./assets/images/ios-tinted.png"
+      }
     },
     "updates": {
       "enabled": true,
