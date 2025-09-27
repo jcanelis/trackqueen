@@ -5,8 +5,8 @@
     "version": "1.0.8",
     "orientation": "portrait",
     "description": "Learn more about your music.",
-    "icon": "./assets/icon.png",
     "scheme": "tq22",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
@@ -16,6 +16,7 @@
       "backgroundColor": "#000000"
     },
     "ios": {
+      "icon": "./assets/app.icon",
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
@@ -42,7 +43,15 @@
       }
     },
     "plugins": [
-      "expo-build-properties",
+      "react-native-bottom-tabs",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
       "expo-secure-store",
       "expo-asset",
       "expo-web-browser"

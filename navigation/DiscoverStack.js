@@ -50,12 +50,6 @@ const DiscoverStack = () => {
           headerShown: true,
           headerLargeTitle: true,
           headerTransparent: true,
-          headerLargeTitleShadowVisible: true,
-          headerTintColor: colors.text,
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-          headerLargeTitleStyle: { color: colors.text },
           headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}

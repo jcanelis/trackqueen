@@ -2,8 +2,10 @@ import React from "react"
 
 // React Navigation
 import { useTheme } from "@react-navigation/native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-const Tabs = createBottomTabNavigator()
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { createNativeBottomTabNavigator } from "@bottom-tabs/react-navigation"
+// const Tabs = createBottomTabNavigator()
+const Tabs = createNativeBottomTabNavigator()
 
 // Expo
 import { BlurView } from "expo-blur"
@@ -27,47 +29,43 @@ const AppTabs = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         lazy: false,
-        tabBarIcon: ({ focused, color }) => {
-          let iconName
-
-          if (route.name === "About") {
-            iconName = focused
-              ? "information-circle"
-              : "information-circle-outline"
-          } else if (route.name === "Lyrics") {
-            iconName = focused ? "musical-notes" : "musical-notes-outline"
-          } else if (route.name === "Comments") {
-            iconName = focused ? "chatbubbles" : "chatbubbles-outline"
-          } else if (route.name === "Videos") {
-            iconName = focused ? "videocam" : "videocam-outline"
-          } else if (route.name === "Discover") {
-            iconName = focused ? "git-network-outline" : "git-network"
-          }
-
-          return <Ionicons name={iconName} size={27} color={color} />
-        },
-        tabBarActiveTintColor: colors.text,
-        tabBarInactiveTintColor: grey,
-        tabBarStyle: {
-          position: "absolute",
-          borderTopColor: "rgba(0,0,0,0.1)",
-        },
-        tabBarBackground: () => (
-          <BlurView
-            tint={dark ? "dark" : "default"}
-            style={{
-              height: 80,
-            }}
-            intensity={50}
-          />
-        ),
       })}
     >
-      <Tabs.Screen name="About" component={AboutStack} />
-      <Tabs.Screen name="Lyrics" component={LyricsStack} />
-      <Tabs.Screen name="Comments" component={CommentsStack} />
-      <Tabs.Screen name="Videos" component={VideoStack} />
-      <Tabs.Screen name="Discover" component={DiscoverStack} />
+      <Tabs.Screen
+        name="About"
+        component={AboutStack}
+        options={{
+          tabBarIcon: () => ({ sfSymbol: "info.circle" }),
+        }}
+      />
+      <Tabs.Screen
+        name="Lyrics"
+        component={LyricsStack}
+        options={{
+          tabBarIcon: () => ({ sfSymbol: "music.note.list" }),
+        }}
+      />
+      <Tabs.Screen
+        name="Comments"
+        component={CommentsStack}
+        options={{
+          tabBarIcon: () => ({ sfSymbol: "message.badge.waveform" }),
+        }}
+      />
+      <Tabs.Screen
+        name="Videos"
+        component={VideoStack}
+        options={{
+          tabBarIcon: () => ({ sfSymbol: "video" }),
+        }}
+      />
+      <Tabs.Screen
+        name="Discover"
+        component={DiscoverStack}
+        options={{
+          tabBarIcon: () => ({ sfSymbol: "infinity" }),
+        }}
+      />
     </Tabs.Navigator>
   )
 }

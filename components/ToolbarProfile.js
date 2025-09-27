@@ -14,11 +14,6 @@ const ToolbarProfile = () => {
       onPress={() => {
         navigation.navigate("ProfileStack")
       }}
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.2 : 1,
-        },
-      ]}
     >
       <Ionicons name={"person-outline"} color={GOLD} size={baseUnit * 3.4} />
     </Pressable>

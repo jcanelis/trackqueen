@@ -53,16 +53,16 @@ const AboutStack = () => {
         name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
         component={AboutScreen}
         options={{
-          animation: "none",
+          // animation: "none",
           headerShown: true,
           headerLargeTitle: true,
           headerTransparent: true,
-          headerLargeTitleShadowVisible: true,
-          headerTintColor: colors.text,
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-          headerLargeTitleStyle: { color: colors.text },
+          //headerLargeTitleShadowVisible: true,
+          //headerTintColor: colors.text,
+          // headerBlurEffect: dark
+          //  ? "systemChromeMaterialDark"
+          //: "systemUltraThinMaterial",
+          // headerLargeTitleStyle: { color: colors.text },
           headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
@@ -103,63 +103,24 @@ const AboutStack = () => {
         name="Credits"
         component={CreditsScreen}
         navigationKey={currentlyPlaying.track}
-        options={{
-          headerBackTitle:
-            currentlyPlaying.track.length > 20
-              ? "Back"
-              : currentlyPlaying.track,
-          headerTransparent: true,
-          headerLargeTitle: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerTintColor: colors.text,
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
       />
 
       <Stack.Screen
         name="Top Tracks"
         component={ArtistTracksScreen}
         navigationKey={currentlyPlaying.track}
-        options={{
-          presentation: "modal",
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
       />
 
       <Stack.Screen
         name={"Ask ChatGPT"}
         component={GPTStack}
         navigationKey={currentlyPlaying.track}
-        options={{
-          headerShown: true,
-          headerBackTitle: "Back",
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: "dark",
-        }}
       />
 
       <Stack.Screen
         name={"Powered by GPT-4 API"}
         component={GPTResponse}
         navigationKey={currentlyPlaying.track}
-        options={{
-          presentation: "modal",
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: false,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: "dark",
-        }}
       />
     </Stack.Navigator>
   )
