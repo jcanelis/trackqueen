@@ -14,12 +14,12 @@ TrackQueen uses several APIs to collect its content:
 - [Musixmatch](https://developer.musixmatch.com)
 - [YouTube](https://developers.google.com/youtube/v3)
 - [Genius](https://docs.genius.com)
-- [ChatGPT (Open AI)](https://platform.openai.com/docs/guides/gpt)
+- [ChatGPT (OpenAI)](https://platform.openai.com/docs/guides/gpt)
 - [ACRCloud](https://www.acrcloud.com/music-recognition/)
 
 ### Brand Guidelines
 
-For each API, it's important to follow the respective branding guidelines for how to properly display the content. [Spotify](https://developer.spotify.com/documentation/general/design-and-branding/), [ACRCloud](https://docs.acrcloud.com/faq/definition-of-terms#brand-exposure), [ChatGPT (Open AI)](https://openai.com/brand), [Musixmatch](https://about.musixmatch.com/brand-resources), and [YouTube](https://developers.google.com/youtube/terms/branding-guidelines) have documentation on how to display their brand assets. [Genius](https://genius.com/static/terms) doesn't appear to currently allow the display of their logo.
+For each API, it's important to follow the respective branding guidelines for how to properly display the content. [Spotify](https://developer.spotify.com/documentation/general/design-and-branding/), [ACRCloud](https://docs.acrcloud.com/faq/definition-of-terms#brand-exposure), [ChatGPT (OpenAI)](https://openai.com/brand), [Musixmatch](https://about.musixmatch.com/brand-resources), and [YouTube](https://developers.google.com/youtube/terms/branding-guidelines) have documentation on how to display their brand assets. [Genius](https://genius.com/static/terms) doesn't appear to currently allow the display of their logo.
 
 ## Development
 
