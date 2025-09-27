@@ -64,7 +64,7 @@ function LyricsScreen() {
   const ref = useRef(null)
   useScrollToTop(
     useRef({
-      scrollToTop: () => ref.current?.scrollToOffset({ offset: -143 }),
+      scrollToTop: () => ref.current?.scrollToOffset({ offset: 0 }),
     })
   )
 
@@ -225,20 +225,6 @@ function LyricsScreen() {
       }
       ListFooterComponent={
         <View style={{ gap: baseUnit * 2 }}>
-          {data.lyrics.length > 0 &&
-            data.geniusTrackSearch &&
-            data.geniusTrackSearch.result.url && (
-              <View style={{ marginTop: baseUnit * 3 }}>
-                <Button
-                  title="View this track on Genius"
-                  color={GOLD}
-                  onPress={() => {
-                    _handlePressButtonAsync(data.geniusTrackSearch.result.url)
-                  }}
-                />
-              </View>
-            )}
-
           <LyricsFooter
             data={data}
             hasLyrics={data.lyrics.length > 0 ? true : false}

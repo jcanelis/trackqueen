@@ -47,91 +47,29 @@ const DiscoverStack = () => {
         component={DiscoverScreen}
         options={{
           animation: "none",
-          headerShown: true,
-          headerLargeTitle: true,
-          headerTransparent: true,
           headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />
 
-      <Stack.Screen
-        name="Top Tracks"
-        component={ArtistTracksScreen}
-        options={{
-          presentation: "modal",
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: false,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
-      />
+      <Stack.Screen name="Top Tracks" component={ArtistTracksScreen} />
 
       <Stack.Screen
         name={`Similar to ${currentlyPlaying.artist}`}
         component={ArtistListScreen}
-        options={{
-          headerShown: true,
-          headerBackTitle: "Back",
-          headerLargeTitle: true,
-          headerTintColor: colors.text,
-          headerTransparent: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
       />
 
       <Stack.Screen
         name={"Ask ChatGPT"}
         component={GPTStack}
         navigationKey={currentlyPlaying.track}
-        options={{
-          headerShown: true,
-          headerBackTitle: "Back",
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: "dark",
-        }}
       />
 
-      <Stack.Screen
-        name={"Powered by GPT-4 API"}
-        component={GPTResponse}
-        options={{
-          presentation: "modal",
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: false,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
-      />
+      <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
 
       <Stack.Screen
         name={`${currentlyPlaying.track} TracksListScreen`}
         component={TrackListScreen}
-        options={{
-          headerShown: true,
-          headerBackTitle: "Back",
-          headerLargeTitle: true,
-          headerTintColor: colors.text,
-          headerTransparent: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
       />
     </Stack.Navigator>
   )

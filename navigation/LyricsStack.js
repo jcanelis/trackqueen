@@ -80,14 +80,6 @@ const LyricsStack = () => {
           name="Top Tracks"
           component={ArtistTracksScreen}
           navigationKey={currentlyPlaying.track}
-          options={{
-            presentation: "modal",
-            headerTransparent: true,
-            headerTintColor: colors.text,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
         />
 
         <Stack.Screen
@@ -103,7 +95,7 @@ const LyricsStack = () => {
             headerTransparent: true,
             headerBlurEffect: "dark",
             headerSearchBarOptions: {
-              placeholder: "Search Genius.com annotations",
+              placeholder: "Search annotations",
               barTintColor: dark ? colors.background : "#cccccc",
               textColor: colors.text,
               headerIconColor: colors.text,

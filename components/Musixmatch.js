@@ -31,7 +31,6 @@ export default function Musixmatch({ data }) {
           }}
           style={({ pressed }) => [
             {
-              marginTop: baseUnit * 2,
               opacity: pressed ? 0.7 : 1,
             },
           ]}

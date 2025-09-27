@@ -53,16 +53,7 @@ const AboutStack = () => {
         name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
         component={AboutScreen}
         options={{
-          // animation: "none",
-          headerShown: true,
-          headerLargeTitle: true,
-          headerTransparent: true,
-          //headerLargeTitleShadowVisible: true,
-          //headerTintColor: colors.text,
-          // headerBlurEffect: dark
-          //  ? "systemChromeMaterialDark"
-          //: "systemUltraThinMaterial",
-          // headerLargeTitleStyle: { color: colors.text },
+          animation: "none",
           headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}

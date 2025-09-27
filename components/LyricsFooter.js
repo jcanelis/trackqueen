@@ -38,37 +38,17 @@ const LyricsFooter = ({ data, hasLyrics }) => {
       }}
     >
       {hasLyrics && (
-        <>
-          <Button
-            title="View all lyrics on Musixmatch"
-            color={GOLD}
-            onPress={() => {
-              _handlePressButtonAsync(data.musixMatchTrack.track_share_url)
-            }}
+        <View>
+          <Musixmatch data={data} />
+          <Image
+            accessibilityLabel={"Muixmatch pixel tracking"}
+            source={data.lyricsData.message.body.lyrics.pixel_tracking_url}
+            height={1}
+            width={1}
+            style={{ opacity: 0 }}
+            placeholder={blurhash}
           />
-          <View
-            style={{
-              margin: baseUnit * 3,
-              padding: baseUnit * 3,
-              paddingTop: baseUnit * 3,
-              paddingBottom: baseUnit * 2,
-              textAlign: "left",
-              backgroundColor: "rgba(184, 155, 128, 0.2)",
-              borderRadius: baseUnit * 2,
-              gap: baseUnit,
-            }}
-          >
-            <Musixmatch data={data} />
-            <Image
-              accessibilityLabel={"Muixmatch pixel tracking"}
-              source={data.lyricsData.message.body.lyrics.pixel_tracking_url}
-              height={1}
-              width={1}
-              style={{ opacity: 0 }}
-              placeholder={blurhash}
-            />
-          </View>
-        </>
+        </View>
       )}
     </View>
   )

@@ -41,7 +41,7 @@ function VideoScreen() {
   const ref = useRef(null)
   useScrollToTop(
     useRef({
-      scrollToTop: () => ref.current?.scrollTo({ y: -143 }),
+      scrollToTop: () => ref.current?.scrollTo({ y: 0 }),
     })
   )
 
