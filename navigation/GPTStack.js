@@ -17,34 +17,8 @@ const GPTStack = () => {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name={"GPT Questions"}
-        component={GPTQuestions}
-        options={{
-          headerShown: false,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: false,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: "dark",
-        }}
-      />
-
-      <Stack.Screen
-        name={"Powered by GPT-4 API"}
-        component={GPTResponse}
-        options={{
-          presentation: "modal",
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: false,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-        }}
-      />
+      <Stack.Screen name={"GPT Questions"} component={GPTQuestions} />
+      <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
     </Stack.Navigator>
   )
 }

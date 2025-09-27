@@ -19,7 +19,7 @@ import VideoStack from "./VideoStack"
 import DiscoverStack from "./DiscoverStack"
 
 // Design
-import { grey } from "../constants/Base"
+import { grey, GOLD } from "../constants/Base"
 
 const AppTabs = () => {
   const { dark, colors } = useTheme()
@@ -28,6 +28,10 @@ const AppTabs = () => {
     <Tabs.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        inactiveTintColor: GOLD,
+        tabBarActiveTintColor: GOLD,
+        tabBarInactiveTintColor: GOLD,
+        // minimizeBehavior: "onScrollDown",
         lazy: false,
       })}
     >

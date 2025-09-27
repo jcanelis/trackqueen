@@ -34,14 +34,6 @@ const ProfileStack = () => {
               color={GOLD}
             />
           ),
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: true,
-          headerLargeTitleStyle: { color: colors.text },
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
         }}
       />
     </Stack.Navigator>

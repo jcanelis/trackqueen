@@ -53,7 +53,7 @@ function DiscoverScreen() {
   const ref = useRef(null)
   useScrollToTop(
     useRef({
-      scrollToTop: () => ref.current?.scrollToOffset({ offset: -143 }),
+      scrollToTop: () => ref.current?.scrollToOffset({ offset: 0 }),
     })
   )
 

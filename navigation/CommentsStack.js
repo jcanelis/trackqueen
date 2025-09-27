@@ -27,27 +27,11 @@ const CommentsStack = () => {
         component={CommentsScreen}
         options={{
           animation: "none",
-          headerShown: true,
-          headerLargeTitle: true,
-          headerTransparent: true,
-          headerLargeTitleShadowVisible: true,
-          headerTintColor: colors.text,
-          headerBlurEffect: dark
-            ? "systemChromeMaterialDark"
-            : "systemUltraThinMaterial",
-          headerLargeTitleStyle: { color: colors.text },
           headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />
-
-      <Stack.Screen
-        name={"Powered by GPT-4 API"}
-        component={GPTResponse}
-        options={{
-          presentation: "modal",
-        }}
-      />
+      <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
     </Stack.Navigator>
   )
 }
