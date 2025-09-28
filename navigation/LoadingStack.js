@@ -22,7 +22,13 @@ const LoadingStack = () => {
     <>
       <StatusBar style={"light"} />
       <NavigationContainer theme={DarkTheme}>
-        <Stack.Navigator>
+        <Stack.Navigator
+          options={{
+            animation: "none",
+            headerLeft: () => <ToolbarProfile />,
+            headerRight: () => <ToolbarAudioSearch />,
+          }}
+        >
           <Stack.Screen name="TrackQueen" component={LoadingScreen} />
           <Stack.Screen name="ProfileStack" component={ProfileStack} />
           <Stack.Screen

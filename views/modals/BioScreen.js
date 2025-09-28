@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import {
   Button,
   ScrollView,
@@ -10,7 +10,6 @@ import PropTypes from "prop-types"
 
 // React Navigation
 import { useNavigation, useTheme } from "@react-navigation/native"
-import { useHeaderHeight } from "@react-navigation/elements"
 
 // Context
 import SpotifyContext from "../../context/spotify"
@@ -30,22 +29,6 @@ function BioScreen({ route }) {
   const navigation = useNavigation()
   const { colors } = useTheme()
   const { width } = useWindowDimensions()
-  const headerHeight = useHeaderHeight()
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerBackground: () => (
-        <Image
-          source={route.params.data.spotifyArtistData.images[0].url}
-          placeholder={blurhash}
-          transition={250}
-          width={width}
-          height={headerHeight - baseUnit}
-          contentFit={"cover"}
-        />
-      ),
-    })
-  }, [colors, navigation, headerHeight, route.params, width])
 
   // Context
   const spotifyContext = useContext(SpotifyContext)
@@ -66,7 +49,6 @@ function BioScreen({ route }) {
       contentContainerStyle={{
         alignItems: "center",
         gap: baseUnit * 3,
-        paddingTop: baseUnit * 12,
       }}
       scrollToOverflowEnabled={true}
       style={{
@@ -85,7 +67,7 @@ function BioScreen({ route }) {
           placeholder={blurhash}
           source={route.params.image}
           transition={250}
-          style={{ marginTop: headerHeight, borderRadius: width / 2 }}
+          style={{ marginTop: baseUnit * 4, borderRadius: width / 2 }}
           height={width / 2}
           width={width / 2}
         />

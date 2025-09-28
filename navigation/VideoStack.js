@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 
 // React Navigation
-import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -18,7 +17,6 @@ import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const VideoStack = () => {
-  const { dark, colors } = useTheme()
   const { currentlyPlaying } = useContext(SpotifyContext)
 
   return (

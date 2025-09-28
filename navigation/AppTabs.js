@@ -1,15 +1,8 @@
 import React from "react"
 
 // React Navigation
-import { useTheme } from "@react-navigation/native"
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createNativeBottomTabNavigator } from "@bottom-tabs/react-navigation"
-// const Tabs = createBottomTabNavigator()
 const Tabs = createNativeBottomTabNavigator()
-
-// Expo
-import { BlurView } from "expo-blur"
-import { Ionicons } from "@expo/vector-icons"
 
 // Stacks
 import AboutStack from "./AboutStack"
@@ -19,19 +12,16 @@ import VideoStack from "./VideoStack"
 import DiscoverStack from "./DiscoverStack"
 
 // Design
-import { grey, GOLD } from "../constants/Base"
+import { GOLD } from "../constants/Base"
 
 const AppTabs = () => {
-  const { dark, colors } = useTheme()
-
   return (
     <Tabs.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={() => ({
         headerShown: false,
         inactiveTintColor: GOLD,
         tabBarActiveTintColor: GOLD,
         tabBarInactiveTintColor: GOLD,
-        // minimizeBehavior: "onScrollDown",
         lazy: false,
       })}
     >
