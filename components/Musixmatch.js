@@ -8,9 +8,6 @@ import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
 
-// Design
-import { baseUnit } from "../constants/Base"
-
 export default function Musixmatch({ data }) {
   const { dark } = useTheme()
   const [assets, error] = useAssets([

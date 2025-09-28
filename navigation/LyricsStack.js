@@ -63,17 +63,6 @@ const LyricsStack = () => {
           name={currentlyPlaying.artist}
           component={BioScreen}
           navigationKey={currentlyPlaying.track}
-          options={{
-            headerShown: true,
-            headerLargeTitle: true,
-            headerBackTitle: "Back",
-            headerTintColor: colors.text,
-            headerLargeTitleStyle: { color: colors.text },
-            headerTransparent: true,
-            headerBlurEffect: dark
-              ? "systemChromeMaterialDark"
-              : "systemUltraThinMaterial",
-          }}
         />
 
         <Stack.Screen

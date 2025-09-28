@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import { Button } from "react-native"
 
 // React Navigation
-import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -17,8 +16,6 @@ import { GOLD } from "../constants/Base"
 
 const ProfileStack = () => {
   const { signOut } = useContext(AuthContext)
-  const { dark, colors } = useTheme()
-
   return (
     <Stack.Navigator>
       <Stack.Screen

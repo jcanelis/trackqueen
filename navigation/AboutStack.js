@@ -32,7 +32,7 @@ import ToolbarProfile from "../components/ToolbarProfile"
 import { baseUnit, blurhash } from "../constants/Base"
 
 const AboutStack = () => {
-  const { dark, colors } = useTheme()
+  const { colors } = useTheme()
   const { width } = useWindowDimensions()
   const { currentlyPlaying } = useContext(SpotifyContext)
 

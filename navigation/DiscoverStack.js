@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 
 // React Navigation
-import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 
@@ -26,7 +25,6 @@ import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const DiscoverStack = () => {
-  const { colors, dark } = useTheme()
   const { currentlyPlaying } = useContext(SpotifyContext)
 
   // Local asset with Expo useAssets
@@ -63,6 +61,9 @@ const DiscoverStack = () => {
         name={"Ask ChatGPT"}
         component={GPTStack}
         navigationKey={currentlyPlaying.track}
+        options={{
+          headerShown: false,
+        }}
       />
 
       <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />

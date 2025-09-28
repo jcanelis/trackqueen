@@ -1,25 +1,18 @@
 import React from "react"
-import { Button, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { View } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
 import { Image } from "expo-image"
 import { useAssets } from "expo-asset"
-import * as WebBrowser from "expo-web-browser"
 
 // Design
-import { baseUnit, blurhash, GOLD } from "../constants/Base"
+import { baseUnit, blurhash } from "../constants/Base"
 
 // Components
 import Musixmatch from "./Musixmatch"
 
-const _handlePressButtonAsync = async (url) => {
-  await WebBrowser.openBrowserAsync(url)
-}
-
 const LyricsFooter = ({ data, hasLyrics }) => {
-  const { colors } = useTheme()
   const [assets, error] = useAssets([
     require("../assets/brands/musixmatch/Type_Extended_Black.png"),
     require("../assets/brands/musixmatch/Type_Extended_White.png"),

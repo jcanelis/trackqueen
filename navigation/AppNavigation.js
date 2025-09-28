@@ -28,7 +28,11 @@ const AppNavigation = () => (
             headerShown: false,
           }}
         />
-        <Stack.Screen name="ProfileStack" component={ProfileStack} />
+        <Stack.Screen
+          name="ProfileStack"
+          component={ProfileStack}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="Search nearby audio" component={SoundCheckScreen} />
       </Stack.Navigator>
     </NavigationContainer>
