@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
 import { AppState, FlatList, RefreshControl, Text, View } from "react-native"
-import SegmentedControl from "@react-native-segmented-control/segmented-control"
+import { Host, Picker } from "@expo/ui/swift-ui"
 
 // React Navigation
 import {
@@ -220,34 +220,27 @@ function CommentsScreen() {
             />
 
             {commentsToShow.length > 0 && (
-              <SegmentedControl
+              <Host
                 style={{
                   flex: 1,
-                  marginTop: baseUnit * 2,
                   marginRight: baseUnit * 3,
                   marginLeft: baseUnit * 3,
-                  marginBottom: baseUnit * 1,
-                  fontWeight: 800,
+                  height: 40,
                 }}
-                values={["Popular", "Recent"]}
-                height={baseUnit * 5}
-                appearance={"dark"}
-                backgroundColor={colors.card}
-                fontStyle={{ fontSize: 14, fontWeight: 900 }}
-                activeFontStyle={{
-                  fontSize: 14,
-                  fontWeight: 900,
-                }}
-                selectedIndex={0}
-                onChange={async (event) => {
-                  const indexData =
-                    event.nativeEvent.selectedSegmentIndex == 0
-                      ? commentsRelevant
-                      : commentsRecent
-                  setCommentsToShow(indexData)
-                  setIndex(event.nativeEvent.selectedSegmentIndex)
-                }}
-              />
+              >
+                <Picker
+                  options={["Popular", "Recent"]}
+                  selectedIndex={0}
+                  onOptionSelected={({ nativeEvent: { index } }) => {
+                    const indexData =
+                      index == 0 ? commentsRelevant : commentsRecent
+                    setCommentsToShow(indexData)
+                    setIndex(index)
+                  }}
+                  variant="segmented"
+                  values={["Popular", "Recent"]}
+                />
+              </Host>
             )}
           </>
         }
