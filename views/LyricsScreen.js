@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import {
   AppState,
-  Button,
   FlatList,
   Pressable,
   RefreshControl,
@@ -18,7 +17,6 @@ import {
 } from "@react-navigation/native"
 
 // Expo
-import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
 
 // Data Fetching
@@ -40,7 +38,7 @@ import LyricsFooter from "../components/LyricsFooter"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Design
-import { baseUnit, blurhash, GOLD, lightGrey } from "../constants/Base"
+import { baseUnit, blurhash, lightGrey } from "../constants/Base"
 
 function LyricsScreen() {
   const navigation = useNavigation()
@@ -67,11 +65,6 @@ function LyricsScreen() {
       scrollToTop: () => ref.current?.scrollToOffset({ offset: 0 }),
     })
   )
-
-  // Provide a link to Genius.com
-  const _handlePressButtonAsync = async (url) => {
-    await WebBrowser.openBrowserAsync(url)
-  }
 
   // Check current track function
   useQuery({

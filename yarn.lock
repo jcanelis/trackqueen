@@ -1196,6 +1196,13 @@
   resolved "https://registry.yarnpkg.com/@expo/sudo-prompt/-/sudo-prompt-9.3.2.tgz#0fd2813402a42988e49145cab220e25bea74b308"
   integrity sha512-HHQigo3rQWKMDzYDLkubN5WQOYXJJE2eNqIQC2axC2iO3mHdwnIR7FgZVvHWtBwAdzBgAP0ECp8KqS8TiMKvgw==
 
+"@expo/ui@~0.2.0-beta.4":
+  version "0.2.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@expo/ui/-/ui-0.2.0-beta.4.tgz#5a4c96f0f9b20bc52552e8ed145efb241992d8e1"
+  integrity sha512-49DoNCQ5jyLFvnTZpVU1aMSbfgRtX4QQtnX7WM97A7dJhocvaF7g7MA3LBeoZ07MMVKuuwfcIBM2F/f52S+6zw==
+  dependencies:
+    sf-symbols-typescript "^2.1.0"
+
 "@expo/vector-icons@^15.0.2":
   version "15.0.2"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-15.0.2.tgz#64d380f04cf2bdeb1dac502c3a0d880b6c2a9e37"
@@ -6837,7 +6844,7 @@ setprototypeof@1.2.0:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
-sf-symbols-typescript@^2.0.0:
+sf-symbols-typescript@^2.0.0, sf-symbols-typescript@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/sf-symbols-typescript/-/sf-symbols-typescript-2.1.0.tgz#50a2d7b36edd6809606f0b0a36322fc1fdd7cfde"
   integrity sha512-ezT7gu/SHTPIOEEoG6TF+O0m5eewl0ZDAO4AtdBi5HjsrUI6JdCG17+Q8+aKp0heM06wZKApRCn5olNbs0Wb/A==
