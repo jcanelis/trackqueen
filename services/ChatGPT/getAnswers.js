@@ -8,7 +8,7 @@ import Keys from "../../constants/Keys"
 
 const ChatGPT = async (query, signal) => {
   const body = {
-    model: "gpt-4-1106-preview",
+    model: "gpt-4.1",
     messages: [{ role: "user", content: query }],
     temperature: 0.7,
     frequency_penalty: 1,
