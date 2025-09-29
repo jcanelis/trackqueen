@@ -238,7 +238,6 @@ function CommentsScreen() {
                     setIndex(index)
                   }}
                   variant="segmented"
-                  values={["Popular", "Recent"]}
                 />
               </Host>
             )}

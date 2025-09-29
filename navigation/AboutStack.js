@@ -64,7 +64,6 @@ const AboutStack = () => {
         component={AlbumTracks}
         navigationKey={currentlyPlaying.track}
         options={{
-          headerBackTitle: "Back",
           headerShown: true,
           headerTransparent: true,
           headerTintColor: colors.text,

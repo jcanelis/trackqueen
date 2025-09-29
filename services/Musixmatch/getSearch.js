@@ -28,11 +28,9 @@ const MusixmatchSearch = async (artist, track) => {
     if (responseJSON.message.header.status_code !== 404) {
       newLyrics = responseJSON.message.body.lyrics.lyrics_body.split("\n")
 
-      if (newLyrics.length > 0) {
-        newLyrics = newLyrics.slice(0, -4)
+      if (newLyrics.length < 1) {
+        newLyrics = []
       }
-    } else {
-      newLyrics = []
     }
 
     const lyrics = newLyrics

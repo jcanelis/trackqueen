@@ -22,18 +22,30 @@ const LoadingStack = () => {
     <>
       <StatusBar style={"light"} />
       <NavigationContainer theme={DarkTheme}>
-        <Stack.Navigator
-          options={{
-            animation: "none",
-            headerLeft: () => <ToolbarProfile />,
-            headerRight: () => <ToolbarAudioSearch />,
-          }}
-        >
-          <Stack.Screen name="TrackQueen" component={LoadingScreen} />
-          <Stack.Screen name="ProfileStack" component={ProfileStack} />
+        <Stack.Navigator>
+          <Stack.Screen
+            name="TrackQueen"
+            component={LoadingScreen}
+            options={{
+              animation: "none",
+              headerLeft: () => <ToolbarProfile />,
+              headerRight: () => <ToolbarAudioSearch />,
+            }}
+          />
+          <Stack.Screen
+            name="ProfileStack"
+            component={ProfileStack}
+            options={{
+              presentation: "modal",
+              headerShown: false,
+            }}
+          />
           <Stack.Screen
             name="Search nearby audio"
             component={SoundCheckScreen}
+            options={{
+              presentation: "modal",
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

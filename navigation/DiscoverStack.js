@@ -61,9 +61,6 @@ const DiscoverStack = () => {
         name={"Ask ChatGPT"}
         component={GPTStack}
         navigationKey={currentlyPlaying.track}
-        options={{
-          headerShown: false,
-        }}
       />
 
       <Stack.Screen name={"Powered by GPT-4 API"} component={GPTResponse} />
