@@ -25,7 +25,8 @@ const LyricsFooter = ({ data, hasLyrics }) => {
   return (
     <View
       style={{
-        marginTop: baseUnit * 3,
+        marginTop: baseUnit * 6,
+        marginBottom: baseUnit * 2,
         alignItems: "center",
         gap: baseUnit * 3,
       }}

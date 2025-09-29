@@ -77,7 +77,6 @@ const LyricsStack = () => {
           navigationKey={currentlyPlaying.track}
           options={{
             headerShown: true,
-            headerBackTitle: "Back",
             headerTintColor: colors.text,
             headerLargeTitle: true,
             headerLargeTitleStyle: { color: colors.text },
