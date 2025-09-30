@@ -32,7 +32,7 @@ import Notes from "../components/Notes"
 import SpotifyLogo from "../components/SpotifyLogo"
 
 // Design
-import { baseUnit, GOLD, lightGrey } from "../constants/Base"
+import { baseUnit, GOLD } from "../constants/Base"
 
 function AboutScreen() {
   const { colors } = useTheme()
@@ -98,6 +98,23 @@ function AboutScreen() {
     },
   })
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          color={GOLD}
+          title="Yo"
+          onPress={() => {
+            setRefreshing(true)
+            queryClient.fetchQuery({
+              queryKey: ["Check-current-track"],
+            })
+          }}
+        />
+      ),
+    })
+  }, [navigation, queryClient])
+
   // Cancel query if app is closed
   // Restart query when back
   useEffect(() => {
@@ -155,8 +172,8 @@ function AboutScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={"#ffffff"}
+          titleColor={"#ffffff"}
           refreshing={refreshing}
           onRefresh={() => {
             setRefreshing(true)
