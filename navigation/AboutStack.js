@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import { useWindowDimensions } from "react-native"
 
 // React Navigation
-import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 import { HeaderHeightContext } from "@react-navigation/elements"
@@ -32,7 +31,6 @@ import ToolbarProfile from "../components/ToolbarProfile"
 import { baseUnit, blurhash } from "../constants/Base"
 
 const AboutStack = () => {
-  const { colors } = useTheme()
   const { width } = useWindowDimensions()
   const { currentlyPlaying } = useContext(SpotifyContext)
 
@@ -64,11 +62,6 @@ const AboutStack = () => {
         component={AlbumTracks}
         navigationKey={currentlyPlaying.track}
         options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: true,
-          headerLargeTitleStyle: { color: colors.text },
           headerBlurEffect: "systemUltraThinMaterialDark",
           headerBackground: () => (
             <HeaderHeightContext.Consumer>
