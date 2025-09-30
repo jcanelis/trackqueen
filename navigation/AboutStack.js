@@ -25,7 +25,7 @@ import GPTStack from "./GPTStack"
 
 // Components
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
-import ToolbarProfile from "../components/ToolbarProfile"
+// import ToolbarProfile from "../components/ToolbarProfile"
 
 // Design
 import { baseUnit, blurhash } from "../constants/Base"
@@ -52,7 +52,8 @@ const AboutStack = () => {
         component={AboutScreen}
         options={{
           animation: "none",
-          headerLeft: () => <ToolbarProfile />,
+          // tabBarIconRight: () => ({ sfSymbol: "info.circle" }),
+          // headerLeft: () => ({ sfSymbol: "info.circle" }),
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />

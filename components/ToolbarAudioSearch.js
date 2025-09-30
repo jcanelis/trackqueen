@@ -10,7 +10,7 @@ const ToolbarAudioSearch = () => {
 
   return (
     <Button
-      title="Search"
+      title="Update"
       color={GOLD}
       onPress={() => {
         navigation.navigate("Search nearby audio")

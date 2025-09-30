@@ -14,7 +14,7 @@ export default function SpotifyButton({ func, text }) {
         variant="glassProminent"
         color={"rgba(50,50,50,1)"}
         controlSize="regular"
-        style={{ backgroundColor: "red", width: 240 }}
+        style={{ width: 240 }}
         onPress={() => func()}
       >
         {text}
