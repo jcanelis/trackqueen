@@ -221,23 +221,25 @@ function CommentsScreen() {
 
             {commentsToShow.length > 0 && (
               <Host
+                appearance="light"
                 style={{
                   flex: 1,
                   marginRight: baseUnit * 3,
                   marginLeft: baseUnit * 3,
-                  height: 40,
+                  height: baseUnit * 6,
                 }}
               >
                 <Picker
+                  controlSize="large"
                   options={["Popular", "Recent"]}
-                  selectedIndex={0}
+                  variant="segmented"
+                  selectedIndex={index}
                   onOptionSelected={({ nativeEvent: { index } }) => {
                     const indexData =
                       index == 0 ? commentsRelevant : commentsRecent
                     setCommentsToShow(indexData)
                     setIndex(index)
                   }}
-                  variant="segmented"
                 />
               </Host>
             )}

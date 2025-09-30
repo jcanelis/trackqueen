@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import { useWindowDimensions } from "react-native"
 
 // React Navigation
-import { useTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 const Stack = createNativeStackNavigator()
 import { HeaderHeightContext } from "@react-navigation/elements"
@@ -26,13 +25,12 @@ import GPTStack from "./GPTStack"
 
 // Components
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
-import ToolbarProfile from "../components/ToolbarProfile"
+// import ToolbarProfile from "../components/ToolbarProfile"
 
 // Design
 import { baseUnit, blurhash } from "../constants/Base"
 
 const AboutStack = () => {
-  const { colors } = useTheme()
   const { width } = useWindowDimensions()
   const { currentlyPlaying } = useContext(SpotifyContext)
 
@@ -54,7 +52,8 @@ const AboutStack = () => {
         component={AboutScreen}
         options={{
           animation: "none",
-          headerLeft: () => <ToolbarProfile />,
+          // tabBarIconRight: () => ({ sfSymbol: "info.circle" }),
+          // headerLeft: () => ({ sfSymbol: "info.circle" }),
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />
@@ -64,11 +63,6 @@ const AboutStack = () => {
         component={AlbumTracks}
         navigationKey={currentlyPlaying.track}
         options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTintColor: colors.text,
-          headerLargeTitle: true,
-          headerLargeTitleStyle: { color: colors.text },
           headerBlurEffect: "systemUltraThinMaterialDark",
           headerBackground: () => (
             <HeaderHeightContext.Consumer>

@@ -1,67 +1,25 @@
 import React from "react"
-import { Pressable, Text, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
 
 // Expo
-import { useAssets } from "expo-asset"
-import { Image } from "expo-image"
+import { Button, Host } from "@expo/ui/swift-ui"
 
 // Design
 import { baseUnit } from "../constants/Base"
 
 export default function SpotifyButton({ func, text }) {
-  const { dark, colors } = useTheme()
-  const [assets, error] = useAssets([
-    require("../assets/brands/spotify/Spotify_Icon_RGB_White.png"),
-  ])
-  if (error) {
-    console.log(error)
-  }
-
   return (
-    <>
-      {assets && (
-        <View style={{ alignItems: "center" }}>
-          <Pressable
-            onPress={() => func()}
-            style={({ pressed }) => [
-              {
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-                marginTop: baseUnit * 2,
-                marginBottom: baseUnit * 2,
-                padding: baseUnit * 2,
-                height: baseUnit * 7,
-                borderWidth: dark ? 1 : 0,
-                borderColor: colors.border,
-                backgroundColor: "rgba(255,255,255,0.1)",
-                borderRadius: baseUnit * 8,
-                opacity: pressed ? 0.7 : 1,
-              },
-            ]}
-          >
-            <Image
-              style={{ marginRight: baseUnit * 1 }}
-              width={baseUnit * 4}
-              height={baseUnit * 4}
-              source={assets[0].localUri}
-            />
-            <Text
-              style={{
-                fontSize: baseUnit * 1.9,
-                lineHeight: baseUnit * 3,
-                fontWeight: 600,
-                color: dark ? colors.text : colors.background,
-              }}
-            >
-              {text}
-            </Text>
-          </Pressable>
-        </View>
-      )}
-    </>
+    <Host style={{ padding: baseUnit * 4 }}>
+      <Button
+        variant="glassProminent"
+        color={"rgba(50,50,50,1)"}
+        controlSize="regular"
+        style={{ width: 240 }}
+        onPress={() => func()}
+      >
+        {text}
+      </Button>
+    </Host>
   )
 }
 

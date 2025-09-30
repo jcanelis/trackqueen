@@ -12,16 +12,14 @@ import VideoStack from "./VideoStack"
 import DiscoverStack from "./DiscoverStack"
 
 // Design
-import { GOLD } from "../constants/Base"
+import { light } from "../constants/Base"
 
 const AppTabs = () => {
   return (
     <Tabs.Navigator
       screenOptions={() => ({
-        headerShown: false,
-        inactiveTintColor: GOLD,
-        tabBarActiveTintColor: GOLD,
-        tabBarInactiveTintColor: GOLD,
+        headerShown: true,
+        tabBarActiveTintColor: light,
         lazy: false,
       })}
     >
