@@ -21,7 +21,6 @@ import TrackListScreen from "../views/modals/TrackListScreen"
 import GPTStack from "./GPTStack"
 
 // Components
-import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const DiscoverStack = () => {
@@ -45,12 +44,15 @@ const DiscoverStack = () => {
         component={DiscoverScreen}
         options={{
           animation: "none",
-          headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />
 
-      <Stack.Screen name="Top Tracks" component={ArtistTracksScreen} />
+      <Stack.Screen
+        name="Top Tracks"
+        component={ArtistTracksScreen}
+        options={{ headerBackTitle: "Back" }}
+      />
 
       <Stack.Screen
         name={`Similar to ${currentlyPlaying.artist}`}

@@ -24,7 +24,7 @@ import GPTResponse from "../views/modals/GPTResponse"
 import GPTStack from "./GPTStack"
 
 // Components
-// import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
+import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 // import ToolbarProfile from "../components/ToolbarProfile"
 
 // Design
@@ -54,7 +54,7 @@ const AboutStack = () => {
           animation: "none",
           // tabBarIconRight: () => ({ sfSymbol: "info.circle" }),
           // headerLeft: () => ({ sfSymbol: "info.circle" }),
-          // headerRight: () => <ToolbarAudioSearch />,
+          headerRight: () => <ToolbarAudioSearch />,
         }}
       />
 
@@ -63,6 +63,7 @@ const AboutStack = () => {
         component={AlbumTracks}
         navigationKey={currentlyPlaying.track}
         options={{
+          headerBackTitle: "Back",
           headerBlurEffect: "systemUltraThinMaterialDark",
           headerBackground: () => (
             <HeaderHeightContext.Consumer>

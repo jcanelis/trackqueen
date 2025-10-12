@@ -15,7 +15,6 @@ import SoundCheckScreen from "../views/modals/SoundCheckScreen"
 
 // Components
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
-import ToolbarProfile from "../components/ToolbarProfile"
 
 const LoadingStack = () => {
   return (
@@ -28,7 +27,6 @@ const LoadingStack = () => {
             component={LoadingScreen}
             options={{
               animation: "none",
-              headerLeft: () => <ToolbarProfile />,
               headerRight: () => <ToolbarAudioSearch />,
             }}
           />

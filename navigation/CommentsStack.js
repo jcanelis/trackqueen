@@ -12,7 +12,6 @@ import CommentsScreen from "../views/CommentsScreen"
 import GPTResponse from "../views/modals/GPTResponse"
 
 // Components
-import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const CommentsStack = () => {
@@ -24,7 +23,6 @@ const CommentsStack = () => {
         component={CommentsScreen}
         options={{
           animation: "none",
-          headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />

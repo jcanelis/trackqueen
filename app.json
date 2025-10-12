@@ -20,7 +20,12 @@
       "bundleIdentifier": "com.jcanelis.tq22",
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["audio", "fetch", "audio", "fetch"],
+        "UIBackgroundModes": [
+          "audio",
+          "fetch",
+          "audio",
+          "fetch"
+        ],
         "NSMicrophoneUsageDescription": "Enable the microphone to find songs using nearby audio.",
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -36,7 +41,9 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "extra": {
       "eas": {
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
@@ -56,6 +63,9 @@
       "expo-asset",
       "expo-web-browser"
     ],
-    "runtimeVersion": "1.0.0"
+    "runtimeVersion": "1.0.0",
+    "android": {
+      "package": "com.jcanelis.tq22"
+    }
   }
 }
