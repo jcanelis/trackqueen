@@ -33,7 +33,7 @@ import { baseUnit, lightGrey } from "../constants/Base"
 
 function CommentsScreen() {
   const navigation = useNavigation()
-  const { colors } = useTheme()
+  const { colors, theme } = useTheme()
   const queryClient = useQueryClient()
 
   // Context
@@ -221,7 +221,7 @@ function CommentsScreen() {
 
             {commentsToShow.length > 0 && (
               <Host
-                appearance="light"
+                appearance={theme == "dark" ? "dark" : "light"}
                 style={{
                   flex: 1,
                   marginRight: baseUnit * 3,

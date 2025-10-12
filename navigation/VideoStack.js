@@ -13,7 +13,6 @@ import VideoListScreen from "../views/modals/VideoListScreen"
 import SpotifyContext from "../context/spotify"
 
 // Components
-import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 const VideoStack = () => {
@@ -25,7 +24,6 @@ const VideoStack = () => {
         name={`${currentlyPlaying.track} by ${currentlyPlaying.artist}`}
         component={VideoScreen}
         options={{
-          headerLeft: () => <ToolbarProfile />,
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />

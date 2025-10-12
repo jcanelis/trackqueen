@@ -98,22 +98,22 @@ function AboutScreen() {
     },
   })
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button
-          color={GOLD}
-          title="Yo"
-          onPress={() => {
-            setRefreshing(true)
-            queryClient.fetchQuery({
-              queryKey: ["Check-current-track"],
-            })
-          }}
-        />
-      ),
-    })
-  }, [navigation, queryClient])
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  //       <Button
+  //         color={GOLD}
+  //         title="Yo"
+  //         onPress={() => {
+  //           setRefreshing(true)
+  //           queryClient.fetchQuery({
+  //             queryKey: ["Check-current-track"],
+  //           })
+  //         }}
+  //       />
+  //     ),
+  //   })
+  // }, [navigation, queryClient])
 
   // Cancel query if app is closed
   // Restart query when back

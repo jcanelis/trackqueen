@@ -17,7 +17,6 @@ import GPTResponse from "../views/modals/GPTResponse"
 import LyricsScreen from "../views/LyricsScreen"
 
 // Components
-import ToolbarProfile from "../components/ToolbarProfile"
 import ToolbarAudioSearch from "../components/ToolbarAudioSearch"
 
 // Documentation for React Navigation's headerSearchBarOptions
@@ -45,7 +44,6 @@ const LyricsStack = () => {
           component={LyricsScreen}
           options={{
             animation: "none",
-            headerLeft: () => <ToolbarProfile />,
             headerRight: () => <ToolbarAudioSearch />,
           }}
         />
