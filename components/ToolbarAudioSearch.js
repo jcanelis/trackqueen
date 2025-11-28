@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet } from "react-native"
+import { Pressable, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 // Expo
@@ -13,28 +13,37 @@ const ToolbarAudioSearch = () => {
 
   return (
     <>
-      <SymbolView
-        name="waveform"
-        color={GOLD}
-        SymbolType="monocrhome"
-        tintColor={GOLD}
-        colors={GOLD}
-        style={styles.symbol}
-        type="hierarchical"
+      <Pressable
         onPress={() => {
           navigation.navigate("Search nearby audio")
         }}
-      />
+      >
+        <SymbolView
+          name="waveform"
+          color={GOLD}
+          SymbolType="monocrhome"
+          tintColor={GOLD}
+          colors={GOLD}
+          style={styles.symbol}
+          type="hierarchical"
+        />
+      </Pressable>
 
-      <SymbolView
-        name="person"
-        color={GOLD}
-        SymbolType="monocrhome"
-        tintColor={GOLD}
-        colors={GOLD}
-        style={styles.symbol}
-        type="hierarchical"
-      />
+      <Pressable
+        onPress={() => {
+          navigation.navigate("ProfileStack")
+        }}
+      >
+        <SymbolView
+          name="person"
+          color={GOLD}
+          SymbolType="monocrhome"
+          tintColor={GOLD}
+          colors={GOLD}
+          style={styles.symbol}
+          type="hierarchical"
+        />
+      </Pressable>
     </>
   )
 }
