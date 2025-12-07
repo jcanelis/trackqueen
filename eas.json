@@ -18,6 +18,7 @@
     },
     "development": {
       "extends": "base",
+      "environment": "development",
       "developmentClient": true,
       "distribution": "internal",
       "cache": {
@@ -34,6 +35,7 @@
     },
     "preview": {
       "extends": "base",
+      "environment": "preview",
       "channel": "preview",
       "distribution": "internal",
       "cache": {
@@ -42,6 +44,7 @@
     },
     "production": {
       "autoIncrement": true,
+      "environment": "production",
       "extends": "base",
       "channel": "main",
       "cache": {
