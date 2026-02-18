@@ -82,7 +82,7 @@ function LoginScreen() {
             <Heading>📀 👑</Heading>
             <Heading>Welcome to TrackQueen</Heading>
             <SubHeading>Learn more about your music.</SubHeading>
-            <SpotifyButton func={promptAsync} text={"Login with Spotify"} />
+            <SpotifyButton func={promptAsync} />
           </Wrapper>
         </>
       )}

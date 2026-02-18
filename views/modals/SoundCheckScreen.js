@@ -10,7 +10,7 @@ import { useNavigation, useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // Expo
-import { Audio } from "expo-av"
+import { useAudioRecorder } from "expo-audio"
 import { Image } from "expo-image"
 import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
@@ -50,7 +50,8 @@ function SoundCheckScreen() {
   ])
 
   // Get audio recording permissions
-  const [permissionResponse, requestPermission] = Audio.usePermissions()
+  const [permissionResponse, requestPermission] =
+    useAudioRecorder.usePermissions()
 
   // Updated during the recording progress
   const initialRecordingStatus = {
@@ -94,7 +95,7 @@ function SoundCheckScreen() {
             }
 
             // Turn off device recordings
-            await Audio.setAudioModeAsync({
+            await useAudioRecorder.setAudioModeAsync({
               allowsRecordingIOS: false,
               playsInSilentModeIOS: false,
             })
@@ -139,13 +140,13 @@ function SoundCheckScreen() {
             }
 
             // Prep device to record
-            await Audio.setAudioModeAsync({
+            await useAudioRecorder.setAudioModeAsync({
               allowsRecordingIOS: true,
               playsInSilentModeIOS: true,
             })
 
             // Create a recording
-            const { recording } = await Audio.Recording.createAsync(
+            const { recording } = await useAudioRecorder.Recording.createAsync(
               audioConfig,
               (data) => {
                 setStatusObject(data)
@@ -162,7 +163,7 @@ function SoundCheckScreen() {
 
             // Stop the recording
             await recording.stopAndUnloadAsync()
-            await Audio.setAudioModeAsync({
+            await useAudioRecorder.setAudioModeAsync({
               allowsRecordingIOS: false,
               playsInSilentModeIOS: false,
             })

@@ -1,4 +1,5 @@
 import React from "react"
+import { Text } from "react-native"
 import PropTypes from "prop-types"
 
 // Expo
@@ -7,7 +8,7 @@ import { Button, Host } from "@expo/ui/swift-ui"
 // Design
 import { baseUnit } from "../constants/Base"
 
-export default function SpotifyButton({ func, text }) {
+export default function SpotifyButton({ func }) {
   return (
     <Host style={{ padding: baseUnit * 4 }}>
       <Button
@@ -17,7 +18,7 @@ export default function SpotifyButton({ func, text }) {
         style={{ width: 240 }}
         onPress={() => func()}
       >
-        {text}
+        <Text style={{ color: "#fff" }}>hello</Text>
       </Button>
     </Host>
   )
@@ -25,5 +26,5 @@ export default function SpotifyButton({ func, text }) {
 
 SpotifyButton.propTypes = {
   func: PropTypes.func,
-  text: PropTypes.string,
+  // texts: PropTypes.string,
 }
