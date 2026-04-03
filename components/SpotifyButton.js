@@ -13,12 +13,12 @@ export default function SpotifyButton({ func }) {
     <Host style={{ padding: baseUnit * 4 }}>
       <Button
         variant="glassProminent"
-        color={"rgba(50,50,50,1)"}
+        color={"#ffffff"}
         controlSize="regular"
         style={{ width: 240 }}
         onPress={() => func()}
       >
-        <Text style={{ color: "#fff" }}>hello</Text>
+        <Text style={{ color: "#fff" }}>Press me</Text>
       </Button>
     </Host>
   )

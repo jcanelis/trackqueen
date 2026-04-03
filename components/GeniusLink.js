@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { useNavigation } from "@react-navigation/native"
+import { Text } from "react-native"
 import PropTypes from "prop-types"
 
 // Context
@@ -30,7 +31,9 @@ const GeniusLink = ({ data }) => {
               })
             }
           >
-            View annotations from Genius
+            <Text style={{ color: "#ffffff" }}>
+              View annotations from Genius
+            </Text>
           </Button>
         </Host>
       )}

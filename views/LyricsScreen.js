@@ -212,7 +212,6 @@ function LyricsScreen() {
           </Pressable>
 
           <SpotifyLogo />
-
           <GeniusLink data={data} />
         </View>
       }
@@ -220,7 +219,7 @@ function LyricsScreen() {
         <View style={{ gap: baseUnit * 2 }}>
           <LyricsFooter
             data={data}
-            hasLyrics={data.lyrics.length > 0 ? true : false}
+            hasLyrics={data.lyrics && data.lyrics.length > 0 ? true : false}
           />
         </View>
       }
