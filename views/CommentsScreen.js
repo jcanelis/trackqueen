@@ -1,6 +1,9 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
-import { AppState, FlatList, RefreshControl, Text, View } from "react-native"
-import { Host, Picker } from "@expo/ui/swift-ui"
+import { AppState, FlatList, RefreshControl, View } from "react-native"
+
+// Expo UI
+import { Host, Picker, Text } from "@expo/ui/swift-ui"
+import { pickerStyle, tag } from "@expo/ui/swift-ui/modifiers"
 
 // React Navigation
 import {
@@ -30,6 +33,8 @@ import VideoThumbnail from "../components/VideoThumbnail"
 
 // Design
 import { baseUnit, lightGrey } from "../constants/Base"
+
+const options = ["Popular", "Recent"]
 
 function CommentsScreen() {
   const navigation = useNavigation()
@@ -61,6 +66,7 @@ function CommentsScreen() {
   let [nextPageTokenRelevant, setPageTokenRelevant] = useState("")
 
   // Tab index
+  const [selectedTag, setSelectedTag] = useState(options[0])
   let [index, setIndex] = useState(0)
 
   // Scroll reference
@@ -231,16 +237,29 @@ function CommentsScreen() {
               >
                 <Picker
                   controlSize="large"
-                  options={["Popular", "Recent"]}
+                  label="Select comments"
                   variant="segmented"
-                  selectedIndex={index}
-                  onOptionSelected={({ nativeEvent: { index } }) => {
-                    const indexData =
-                      index == 0 ? commentsRelevant : commentsRecent
-                    setCommentsToShow(indexData)
-                    setIndex(index)
+                  modifiers={[pickerStyle("segmented")]}
+                  selection={selectedTag}
+                  onSelectionChange={(selection) => {
+                    setSelectedTag(selection)
+                    const comments =
+                      selection == "Popular" ? commentsRelevant : commentsRecent
+                    setCommentsToShow(comments)
+                    const indexData = selection == "Popular" ? 0 : 1
+                    setIndex(indexData)
                   }}
-                />
+                >
+                  {options.map((option) => (
+                    <Text
+                      style={{ color: colors.text }}
+                      key={option}
+                      modifiers={[tag(option)]}
+                    >
+                      {option}
+                    </Text>
+                  ))}
+                </Picker>
               </Host>
             )}
           </>
