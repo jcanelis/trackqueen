@@ -127,12 +127,14 @@ function LoadingScreen() {
         <Wrapper>
           <Heading>Play a song with Spotify</Heading>
           <SubHeading>Pull down to refresh</SubHeading>
-          <SpotifyButton
-            text={"Open Spotify"}
-            func={() => {
-              Linking.openURL("https://open.spotify.com/collection/tracks")
-            }}
-          />
+          <View style={{ padding: 16 }}>
+            <SpotifyButton
+              text={"Open Spotify"}
+              func={() => {
+                Linking.openURL("https://open.spotify.com/collection/tracks")
+              }}
+            />
+          </View>
         </Wrapper>
       </ScrollView>
     </View>

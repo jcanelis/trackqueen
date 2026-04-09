@@ -181,7 +181,13 @@ function ProfileScreen() {
           </View>
         }
         ListFooterComponent={
-          <View style={{ margin: baseUnit * 4 }}>
+          <View
+            style={{
+              alignItems: "center",
+              marginTop: baseUnit * 6,
+              marginBottom: baseUnit * 2,
+            }}
+          >
             <SpotifyButton
               text={"Open Spotify"}
               func={() => {

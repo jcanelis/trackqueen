@@ -49,7 +49,7 @@ function GPTQuestions() {
         <Chip
           text={"Tell me about this song."}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me about the song, ”${track}” by ${artist}.`,
             })
           }}
@@ -58,7 +58,7 @@ function GPTQuestions() {
         <Chip
           text={"What have people said about this song?"}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `What have people said about the song, ”${track}” by ${artist}?`,
             })
           }}
@@ -70,7 +70,7 @@ function GPTQuestions() {
         <Chip
           text={`Tell me about this album, ${album}.`}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me about the album, ”${album}” by ${artist}.`,
             })
           }}
@@ -79,7 +79,7 @@ function GPTQuestions() {
         <Chip
           text={"What have people said about this album?"}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `What have people said about the album, ”${album}” by ${artist}?`,
             })
           }}
@@ -92,7 +92,7 @@ function GPTQuestions() {
         <Chip
           text={`Tell me about ${artist}.`}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me about the musician ${artist}.`,
             })
           }}
@@ -105,7 +105,7 @@ function GPTQuestions() {
         <Chip
           text={"Tell me about the instruments used in this song."}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me about the instruments used in the song, ”${track}” by ${artist}?`,
             })
           }}
@@ -114,7 +114,7 @@ function GPTQuestions() {
         <Chip
           text={"What samples are used in this song?"}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `What samples are used in the song, ”${track}” by ${artist}?`,
             })
           }}
@@ -123,7 +123,7 @@ function GPTQuestions() {
         <Chip
           text={"What other songs have sampled this?"}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `What songs have sampled the track, ”${track}” by ${artist}?`,
             })
           }}
@@ -145,7 +145,7 @@ function GPTQuestions() {
         <Chip
           text={"What movies has this song been in?"}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `What movies has the song, ”${track}” by ${artist} been in?`,
             })
           }}
@@ -154,7 +154,7 @@ function GPTQuestions() {
         <Chip
           text={"Tell me something interesting about this song."}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me something interesting about the song, ”${track}” by ${artist}.`,
             })
           }}

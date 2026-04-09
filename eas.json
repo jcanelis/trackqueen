@@ -4,7 +4,7 @@
   },
   "build": {
     "base": {
-      "node": "20.19.4",
+      "node": "22.14.0",
       "yarn": "1.22.22",
       "env": {
         "EXAMPLE_ENV": "example values"

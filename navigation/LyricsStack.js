@@ -49,7 +49,7 @@ const LyricsStack = () => {
         />
 
         <Stack.Screen
-          name={"Powered by GPT-4 API"}
+          name={"Powered by GPT-5 API"}
           component={GPTResponse}
           navigationKey={currentlyPlaying.track}
           options={{
