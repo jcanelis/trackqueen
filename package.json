@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@bottom-tabs/react-navigation": "^1.1.0",
-    "@expo/ui": "~55.0.8",
+    "@expo/ui": "~55.0.10",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-native-segmented-control/segmented-control": "^2.5.7",
     "@react-navigation/bottom-tabs": "^7.8.11",

@@ -1,24 +1,36 @@
 import React from "react"
-import { Text } from "react-native"
 import PropTypes from "prop-types"
 
-// Expo
-import { Button, Host } from "@expo/ui/swift-ui"
+import { Button, Host, Text } from "@expo/ui/swift-ui"
+
+import {
+  buttonStyle,
+  controlSize,
+  tint,
+  fixedSize,
+} from "@expo/ui/swift-ui/modifiers"
 
 // Design
-import { baseUnit } from "../constants/Base"
+import { GOLD } from "../constants/Base"
 
-export default function SpotifyButton({ func }) {
+export default function SpotifyButton({ func, text }) {
   return (
-    <Host style={{ padding: baseUnit * 4 }}>
+    <Host matchContents>
       <Button
-        variant="glassProminent"
-        color={"#ffffff"}
-        controlSize="regular"
-        style={{ width: 240 }}
         onPress={() => func()}
+        role="default"
+        label={text}
+        modifiers={[
+          controlSize("extraLarge"),
+          buttonStyle("glassProminent"),
+          tint(GOLD),
+          fixedSize({
+            horizontal: true,
+            vertical: true,
+          }),
+        ]}
       >
-        <Text style={{ color: "#fff" }}>Press me</Text>
+        <Text>{text}</Text>
       </Button>
     </Host>
   )
@@ -26,5 +38,5 @@ export default function SpotifyButton({ func }) {
 
 SpotifyButton.propTypes = {
   func: PropTypes.func,
-  // texts: PropTypes.string,
+  text: PropTypes.string,
 }

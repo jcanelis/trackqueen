@@ -1210,10 +1210,10 @@
   resolved "https://registry.yarnpkg.com/@expo/sudo-prompt/-/sudo-prompt-9.3.2.tgz#0fd2813402a42988e49145cab220e25bea74b308"
   integrity sha512-HHQigo3rQWKMDzYDLkubN5WQOYXJJE2eNqIQC2axC2iO3mHdwnIR7FgZVvHWtBwAdzBgAP0ECp8KqS8TiMKvgw==
 
-"@expo/ui@~55.0.8":
-  version "55.0.8"
-  resolved "https://registry.yarnpkg.com/@expo/ui/-/ui-55.0.8.tgz#6de201fea30e1c732611aa671764e63325c2dcad"
-  integrity sha512-YGKjr0sF9SwRK0sPu8AlBIbAnxM+yhoml39WnJ/+Xk2tm2Fe4uYuHgBmPhA9Zq/CR684hfz4eTJT63GafpM1aw==
+"@expo/ui@~55.0.10":
+  version "55.0.10"
+  resolved "https://registry.yarnpkg.com/@expo/ui/-/ui-55.0.10.tgz#ff8e0fe41759a63f93e6919b9e439d86adab39d2"
+  integrity sha512-Kfmjw1xKgRWkgCk5BIS9NRWjhsTDDd5m24FOfmFO5+nTdGUOWH6CfYGYooPCdVw9F+X3/Jw43r5IuyvEFtaKTQ==
   dependencies:
     sf-symbols-typescript "^2.1.0"
 

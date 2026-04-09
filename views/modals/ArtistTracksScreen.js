@@ -91,7 +91,11 @@ function ArtistTracksScreen({ route }) {
         }
         ListFooterComponent={
           <View
-            style={{ marginTop: baseUnit * 2, marginBottom: baseUnit * 12 }}
+            style={{
+              alignItems: "center",
+              marginTop: baseUnit * 4,
+              marginBottom: baseUnit * 16,
+            }}
           >
             <SpotifyButton
               text={"Play on Spotify"}
