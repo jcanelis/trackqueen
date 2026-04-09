@@ -103,7 +103,7 @@ function BioScreen({ route }) {
           color={GOLD}
           title={"Ask ChatGPT"}
           onPress={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me about the musician ${artist}.`,
             })
           }}
@@ -143,7 +143,7 @@ function BioScreen({ route }) {
         <Chip
           text={`Ask ChatGPT about ${artist}.`}
           action={() => {
-            navigation.navigate("Powered by GPT-4 API", {
+            navigation.navigate("Powered by GPT-5 API", {
               query: `Tell me about the musician ${artist}.`,
             })
           }}

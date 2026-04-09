@@ -17,7 +17,7 @@ const GPTStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={"Powered by GPT-4 API"}
+        name={"Powered by GPT-5 API"}
         component={GPTResponse}
         options={{
           presentation: "modal",

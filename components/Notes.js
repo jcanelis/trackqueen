@@ -84,7 +84,7 @@ const Notes = ({ data }) => {
       <Chip
         text={`Ask ChatGPT about this song.`}
         action={() => {
-          navigation.navigate("Powered by GPT-4 API", {
+          navigation.navigate("Powered by GPT-5 API", {
             query: `Tell me about the song, ”${track}” by ${artist}.`,
           })
         }}

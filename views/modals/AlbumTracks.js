@@ -63,7 +63,7 @@ const AlbumTracks = ({ route }) => {
             copy={`${route.params.tracks.length} tracks`}
             border={false}
             func={() => {
-              navigation.navigate("Powered by GPT-4 API", {
+              navigation.navigate("Powered by GPT-5 API", {
                 query: `Tell me about the album, ${album} by ${artist}.`,
               })
             }}
