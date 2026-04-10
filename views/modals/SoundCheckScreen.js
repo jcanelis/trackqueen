@@ -96,7 +96,7 @@ function SoundCheckScreen() {
   // const recorderState = useAudioRecorderState(audioRecorder)
 
   // A recording timer ID for cancelling when needed.
-  // const [timerID, setTimerID] = useState(1)
+  const [timerID, setTimerID] = useState(1)
 
   // Is data being fetched from the API service
   const [fetchingData, setFetchingData] = useState(false)
@@ -158,6 +158,7 @@ function SoundCheckScreen() {
 
   function timeout(ms) {
     return new Promise((resolve) => {
+      console.log("Starting the timer...")
       const daID = setTimeout(resolve, ms)
       setTimerID(daID)
     })
@@ -169,6 +170,8 @@ function SoundCheckScreen() {
       const audioSearch = new Promise((resolve, reject) => {
         async function init() {
           try {
+            console.log("Running query Search-nearby-audio...")
+
             if (failed) {
               setFailed(false)
             }
@@ -185,15 +188,14 @@ function SoundCheckScreen() {
               )
               audioRecorder.record()
             }
-
             record()
+
+            await timeout(8000)
 
             const stopRecording = async () => {
               console.log("Stop recording...")
               await audioRecorder.stop()
             }
-
-            await timeout(5000)
 
             stopRecording()
 
@@ -204,12 +206,7 @@ function SoundCheckScreen() {
 
             setFetchingData(true)
 
-            console.log("audioRecorder", audioRecorder)
-
             const acrCloud = await Identify(audioRecorder.uri, signal)
-
-            console.log("acrCloud", acrCloud)
-            console.log("acrCloud STATUS", acrCloud.status)
 
             if (acrCloud.status.msg === "No result") {
               setFailed(true)

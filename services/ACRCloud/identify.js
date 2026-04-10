@@ -27,8 +27,6 @@ function signString(stringToSign, accessSecret) {
 }
 
 export default async function Identify(uri, signal) {
-  console.log("uri received", uri)
-
   try {
     const options = {
       host: "identify-us-west-2.acrcloud.com",
@@ -39,6 +37,9 @@ export default async function Identify(uri, signal) {
       access_key: `${Keys.Acr}`,
       access_secret: `${Keys.AcrSecret}`,
     }
+
+    console.log(`${Keys.AcrSecret}`)
+    console.log(`${Keys.Acr}`)
 
     const current_date = new Date()
     const timestamp = current_date.getTime() / 1000
@@ -52,6 +53,9 @@ export default async function Identify(uri, signal) {
     )
 
     let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
+
+    console.log("fileinfo", fileinfo)
+
     const signature = signString(stringToSign, options.access_secret)
     const formData = {
       sample: { uri: fileinfo.uri, name: "sample.wav", type: "audio/wav" },
@@ -76,14 +80,10 @@ export default async function Identify(uri, signal) {
       signal,
     }
 
-    console.log("Fetching from API...")
-
     let response = await fetch(
       "https://" + options.host + options.endpoint,
       postOptions
     )
-
-    console.log("RESPONSE", response)
 
     let responseJSON = await response.json()
     console.log("RESPONSEJSON RESPONSEJSON ", responseJSON)
