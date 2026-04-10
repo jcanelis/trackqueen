@@ -3,7 +3,7 @@ import hmacSHA1 from "crypto-js/hmac-sha1"
 import Base64 from "crypto-js/enc-base64"
 
 // Expo
-import * as FileSystem from "expo-file-system"
+import { File } from "expo-file-system"
 
 // Custom
 import Keys from "../../constants/Keys"
@@ -26,6 +26,7 @@ function signString(stringToSign, accessSecret) {
 }
 
 export default async function Identify(uri, signal) {
+  console.log("STARTED!")
   try {
     const options = {
       host: "identify-us-west-2.acrcloud.com",
@@ -47,8 +48,14 @@ export default async function Identify(uri, signal) {
       options.signature_version,
       timestamp
     )
-    let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
+
+    //let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
+    let fileinfo = await new File(uri).info
+    console.log("fileinfo", fileinfo)
+
     const signature = signString(stringToSign, options.access_secret)
+    console.log("signature", signature)
+
     const formData = {
       sample: { uri: uri, name: "sample.wav", type: "audio/wav" },
       access_key: options.access_key,
@@ -72,11 +79,15 @@ export default async function Identify(uri, signal) {
       signal,
     }
 
+    console.log("DO THE THING!!")
+
     let response = await fetch(
       "https://" + options.host + options.endpoint,
       postOptions
     )
+    console.log(response)
     let responseJSON = await response.json()
+    console.log("RESPONSEJSON RESPONSEJSON ", responseJSON)
 
     return responseJSON
   } catch (error) {

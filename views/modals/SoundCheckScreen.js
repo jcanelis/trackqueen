@@ -10,7 +10,14 @@ import { useNavigation, useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // Expo
-import { useAudioRecorder } from "expo-audio"
+import {
+  audioRecorder,
+  useAudioRecorder,
+  setAudioModeAsync,
+  RecordingPresets,
+  useAudioRecorderState,
+  requestRecordingPermissionsAsync,
+} from "expo-audio"
 import { Image } from "expo-image"
 import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
@@ -41,6 +48,7 @@ function SoundCheckScreen() {
   const { colors } = useTheme()
   const { width } = useWindowDimensions()
   const animationRef = useRef(null)
+  const [permissionGranted, setPermissionGranted] = useState(false)
 
   // ACRCloud image
   // https://docs.expo.dev/versions/latest/sdk/asset/
@@ -49,9 +57,18 @@ function SoundCheckScreen() {
     require("../../assets/loader.png"),
   ])
 
-  // Get audio recording permissions
-  const [permissionResponse, requestPermission] =
-    useAudioRecorder.usePermissions()
+  // if required on Android, request recording permissions
+  useEffect(() => {
+    async function requestPermission() {
+      const { granted } = await requestRecordingPermissionsAsync()
+      if (granted) {
+        console.log("Permission granted")
+        setPermissionGranted(true)
+      }
+    }
+
+    requestPermission()
+  }, [])
 
   // Updated during the recording progress
   const initialRecordingStatus = {
@@ -64,6 +81,9 @@ function SoundCheckScreen() {
 
   // A reference to the recording
   const [recording, setRecording] = useState(null)
+
+  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY)
+  const recorderState = useAudioRecorderState(audioRecorder)
 
   // A recording timer ID for cancelling when needed.
   const [timerID, setTimerID] = useState(1)
@@ -95,7 +115,7 @@ function SoundCheckScreen() {
             }
 
             // Turn off device recordings
-            await useAudioRecorder.setAudioModeAsync({
+            await setAudioModeAsync({
               allowsRecordingIOS: false,
               playsInSilentModeIOS: false,
             })
@@ -140,42 +160,44 @@ function SoundCheckScreen() {
             }
 
             // Prep device to record
-            await useAudioRecorder.setAudioModeAsync({
+            await setAudioModeAsync({
               allowsRecordingIOS: true,
               playsInSilentModeIOS: true,
             })
 
-            // Create a recording
-            const { recording } = await useAudioRecorder.Recording.createAsync(
-              audioConfig,
-              (data) => {
-                setStatusObject(data)
-              },
-              1000
-            )
-
-            // Start the recording
-            setRecording(recording)
-            await recording.startAsync()
+            const recording = async () => {
+              await audioRecorder.prepareToRecordAsync()
+              audioRecorder.record()
+            }
 
             // Let the audio record for six seconds
             await timeout(6000)
 
-            // Stop the recording
-            await recording.stopAndUnloadAsync()
-            await useAudioRecorder.setAudioModeAsync({
+            const stopRecording = async () => {
+              // The recording will be available on `audioRecorder.uri`.
+              await audioRecorder.stop()
+            }
+
+            await setAudioModeAsync({
               allowsRecordingIOS: false,
               playsInSilentModeIOS: false,
             })
 
+            console.log("recording!!!!", recording)
+
             // Get the file
-            let audioFile = recording.getURI()
+            let audioFile = audioRecorder.uri
+
+            console.log("audioFile", audioFile)
+            console.log("audioFile.uri", audioFile.uri)
 
             // Send the audio file to ACR Cloud API
             setFetchingData(true)
             const acrCloud = await Identify(audioFile, signal)
 
             // Handle the response
+            console.log(acrCloud)
+            console.log(acrCloud.status)
             if (acrCloud.status.msg === "No result") {
               setFailed(true)
               throw new Error("No track found in search.")
@@ -264,7 +286,7 @@ function SoundCheckScreen() {
         </Pressable>
       </View>
 
-      {permissionResponse && (
+      {permissionGranted && (
         <View
           style={{
             flex: 1,
@@ -291,7 +313,7 @@ function SoundCheckScreen() {
             <StatusText content={"Unable to find a song with your audio..."} />
           ) : null}
 
-          {permissionResponse.status === "granted" ? (
+          {permissionGranted ? (
             <Button
               title={recording ? "Cancel" : "Start recording"}
               color={GOLD}
