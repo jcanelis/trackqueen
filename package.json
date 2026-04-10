@@ -1,6 +1,6 @@
 {
   "name": "trackqueen",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Learn more about your music.",
   "scripts": {
     "build": "npx eas-cli build --platform ios",
