@@ -3,7 +3,7 @@ import hmacSHA1 from "crypto-js/hmac-sha1"
 import Base64 from "crypto-js/enc-base64"
 
 // Expo
-import { File } from "expo-file-system"
+import { File, Paths } from "expo-file-system"
 
 // Custom
 import Keys from "../../constants/Keys"
@@ -25,8 +25,13 @@ function signString(stringToSign, accessSecret) {
   return Base64.stringify(hmacSHA1(stringToSign, accessSecret))
 }
 
-export default async function Identify(uri, signal) {
-  console.log("STARTED!")
+export default async function Identify(audiofile, signal) {
+  console.log("audiofilesize", audiofile.size)
+
+  console.log("audiofile", audiofile)
+  const newfile = new File(Paths.cache, audiofile.uri)
+  console.log("newfile", newfile)
+
   try {
     const options = {
       host: "identify-us-west-2.acrcloud.com",
@@ -49,20 +54,14 @@ export default async function Identify(uri, signal) {
       timestamp
     )
 
-    //let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
-    let fileinfo = await new File(uri).info
-    console.log("fileinfo", fileinfo)
-
     const signature = signString(stringToSign, options.access_secret)
-    console.log("signature", signature)
-
     const formData = {
-      sample: { uri: uri, name: "sample.wav", type: "audio/wav" },
+      sample: { uri: newfile.uri, name: "sample.wav", type: "audio/wav" },
       access_key: options.access_key,
       data_type: options.data_type,
       signature_version: options.signature_version,
       signature: signature,
-      sample_bytes: fileinfo.size,
+      sample_bytes: newfile.size,
       timestamp: timestamp,
     }
     var form = new FormData()
@@ -79,13 +78,15 @@ export default async function Identify(uri, signal) {
       signal,
     }
 
-    console.log("DO THE THING!!")
+    console.log("Fetching from API...")
 
     let response = await fetch(
       "https://" + options.host + options.endpoint,
       postOptions
     )
-    console.log(response)
+
+    console.log("RESPONSE", response)
+
     let responseJSON = await response.json()
     console.log("RESPONSEJSON RESPONSEJSON ", responseJSON)
 

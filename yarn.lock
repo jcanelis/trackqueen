@@ -1285,9 +1285,9 @@
   integrity sha512-nDRbLmSrJar7abvUjp3smDwH8HcbZcoOEa5jVPUv9/9CajgmWw20JNRwTuBRzWIWIkEJDkz20GoNA+tSwUqk0Q==
 
 "@expo/xcpretty@^4.4.0":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@expo/xcpretty/-/xcpretty-4.4.2.tgz#7430231bbf8b8f2e9e8455bea6c7214680efd6d9"
-  integrity sha512-ni4WJrmmY43GB1d++iTB7OD7JQlwGarrdhS7pb/ibJKrRIf/HOeuTZndPalXM2QOD7JpfZ/51QprRU9UOjTROw==
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/@expo/xcpretty/-/xcpretty-4.4.3.tgz#c49a052591cc672a9a032760c0262c76d46e08b6"
+  integrity sha512-wC562eD3gS6vO2tWHToFhlFnmHKfKHgF1oyvojeSkLK/ZYop1bMU+7cOMiF9Sq70CzcsLy/EMRy/uRc76QmNRw==
   dependencies:
     "@babel/code-frame" "^7.20.0"
     chalk "^4.1.0"

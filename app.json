@@ -52,6 +52,21 @@
           }
         }
       ],
+      [
+        "expo-file-system",
+        {
+          "supportsOpeningDocumentsInPlace": true,
+          "enableFileSharing": true
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Allow TrackQueen to access your microphone.",
+          "enableBackgroundPlayback": true,
+          "enableBackgroundRecording": true
+        }
+      ],
       "expo-secure-store",
       "expo-asset",
       "expo-web-browser",

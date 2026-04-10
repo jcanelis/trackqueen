@@ -11,11 +11,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // Expo
 import {
-  audioRecorder,
   useAudioRecorder,
+  AudioModule,
   setAudioModeAsync,
   RecordingPresets,
-  useAudioRecorderState,
   requestRecordingPermissionsAsync,
 } from "expo-audio"
 import { Image } from "expo-image"
@@ -31,7 +30,7 @@ import SpotifyGetTrack from "../../services/Spotify/getTrack"
 import TokenCheck from "../../services/Custom/checkToken"
 
 // Utility
-import audioConfig from "../../constants/AudioConfig"
+// import audioConfig from "../../constants/AudioConfig"
 
 // Components
 import StatusText from "../../components/StatusText"
@@ -82,8 +81,18 @@ function SoundCheckScreen() {
   // A reference to the recording
   const [recording, setRecording] = useState(null)
 
-  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY)
-  const recorderState = useAudioRecorderState(audioRecorder)
+  const audioRecorder = useAudioRecorder({
+    ios: {
+      extension: ".wav",
+      audioQuality: RecordingPresets.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+      sampleRate: 8000,
+      numberOfChannels: 1,
+      linearPCMBitDepth: 16,
+      linearPCMIsBigEndian: false,
+      linearPCMIsFloat: true,
+    },
+  })
+  // const recorderState = useAudioRecorderState(audioRecorder)
 
   // A recording timer ID for cancelling when needed.
   const [timerID, setTimerID] = useState(1)
@@ -98,6 +107,20 @@ function SoundCheckScreen() {
   const _handlePressButtonAsync = async (url) => {
     await WebBrowser.openBrowserAsync(url)
   }
+
+  useEffect(() => {
+    ;(async () => {
+      const status = await AudioModule.requestRecordingPermissionsAsync()
+      if (!status.granted) {
+        Alert.alert("Permission to access microphone was denied")
+      }
+
+      setAudioModeAsync({
+        playsInSilentMode: true,
+        allowsRecording: true,
+      })
+    })()
+  }, [])
 
   useEffect(() => {
     // If recording, stop the recording
@@ -116,8 +139,8 @@ function SoundCheckScreen() {
 
             // Turn off device recordings
             await setAudioModeAsync({
-              allowsRecordingIOS: false,
-              playsInSilentModeIOS: false,
+              allowsRecordingIOS: true,
+              playsInSilentModeIOS: true,
             })
 
             // Cancel the query wrapper
@@ -139,16 +162,6 @@ function SoundCheckScreen() {
     })
   }
 
-  async function stopRecording() {
-    animationRef.current?.pause()
-    queryClient.cancelQueries({ queryKey: ["Search-nearby-audio"] })
-    clearTimeout(timerID)
-    setRecording(null)
-    setFailed(false)
-    setFetchingData(false)
-    setStatusObject(initialRecordingStatus)
-  }
-
   useQuery({
     queryKey: ["Search-nearby-audio"],
     queryFn: async ({ signal }) => {
@@ -159,45 +172,64 @@ function SoundCheckScreen() {
               setFailed(false)
             }
 
-            // Prep device to record
             await setAudioModeAsync({
               allowsRecordingIOS: true,
               playsInSilentModeIOS: true,
             })
 
-            const recording = async () => {
-              await audioRecorder.prepareToRecordAsync()
+            const record = async () => {
+              await audioRecorder.prepareToRecordAsync({
+                extension: ".wav",
+                audioQuality:
+                  RecordingPresets.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+                sampleRate: 8000,
+                numberOfChannels: 1,
+                linearPCMBitDepth: 16,
+                linearPCMIsBigEndian: false,
+                linearPCMIsFloat: true,
+              })
               audioRecorder.record()
             }
 
-            // Let the audio record for six seconds
-            await timeout(6000)
+            record()
+
+            // const recording = async () => {
+            //   await setAudioModeAsync({
+            //     allowsRecordingIOS: true,
+            //     playsInSilentModeIOS: true,
+            //   })
+            //   console.log("Start recording...")
+            //   await audioRecorder.prepareToRecordAsync()
+            //   audioRecorder.record()
+            // }
 
             const stopRecording = async () => {
-              // The recording will be available on `audioRecorder.uri`.
+              console.log("Stop recording...")
+              await timeout(6000)
               await audioRecorder.stop()
+              // animationRef.current?.pause()
+              // queryClient.cancelQueries({ queryKey: ["Search-nearby-audio"] })
+              // clearTimeout(timerID)
+              // setRecording(null)
+              // setFailed(false)
+              // setFetchingData(false)
+              // setStatusObject(initialRecordingStatus)
             }
+
+            stopRecording()
 
             await setAudioModeAsync({
               allowsRecordingIOS: false,
               playsInSilentModeIOS: false,
             })
 
-            console.log("recording!!!!", recording)
-
-            // Get the file
-            let audioFile = audioRecorder.uri
-
-            console.log("audioFile", audioFile)
-            console.log("audioFile.uri", audioFile.uri)
-
-            // Send the audio file to ACR Cloud API
             setFetchingData(true)
-            const acrCloud = await Identify(audioFile, signal)
 
-            // Handle the response
-            console.log(acrCloud)
-            console.log(acrCloud.status)
+            console.log("audioRecorder", audioRecorder)
+            console.log("recording", recording)
+
+            const acrCloud = await Identify(audioRecorder, signal)
+
             if (acrCloud.status.msg === "No result") {
               setFailed(true)
               throw new Error("No track found in search.")
@@ -266,16 +298,6 @@ function SoundCheckScreen() {
               opacity: pressed ? 0.7 : 1,
             },
           ]}
-          onPress={
-            recording
-              ? stopRecording
-              : () => {
-                  animationRef.current?.play()
-                  queryClient.fetchQuery({
-                    queryKey: ["Search-nearby-audio"],
-                  })
-                }
-          }
         >
           {assets && (
             <Image
@@ -315,27 +337,17 @@ function SoundCheckScreen() {
 
           {permissionGranted ? (
             <Button
-              title={recording ? "Cancel" : "Start recording"}
-              color={GOLD}
-              onPress={
-                recording
-                  ? stopRecording
-                  : () => {
-                      animationRef.current?.play()
-                      queryClient.fetchQuery({
-                        queryKey: ["Search-nearby-audio"],
-                      })
-                    }
-              }
-            />
-          ) : (
-            <Button
-              title="Enable audio recording"
+              title={"Start recording"}
               color={GOLD}
               onPress={() => {
-                requestPermission()
+                animationRef.current?.play()
+                queryClient.fetchQuery({
+                  queryKey: ["Search-nearby-audio"],
+                })
               }}
             />
+          ) : (
+            <Button title="Enable audio recording" color={GOLD} />
           )}
 
           <View
