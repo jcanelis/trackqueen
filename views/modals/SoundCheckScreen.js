@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import {
+  Alert,
   ActivityIndicator,
   Button,
   Pressable,
@@ -95,7 +96,7 @@ function SoundCheckScreen() {
   // const recorderState = useAudioRecorderState(audioRecorder)
 
   // A recording timer ID for cancelling when needed.
-  const [timerID, setTimerID] = useState(1)
+  // const [timerID, setTimerID] = useState(1)
 
   // Is data being fetched from the API service
   const [fetchingData, setFetchingData] = useState(false)
@@ -139,8 +140,8 @@ function SoundCheckScreen() {
 
             // Turn off device recordings
             await setAudioModeAsync({
-              allowsRecordingIOS: true,
-              playsInSilentModeIOS: true,
+              allowsRecording: true,
+              playsInSilentMode: true,
             })
 
             // Cancel the query wrapper
@@ -173,62 +174,42 @@ function SoundCheckScreen() {
             }
 
             await setAudioModeAsync({
-              allowsRecordingIOS: true,
-              playsInSilentModeIOS: true,
+              allowsRecording: true,
+              playsInSilentMode: true,
             })
 
             const record = async () => {
-              await audioRecorder.prepareToRecordAsync({
-                extension: ".wav",
-                audioQuality:
-                  RecordingPresets.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
-                sampleRate: 8000,
-                numberOfChannels: 1,
-                linearPCMBitDepth: 16,
-                linearPCMIsBigEndian: false,
-                linearPCMIsFloat: true,
-              })
+              console.log("Starting to record...")
+              await audioRecorder.prepareToRecordAsync(
+                RecordingPresets.HIGH_QUALITY
+              )
               audioRecorder.record()
             }
 
             record()
 
-            // const recording = async () => {
-            //   await setAudioModeAsync({
-            //     allowsRecordingIOS: true,
-            //     playsInSilentModeIOS: true,
-            //   })
-            //   console.log("Start recording...")
-            //   await audioRecorder.prepareToRecordAsync()
-            //   audioRecorder.record()
-            // }
-
             const stopRecording = async () => {
               console.log("Stop recording...")
-              await timeout(6000)
               await audioRecorder.stop()
-              // animationRef.current?.pause()
-              // queryClient.cancelQueries({ queryKey: ["Search-nearby-audio"] })
-              // clearTimeout(timerID)
-              // setRecording(null)
-              // setFailed(false)
-              // setFetchingData(false)
-              // setStatusObject(initialRecordingStatus)
             }
+
+            await timeout(5000)
 
             stopRecording()
 
             await setAudioModeAsync({
-              allowsRecordingIOS: false,
-              playsInSilentModeIOS: false,
+              allowsRecording: true,
+              playsInSilentMode: true,
             })
 
             setFetchingData(true)
 
             console.log("audioRecorder", audioRecorder)
-            console.log("recording", recording)
 
-            const acrCloud = await Identify(audioRecorder, signal)
+            const acrCloud = await Identify(audioRecorder.uri, signal)
+
+            console.log("acrCloud", acrCloud)
+            console.log("acrCloud STATUS", acrCloud.status)
 
             if (acrCloud.status.msg === "No result") {
               setFailed(true)

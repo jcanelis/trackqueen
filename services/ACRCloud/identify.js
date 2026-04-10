@@ -4,6 +4,7 @@ import Base64 from "crypto-js/enc-base64"
 
 // Expo
 import { File, Paths } from "expo-file-system"
+import * as FileSystem from "expo-file-system/legacy"
 
 // Custom
 import Keys from "../../constants/Keys"
@@ -25,12 +26,8 @@ function signString(stringToSign, accessSecret) {
   return Base64.stringify(hmacSHA1(stringToSign, accessSecret))
 }
 
-export default async function Identify(audiofile, signal) {
-  console.log("audiofilesize", audiofile.size)
-
-  console.log("audiofile", audiofile)
-  const newfile = new File(Paths.cache, audiofile.uri)
-  console.log("newfile", newfile)
+export default async function Identify(uri, signal) {
+  console.log("uri received", uri)
 
   try {
     const options = {
@@ -54,14 +51,15 @@ export default async function Identify(audiofile, signal) {
       timestamp
     )
 
+    let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
     const signature = signString(stringToSign, options.access_secret)
     const formData = {
-      sample: { uri: newfile.uri, name: "sample.wav", type: "audio/wav" },
+      sample: { uri: fileinfo.uri, name: "sample.wav", type: "audio/wav" },
       access_key: options.access_key,
       data_type: options.data_type,
       signature_version: options.signature_version,
       signature: signature,
-      sample_bytes: newfile.size,
+      sample_bytes: fileinfo.size,
       timestamp: timestamp,
     }
     var form = new FormData()
