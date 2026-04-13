@@ -3,7 +3,6 @@ import hmacSHA1 from "crypto-js/hmac-sha1"
 import Base64 from "crypto-js/enc-base64"
 
 // Expo
-import { File, Paths } from "expo-file-system"
 import * as FileSystem from "expo-file-system/legacy"
 
 // Custom
