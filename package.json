@@ -38,7 +38,7 @@
     "@shopify/flash-list": "2.0.2",
     "@tanstack/react-query": "^4.35.3",
     "crypto-js": "^4.2.0",
-    "expo": "55.0.9",
+    "expo": "~55.0.14",
     "expo-asset": "~55.0.13",
     "expo-audio": "~55.0.12",
     "expo-auth-session": "~55.0.12",
