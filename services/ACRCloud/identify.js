@@ -3,7 +3,7 @@ import hmacSHA1 from "crypto-js/hmac-sha1"
 import Base64 from "crypto-js/enc-base64"
 
 // Expo
-import * as FileSystem from "expo-file-system"
+import * as FileSystem from "expo-file-system/legacy"
 
 // Custom
 import Keys from "../../constants/Keys"
@@ -37,6 +37,9 @@ export default async function Identify(uri, signal) {
       access_secret: `${Keys.AcrSecret}`,
     }
 
+    console.log(`${Keys.AcrSecret}`)
+    console.log(`${Keys.Acr}`)
+
     const current_date = new Date()
     const timestamp = current_date.getTime() / 1000
     const stringToSign = buildStringToSign(
@@ -47,10 +50,14 @@ export default async function Identify(uri, signal) {
       options.signature_version,
       timestamp
     )
+
     let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
+
+    console.log("fileinfo", fileinfo)
+
     const signature = signString(stringToSign, options.access_secret)
     const formData = {
-      sample: { uri: uri, name: "sample.wav", type: "audio/wav" },
+      sample: { uri: fileinfo.uri, name: "sample.wav", type: "audio/wav" },
       access_key: options.access_key,
       data_type: options.data_type,
       signature_version: options.signature_version,
@@ -76,7 +83,9 @@ export default async function Identify(uri, signal) {
       "https://" + options.host + options.endpoint,
       postOptions
     )
+
     let responseJSON = await response.json()
+    console.log("RESPONSEJSON RESPONSEJSON ", responseJSON)
 
     return responseJSON
   } catch (error) {

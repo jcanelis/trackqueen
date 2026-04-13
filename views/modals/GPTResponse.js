@@ -198,7 +198,7 @@ function GPTResponse({ route }) {
           opacity: 0.85,
         }}
       >
-        {data.choices[0].message.content.trim().trim()}
+        {data.output[1].content[0].text}
       </Text>
 
       {assets && !error && (

@@ -22,8 +22,8 @@ const GeniusLink = ({ data }) => {
 
   return (
     <>
-      {data.annotations.length > 0 && (
-        <Host style={{ padding: baseUnit * 4 }}>
+      {data && data.annotations && data.annotations.length > 0 && (
+        <Host style={{ padding: baseUnit * 4 }} matchContents>
           <Button
             label={"View annotations from Genius"}
             modifiers={[

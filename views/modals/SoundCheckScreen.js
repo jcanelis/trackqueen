@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import {
+  Alert,
   ActivityIndicator,
   Button,
   Pressable,
@@ -10,7 +11,13 @@ import { useNavigation, useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // Expo
-import { useAudioRecorder } from "expo-audio"
+import {
+  useAudioRecorder,
+  AudioModule,
+  setAudioModeAsync,
+  RecordingPresets,
+  requestRecordingPermissionsAsync,
+} from "expo-audio"
 import { Image } from "expo-image"
 import { useAssets } from "expo-asset"
 import * as WebBrowser from "expo-web-browser"
@@ -24,7 +31,7 @@ import SpotifyGetTrack from "../../services/Spotify/getTrack"
 import TokenCheck from "../../services/Custom/checkToken"
 
 // Utility
-import audioConfig from "../../constants/AudioConfig"
+// import audioConfig from "../../constants/AudioConfig"
 
 // Components
 import StatusText from "../../components/StatusText"
@@ -41,6 +48,7 @@ function SoundCheckScreen() {
   const { colors } = useTheme()
   const { width } = useWindowDimensions()
   const animationRef = useRef(null)
+  const [permissionGranted, setPermissionGranted] = useState(false)
 
   // ACRCloud image
   // https://docs.expo.dev/versions/latest/sdk/asset/
@@ -49,9 +57,18 @@ function SoundCheckScreen() {
     require("../../assets/loader.png"),
   ])
 
-  // Get audio recording permissions
-  const [permissionResponse, requestPermission] =
-    useAudioRecorder.usePermissions()
+  // if required on Android, request recording permissions
+  useEffect(() => {
+    async function requestPermission() {
+      const { granted } = await requestRecordingPermissionsAsync()
+      if (granted) {
+        console.log("Permission granted")
+        setPermissionGranted(true)
+      }
+    }
+
+    requestPermission()
+  }, [])
 
   // Updated during the recording progress
   const initialRecordingStatus = {
@@ -64,6 +81,19 @@ function SoundCheckScreen() {
 
   // A reference to the recording
   const [recording, setRecording] = useState(null)
+
+  const audioRecorder = useAudioRecorder({
+    ios: {
+      extension: ".wav",
+      audioQuality: RecordingPresets.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+      sampleRate: 8000,
+      numberOfChannels: 1,
+      linearPCMBitDepth: 16,
+      linearPCMIsBigEndian: false,
+      linearPCMIsFloat: true,
+    },
+  })
+  // const recorderState = useAudioRecorderState(audioRecorder)
 
   // A recording timer ID for cancelling when needed.
   const [timerID, setTimerID] = useState(1)
@@ -78,6 +108,20 @@ function SoundCheckScreen() {
   const _handlePressButtonAsync = async (url) => {
     await WebBrowser.openBrowserAsync(url)
   }
+
+  useEffect(() => {
+    ;(async () => {
+      const status = await AudioModule.requestRecordingPermissionsAsync()
+      if (!status.granted) {
+        Alert.alert("Permission to access microphone was denied")
+      }
+
+      setAudioModeAsync({
+        playsInSilentMode: true,
+        allowsRecording: true,
+      })
+    })()
+  }, [])
 
   useEffect(() => {
     // If recording, stop the recording
@@ -95,9 +139,9 @@ function SoundCheckScreen() {
             }
 
             // Turn off device recordings
-            await useAudioRecorder.setAudioModeAsync({
-              allowsRecordingIOS: false,
-              playsInSilentModeIOS: false,
+            await setAudioModeAsync({
+              allowsRecording: true,
+              playsInSilentMode: true,
             })
 
             // Cancel the query wrapper
@@ -114,19 +158,10 @@ function SoundCheckScreen() {
 
   function timeout(ms) {
     return new Promise((resolve) => {
+      console.log("Starting the timer...")
       const daID = setTimeout(resolve, ms)
       setTimerID(daID)
     })
-  }
-
-  async function stopRecording() {
-    animationRef.current?.pause()
-    queryClient.cancelQueries({ queryKey: ["Search-nearby-audio"] })
-    clearTimeout(timerID)
-    setRecording(null)
-    setFailed(false)
-    setFetchingData(false)
-    setStatusObject(initialRecordingStatus)
   }
 
   useQuery({
@@ -135,47 +170,44 @@ function SoundCheckScreen() {
       const audioSearch = new Promise((resolve, reject) => {
         async function init() {
           try {
+            console.log("Running query Search-nearby-audio...")
+
             if (failed) {
               setFailed(false)
             }
 
-            // Prep device to record
-            await useAudioRecorder.setAudioModeAsync({
-              allowsRecordingIOS: true,
-              playsInSilentModeIOS: true,
+            await setAudioModeAsync({
+              allowsRecording: true,
+              playsInSilentMode: true,
             })
 
-            // Create a recording
-            const { recording } = await useAudioRecorder.Recording.createAsync(
-              audioConfig,
-              (data) => {
-                setStatusObject(data)
-              },
-              1000
-            )
+            const record = async () => {
+              console.log("Starting to record...")
+              await audioRecorder.prepareToRecordAsync(
+                RecordingPresets.HIGH_QUALITY
+              )
+              audioRecorder.record()
+            }
+            record()
 
-            // Start the recording
-            setRecording(recording)
-            await recording.startAsync()
+            await timeout(8000)
 
-            // Let the audio record for six seconds
-            await timeout(6000)
+            const stopRecording = async () => {
+              console.log("Stop recording...")
+              await audioRecorder.stop()
+            }
 
-            // Stop the recording
-            await recording.stopAndUnloadAsync()
-            await useAudioRecorder.setAudioModeAsync({
-              allowsRecordingIOS: false,
-              playsInSilentModeIOS: false,
+            stopRecording()
+
+            await setAudioModeAsync({
+              allowsRecording: true,
+              playsInSilentMode: true,
             })
 
-            // Get the file
-            let audioFile = recording.getURI()
-
-            // Send the audio file to ACR Cloud API
             setFetchingData(true)
-            const acrCloud = await Identify(audioFile, signal)
 
-            // Handle the response
+            const acrCloud = await Identify(audioRecorder.uri, signal)
+
             if (acrCloud.status.msg === "No result") {
               setFailed(true)
               throw new Error("No track found in search.")
@@ -244,16 +276,6 @@ function SoundCheckScreen() {
               opacity: pressed ? 0.7 : 1,
             },
           ]}
-          onPress={
-            recording
-              ? stopRecording
-              : () => {
-                  animationRef.current?.play()
-                  queryClient.fetchQuery({
-                    queryKey: ["Search-nearby-audio"],
-                  })
-                }
-          }
         >
           {assets && (
             <Image
@@ -264,7 +286,7 @@ function SoundCheckScreen() {
         </Pressable>
       </View>
 
-      {permissionResponse && (
+      {permissionGranted && (
         <View
           style={{
             flex: 1,
@@ -291,29 +313,19 @@ function SoundCheckScreen() {
             <StatusText content={"Unable to find a song with your audio..."} />
           ) : null}
 
-          {permissionResponse.status === "granted" ? (
+          {permissionGranted ? (
             <Button
-              title={recording ? "Cancel" : "Start recording"}
-              color={GOLD}
-              onPress={
-                recording
-                  ? stopRecording
-                  : () => {
-                      animationRef.current?.play()
-                      queryClient.fetchQuery({
-                        queryKey: ["Search-nearby-audio"],
-                      })
-                    }
-              }
-            />
-          ) : (
-            <Button
-              title="Enable audio recording"
+              title={"Start recording"}
               color={GOLD}
               onPress={() => {
-                requestPermission()
+                animationRef.current?.play()
+                queryClient.fetchQuery({
+                  queryKey: ["Search-nearby-audio"],
+                })
               }}
             />
+          ) : (
+            <Button title="Enable audio recording" color={GOLD} />
           )}
 
           <View
