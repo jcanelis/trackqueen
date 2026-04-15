@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from "react"
 import { ActivityIndicator, View } from "react-native"
 import { useTheme } from "@react-navigation/native"
 
+import * as WebBrowser from "expo-web-browser"
+
 // Expo
-import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
+import { useAuthRequest } from "expo-auth-session"
 
 // Context
 import AuthContext from "../../context/auth"
@@ -23,6 +25,8 @@ import SpotifyButton from "../../components/SpotifyButton"
 // Design
 import { GOLD } from "../../constants/Base"
 
+WebBrowser.maybeCompleteAuthSession()
+
 function LoginScreen() {
   const { colors } = useTheme()
   const authContext = useContext(AuthContext)
@@ -39,9 +43,7 @@ function LoginScreen() {
       clientId: `${Keys.Spotify}`,
       scopes: spotifyAuthScopes,
       usePKCE: false,
-      redirectUri: makeRedirectUri({
-        scheme: "tq22",
-      }),
+      redirectUri: "com.jcanelis.tq22://auth/",
     },
     endpoints
   )
@@ -50,11 +52,8 @@ function LoginScreen() {
     async function getAccessToken(authCode) {
       try {
         setLoading(true)
-        // Fetch token from Google Cloud using Spotify login data
         const accessToken = await SpotifyGetToken(authCode)
         setLoading(false)
-
-        // Update app root state with user token
         authContext.signIn(accessToken)
       } catch (error) {
         console.error(error)
@@ -63,7 +62,6 @@ function LoginScreen() {
 
     if (response?.type === "success") {
       const { code } = response.params
-      // Send data from the results of user Spotify login to handler function
       getAccessToken(code)
     }
   }, [response, authContext, request])

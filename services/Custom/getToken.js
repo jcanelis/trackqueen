@@ -8,9 +8,8 @@ import { saveSecureValue } from "../../utility/SecureStore"
 
 const SpotifyGetToken = async (authCode) => {
   try {
-    // http://127.0.0.1:5001/trackqueen2022/us-central1/spotifyCallback-spotifyCallback
     let response = await fetch(
-      "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyCallback-spotifyCallback",
+      "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyCallback2026-spotifyCallback2026",
       {
         method: "POST",
         mode: "cors",
