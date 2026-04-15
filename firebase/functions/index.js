@@ -1,5 +1,5 @@
-const Admin = require("firebase-admin")
-Admin.initializeApp()
+const admin = require("firebase-admin")
+admin.initializeApp()
 
-exports.spotifyCallback = require("./src/spotifyCallback")
-exports.spotifyRefreshToken = require("./src/spotifyRefreshToken")
+exports.spotifyCallback2026 = require("./src/spotifyCallback2026")
+exports.spotifyRefreshToken2026 = require("./src/spotifyRefreshToken2026")

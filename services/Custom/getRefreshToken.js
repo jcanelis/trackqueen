@@ -11,7 +11,7 @@ const SpotifyRefreshToken = async (signal) => {
   try {
     const refreshToken = await getSecureValue("spotifyRefreshToken")
     let response = await fetch(
-      `https://us-central1-trackqueen2022.cloudfunctions.net/spotifyRefreshToken-spotifyRefreshToken`,
+      `https://us-central1-trackqueen2022.cloudfunctions.net/spotifyRefreshToken2026-spotifyRefreshToken2026`,
       {
         method: "POST",
         mode: "cors",
