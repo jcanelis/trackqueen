@@ -48,8 +48,8 @@ const ArtistListScreen = ({ route }) => {
           <View
             style={{
               alignItems: "center",
-              marginTop: baseUnit * 6,
-              marginBottom: baseUnit * 4,
+              marginTop: baseUnit * 2,
+              marginBottom: baseUnit * 2,
             }}
           >
             <SpotifyButton

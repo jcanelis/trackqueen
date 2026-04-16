@@ -23,11 +23,10 @@ const ArtistLarge = ({ item, image }) => {
       style={({ pressed }) => [
         {
           flex: 1,
-          marginTop: baseUnit * 3,
           alignItems: "center",
-          width: width / 2.4,
-          height: width / 2.4 + baseUnit * 5,
-          opacity: pressed ? 0.6 : 1,
+          width: width / 2,
+          height: width / 2,
+          opacity: pressed ? 0.65 : 1,
         },
       ]}
     >
@@ -35,9 +34,9 @@ const ArtistLarge = ({ item, image }) => {
         source={image}
         placeholder={blurhash}
         transition={240}
-        height={width / 2.4}
-        width={width / 2.4}
-        style={{ borderRadius: width / 2.4 }}
+        height={width / 3}
+        width={width / 3}
+        style={{ borderRadius: width / 3 }}
         accessibilityLabel={item.name}
       />
       <Text
@@ -49,7 +48,7 @@ const ArtistLarge = ({ item, image }) => {
           fontWeight: 600,
           letterSpacing: -0.1,
           color: colors.text,
-          opacity: 0.75,
+          opacity: 0.85,
         }}
       >
         {item.name}
