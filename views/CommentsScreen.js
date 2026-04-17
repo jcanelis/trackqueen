@@ -3,7 +3,16 @@ import { AppState, FlatList, RefreshControl, View } from "react-native"
 
 // Expo UI
 import { Host, Picker, Text } from "@expo/ui/swift-ui"
-import { pickerStyle, tag } from "@expo/ui/swift-ui/modifiers"
+import {
+  // colorInvert,
+  pickerStyle,
+  // foregroundStyle,
+  tint,
+  // background,
+  // backgroundOverlay,
+  tag,
+  // padding,
+} from "@expo/ui/swift-ui/modifiers"
 
 // React Navigation
 import {
@@ -32,7 +41,7 @@ import Loader from "../components/Loader"
 import VideoThumbnail from "../components/VideoThumbnail"
 
 // Design
-import { baseUnit, lightGrey } from "../constants/Base"
+import { baseUnit, GOLD, lightGrey } from "../constants/Base"
 
 const options = ["Popular", "Recent"]
 
@@ -238,8 +247,8 @@ function CommentsScreen() {
                 <Picker
                   controlSize="large"
                   label="Select comments"
-                  variant="segmented"
-                  modifiers={[pickerStyle("segmented")]}
+                  variant="picker"
+                  modifiers={[pickerStyle("picker"), tint(GOLD)]}
                   selection={selectedTag}
                   onSelectionChange={(selection) => {
                     setSelectedTag(selection)
@@ -251,11 +260,7 @@ function CommentsScreen() {
                   }}
                 >
                   {options.map((option) => (
-                    <Text
-                      style={{ color: colors.text }}
-                      key={option}
-                      modifiers={[tag(option)]}
-                    >
+                    <Text key={option} modifiers={[tag(option)]}>
                       {option}
                     </Text>
                   ))}

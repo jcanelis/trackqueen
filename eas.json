@@ -44,12 +44,17 @@
       "autoIncrement": true,
       "extends": "base",
       "channel": "main",
+
       "cache": {
         "key": "random-value-heres"
       }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "ascAppId": "1622531765"
+      }
+    }
   }
 }

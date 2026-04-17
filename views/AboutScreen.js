@@ -157,7 +157,7 @@ function AboutScreen() {
       automaticallyAdjustsScrollIndicatorInsets={true}
       automaticallyAdjustContentInsets={true}
       contentInsetAdjustmentBehavior={"automatic"}
-      contentInset={{ bottom: baseUnit * 16 }}
+      contentInset={{ bottom: baseUnit * 8 }}
       contentContainerStyle={{
         padding: baseUnit * 3,
         gap: baseUnit * 3,
