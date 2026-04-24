@@ -103,7 +103,7 @@ const AboutStack = () => {
       />
 
       <Stack.Screen
-        name={"Powered by GPT-5 API"}
+        name={"Powered by GPT-5"}
         component={GPTResponse}
         navigationKey={currentlyPlaying.track}
       />
