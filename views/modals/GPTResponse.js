@@ -40,7 +40,7 @@ function GPTResponse({ route }) {
 
   // https://docs.expo.dev/versions/latest/sdk/asset/
   const [assets, error] = useAssets([
-    require("../../assets/brands/openai/PNGs/openai-white-lockup.png"),
+    require("../../assets/brands/openai/PNGs/OpenAI-white-wordmark.png"),
   ])
 
   const { isLoading, isError, data } = useQuery({
@@ -132,8 +132,8 @@ function GPTResponse({ route }) {
           <Image
             style={{ opacity: 1 }}
             source={assets[0].localUri}
-            width={2200 / 24}
-            height={598 / 24}
+            width={1604 / 20}
+            height={718 / 20}
           />
         )}
       </View>

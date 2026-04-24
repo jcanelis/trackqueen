@@ -26,7 +26,7 @@ const CommentsStack = () => {
           headerRight: () => <ToolbarAudioSearch />,
         }}
       />
-      <Stack.Screen name={"Powered by GPT-5 API"} component={GPTResponse} />
+      <Stack.Screen name={"Powered by GPT-5"} component={GPTResponse} />
     </Stack.Navigator>
   )
 }

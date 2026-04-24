@@ -185,7 +185,7 @@ function DiscoverScreen() {
             <Chip
               text={`Tell me more about this song.`}
               action={() => {
-                navigation.navigate("Powered by GPT-5 API", {
+                navigation.navigate("Powered by GPT-5", {
                   query: `Tell me about the song, ”${track}” by ${artist}.`,
                 })
               }}
@@ -194,7 +194,7 @@ function DiscoverScreen() {
             <Chip
               text={`Tell me about ${artist}.`}
               action={() => {
-                navigation.navigate("Powered by GPT-5 API", {
+                navigation.navigate("Powered by GPT-5", {
                   query: `Tell me about the musician, ${artist}.`,
                 })
               }}

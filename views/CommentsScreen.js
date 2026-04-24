@@ -212,7 +212,7 @@ function CommentsScreen() {
             <Chip
               text={`Ask ChatGPT about what people have said about ”${track}” by ${artist}.`}
               action={() => {
-                navigation.navigate("Powered by GPT-5 API", {
+                navigation.navigate("Powered by GPT-5", {
                   query: `What have people said about the song, ”${track}” by ${artist}?`,
                 })
               }}
@@ -227,7 +227,7 @@ function CommentsScreen() {
               type={"youtube"}
               copy={"Comments"}
               func={() => {
-                navigation.navigate("Powered by GPT-5 API", {
+                navigation.navigate("Powered by GPT-5", {
                   query: `What have people said about the song, ”${track}” by ${artist}?`,
                 })
               }}

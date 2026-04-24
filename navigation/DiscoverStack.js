@@ -65,7 +65,7 @@ const DiscoverStack = () => {
         navigationKey={currentlyPlaying.track}
       />
 
-      <Stack.Screen name={"Powered by GPT-5 API"} component={GPTResponse} />
+      <Stack.Screen name={"Powered by GPT-5"} component={GPTResponse} />
 
       <Stack.Screen
         name={`${currentlyPlaying.track} TracksListScreen`}
