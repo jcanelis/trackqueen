@@ -14,8 +14,8 @@ import Musixmatch from "./Musixmatch"
 
 const LyricsFooter = ({ data, hasLyrics }) => {
   const [assets, error] = useAssets([
-    require("../assets/brands/musixmatch/Type_Extended_Black.png"),
-    require("../assets/brands/musixmatch/Type_Extended_White.png"),
+    require("../assets/brands/musixmatch/Musixmatch-logo-brands-Black.png"),
+    require("../assets/brands/musixmatch/Musixmatch-logo-brands-White.png"),
   ])
 
   if (!assets || error) {
