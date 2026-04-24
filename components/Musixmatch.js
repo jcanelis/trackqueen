@@ -11,8 +11,8 @@ import { Image } from "expo-image"
 export default function Musixmatch({ data }) {
   const { dark } = useTheme()
   const [assets, error] = useAssets([
-    require("../assets/brands/musixmatch/Type_Extended_White.png"),
-    require("../assets/brands/musixmatch/Type_Extended_Black.png"),
+    require("../assets/brands/musixmatch/Musixmatch-logo-brands-White.png"),
+    require("../assets/brands/musixmatch/Musixmatch-logo-brands-Black.png"),
   ])
 
   const _handlePressButtonAsync = async (url) => {
@@ -34,8 +34,8 @@ export default function Musixmatch({ data }) {
         >
           <Image
             source={dark ? assets[0].localUri : assets[1].localUri}
-            height={400 / 11}
-            width={1760 / 11}
+            height={582 / 12}
+            width={1920 / 12}
           />
         </Pressable>
       )}
