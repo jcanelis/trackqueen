@@ -10,11 +10,6 @@
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#000000"
-    },
     "ios": {
       "icon": "./assets/app.icon",
       "bundleIdentifier": "com.jcanelis.tq22",
@@ -75,6 +70,19 @@
           "microphonePermission": "Allow TrackQueen to access your microphone.",
           "enableBackgroundPlayback": true,
           "enableBackgroundRecording": true
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./assets/splash-icon.png",
+          "enableFullScreenImage_legacy": true,
+          "resizeMode": "cover",
+          "dark": {
+            "image": "./assets/splash-icon-dark.png",
+            "backgroundColor": "#000000"
+          },
         }
       ],
       "expo-secure-store",
