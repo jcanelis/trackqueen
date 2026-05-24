@@ -7,10 +7,13 @@
 
 import Keys from "../../constants/Keys"
 
-const YouTubeComments = async (videoID) => {
+const YouTubeComments = async (videoID, nextPageToken) => {
+
+  const order = "relevance"
+  
   const baseURL = "https://www.googleapis.com/youtube/v3/"
   const endpoint = "commentThreads"
-  const config = `?part=snippet&&maxResults=5&order=relevance&textFormat=plainText&videoId=${videoID}`
+  const config = `?part=snippet&maxResults=1&order=${order}&pageToken=${nextPageToken}&textFormat=plainText&videoId=${videoID}`
   const accessToken = `&key=${Keys.YouTube}`
 
   try {
@@ -19,6 +22,10 @@ const YouTubeComments = async (videoID) => {
       mode: "cors",
     })
     let data = await response.json()
+
+    console.log(data.nextPageToken)
+
+    // Handle error, no comments, or comments disabled
     const comments = data.error ? [] : data.items
 
     return { data: data, comments: comments }

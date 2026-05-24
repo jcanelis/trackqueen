@@ -9,7 +9,7 @@ import {
 } from "@react-navigation/native"
 
 // Data Fetching
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useQuery, keepPreviousData, useQueryClient } from "@tanstack/react-query"
 
 import YouTubeSearch from "../services/YouTube/getSearch"
 import YouTubeComments from "../services/YouTube/getComments"
@@ -41,6 +41,8 @@ function CommentsScreen() {
   const spotifyContext = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
+  const [ nextPageToken, setNextPageToken] = useState("")
+  const [commentsToShow, setCommentsToShow] = useState([])
 
   // AppState listener: https://reactnative.dev/docs/appstate
   const appState = useRef(AppState.currentState)
@@ -144,11 +146,11 @@ function CommentsScreen() {
     }
   }, [queryClient])
 
-  const { isLoading, isError, data, error: commentsError } = useQuery({
-    queryKey: [`${currentlyPlaying.track}-comments`],
+  const { isLoading, isError, isSuccess, isPlaceholderData, data, error: commentsError } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-comments-${nextPageToken}`],
     queryFn: async () => {
       const video = await YouTubeSearch(1, `${track} ${artist} official`, "");
-      const commentsData = await YouTubeComments(video.items[0].id.videoId);
+      const commentsData = await YouTubeComments(video.items[0].id.videoId, nextPageToken);
 
       return {
         video: { 
@@ -156,12 +158,26 @@ function CommentsScreen() {
           coverArt: video.items[0].snippet.thumbnails.high.url,
         },
         comments: commentsData.comments,
+        nextPageToken: commentsData.nextPageToken
       }
     },
+   
     refetchOnMount: true,
     enabled: true,
     retry: false,
   })
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
+      setRefreshing(false)
+      spotifyContext.updateTrack({
+        track: checkCurrentTrackQuery.data.name,
+        artist: checkCurrentTrackQuery.data.artists[0].name,
+        spotifyData: checkCurrentTrackQuery.data,
+      })
+    }
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+
 
   useEffect(() => {
     if (commentsError) {
@@ -171,6 +187,8 @@ function CommentsScreen() {
 
   if (isLoading) return <Loader />
   if (isError) return <Loader />
+  if (isSuccess) () => setNextPageToken(data.nextPageToken)
+
 
   return (
     <View
@@ -202,8 +220,23 @@ function CommentsScreen() {
               }}
               border={false}
             />
+            <Text style={{padding: 16, color: colors.text}}>{nextPageToken}</Text>
           </>
         }
+        onEndReachedThreshold={0.6}
+        onEndReached={async () => {
+          console.log("Fetching more comments...")
+          console.log("with nextPageToken : ", nextPageToken)
+          try {
+              await queryClient.fetchQuery({
+                queryKey: [`${currentlyPlaying.track}-comments-${nextPageToken}`],
+              })
+            } catch (error) {
+              console.error("Error fetching more comments : ", error)
+            } finally {
+              console.log("New comments fetch complete.")
+            }
+        }}
         data={data.comments}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <Comment data={item} />}
@@ -240,12 +273,18 @@ function CommentsScreen() {
             tintColor={lightGrey}
             titleColor={lightGrey}
             refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true)
-              queryClient.fetchQuery({
+            onRefresh={async () => {
+            setRefreshing(true)
+            try {
+              await queryClient.fetchQuery({
                 queryKey: ["Check-current-track"],
               })
-            }}
+            } catch (error) {
+              console.error("Error fetching current track", error)
+            } finally {
+              setRefreshing(false)
+            }
+          }}
           />
         }
       />
