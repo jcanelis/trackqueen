@@ -4,23 +4,25 @@
   https://developer.spotify.com/documentation/web-api/tutorials/code-flow
 */
 
+// local: "http://127.0.0.1:5001/trackqueen2022/us-central1/spotifyCallback2026-spotifyCallback2026"
+// prod : "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyCallback2026-spotifyCallback2026"
+
 import { saveSecureValue } from "../../utility/SecureStore"
 
 const SpotifyGetToken = async (authCode) => {
-  console.log("authCode : ", authCode)
   try {
     let response = await fetch(
-      "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyCallback2026-spotifyCallback2026",
+      "http://127.0.0.1:5001/trackqueen2022/us-central1/spotifyCallback2026-spotifyCallback2026",
       {
         method: "POST",
         mode: "cors",
-        body: authCode,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code: authCode }),
       }
     )
-    console.log(response)
     let responseJSON = await response.json()
-    console.log("responseJSON", responseJSON)
-
     const storeData = async () => {
       try {
         // Save the tokens
@@ -39,8 +41,6 @@ const SpotifyGetToken = async (authCode) => {
 
     return responseJSON.access_token
   } catch (error) {
-
-    console.log("ERROrr!!!!!")
     console.error(error)
 
     return error

@@ -11,9 +11,16 @@ const spotify_client_secret = defineSecret("SPOTIFY_CLIENT_SECRET")
 exports.spotifyCallback2026 = onRequest(
   {
     secrets: [spotify_client_id, spotify_client_secret],
-    cors: ["http://localhost:19006", "https://accounts.spotify.com"],
+    cors: ["http://localhost:19006", "http://localhost:5001", "https://accounts.spotify.com"],
   },
   (req, res) => {
+    const { code } = req.body
+    
+    if (!code) {
+      res.status(400).send({ error: "Authorization code is required" })
+      return
+    }
+    
     const buffer = Buffer.from(
       `${spotify_client_id.value()}:${spotify_client_secret.value()}`
     )
@@ -21,7 +28,7 @@ exports.spotifyCallback2026 = onRequest(
     let authOptions = {
       url: "https://accounts.spotify.com/api/token",
       form: {
-        code: req.body,
+        code: code,
         redirect_uri: "com.jcanelis.tq22://auth/",
         grant_type: "authorization_code",
       },
