@@ -39,8 +39,8 @@ const VideoThumbnail = ({ data }) => {
 }
 
 VideoThumbnail.propTypes = {
-  coverArt:  PropTypes.string,
-  url: PropTypes.string,
+  data:  PropTypes.object,
+
 }
 
 export default VideoThumbnail

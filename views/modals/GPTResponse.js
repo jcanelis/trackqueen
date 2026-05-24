@@ -34,11 +34,11 @@ function GPTResponse({ route }) {
   const { colors } = useTheme()
   const queryClient = useQueryClient()
 
-  // https://reactnative.dev/docs/appstate
+  // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
-  // https://docs.expo.dev/versions/latest/sdk/asset/
+  // Expo Asset (https://docs.expo.dev/versions/latest/sdk/asset/)
   const [assets, error] = useAssets([
     require("../../assets/brands/openai/PNGs/OpenAI-white-wordmark.png"),
   ])
@@ -61,22 +61,16 @@ function GPTResponse({ route }) {
   // Cancel query if view is closed
   useEffect(() => {
     return function cleanUp() {
-      console.log("Cleaning up GPT Response...")
-
-      // Cancel the query
       queryClient.cancelQueries({
         queryKey: ["chat-gpt-response"],
       })
-
-      // Reset the query
       queryClient.resetQueries({
         queryKey: ["chat-gpt-response"],
       })
     }
   }, [queryClient])
 
-  // Cancel query if app is closed
-  // Restart query when back
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
@@ -112,9 +106,7 @@ function GPTResponse({ route }) {
         }}
       >
         <ActivityIndicator size="large" color={GOLD} />
-
         <StatusText content={`”${route.params.query}”`} />
-
         <Text
           style={{
             marginBottom: baseUnit * 3,

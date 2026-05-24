@@ -9,7 +9,7 @@ import {
 } from "@react-navigation/native"
 
 // Data Fetching
-import { useQuery, keepPreviousData, useQueryClient } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 import YouTubeSearch from "../services/YouTube/getSearch"
 import YouTubeComments from "../services/YouTube/getComments"
@@ -41,30 +41,18 @@ function CommentsScreen() {
   const spotifyContext = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
-  const [ nextPageToken, setNextPageToken] = useState("")
-  const [commentsToShow, setCommentsToShow] = useState([])
 
-  // AppState listener: https://reactnative.dev/docs/appstate
+  // Comments
+  const [allComments, setAllComments] = useState([])
+  const [nextPageToken, setNextPageToken] = useState("")
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+
+  // AppState listener (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
   // Refresh control
   let [refreshing, setRefreshing] = useState(false)
-
-  // Save each array of comments
-  // let [commentsRelevant, setCommentsRelevant] = useState([])
-  // let [commentsRecent, setCommentsRecent] = useState([])
-
-  // Comments to be displayed
-  // let [commentsToShow, setCommentsToShow] = useState(commentsRelevant)
-
-  // Comments nextPageToken for new requests
-  // let [nextPageTokenRecent, setPageTokenRecent] = useState("")
-  // let [nextPageTokenRelevant, setPageTokenRelevant] = useState("")
-
-  // Tab index
-  // const [selectedTag, setSelectedTag] = useState(options[0])
-  // let [index, setIndex] = useState(0)
 
   // Scroll reference
   const ref = useRef(null)
@@ -102,7 +90,6 @@ function CommentsScreen() {
 
   useEffect(() => {
     if (checkCurrentTrackQuery.isError) {
-      console.log(appStateVisible)
       console.error("Error on query for CommentsScreen", checkCurrentTrackQuery.error)
     }
   }, [checkCurrentTrackQuery.isError, checkCurrentTrackQuery.error, appStateVisible])
@@ -118,8 +105,7 @@ function CommentsScreen() {
     }
   }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
-  // Cancel query if app is closed
-  // Restart query when back
+  // Cancel query if app is closed, restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
@@ -145,17 +131,19 @@ function CommentsScreen() {
       subscription.remove()
     }
   }, [queryClient])
-
-  const { isLoading, isError, isSuccess, isPlaceholderData, data, error: commentsError } = useQuery({
-    queryKey: [`${currentlyPlaying.track}-comments-${nextPageToken}`],
+  
+  // FETCH THE INITIAL COMMENTS
+  const { isLoading, isError, isSuccess, data, error: commentsError } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-comments-initial`],
     queryFn: async () => {
       const video = await YouTubeSearch(1, `${track} ${artist} official`, "");
-      const commentsData = await YouTubeComments(video.items[0].id.videoId, nextPageToken);
+      const commentsData = await YouTubeComments(video.items[0].id.videoId, "");
 
       return {
         video: { 
           url: `https://www.youtube.com/watch?v=${video.items[0].id.videoId}`,
           coverArt: video.items[0].snippet.thumbnails.high.url,
+          videoId: video.items[0].id.videoId,
         },
         comments: commentsData.comments,
         nextPageToken: commentsData.nextPageToken
@@ -167,28 +155,36 @@ function CommentsScreen() {
     retry: false,
   })
 
-  useEffect(() => {
-    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
-      setRefreshing(false)
-      spotifyContext.updateTrack({
-        track: checkCurrentTrackQuery.data.name,
-        artist: checkCurrentTrackQuery.data.artists[0].name,
-        spotifyData: checkCurrentTrackQuery.data,
-      })
-    }
-  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
-
-
-  useEffect(() => {
+  useEffect(( ) => {
     if (commentsError) {
       console.error("An error occured in CommentsScreen : ", commentsError)
+  }})
+
+  // SEND COMMENTS DATA TO STATE
+  useEffect(() => {
+    if (isSuccess && data) {
+      setAllComments(data.comments)
+      setNextPageToken(data.nextPageToken || "")
     }
-  }, [commentsError])
+  }, [isSuccess, data])
+
+  // LOAD MORE COMMENTS AND UPDATE STATE ON SCROLL
+  const loadMoreComments = async () => {
+    if (!nextPageToken || isLoadingMore || !data?.video?.videoId) return
+    setIsLoadingMore(true)
+    try {
+      const commentsData = await YouTubeComments(data.video.videoId, nextPageToken)
+      setAllComments(prevComments => [...prevComments, ...commentsData.comments])
+      setNextPageToken(commentsData.nextPageToken || "")
+    } catch (error) {
+      console.error("Error loading more comments:", error)
+    } finally {
+      setIsLoadingMore(false)
+    }
+  }
 
   if (isLoading) return <Loader />
   if (isError) return <Loader />
-  if (isSuccess) () => setNextPageToken(data.nextPageToken)
-
 
   return (
     <View
@@ -220,24 +216,15 @@ function CommentsScreen() {
               }}
               border={false}
             />
-            <Text style={{padding: 16, color: colors.text}}>{nextPageToken}</Text>
           </>
         }
-        onEndReachedThreshold={0.6}
-        onEndReached={async () => {
-          console.log("Fetching more comments...")
-          console.log("with nextPageToken : ", nextPageToken)
-          try {
-              await queryClient.fetchQuery({
-                queryKey: [`${currentlyPlaying.track}-comments-${nextPageToken}`],
-              })
-            } catch (error) {
-              console.error("Error fetching more comments : ", error)
-            } finally {
-              console.log("New comments fetch complete.")
-            }
+        onEndReachedThreshold={0.1}
+        onEndReached={() => {
+          if (nextPageToken && !isLoadingMore) {
+            loadMoreComments()
+          }
         }}
-        data={data.comments}
+        data={allComments}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <Comment data={item} />}
         ListEmptyComponent={
@@ -265,6 +252,20 @@ function CommentsScreen() {
                 })
               }}
             />
+          </View>
+        }
+        ListFooterComponent={
+          <View>
+            <Text
+              style={{
+                marginTop: baseUnit * 2,
+                textAlign: "center",
+                color: colors.text,
+                opacity: 0.7,
+              }}
+            >
+              {isLoadingMore ? "Loading more comments..." : null }
+            </Text>
           </View>
         }
         refreshControl={

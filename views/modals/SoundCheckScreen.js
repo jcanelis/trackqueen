@@ -109,6 +109,8 @@ function SoundCheckScreen() {
     await WebBrowser.openBrowserAsync(url)
   }
 
+  console.log(setStatusObject, timerID)
+  
   useEffect(() => {
     ;(async () => {
       const status = await AudioModule.requestRecordingPermissionsAsync()

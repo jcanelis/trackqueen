@@ -2,7 +2,7 @@
   "expo": {
     "name": "TrackQueen",
     "slug": "tq22",
-    "version": "1.2.5",
+    "version": "1.3.1",
     "orientation": "portrait",
     "description": "Learn more about your music.",
     "scheme": "com.jcanelis.tq22",
@@ -85,7 +85,7 @@
       "expo-audio",
       "expo-status-bar"
     ],
-    "runtimeVersion": "1.2.5",
+    "runtimeVersion": "1.3.1",
     "android": {
       "package": "com.jcanelis.tq22"
     }
