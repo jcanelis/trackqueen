@@ -12,7 +12,7 @@ const YouTubeSearch = async (limit, query, nextPageToken) => {
   const baseURL = "https://www.googleapis.com/youtube/v3/"
   const endpoint = "search"
   const config = `?part=snippet&order=relevance&q=${queryURI}`
-  const limiter = `&maxResults=${limit}&pageToken=${nextPageToken}`
+  const limiter = `&maxResults=1&pageToken=${nextPageToken}`
 
   const accessToken = `&key=${Keys.YouTube}`
   try {

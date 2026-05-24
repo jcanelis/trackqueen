@@ -1,18 +1,5 @@
 import React, { useEffect, useContext, useRef, useState } from "react"
-import { AppState, FlatList, RefreshControl, View } from "react-native"
-
-// Expo UI
-import { Host, Picker, Text } from "@expo/ui/swift-ui"
-import {
-  // colorInvert,
-  pickerStyle,
-  // foregroundStyle,
-  tint,
-  // background,
-  // backgroundOverlay,
-  tag,
-  // padding,
-} from "@expo/ui/swift-ui/modifiers"
+import { AppState, FlatList, Text, RefreshControl, View } from "react-native"
 
 // React Navigation
 import {
@@ -23,7 +10,8 @@ import {
 
 // Data Fetching
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import CommentsScreenModel from "../models/commentsScreenModel"
+
+import YouTubeSearch from "../services/YouTube/getSearch"
 import YouTubeComments from "../services/YouTube/getComments"
 
 // Context
@@ -41,13 +29,11 @@ import Loader from "../components/Loader"
 import VideoThumbnail from "../components/VideoThumbnail"
 
 // Design
-import { baseUnit, GOLD, lightGrey } from "../constants/Base"
-
-const options = ["Popular", "Recent"]
+import { baseUnit, lightGrey } from "../constants/Base"
 
 function CommentsScreen() {
   const navigation = useNavigation()
-  const { colors, theme } = useTheme()
+  const { colors } = useTheme()
   const queryClient = useQueryClient()
 
   // Context
@@ -64,19 +50,19 @@ function CommentsScreen() {
   let [refreshing, setRefreshing] = useState(false)
 
   // Save each array of comments
-  let [commentsRelevant, setCommentsRelevant] = useState([])
-  let [commentsRecent, setCommentsRecent] = useState([])
+  // let [commentsRelevant, setCommentsRelevant] = useState([])
+  // let [commentsRecent, setCommentsRecent] = useState([])
 
   // Comments to be displayed
-  let [commentsToShow, setCommentsToShow] = useState(commentsRelevant)
+  // let [commentsToShow, setCommentsToShow] = useState(commentsRelevant)
 
   // Comments nextPageToken for new requests
-  let [nextPageTokenRecent, setPageTokenRecent] = useState("")
-  let [nextPageTokenRelevant, setPageTokenRelevant] = useState("")
+  // let [nextPageTokenRecent, setPageTokenRecent] = useState("")
+  // let [nextPageTokenRelevant, setPageTokenRelevant] = useState("")
 
   // Tab index
-  const [selectedTag, setSelectedTag] = useState(options[0])
-  let [index, setIndex] = useState(0)
+  // const [selectedTag, setSelectedTag] = useState(options[0])
+  // let [index, setIndex] = useState(0)
 
   // Scroll reference
   const ref = useRef(null)
@@ -117,7 +103,6 @@ function CommentsScreen() {
     },
     onSuccess: (data) => {
       setRefreshing(false)
-      // Update the app
       spotifyContext.updateTrack({
         track: data.name,
         artist: data.artists[0].name,
@@ -154,25 +139,32 @@ function CommentsScreen() {
     }
   }, [queryClient])
 
-  const { isLoading, isError, data } = useQuery(
-    [`${currentlyPlaying.track}-comments`],
-    async () => {
-      const model = await CommentsScreenModel(currentlyPlaying)
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-comments`],
+    queryFn: async () => {
+      const video = await YouTubeSearch(1, `${track} ${artist} official`, "");
+      const commentsData = await YouTubeComments(video.items[0].id.videoId);
 
-      // Set initial comments
-      setCommentsToShow(model.commentsRelevant)
+      return {
+        video: { 
+          url: `https://www.youtube.com/watch?v=${video.items[0].id.videoId}`,
+          coverArt: video.items[0].snippet.thumbnails.high.url,
+        },
+        comments: commentsData.comments,
+      }
+    },
+    refetchOnMount: true,
+    keepPreviousData: false,
+    enabled: true,
+    retry: false,
+    onSuccess: (data) => {
+      return data
+    },
+    onError: (error) => {
+      console.error("An error occured in CommentsScreen : ", error)  
+    },
+  })
 
-      // Save other comments
-      setCommentsRelevant(model.commentsRelevant)
-      setCommentsRecent(model.commentsRecent)
-
-      // Save nextPageTokens
-      setPageTokenRelevant(model.commentsRelevantData.data.nextPageToken)
-      setPageTokenRecent(model.commentsRecentData.data.nextPageToken)
-
-      return model
-    }
-  )
   if (isLoading) return <Loader />
   if (isError) return <Loader />
 
@@ -192,6 +184,25 @@ function CommentsScreen() {
         style={{ flex: 1 }}
         scrollsToTop={true}
         scrollToOverflowEnabled={true}
+        ListHeaderComponent={
+          <>
+            <VideoThumbnail data={data.video} />
+            <Header
+              buttonTitle={"Ask ChatGPT"}
+              type={"youtube"}
+              copy={"Comments"}
+              func={() => {
+                navigation.navigate("Powered by GPT-5", {
+                  query: `What have people said about the song, ”${track}” by ${artist}?`,
+                })
+              }}
+              border={false}
+            />
+          </>
+        }
+        data={data.comments}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Comment data={item} />}
         ListEmptyComponent={
           <View
             style={{
@@ -219,86 +230,6 @@ function CommentsScreen() {
             />
           </View>
         }
-        ListHeaderComponent={
-          <>
-            <VideoThumbnail data={data} />
-            <Header
-              buttonTitle={"Ask ChatGPT"}
-              type={"youtube"}
-              copy={"Comments"}
-              func={() => {
-                navigation.navigate("Powered by GPT-5", {
-                  query: `What have people said about the song, ”${track}” by ${artist}?`,
-                })
-              }}
-              border={false}
-            />
-
-            {commentsToShow.length > 0 && (
-              <Host
-                appearance={theme == "dark" ? "dark" : "light"}
-                style={{
-                  flex: 1,
-                  marginRight: baseUnit * 3,
-                  marginLeft: baseUnit * 3,
-                  height: baseUnit * 6,
-                }}
-              >
-                <Picker
-                  controlSize="large"
-                  label="Select comments"
-                  variant="picker"
-                  modifiers={[pickerStyle("picker"), tint(GOLD)]}
-                  selection={selectedTag}
-                  onSelectionChange={(selection) => {
-                    setSelectedTag(selection)
-                    const comments =
-                      selection == "Popular" ? commentsRelevant : commentsRecent
-                    setCommentsToShow(comments)
-                    const indexData = selection == "Popular" ? 0 : 1
-                    setIndex(indexData)
-                  }}
-                >
-                  {options.map((option) => (
-                    <Text key={option} modifiers={[tag(option)]}>
-                      {option}
-                    </Text>
-                  ))}
-                </Picker>
-              </Host>
-            )}
-          </>
-        }
-        onEndReachedThreshold={0.6}
-        onEndReached={async () => {
-          const queryType = index === 0 ? "relevance" : "time"
-          const pageToken =
-            queryType === "relevance"
-              ? nextPageTokenRelevant
-              : nextPageTokenRecent
-
-          try {
-            const searchData = await YouTubeComments(
-              data.videoId,
-              pageToken,
-              queryType
-            )
-
-            // Update token for the query type
-            if (queryType === "relevance") {
-              setPageTokenRelevant(searchData.data.nextPageToken)
-            } else {
-              setPageTokenRecent(searchData.data.nextPageToken)
-            }
-
-            setCommentsToShow([...commentsToShow, ...searchData.comments])
-          } catch (error) {
-            console.error(error)
-          }
-        }}
-        data={commentsToShow}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Comment data={item} />}
         refreshControl={
           <RefreshControl
             title="Checking your current Spotify track..."
