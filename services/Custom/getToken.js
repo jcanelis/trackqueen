@@ -7,6 +7,7 @@
 import { saveSecureValue } from "../../utility/SecureStore"
 
 const SpotifyGetToken = async (authCode) => {
+  console.log("authCode : ", authCode)
   try {
     let response = await fetch(
       "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyCallback2026-spotifyCallback2026",
@@ -16,7 +17,9 @@ const SpotifyGetToken = async (authCode) => {
         body: authCode,
       }
     )
+    console.log(response)
     let responseJSON = await response.json()
+    console.log("responseJSON", responseJSON)
 
     const storeData = async () => {
       try {
@@ -36,6 +39,8 @@ const SpotifyGetToken = async (authCode) => {
 
     return responseJSON.access_token
   } catch (error) {
+
+    console.log("ERROrr!!!!!")
     console.error(error)
 
     return error

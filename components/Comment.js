@@ -5,7 +5,6 @@ import PropTypes from "prop-types"
 
 // Design
 import { baseUnit, verticalRhythm } from "../constants/Base"
-import { Ionicons } from "@expo/vector-icons"
 
 const Comment = ({ data }) => {
   const { colors } = useTheme()
@@ -47,12 +46,6 @@ const Comment = ({ data }) => {
           opacity: 0.85,
         }}
       >
-        <Ionicons
-          style={{ opacity: 0.65 }}
-          name={"heart-outline"}
-          color={colors.text}
-          size={22}
-        />
         <Text
           style={{
             fontSize: baseUnit * 2,

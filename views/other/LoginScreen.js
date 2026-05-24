@@ -37,6 +37,8 @@ function LoginScreen() {
     tokenEndpoint: "https://accounts.spotify.com/api/token",
   }
 
+  console.log(`KEY SPOTIFY ${Keys.Spotify}`)
+
   // Expo AuthSession: https://docs.expo.dev/versions/latest/sdk/auth-session/
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -48,11 +50,14 @@ function LoginScreen() {
     endpoints
   )
 
+
   useEffect(() => {
     async function getAccessToken(authCode) {
       try {
         setLoading(true)
         const accessToken = await SpotifyGetToken(authCode)
+
+        console.log("tokennn : ", accessToken)
         setLoading(false)
         authContext.signIn(accessToken)
       } catch (error) {
@@ -61,7 +66,10 @@ function LoginScreen() {
     }
 
     if (response?.type === "success") {
+
       const { code } = response.params
+
+      console.log("CODE PARAMS :", code)
       getAccessToken(code)
     }
   }, [response, authContext, request])
