@@ -79,10 +79,6 @@
           "image": "./assets/splash.png",
           "enableFullScreenImage_legacy": true,
           "resizeMode": "cover",
-          "dark": {
-            "image": "./assets/splash-icon-dark.png",
-            "backgroundColor": "#000000"
-          },
         }
       ],
       "expo-secure-store",
