@@ -33,17 +33,17 @@ function ArtistTracksScreen({ route }) {
     })
   }, [navigation, route.params.item.name])
 
-  const { isLoading, isError, data } = useQuery(
-    [`${route.params.item.name}-top-tracks`],
-    async () => {
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [`${route.params.item.name}-top-tracks`],
+    queryFn: async () => {
       const token = await TokenCheck()
       const { id } = route.params.item
       const { tracks } = await SpotifyArtistTopTracks(token, id)
       const newImage = route.params.coverImage
 
       return { tracks, newImage }
-    }
-  )
+    },
+  })
 
   if (isLoading) return <Loader />
   if (isError) return <Loader />

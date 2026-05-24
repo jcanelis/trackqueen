@@ -29,13 +29,15 @@ function ProfileScreen() {
     queryKey: ["ProfileScreen"],
     queryFn: async ({ signal }) => await ProfileScreenModel(signal),
     refetchOnMount: true,
-    keepPreviousData: true,
     enabled: true,
     retry: true,
-    onError: (error) => {
-      console.error("Error on ProfileScreen", error)
-    },
   })
+
+  useEffect(() => {
+    if (error) {
+      console.error("Error on ProfileScreen", error)
+    }
+  }, [error])
 
   useEffect(() => {
     // Cancel the query on cleanup

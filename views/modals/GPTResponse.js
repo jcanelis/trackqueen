@@ -43,21 +43,20 @@ function GPTResponse({ route }) {
     require("../../assets/brands/openai/PNGs/OpenAI-white-wordmark.png"),
   ])
 
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data, error: gptError } = useQuery({
     queryKey: ["chat-gpt-response"],
     queryFn: async ({ signal }) => await ChatGPT(route.params.query, signal),
     refetchOnMount: true,
-    keepPreviousData: false,
     enabled: true,
     retry: false,
-    onSuccess: (data) => {
-      return data
-    },
-    onError: (error) => {
-      console.error("An error occured in ChatGPTResponse : ", error)
-      console.log("appStateVisible : ", appStateVisible)
-    },
   })
+
+  useEffect(() => {
+    if (gptError) {
+      console.error("An error occured in ChatGPTResponse : ", gptError)
+      console.log("appStateVisible : ", appStateVisible)
+    }
+  }, [gptError, appStateVisible])
 
   // Cancel query if view is closed
   useEffect(() => {

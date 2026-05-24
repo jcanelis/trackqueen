@@ -80,6 +80,7 @@ const LyricsStack = () => {
             headerLargeTitleStyle: { color: colors.text },
             headerTransparent: true,
             headerBlurEffect: "dark",
+            scrollEdgeAppearance: "opaque",
             headerSearchBarOptions: {
               placeholder: "Search annotations",
               barTintColor: dark ? colors.background : "#cccccc",

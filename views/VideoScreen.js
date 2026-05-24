@@ -51,7 +51,7 @@ function VideoScreen() {
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
   // Query
-  useQuery({
+  const checkCurrentTrackQuery = useQuery({
     queryKey: ["Check-current-track"],
     queryFn: async ({ signal }) => {
       return new Promise((resolve, reject) => {
@@ -72,23 +72,28 @@ function VideoScreen() {
       })
     },
     refetchOnMount: true,
-    keepPreviousData: false,
     enabled: false,
     retry: false,
-    onError: (error) => {
+  })
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isError) {
       console.log(appStateVisible, "appStateVisible")
-      console.error("Error on query for LoadingScreen", error)
-    },
-    onSuccess: (data) => {
+      console.error("Error on query for VideoScreen", checkCurrentTrackQuery.error)
+    }
+  }, [checkCurrentTrackQuery.isError, checkCurrentTrackQuery.error, appStateVisible])
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
       // Update the app
       spotifyContext.updateTrack({
-        track: data.name,
-        artist: data.artists[0].name,
-        spotifyData: data,
+        track: checkCurrentTrackQuery.data.name,
+        artist: checkCurrentTrackQuery.data.artists[0].name,
+        spotifyData: checkCurrentTrackQuery.data,
       })
-    },
-  })
+    }
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
   // Cancel query if app is closed
   // Restart query when back
@@ -118,10 +123,10 @@ function VideoScreen() {
     }
   }, [queryClient])
 
-  const { isLoading, isError, data } = useQuery(
-    [`${currentlyPlaying.track}-videos`],
-    async () => await VideoScreenModel(currentlyPlaying)
-  )
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-videos`],
+    queryFn: async () => await VideoScreenModel(currentlyPlaying),
+  })
 
   if (isLoading) return <Loader />
   if (isError) return <Loader />

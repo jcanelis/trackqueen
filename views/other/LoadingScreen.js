@@ -34,7 +34,7 @@ function LoadingScreen() {
   let [refreshing, setRefreshing] = useState(false)
 
   // Check current track function
-  useQuery({
+  const checkCurrentTrackQuery = useQuery({
     queryKey: ["Check-current-track"],
     queryFn: async ({ signal }) => {
       return new Promise((resolve, reject) => {
@@ -51,24 +51,29 @@ function LoadingScreen() {
       })
     },
     refetchOnMount: true,
-    keepPreviousData: false,
     enabled: false,
     retry: false,
-    onError: (error) => {
+  })
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isError) {
       setRefreshing(false)
-      console.error("Error on query for LoadingScreen", error)
+      console.error("Error on query for LoadingScreen", checkCurrentTrackQuery.error)
       console.log("appStateVisible : ", appStateVisible)
-    },
-    onSuccess: (data) => {
+    }
+  }, [checkCurrentTrackQuery.isError, checkCurrentTrackQuery.error, appStateVisible])
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
       // Update the app
       spotifyContext.updateTrack({
-        track: data.name,
-        artist: data.artists[0].name,
-        spotifyData: data,
+        track: checkCurrentTrackQuery.data.name,
+        artist: checkCurrentTrackQuery.data.artists[0].name,
+        spotifyData: checkCurrentTrackQuery.data,
       })
-    },
-  })
+    }
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
   // Cancel query if app is closed
   // Restart query when back

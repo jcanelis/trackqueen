@@ -164,7 +164,7 @@ function SoundCheckScreen() {
     })
   }
 
-  useQuery({
+  const soundCheckQuery = useQuery({
     queryKey: ["Search-nearby-audio"],
     queryFn: async ({ signal }) => {
       const audioSearch = new Promise((resolve, reject) => {
@@ -231,28 +231,33 @@ function SoundCheckScreen() {
       return audioSearch
     },
     refetchOnMount: false,
-    keepPreviousData: false,
     enabled: false,
     retry: false,
-    onError: (error) => {
-      console.error("Error on query for SoundCheckScreen", error)
+  })
+
+  useEffect(() => {
+    if (soundCheckQuery.isError) {
+      console.error("Error on query for SoundCheckScreen", soundCheckQuery.error)
       animationRef.current?.pause()
       setFetchingData(false)
       setRecording(null)
       setFailed(true)
-    },
-    onSuccess: (data) => {
+    }
+  }, [soundCheckQuery.isError, soundCheckQuery.error])
+
+  useEffect(() => {
+    if (soundCheckQuery.isSuccess && soundCheckQuery.data) {
       animationRef.current?.pause()
       setFetchingData(false)
       setRecording(null)
       spotifyContext.updateTrack({
-        track: data.name,
-        artist: data.artists[0].name,
-        spotifyData: data,
+        track: soundCheckQuery.data.name,
+        artist: soundCheckQuery.data.artists[0].name,
+        spotifyData: soundCheckQuery.data,
       })
       navigation.goBack()
-    },
-  })
+    }
+  }, [soundCheckQuery.isSuccess, soundCheckQuery.data, navigation])
 
   return (
     <View
