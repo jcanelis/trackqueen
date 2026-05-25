@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { AppState, RefreshControl, ScrollView, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
+
+// React Navigation
+import { useTheme } from "@react-navigation/native"
 
 // Expo
 import * as Linking from "expo-linking"
@@ -26,7 +28,7 @@ function LoadingScreen() {
   const queryClient = useQueryClient()
   const spotifyContext = useContext(SpotifyContext)
 
-  // AppState listener : https://reactnative.dev/docs/appstate
+  // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
@@ -66,7 +68,6 @@ function LoadingScreen() {
   useEffect(() => {
     if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
-      // Update the app
       spotifyContext.updateTrack({
         track: checkCurrentTrackQuery.data.name,
         artist: checkCurrentTrackQuery.data.artists[0].name,
@@ -75,8 +76,7 @@ function LoadingScreen() {
     }
   }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
-  // Cancel query if app is closed
-  // Restart query when back
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (

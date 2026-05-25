@@ -51,13 +51,13 @@ const AppTabs = () => {
           tabBarIcon: () => ({ sfSymbol: "video" }),
         }}
       />
-      <Tabs.Screen
+{/*      <Tabs.Screen
         name="Discover"
         component={DiscoverStack}
         options={{
           tabBarIcon: () => ({ sfSymbol: "infinity" }),
         }}
-      />
+      />*/}
     </Tabs.Navigator>
   )
 }

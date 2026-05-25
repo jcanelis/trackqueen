@@ -53,12 +53,10 @@ function LyricsScreen() {
   // State
   let [refreshing, setRefreshing] = useState(false)
 
-  // AppState listener
-  // https://reactnative.dev/docs/appstate
+  // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
-  // Ref
   const ref = useRef(null)
   useScrollToTop(
     useRef({
@@ -66,17 +64,13 @@ function LyricsScreen() {
     })
   )
 
-  // Check current track function
   const checkCurrentTrackQuery = useQuery({
     queryKey: ["Check-current-track"],
     queryFn: async ({ signal }) => {
       return new Promise((resolve, reject) => {
         async function init() {
           try {
-            // Get token
             let authToken = await TokenCheck(signal)
-
-            // Check track
             let spotifyData = await SpotifyCurrentTrack(authToken, signal)
 
             resolve(spotifyData)
@@ -111,8 +105,7 @@ function LyricsScreen() {
     }
   }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
-  // Cancel query if app is closed
-  // Restart query when back
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
@@ -169,18 +162,25 @@ function LyricsScreen() {
         item.length > 0 ? <Lyric content={item} /> : null
       }
       refreshing={refreshing}
+
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
           tintColor={lightGrey}
           titleColor={lightGrey}
           refreshing={refreshing}
-          onRefresh={() => {
-            setRefreshing(true)
-            queryClient.fetchQuery({
+          onRefresh={async () => {
+          setRefreshing(true)
+          try {
+            await queryClient.fetchQuery({
               queryKey: ["Check-current-track"],
             })
-          }}
+          } catch (error) {
+            console.error("Error fetching current track", error)
+          } finally {
+            setRefreshing(false)
+          }
+        }}
         />
       }
       ListHeaderComponent={

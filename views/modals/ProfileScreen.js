@@ -18,7 +18,7 @@ import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
 
 // Design
-import { baseUnit, blurhash, GOLD } from "../../constants/Base"
+import { baseUnit, blurhash } from "../../constants/Base"
 
 function ProfileScreen() {
   const { colors } = useTheme()
