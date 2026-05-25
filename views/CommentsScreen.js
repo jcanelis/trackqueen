@@ -1,5 +1,9 @@
-import React, { useEffect, useContext, useRef, useState } from "react"
-import { AppState, FlatList, Text, RefreshControl, View } from "react-native"
+import React, { useCallback, useEffect, useContext, useRef, useState } from "react"
+import { ActivityIndicator, AppState, FlatList, Text, RefreshControl, View } from "react-native"
+
+// Expo UI
+import { Host, Picker, Text as ExpoText } from "@expo/ui/swift-ui"
+import { controlSize, environment, font, foregroundStyle, padding, pickerStyle, tag } from "@expo/ui/swift-ui/modifiers"
 
 // React Navigation
 import {
@@ -45,6 +49,7 @@ function CommentsScreen() {
   const [allComments, setAllComments] = useState([])
   const [nextPageToken, setNextPageToken] = useState("")
   const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [commentOrder, setCommentOrder] = useState("relevance")
 
   // AppState listener (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
@@ -132,11 +137,11 @@ function CommentsScreen() {
   }, [queryClient])
   
   // FETCH THE INITIAL COMMENTS
-  const { isLoading, isError, isSuccess, data, error: commentsError } = useQuery({
-    queryKey: [`${currentlyPlaying.track}-comments-initial`],
+  const { isLoading, isFetching, isError, isSuccess, data, error: commentsError } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-comments-initial`, commentOrder],
     queryFn: async () => {
       const video = await YouTubeSearch(1, `${track} ${artist} official`, "");
-      const commentsData = await YouTubeComments(video.items[0].id.videoId, "");
+      const commentsData = await YouTubeComments(video.items[0].id.videoId, "", commentOrder);
 
       return {
         video: { 
@@ -149,6 +154,7 @@ function CommentsScreen() {
       }
     },
    
+    placeholderData: (previousData) => previousData,
     refetchOnMount: true,
     enabled: true,
     retry: false,
@@ -168,11 +174,11 @@ function CommentsScreen() {
   }, [isSuccess, data])
 
   // LOAD MORE COMMENTS AND UPDATE STATE ON SCROLL
-  const loadMoreComments = async () => {
+  const loadMoreComments = useCallback(async () => {
     if (!nextPageToken || isLoadingMore || !data?.video?.videoId) return
     setIsLoadingMore(true)
     try {
-      const commentsData = await YouTubeComments(data.video.videoId, nextPageToken)
+      const commentsData = await YouTubeComments(data.video.videoId, nextPageToken, commentOrder)
       setAllComments(prevComments => [...prevComments, ...commentsData.comments])
       setNextPageToken(commentsData.nextPageToken || "")
     } catch (error) {
@@ -180,10 +186,9 @@ function CommentsScreen() {
     } finally {
       setIsLoadingMore(false)
     }
-  }
+  }, [nextPageToken, isLoadingMore, data?.video?.videoId, commentOrder])
 
-  if (isLoading) return <Loader />
-  if (isError) return <Loader />
+  if (isLoading && !data) return <Loader />
 
   return (
     <View
@@ -210,11 +215,30 @@ function CommentsScreen() {
               copy={"Comments"}
               func={() => {
                 navigation.navigate("Powered by GPT-5", {
-                  query: `What have people said about the song, ”${track}” by ${artist}?`,
+                  query: `What have people said about the song, "${track}" by ${artist}?`,
                 })
               }}
               border={false}
             />
+            {allComments.length > 0 && (
+              <Host
+                matchContents
+                style={{
+                  marginHorizontal: baseUnit * 3,
+                  marginTop: baseUnit * 2,
+                  marginBottom: baseUnit,
+                }}
+              >
+                <Picker
+                  selection={commentOrder}
+                  onSelectionChange={(value) => setCommentOrder(value)}
+                  modifiers={[pickerStyle("segmented"), controlSize("regular"), environment({ key: "colorScheme", value: "dark" })]}
+                >
+                  <ExpoText modifiers={[tag("relevance"), font({ design: 'rounded', size: 18 }), foregroundStyle(colors.text)]}>Relevant</ExpoText>
+                  <ExpoText modifiers={[tag("time"), font({ design: 'rounded', size: 18 }), foregroundStyle(colors.text)]}>Recent</ExpoText>
+                </Picker>
+              </Host>
+            )}
           </>
         }
         onEndReachedThreshold={0.1}
@@ -227,31 +251,35 @@ function CommentsScreen() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <Comment data={item} />}
         ListEmptyComponent={
-          <View
-            style={{
-              gap: baseUnit * 6,
-              padding: baseUnit * 3,
-            }}
-          >
-            <Text
+          isFetching ? (
+            <ActivityIndicator style={{ marginTop: baseUnit * 6 }} />
+          ) : (
+            <View
               style={{
-                marginTop: baseUnit * 2,
-                textAlign: "center",
-                color: colors.text,
-                opacity: 0.7,
+                gap: baseUnit * 6,
+                padding: baseUnit * 3,
               }}
             >
-              No comments found for this track.
-            </Text>
-            <Chip
-              text={`Ask ChatGPT about what people have said about ”${track}” by ${artist}.`}
-              action={() => {
-                navigation.navigate("Powered by GPT-5", {
-                  query: `What have people said about the song, ”${track}” by ${artist}?`,
-                })
-              }}
-            />
-          </View>
+              <Text
+                style={{
+                  marginTop: baseUnit * 2,
+                  textAlign: "center",
+                  color: colors.text,
+                  opacity: 0.7,
+                }}
+              >
+                No comments found for this track.
+              </Text>
+              <Chip
+                text={`Ask ChatGPT about what people have said about "${track}" by ${artist}.`}
+                action={() => {
+                  navigation.navigate("Powered by GPT-5", {
+                    query: `What have people said about the song, "${track}" by ${artist}?`,
+                  })
+                }}
+              />
+            </View>
+          )
         }
         ListFooterComponent={
           <View>
