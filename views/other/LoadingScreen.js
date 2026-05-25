@@ -119,11 +119,18 @@ function LoadingScreen() {
             tintColor={lightGrey}
             titleColor={lightGrey}
             refreshing={refreshing}
-            onRefresh={() => {
+
+            onRefresh={async () => {
               setRefreshing(true)
-              queryClient.fetchQuery({
-                queryKey: ["Check-current-track"],
-              })
+              try {
+                await queryClient.fetchQuery({
+                  queryKey: ["Check-current-track"],
+                })
+              } catch (error) {
+                console.error("Error fetching current track", error)
+              } finally {
+                setRefreshing(false)
+              }
             }}
           />
         }

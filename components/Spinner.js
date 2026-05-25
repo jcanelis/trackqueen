@@ -8,39 +8,46 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
   withRepeat,
+  Easing,
+  cancelAnimation,
 } from "react-native-reanimated"
 
 // Expo
 import { useAssets } from "expo-asset"
 
 export default function Spinner() {
-  // const { width } = useWindowDimensions()
   const [assets, error] = useAssets([require("../assets/loader.png")])
 
-  // Timing and easing config
-  // const config = {
-  //   duration: 4000,
-  //   easing: Easing.bezier(0.5, 0.01, 0, 1),
-  // }
-
-  const translateX = useSharedValue(0)
+  const rotation = useSharedValue(0)
+  const scaleAnim = useSharedValue(0.7)
 
   useEffect(() => {
-    translateX.value = withRepeat(
-      withTiming(720, {
-        duration: 13000,
+    rotation.value = withTiming(360 * 10000, {
+      duration: 3375 * 10000,
+      easing: Easing.linear,
+    })
+
+    scaleAnim.value = withRepeat(
+      withTiming(0.8, {
+        duration: 1800,
+        easing: Easing.inOut(Easing.ease),
       }),
-      0,
+      -1,
       true
     )
-  }, [translateX])
+
+    return () => {
+      cancelAnimation(rotation)
+      cancelAnimation(scaleAnim)
+    }
+  }, [rotation, scaleAnim])
 
   // Style object
   const style = useAnimatedStyle(() => {
     return {
       width: 240,
       height: 240,
-      transform: [{ rotate: `${translateX.value}deg` }],
+      transform: [{ rotate: `${rotation.value}deg` }, { scale: scaleAnim.value }],
     }
   })
 
