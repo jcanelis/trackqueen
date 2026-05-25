@@ -72,7 +72,7 @@ export default function Loader() {
         <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
       </Animated.View>
 
-      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.75 }}>
+      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.85, marginTop: baseUnit }}>
         Loading content...
       </Text>
     </View>

@@ -103,25 +103,7 @@ function AboutScreen() {
     }
   }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <Button
-  //         color={GOLD}
-  //         title="Yo"
-  //         onPress={() => {
-  //           setRefreshing(true)
-  //           queryClient.fetchQuery({
-  //             queryKey: ["Check-current-track"],
-  //           })
-  //         }}
-  //       />
-  //     ),
-  //   })
-  // }, [navigation, queryClient])
-
-  // Cancel query if app is closed
-  // Restart query when back
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
