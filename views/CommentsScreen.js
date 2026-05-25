@@ -3,7 +3,7 @@ import { ActivityIndicator, AppState, FlatList, Text, RefreshControl, View } fro
 
 // Expo UI
 import { Host, Picker, Text as ExpoText } from "@expo/ui/swift-ui"
-import { controlSize, environment, font, foregroundStyle, padding, pickerStyle, tag } from "@expo/ui/swift-ui/modifiers"
+import { controlSize, environment, font, foregroundStyle, pickerStyle, tag } from "@expo/ui/swift-ui/modifiers"
 
 // React Navigation
 import {
@@ -164,6 +164,12 @@ function CommentsScreen() {
     if (commentsError) {
       console.error("An error occured in CommentsScreen : ", commentsError)
   }})
+
+  useEffect(( ) => {
+    if (isError) {
+      console.error(isError)
+
+  }},[isError])
 
   // SEND COMMENTS DATA TO STATE
   useEffect(() => {

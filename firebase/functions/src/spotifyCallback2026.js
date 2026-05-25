@@ -1,3 +1,4 @@
+// Get Spotify access and refresh tokens after user completes Spotify auth
 const request = require("request")
 
 // Google Cloud Functions v2
