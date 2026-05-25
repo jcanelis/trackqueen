@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Pressable, View } from "react-native"
+import { View } from "react-native"
 
 // React Native Reanimated
 // https://docs.swmansion.com/react-native-reanimated/
@@ -74,9 +74,7 @@ export default function Spinner() {
           justifyContent: "center",
         }}
       >
-        <Pressable>
-          <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
-        </Pressable>
+        <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
       </Animated.View>
     </View>
   )

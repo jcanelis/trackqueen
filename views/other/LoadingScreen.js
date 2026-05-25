@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { AppState, RefreshControl, ScrollView, View } from "react-native"
+import { Alert, AppState, Pressable, RefreshControl, ScrollView, View } from "react-native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 // React Navigation
@@ -104,6 +104,19 @@ function LoadingScreen() {
     }
   }, [queryClient])
 
+  async function handleRefresh() {
+    setRefreshing(true)
+    try {
+      await queryClient.fetchQuery({
+        queryKey: ["Check-current-track"],
+      })
+    } catch (error) {
+      console.error("Error fetching current track", error)
+    } finally {
+      setRefreshing(false)
+    }
+  }
+
   return (
     <View
       style={{
@@ -119,23 +132,23 @@ function LoadingScreen() {
             tintColor={lightGrey}
             titleColor={lightGrey}
             refreshing={refreshing}
-
-            onRefresh={async () => {
-              setRefreshing(true)
-              try {
-                await queryClient.fetchQuery({
-                  queryKey: ["Check-current-track"],
-                })
-              } catch (error) {
-                console.error("Error fetching current track", error)
-              } finally {
-                setRefreshing(false)
-              }
-            }}
+            onRefresh={handleRefresh}
           />
         }
-      >
-        <Spinner />
+      > 
+        <View style={{flex: 1, justifyContent: "center"}}>
+          <Pressable
+            onPress={() =>
+              Alert.alert(
+                "Pull Down to Refresh",
+                "Pull down to check your currently playing song.",
+                [{ text: "Got It", style: "cancel" }]
+              )
+            }
+          >
+            <Spinner />
+          </Pressable>
+        </View>
         <Wrapper>
           <Heading>Play a song with Spotify</Heading>
           <SubHeading>Pull down to refresh</SubHeading>
