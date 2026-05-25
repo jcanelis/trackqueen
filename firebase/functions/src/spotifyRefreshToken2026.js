@@ -1,3 +1,4 @@
+// Request a new Spotify access token after the previous has expired
 const request = require("request")
 
 // Google Cloud Functions v2
@@ -14,11 +15,12 @@ exports.spotifyRefreshToken2026 = onRequest(
     cors: ["http://localhost:19006", "https://accounts.spotify.com"],
   },
   (req, res) => {
+    const { refresh_token } = req.body
+
     const buffer = Buffer.from(
       `${spotify_client_id.value()}:${spotify_client_secret.value()}`
     )
     const bufferString = buffer.toString("base64")
-    const refresh_token = req.body
     const authOptions = {
       url: "https://accounts.spotify.com/api/token",
       headers: {

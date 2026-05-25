@@ -18,7 +18,7 @@ import SpotifyButton from "../../components/SpotifyButton"
 import Track from "../../components/Track"
 
 // Design
-import { baseUnit, blurhash, GOLD } from "../../constants/Base"
+import { baseUnit, blurhash } from "../../constants/Base"
 
 function ProfileScreen() {
   const { colors } = useTheme()
@@ -29,17 +29,17 @@ function ProfileScreen() {
     queryKey: ["ProfileScreen"],
     queryFn: async ({ signal }) => await ProfileScreenModel(signal),
     refetchOnMount: true,
-    keepPreviousData: true,
     enabled: true,
     retry: true,
-    onError: (error) => {
-      console.error("Error on ProfileScreen", error)
-    },
   })
 
   useEffect(() => {
-    // Cancel the query on cleanup
-    // Should add a check for if query is actually running
+    if (error) {
+      console.error("Error on ProfileScreen", error)
+    }
+  }, [error])
+
+  useEffect(() => {
     return function cleanUp() {
       queryClient.cancelQueries({
         queryKey: ["ProfileScreen"],
@@ -47,13 +47,9 @@ function ProfileScreen() {
     }
   }, [queryClient])
 
-  // What to show while the query is loading
   if (isLoading) return <Loader />
-
-  // What to show if the query fails
   if (error) return <Loader />
 
-  // What to show if there's a response but no data
   if (!data) {
     return (
       <View
@@ -194,7 +190,6 @@ function ProfileScreen() {
                 Linking.openURL(data.user.external_urls.spotify)
               }}
             />
-            <Text style={{ marginTop: 180, color: GOLD }}>TrackQueen</Text>
           </View>
         }
         refreshing={false}

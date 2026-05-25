@@ -11,6 +11,8 @@ import Animated, {
   useSharedValue,
   withTiming,
   withRepeat,
+  Easing,
+  cancelAnimation,
 } from "react-native-reanimated"
 
 // Design
@@ -22,24 +24,39 @@ export default function Loader() {
   const [assets, error] = useAssets([require("../assets/loader.png")])
 
   // Setup animation
-  const translateX = useSharedValue(0)
+  const rotation = useSharedValue(0)
+  const scaleAnim = useSharedValue(0.35)
 
   useEffect(() => {
-    translateX.value = withRepeat(
-      withTiming(720, {
-        duration: 4000,
+    // Use a large target value with linear easing to simulate infinite clockwise
+    // rotation without ever resetting to 0 (which causes counter-clockwise jumps).
+    // 360 * 10000 = 3,600,000 degrees — effectively infinite at 3s per rotation.
+    rotation.value = withTiming(360 * 10000, {
+      duration: 1500 * 10000,
+      easing: Easing.linear,
+    })
+
+    scaleAnim.value = withRepeat(
+      withTiming(0.5, {
+        duration: 1800,
+        easing: Easing.inOut(Easing.ease),
       }),
-      0,
+      -1,
       true
     )
-  }, [translateX])
+
+    return () => {
+      cancelAnimation(rotation)
+      cancelAnimation(scaleAnim)
+    }
+  }, [rotation, scaleAnim])
 
   // Dynamic style for animated view
   const style = useAnimatedStyle(() => {
     return {
       width: 240,
       height: 240,
-      transform: [{ rotate: `${translateX.value}deg` }],
+      transform: [{ rotate: `${rotation.value}deg` }, { scale: scaleAnim.value }],
     }
   })
 
@@ -72,7 +89,7 @@ export default function Loader() {
         <Animated.Image style={style} source={{ uri: assets[0].localUri }} />
       </Animated.View>
 
-      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.75 }}>
+      <Text style={{ textAlign: "center", color: colors.text, opacity: 0.85 }}>
         Loading content...
       </Text>
     </View>

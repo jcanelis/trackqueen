@@ -6,10 +6,10 @@ import PropTypes from "prop-types"
 // Expo
 import * as WebBrowser from "expo-web-browser"
 import { Image } from "expo-image"
+import { SymbolView } from "expo-symbols"
 
 // Design
 import { blurhash, baseUnit, GOLD } from "../constants/Base"
-import { Ionicons } from "@expo/vector-icons"
 
 const Annotation = ({ data }) => {
   const { colors } = useTheme()
@@ -128,10 +128,15 @@ const Annotation = ({ data }) => {
                 alignItems: "center",
               }}
             >
-              <Ionicons name={"heart-outline"} color={colors.text} size={26} />
+              <SymbolView
+                name="hand.thumbsup.fill"
+                size={baseUnit * 2.4}
+                tintColor={colors.text}
+                style={{ opacity: 0.85 }}
+              />
               <Text
                 style={{
-                  marginLeft: baseUnit / 2,
+                  marginLeft: baseUnit,
                   fontSize: baseUnit * 2,
                   lineHeight: baseUnit * 3,
                   fontWeight: 600,

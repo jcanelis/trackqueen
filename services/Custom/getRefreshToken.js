@@ -5,17 +5,23 @@
   - Save tokens locally.
 */
 
+// local: "http://127.0.0.1:5001/trackqueen2022/us-central1/spotifyRefreshToken2026-spotifyRefreshToken2026"
+// prod : "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyRefreshToken2026-spotifyRefreshToken2026"
+
 import { saveSecureValue, getSecureValue } from "../../utility/SecureStore"
 
 const SpotifyRefreshToken = async (signal) => {
   try {
     const refreshToken = await getSecureValue("spotifyRefreshToken")
     let response = await fetch(
-      `https://us-central1-trackqueen2022.cloudfunctions.net/spotifyRefreshToken2026-spotifyRefreshToken2026`,
+      "https://us-central1-trackqueen2022.cloudfunctions.net/spotifyRefreshToken2026-spotifyRefreshToken2026",
       {
         method: "POST",
         mode: "cors",
-        body: `${refreshToken}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refreshToken: refreshToken }),
         signal,
       }
     )

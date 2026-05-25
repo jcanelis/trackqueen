@@ -37,6 +37,8 @@ export default async function Identify(uri, signal) {
       access_secret: `${Keys.AcrSecret}`,
     }
 
+    console.log("ATTEMPING")
+
     console.log(`${Keys.AcrSecret}`)
     console.log(`${Keys.Acr}`)
 

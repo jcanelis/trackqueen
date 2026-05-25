@@ -59,7 +59,7 @@ function AboutScreen() {
   )
 
   // Check current track function
-  useQuery({
+  const checkCurrentTrackQuery = useQuery({
     queryKey: ["Check-current-track"],
     queryFn: async ({ signal }) => {
       return new Promise((resolve, reject) => {
@@ -80,43 +80,30 @@ function AboutScreen() {
       })
     },
     refetchOnMount: true,
-    keepPreviousData: false,
     enabled: false,
     retry: false,
-    onError: (error) => {
+  })
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isError) {
       console.log(appStateVisible)
-      console.error("Error on query for AboutScreen", error)
-    },
-    onSuccess: (data) => {
+      console.error("Error on query for AboutScreen", checkCurrentTrackQuery.error)
+    }
+  }, [checkCurrentTrackQuery.isError, checkCurrentTrackQuery.error, appStateVisible])
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
       // Update the app
       spotifyContext.updateTrack({
-        track: data.name,
-        artist: data.artists[0].name,
-        spotifyData: data,
+        track: checkCurrentTrackQuery.data.name,
+        artist: checkCurrentTrackQuery.data.artists[0].name,
+        spotifyData: checkCurrentTrackQuery.data,
       })
-    },
-  })
+    }
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
 
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <Button
-  //         color={GOLD}
-  //         title="Yo"
-  //         onPress={() => {
-  //           setRefreshing(true)
-  //           queryClient.fetchQuery({
-  //             queryKey: ["Check-current-track"],
-  //           })
-  //         }}
-  //       />
-  //     ),
-  //   })
-  // }, [navigation, queryClient])
-
-  // Cancel query if app is closed
-  // Restart query when back
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
@@ -143,10 +130,10 @@ function AboutScreen() {
     }
   }, [queryClient])
 
-  const { isLoading, isError, data } = useQuery(
-    [`${currentlyPlaying.track}-about`],
-    async () => await AboutScreenModel(currentlyPlaying, spotifyContext)
-  )
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-about`],
+    queryFn: async () => await AboutScreenModel(currentlyPlaying, spotifyContext),
+  })
 
   if (isLoading) return <Loader />
   if (isError) return <Loader />
@@ -175,11 +162,17 @@ function AboutScreen() {
           tintColor={"#ffffff"}
           titleColor={"#ffffff"}
           refreshing={refreshing}
-          onRefresh={() => {
+          onRefresh={async () => {
             setRefreshing(true)
-            queryClient.fetchQuery({
-              queryKey: ["Check-current-track"],
-            })
+            try {
+              await queryClient.fetchQuery({
+                queryKey: ["Check-current-track"],
+              })
+            } catch (error) {
+              console.error("Error fetching current track", error)
+            } finally {
+              setRefreshing(false)
+            }
           }}
         />
       }

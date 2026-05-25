@@ -1,10 +1,14 @@
 import React, { useContext, useEffect } from "react"
 import { Text, useWindowDimensions, View } from "react-native"
+import { FlashList } from "@shopify/flash-list"
+import PropTypes from "prop-types"
+
+// React Navigation
 import { useTheme, useNavigation } from "@react-navigation/native"
 import { useHeaderHeight } from "@react-navigation/elements"
-import { FlashList } from "@shopify/flash-list"
+
+// Expo
 import { Image } from "expo-image"
-import PropTypes from "prop-types"
 
 // Context
 import SearchContext from "../../context/search"

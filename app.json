@@ -2,7 +2,7 @@
   "expo": {
     "name": "TrackQueen",
     "slug": "tq22",
-    "version": "1.2.5",
+    "version": "1.3.1",
     "orientation": "portrait",
     "description": "Learn more about your music.",
     "scheme": "com.jcanelis.tq22",
@@ -10,18 +10,20 @@
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/jcanelis/trackqueen",
     "owner": "jcanelis",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#000000"
-    },
     "ios": {
       "icon": "./assets/app.icon",
       "bundleIdentifier": "com.jcanelis.tq22",
-      "associatedDomains": ["applinks:trackqueen.app"],
+      "associatedDomains": [
+        "applinks:trackqueen.app"
+      ],
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["audio", "fetch", "audio", "fetch"],
+        "UIBackgroundModes": [
+          "audio",
+          "fetch",
+          "audio",
+          "fetch"
+        ],
         "NSMicrophoneUsageDescription": "Enable the microphone to find songs using nearby audio.",
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -37,7 +39,9 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "extra": {
       "eas": {
         "projectId": "4e40a877-6f31-41c4-a1e8-446cb9ce2fee"
@@ -68,14 +72,24 @@
           "enableBackgroundRecording": true
         }
       ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./assets/splash.png",
+          "enableFullScreenImage_legacy": true,
+          "resizeMode": "cover",
+        }
+      ],
       "expo-secure-store",
       "expo-asset",
       "expo-web-browser",
       "expo-image",
       "expo-font",
-      "expo-audio"
+      "expo-audio",
+      "expo-status-bar"
     ],
-    "runtimeVersion": "1.2.5",
+    "runtimeVersion": "1.3.1",
     "android": {
       "package": "com.jcanelis.tq22"
     }

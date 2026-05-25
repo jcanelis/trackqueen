@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { AppState, RefreshControl, ScrollView, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
+import { Alert, AppState, Pressable, RefreshControl, ScrollView, View } from "react-native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
+
+// React Navigation
+import { useTheme } from "@react-navigation/native"
 
 // Expo
 import * as Linking from "expo-linking"
@@ -26,7 +28,7 @@ function LoadingScreen() {
   const queryClient = useQueryClient()
   const spotifyContext = useContext(SpotifyContext)
 
-  // AppState listener : https://reactnative.dev/docs/appstate
+  // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
@@ -34,7 +36,7 @@ function LoadingScreen() {
   let [refreshing, setRefreshing] = useState(false)
 
   // Check current track function
-  useQuery({
+  const checkCurrentTrackQuery = useQuery({
     queryKey: ["Check-current-track"],
     queryFn: async ({ signal }) => {
       return new Promise((resolve, reject) => {
@@ -51,27 +53,30 @@ function LoadingScreen() {
       })
     },
     refetchOnMount: true,
-    keepPreviousData: false,
     enabled: false,
     retry: false,
-    onError: (error) => {
-      setRefreshing(false)
-      console.error("Error on query for LoadingScreen", error)
-      console.log("appStateVisible : ", appStateVisible)
-    },
-    onSuccess: (data) => {
-      setRefreshing(false)
-      // Update the app
-      spotifyContext.updateTrack({
-        track: data.name,
-        artist: data.artists[0].name,
-        spotifyData: data,
-      })
-    },
   })
 
-  // Cancel query if app is closed
-  // Restart query when back
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isError) {
+      setRefreshing(false)
+      console.error("Error on query for LoadingScreen", checkCurrentTrackQuery.error)
+      console.log("appStateVisible : ", appStateVisible)
+    }
+  }, [checkCurrentTrackQuery.isError, checkCurrentTrackQuery.error, appStateVisible])
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
+      setRefreshing(false)
+      spotifyContext.updateTrack({
+        track: checkCurrentTrackQuery.data.name,
+        artist: checkCurrentTrackQuery.data.artists[0].name,
+        spotifyData: checkCurrentTrackQuery.data,
+      })
+    }
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
@@ -99,6 +104,19 @@ function LoadingScreen() {
     }
   }, [queryClient])
 
+  async function handleRefresh() {
+    setRefreshing(true)
+    try {
+      await queryClient.fetchQuery({
+        queryKey: ["Check-current-track"],
+      })
+    } catch (error) {
+      console.error("Error fetching current track", error)
+    } finally {
+      setRefreshing(false)
+    }
+  }
+
   return (
     <View
       style={{
@@ -114,16 +132,23 @@ function LoadingScreen() {
             tintColor={lightGrey}
             titleColor={lightGrey}
             refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true)
-              queryClient.fetchQuery({
-                queryKey: ["Check-current-track"],
-              })
-            }}
+            onRefresh={handleRefresh}
           />
         }
-      >
-        <Spinner />
+      > 
+        <View style={{flex: 1, justifyContent: "center"}}>
+          <Pressable
+            onPress={() =>
+              Alert.alert(
+                "Pull Down to Refresh",
+                "Pull down to check your currently playing song.",
+                [{ text: "Got It", style: "cancel" }]
+              )
+            }
+          >
+            <Spinner />
+          </Pressable>
+        </View>
         <Wrapper>
           <Heading>Play a song with Spotify</Heading>
           <SubHeading>Pull down to refresh</SubHeading>

@@ -9,12 +9,10 @@ import { blurhash, baseUnit } from "../constants/Base"
 
 const VideoThumbnail = ({ data }) => {
   const { width } = useWindowDimensions()
-  const { coverArt, url } = data
-
   return (
     <Pressable
       onPress={() => {
-        Linking.openURL(url)
+        Linking.openURL(data.url)
       }}
       style={({ pressed }) => [
         {
@@ -28,7 +26,7 @@ const VideoThumbnail = ({ data }) => {
       ]}
     >
       <Image
-        source={coverArt}
+        source={data.coverArt}
         placeholder={blurhash}
         transition={250}
         width={width - baseUnit * 6}
@@ -41,7 +39,8 @@ const VideoThumbnail = ({ data }) => {
 }
 
 VideoThumbnail.propTypes = {
-  data: PropTypes.object,
+  data:  PropTypes.object,
+
 }
 
 export default VideoThumbnail

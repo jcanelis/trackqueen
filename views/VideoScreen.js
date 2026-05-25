@@ -23,7 +23,7 @@ import Loader from "../components/Loader"
 import YouTubeList from "../components/YouTubeList"
 
 // Design
-import { baseUnit, lightGrey } from "../constants/Base"
+import { baseUnit } from "../constants/Base"
 
 function VideoScreen() {
   const navigation = useNavigation()
@@ -37,30 +37,25 @@ function VideoScreen() {
   // State
   let [refreshing, setRefreshing] = useState(false)
 
-  // Ref
   const ref = useRef(null)
   useScrollToTop(
     useRef({
       scrollToTop: () => ref.current?.scrollTo({ y: 0 }),
     })
   )
-
-  // AppState listener
-  // https://reactnative.dev/docs/appstate
+  
+  // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
   // Query
-  useQuery({
+  const checkCurrentTrackQuery = useQuery({
     queryKey: ["Check-current-track"],
     queryFn: async ({ signal }) => {
       return new Promise((resolve, reject) => {
         async function init() {
           try {
-            // Get token
             let authToken = await TokenCheck(signal)
-
-            // Check track
             let spotifyData = await SpotifyCurrentTrack(authToken, signal)
 
             resolve(spotifyData)
@@ -72,26 +67,29 @@ function VideoScreen() {
       })
     },
     refetchOnMount: true,
-    keepPreviousData: false,
     enabled: false,
     retry: false,
-    onError: (error) => {
-      console.log(appStateVisible, "appStateVisible")
-      console.error("Error on query for LoadingScreen", error)
-    },
-    onSuccess: (data) => {
-      setRefreshing(false)
-      // Update the app
-      spotifyContext.updateTrack({
-        track: data.name,
-        artist: data.artists[0].name,
-        spotifyData: data,
-      })
-    },
   })
 
-  // Cancel query if app is closed
-  // Restart query when back
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isError) {
+      console.log(appStateVisible, "appStateVisible")
+      console.error("Error on query for VideoScreen", checkCurrentTrackQuery.error)
+    }
+  }, [checkCurrentTrackQuery.isError, checkCurrentTrackQuery.error, appStateVisible])
+
+  useEffect(() => {
+    if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
+      setRefreshing(false)
+      spotifyContext.updateTrack({
+        track: checkCurrentTrackQuery.data.name,
+        artist: checkCurrentTrackQuery.data.artists[0].name,
+        spotifyData: checkCurrentTrackQuery.data,
+      })
+    }
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+
+  // Cancel query if app is closed and restart query when back
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
@@ -118,10 +116,10 @@ function VideoScreen() {
     }
   }, [queryClient])
 
-  const { isLoading, isError, data } = useQuery(
-    [`${currentlyPlaying.track}-videos`],
-    async () => await VideoScreenModel(currentlyPlaying)
-  )
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [`${currentlyPlaying.track}-videos`],
+    queryFn: async () => await VideoScreenModel(currentlyPlaying),
+  })
 
   if (isLoading) return <Loader />
   if (isError) return <Loader />
@@ -143,18 +141,24 @@ function VideoScreen() {
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
-          tintColor={lightGrey}
-          titleColor={lightGrey}
+          tintColor={"#ffffff"}
+          titleColor={"#ffffff"}
           refreshing={refreshing}
-          onRefresh={() => {
+          onRefresh={async () => {
             setRefreshing(true)
-            queryClient.fetchQuery({
-              queryKey: ["Check-current-track"],
-            })
+            try {
+              await queryClient.fetchQuery({
+                queryKey: ["Check-current-track"],
+              })
+            } catch (error) {
+              console.error("Error fetching current track", error)
+            } finally {
+              setRefreshing(false)
+            }
           }}
         />
-      }
-    >
+      }>
+
       <Header
         border={false}
         buttonTitle={"View all"}

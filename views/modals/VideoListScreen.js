@@ -46,10 +46,10 @@ const VideoListScreen = ({ route, navigation }) => {
         refreshing={false}
         onEndReachedThreshold={0.6}
         onEndReached={async () => {
-          if (numberOfRequests < 4) {
+          if (numberOfRequests < 10) {
             try {
               const newData = await YouTubeSearch(
-                10,
+                3,
                 route.params.query,
                 nextPageToken
               )

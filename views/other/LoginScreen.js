@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ActivityIndicator, View } from "react-native"
-import { useTheme } from "@react-navigation/native"
-
 import * as WebBrowser from "expo-web-browser"
+
+// React Navigation
+import { useTheme } from "@react-navigation/native"
 
 // Expo
 import { useAuthRequest } from "expo-auth-session"
@@ -37,7 +38,6 @@ function LoginScreen() {
     tokenEndpoint: "https://accounts.spotify.com/api/token",
   }
 
-  // Expo AuthSession: https://docs.expo.dev/versions/latest/sdk/auth-session/
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: `${Keys.Spotify}`,

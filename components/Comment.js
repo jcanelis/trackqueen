@@ -2,10 +2,10 @@ import React from "react"
 import { Text, View } from "react-native"
 import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
+import { SymbolView } from "expo-symbols"
 
 // Design
 import { baseUnit, verticalRhythm } from "../constants/Base"
-import { Ionicons } from "@expo/vector-icons"
 
 const Comment = ({ data }) => {
   const { colors } = useTheme()
@@ -33,7 +33,7 @@ const Comment = ({ data }) => {
           fontWeight: 500,
           textAlign: "left",
           color: colors.text,
-          opacity: 0.95,
+          opacity: 1,
         }}
       >
         {content}
@@ -47,24 +47,43 @@ const Comment = ({ data }) => {
           opacity: 0.85,
         }}
       >
-        <Ionicons
-          style={{ opacity: 0.65 }}
-          name={"heart-outline"}
-          color={colors.text}
-          size={22}
+        <SymbolView
+          name="hand.thumbsup.fill"
+          size={baseUnit * 2.2}
+          tintColor={colors.text}
         />
-        <Text
+        <View 
           style={{
+            flex: 1,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              gap: baseUnit,
+            }}
+          >
+          <Text style={{
             fontSize: baseUnit * 2,
+            letterSpacing: 0.5,
             lineHeight: baseUnit * 4,
+            marginLeft: 2,
             fontWeight: 500,
             textAlign: "left",
             color: colors.text,
-            opacity: 0.85,
-          }}
-        >
-          {likes} • {newDate}
-        </Text>
+            opacity: 1,
+          }}>
+            {likes}
+          </Text>
+          <Text style={{
+            fontSize: baseUnit * 2,
+              lineHeight: baseUnit * 4,
+              marginLeft: 2,
+              fontWeight: 500,
+              textAlign: "left",
+              color: colors.text,
+              opacity: 0.5,
+          }}>
+            {newDate}
+          </Text>
+        </View>
       </View>
     </View>
   )

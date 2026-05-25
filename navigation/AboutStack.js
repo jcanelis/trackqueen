@@ -65,6 +65,8 @@ const AboutStack = () => {
         options={{
           headerBackTitle: "Back",
           headerBlurEffect: "systemUltraThinMaterialDark",
+          headerTransparent: true,
+          scrollEdgeAppearance: "opaque",
           headerBackground: () => (
             <HeaderHeightContext.Consumer>
               {(headerHeight) => {

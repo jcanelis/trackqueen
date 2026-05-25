@@ -5,19 +5,19 @@ const VideoScreenModel = async ({ artist, track }) => {
   try {
     // Fetch live performances of the track
     const performancesSearch = await YouTubeSearch(
-      2,
+      3,
       `${track} ${artist} live`,
       ""
     )
     const performances = performancesSearch.items
 
     // Fetch interviews with the artist
-    const interviewsSearch = await YouTubeSearch(2, `${artist} interviews`, "")
+    const interviewsSearch = await YouTubeSearch(3, `${artist} interviews`, "")
     const interviews = interviewsSearch.items
 
     // Fetch reactions to the track
     const reactionsSearch = await YouTubeSearch(
-      2,
+      3,
       `${track} ${artist} reactions`,
       ""
     )
