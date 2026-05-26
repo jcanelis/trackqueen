@@ -104,11 +104,19 @@ function SoundCheckScreen() {
     ios: {
       extension: ".wav",
       audioQuality: RecordingPresets.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
-      sampleRate: 8000,
+      sampleRate: 16000,
       numberOfChannels: 1,
       linearPCMBitDepth: 16,
       linearPCMIsBigEndian: false,
-      linearPCMIsFloat: true,
+      linearPCMIsFloat: false,
+    },
+    android: {
+      extension: ".m4a",
+      outputFormat: RecordingPresets.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+      audioEncoder: RecordingPresets.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
+      sampleRate: 16000,
+      numberOfChannels: 1,
+      bitRate: 128000,
     },
   })
 
@@ -137,18 +145,10 @@ function SoundCheckScreen() {
               playsInSilentMode: true,
             })
 
-            // Start recording
-            await audioRecorder.prepareToRecordAsync(
-              RecordingPresets.HIGH_QUALITY
-            )
+            await audioRecorder.prepareToRecordAsync()
             audioRecorder.record()
             setScreenState("recording")
-
-            // Auto-stop after 8 seconds (timer can be cleared by Stop button)
             await timeout(8000)
-            console.log("Stopping recording")
-
-            // Stop recording and transition to searching
             await audioRecorder.stop()
             setScreenState("searching")
 
@@ -157,23 +157,19 @@ function SoundCheckScreen() {
               playsInSilentMode: true,
             })
 
-            console.log("yee", audioRecorder.uri)
-
-            // Send audio to ACRCloud
             const acrCloud = await Identify(audioRecorder.uri, signal)
 
             if (acrCloud.status.msg === "No result") {
-              console.log("NOTHING WSA FOUND")
               setScreenState("not_found")
               throw new Error("No track found in search.")
             } else if (acrCloud.status.code == 2004) {
               setScreenState("not_found")
               throw new Error("Status code 2004.")
             } else {
-              console.log("WE HAVE DATA")
               const { spotify } = acrCloud.metadata.music[0].external_metadata
               const token = await TokenCheck()
               const data = SpotifyGetTrack(token, spotify.track.id)
+              
               resolve(data)
             }
           } catch (error) {

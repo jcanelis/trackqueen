@@ -3,7 +3,7 @@ import hmacSHA1 from "crypto-js/hmac-sha1"
 import Base64 from "crypto-js/enc-base64"
 
 // Expo
-import * as FileSystem from "expo-file-system/legacy"
+import { File } from "expo-file-system"
 
 // Custom
 import Keys from "../../constants/Keys"
@@ -37,11 +37,6 @@ export default async function Identify(uri, signal) {
       access_secret: `${Keys.AcrSecret}`,
     }
 
-    console.log("ATTEMPING")
-
-    console.log(`${Keys.AcrSecret}`)
-    console.log(`${Keys.Acr}`)
-
     const current_date = new Date()
     const timestamp = current_date.getTime() / 1000
     const stringToSign = buildStringToSign(
@@ -53,30 +48,25 @@ export default async function Identify(uri, signal) {
       timestamp
     )
 
-    let fileinfo = await FileSystem.getInfoAsync(uri, { size: true })
-
-    console.log("fileinfo", fileinfo)
-
+    // The new expo-file-system File class implements the web Blob interface
+    // natively, so it can be appended to FormData directly without any
+    // ArrayBuffer or base64 conversion (both of which fail on Hermes).
+    const file = new File(uri)
     const signature = signString(stringToSign, options.access_secret)
-    const formData = {
-      sample: { uri: fileinfo.uri, name: "sample.wav", type: "audio/wav" },
-      access_key: options.access_key,
-      data_type: options.data_type,
-      signature_version: options.signature_version,
-      signature: signature,
-      sample_bytes: fileinfo.size,
-      timestamp: timestamp,
-    }
-    var form = new FormData()
-    for (let key in formData) {
-      form.append(key, formData[key])
-    }
 
+    var form = new FormData()
+    form.append("sample", file, "sample.wav")
+    form.append("access_key", options.access_key)
+    form.append("data_type", options.data_type)
+    form.append("signature_version", options.signature_version)
+    form.append("signature", signature)
+    form.append("sample_bytes", String(file.size))
+    form.append("timestamp", String(timestamp))
+
+    // Do NOT set Content-Type manually — fetch must set it automatically so
+    // that the multipart boundary is included in the header value.
     let postOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       body: form,
       signal,
     }
@@ -87,10 +77,11 @@ export default async function Identify(uri, signal) {
     )
 
     let responseJSON = await response.json()
-    console.log("RESPONSEJSON RESPONSEJSON ", responseJSON)
 
     return responseJSON
   } catch (error) {
+    console.error(error)
+    
     return error
   }
 }
