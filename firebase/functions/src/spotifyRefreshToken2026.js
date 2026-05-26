@@ -39,6 +39,12 @@ exports.spotifyRefreshToken2026 = onRequest(
         res.status(200).send({
           access_token: newToken,
         })
+      } else {
+        console.error("Spotify token refresh failed:", error || body)
+        res.status(500).send({
+          error: "Failed to refresh Spotify token",
+          details: error ? error.message : body,
+        })
       }
     })
   }
