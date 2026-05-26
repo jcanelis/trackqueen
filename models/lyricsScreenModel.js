@@ -83,7 +83,7 @@ const LyricsScreenModel = async ({ track, artist, spotifyData }) => {
   } catch (error) {
     console.error("Error retrieving data in LyricsScreenModel : \n", error)
 
-    return error
+    throw error
   }
 }
 
