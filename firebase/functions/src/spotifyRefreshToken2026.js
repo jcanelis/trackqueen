@@ -15,7 +15,7 @@ exports.spotifyRefreshToken2026 = onRequest(
     cors: ["http://localhost:19006", "https://accounts.spotify.com"],
   },
   (req, res) => {
-    const { refresh_token } = req.body
+    const { refreshToken: refresh_token } = req.body
 
     const buffer = Buffer.from(
       `${spotify_client_id.value()}:${spotify_client_secret.value()}`
@@ -38,6 +38,12 @@ exports.spotifyRefreshToken2026 = onRequest(
 
         res.status(200).send({
           access_token: newToken,
+        })
+      } else {
+        console.error("Spotify token refresh failed:", error || body)
+        res.status(500).send({
+          error: "Failed to refresh Spotify token",
+          details: error ? error.message : body,
         })
       }
     })
