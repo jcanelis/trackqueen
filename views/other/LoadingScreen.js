@@ -140,7 +140,7 @@ function LoadingScreen() {
           <Pressable
             onPress={() =>
               Alert.alert(
-                "Pull Down to Refresh",
+                "Pull down to refresh",
                 "Pull down to check your currently playing song.",
                 [{ text: "Got It", style: "cancel" }]
               )
