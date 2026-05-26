@@ -135,6 +135,9 @@ function LyricsScreen() {
   const { isLoading, isError, data } = useQuery({
     queryKey: [`${currentlyPlaying.track}-lyrics`],
     queryFn: async () => await LyricsScreenModel(currentlyPlaying),
+    refetchOnMount: true,
+    enabled: true,
+    retry: false,
   })
 
   if (isLoading) return <Loader />
@@ -162,7 +165,6 @@ function LyricsScreen() {
         item.length > 0 ? <Lyric content={item} /> : null
       }
       refreshing={refreshing}
-
       refreshControl={
         <RefreshControl
           title="Checking your current Spotify track..."
