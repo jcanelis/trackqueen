@@ -112,7 +112,7 @@ function LyricsScreen() {
         appState.current.match(/inactive|background/) &&
         nextAppState === "active"
       ) {
-        queryClient.resetQueries({
+        queryClient.fetchQuery({
           queryKey: ["Check-current-track"],
         })
       } else {
