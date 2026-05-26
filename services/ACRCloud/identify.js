@@ -26,11 +26,6 @@ function signString(stringToSign, accessSecret) {
 }
 
 export default async function Identify(uri, signal) {
-
-  console.log("Calling ACR...")
-  console.log(`${Keys.Acr}`)
-  console.log(`${Keys.AcrSecret}`)
-
   try {
     const options = {
       host: "identify-us-west-2.acrcloud.com",
@@ -57,8 +52,6 @@ export default async function Identify(uri, signal) {
     // natively, so it can be appended to FormData directly without any
     // ArrayBuffer or base64 conversion (both of which fail on Hermes).
     const file = new File(uri)
-    console.log("file", file.uri, "size", file.size)
-
     const signature = signString(stringToSign, options.access_secret)
 
     var form = new FormData()
@@ -82,16 +75,13 @@ export default async function Identify(uri, signal) {
       "https://" + options.host + options.endpoint,
       postOptions
     )
-    console.log(response)
 
     let responseJSON = await response.json()
-    console.log("RESPONSEJSON ", responseJSON)
 
     return responseJSON
   } catch (error) {
-    console.log("ERROR ZONE")
-    console.log(error)
     console.error(error)
+    
     return error
   }
 }
