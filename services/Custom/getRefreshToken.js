@@ -21,7 +21,7 @@ const SpotifyRefreshToken = async (signal) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ refresh_token: refreshToken }),
+        body: JSON.stringify({ refreshToken: refreshToken }),
         signal,
       }
     )

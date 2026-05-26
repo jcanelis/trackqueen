@@ -15,7 +15,7 @@ exports.spotifyRefreshToken2026 = onRequest(
     cors: ["http://localhost:19006", "https://accounts.spotify.com"],
   },
   (req, res) => {
-    const { refresh_token } = req.body
+    const { refreshToken: refresh_token } = req.body
 
     const buffer = Buffer.from(
       `${spotify_client_id.value()}:${spotify_client_secret.value()}`
