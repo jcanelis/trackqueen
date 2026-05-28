@@ -47,8 +47,8 @@ function LyricsScreen() {
   const queryClient = useQueryClient()
 
   // Context
-  const { currentlyPlaying } = useContext(SpotifyContext)
   const spotifyContext = useContext(SpotifyContext)
+  const { currentlyPlaying } = spotifyContext
 
   // State
   let [refreshing, setRefreshing] = useState(false)
@@ -56,6 +56,13 @@ function LyricsScreen() {
   // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
+
+  // Hold the current lyrics query key in a ref so the AppState listener
+  // can cancel it without needing currentlyPlaying in its dependency array
+  const currentTrackKey = useRef(`${currentlyPlaying.track}-lyrics`)
+  useEffect(() => {
+    currentTrackKey.current = `${currentlyPlaying.track}-lyrics`
+  }, [currentlyPlaying.track])
 
   const ref = useRef(null)
   useScrollToTop(
@@ -112,13 +119,16 @@ function LyricsScreen() {
         appState.current.match(/inactive|background/) &&
         nextAppState === "active"
       ) {
-        queryClient.fetchQuery({
+        queryClient.resetQueries({
           queryKey: ["Check-current-track"],
         })
       } else {
         setRefreshing(false)
         queryClient.cancelQueries({
           queryKey: ["Check-current-track"],
+        })
+        queryClient.cancelQueries({
+          queryKey: [currentTrackKey.current],
         })
       }
 
@@ -138,6 +148,7 @@ function LyricsScreen() {
     refetchOnMount: true,
     enabled: true,
     retry: false,
+    staleTime: Infinity,
   })
 
   if (isLoading) return <Loader />
