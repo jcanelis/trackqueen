@@ -67,7 +67,7 @@
       [
         "expo-audio",
         {
-          "microphonePermission": "Allow TrackQueen to access your microphone.",
+          "microphonePermission": "TrackQueen uses the microphone to listen to nearby audio so it can identify the song currently playing around you.",
           "enableBackgroundPlayback": true,
           "enableBackgroundRecording": true
         }
@@ -86,7 +86,6 @@
       "expo-web-browser",
       "expo-image",
       "expo-font",
-      "expo-audio",
       "expo-status-bar"
     ],
     "runtimeVersion": "1.3.1",
