@@ -193,24 +193,26 @@ function GPTResponse({ route }) {
       </Text>
 
       {assets && !error && (
-        <Pressable
-          onPress={() => {
-            _handlePressButtonAsync("https://openai.com/")
-          }}
-          style={({ pressed }) => [
-            {
-              marginTop: baseUnit * 3,
-              opacity: pressed ? 0.7 : 1,
-            },
-          ]}
-        >
-          <Image
-            style={{ opacity: 1 }}
-            source={assets[0].localUri}
-            width={2200 / 24}
-            height={598 / 24}
-          />
-        </Pressable>
+        <View style={{alignItems: "center", paddingTop: baseUnit * 2, paddingBottom: baseUnit * 6 }}>
+          <Pressable
+            onPress={() => {
+              _handlePressButtonAsync("https://openai.com/")
+            }}
+            style={({ pressed }) => [
+              {
+                marginTop: baseUnit * 3,
+                opacity: pressed ? 0.7 : 1,
+              },
+            ]}
+          >
+            <Image
+              style={{ opacity: 1 }}
+              source={assets[0].localUri}
+              width={2200 / 24}
+              height={598 / 24}
+            />
+          </Pressable>
+        </View>
       )}
     </ScrollView>
   )

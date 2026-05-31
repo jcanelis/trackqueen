@@ -143,13 +143,19 @@ function CommentsScreen() {
       const video = await YouTubeSearch(1, `${track} ${artist} official`, "");
       const commentsData = await YouTubeComments(video.items[0].id.videoId, "", commentOrder);
 
+      // Cleanup comments
+      const initialComments = commentsData.comments.filter(
+        (comment) =>
+          comment.snippet.topLevelComment.snippet.textOriginal.length < 700
+      )
+
       return {
         video: { 
           url: `https://www.youtube.com/watch?v=${video.items[0].id.videoId}`,
           coverArt: video.items[0].snippet.thumbnails.high.url,
           videoId: video.items[0].id.videoId,
         },
-        comments: commentsData.comments,
+        comments: initialComments,
         nextPageToken: commentsData.nextPageToken
       }
     },
@@ -185,7 +191,14 @@ function CommentsScreen() {
     setIsLoadingMore(true)
     try {
       const commentsData = await YouTubeComments(data.video.videoId, nextPageToken, commentOrder)
-      setAllComments(prevComments => [...prevComments, ...commentsData.comments])
+      
+      // Cleanup comments
+      const newComments = commentsData.comments.filter(
+        (comment) =>
+          comment.snippet.topLevelComment.snippet.textOriginal.length < 700
+      )
+
+      setAllComments(prevComments => [...prevComments, ...newComments])
       setNextPageToken(commentsData.nextPageToken || "")
     } catch (error) {
       console.error("Error loading more comments:", error)
