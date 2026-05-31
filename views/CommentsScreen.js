@@ -40,8 +40,7 @@ function CommentsScreen() {
   const queryClient = useQueryClient()
 
   // Context
-  const { currentlyPlaying } = useContext(SpotifyContext)
-  const spotifyContext = useContext(SpotifyContext)
+  const { currentlyPlaying, updateTrack } = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
 
@@ -101,13 +100,13 @@ function CommentsScreen() {
   useEffect(() => {
     if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
-      spotifyContext.updateTrack({
+      updateTrack({
         track: checkCurrentTrackQuery.data.name,
         artist: checkCurrentTrackQuery.data.artists[0].name,
         spotifyData: checkCurrentTrackQuery.data,
       })
     }
-  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data, updateTrack])
 
   // Cancel query if app is closed, restart query when back
   useEffect(() => {

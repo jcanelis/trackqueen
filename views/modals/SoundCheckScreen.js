@@ -53,7 +53,7 @@ import { baseUnit, GOLD } from "../../constants/Base"
 function SoundCheckScreen() {
   const navigation = useNavigation()
   const queryClient = useQueryClient()
-  const spotifyContext = useContext(SpotifyContext)
+  const { updateTrack } = useContext(SpotifyContext)
 
   // User interface
   const { colors } = useTheme()
@@ -207,14 +207,14 @@ function SoundCheckScreen() {
   useEffect(() => {
     if (soundCheckQuery.isSuccess && soundCheckQuery.data) {
       setScreenState("idle")
-      spotifyContext.updateTrack({
+      updateTrack({
         track: soundCheckQuery.data.name,
         artist: soundCheckQuery.data.artists[0].name,
         spotifyData: soundCheckQuery.data,
       })
       navigation.goBack()
     }
-  }, [soundCheckQuery.isSuccess, soundCheckQuery.data, navigation])
+  }, [soundCheckQuery.isSuccess, soundCheckQuery.data, navigation, updateTrack])
 
   // Stop recording early and return to idle — no ACR call is made
   function handleStopRecording() {
