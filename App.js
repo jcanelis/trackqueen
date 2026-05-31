@@ -1,6 +1,6 @@
 // React
 import "react-native-gesture-handler"
-import React, { useEffect, useMemo, useReducer } from "react"
+import React, { useCallback, useEffect, useMemo, useReducer } from "react"
 
 // React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -54,19 +54,24 @@ export default function App() {
     []
   )
 
+  const updateTrack = useCallback(
+    async ({ track, artist, spotifyData }) => {
+      dispatch({
+        type: "UPDATE_TRACK",
+        track: track,
+        artist: artist,
+        spotifyData: spotifyData,
+      })
+    },
+    [dispatch]
+  )
+
   const spotifyContext = useMemo(
     () => ({
       currentlyPlaying: state.currentlyPlaying,
-      updateTrack: async ({ track, artist, spotifyData }) => {
-        dispatch({
-          type: "UPDATE_TRACK",
-          track: track,
-          artist: artist,
-          spotifyData: spotifyData,
-        })
-      },
+      updateTrack,
     }),
-    [state.currentlyPlaying]
+    [state.currentlyPlaying, updateTrack]
   )
 
   useEffect(() => {

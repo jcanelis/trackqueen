@@ -44,8 +44,7 @@ function AboutScreen() {
   const [appStateVisible, setAppStateVisible] = useState(appState.current)
 
   // Context
-  const spotifyContext = useContext(SpotifyContext)
-  const { currentlyPlaying } = spotifyContext
+  const { currentlyPlaying, updateTrack } = useContext(SpotifyContext)
 
   // State
   let [refreshing, setRefreshing] = useState(false)
@@ -95,13 +94,13 @@ function AboutScreen() {
     if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
       // Update the app
-      spotifyContext.updateTrack({
+      updateTrack({
         track: checkCurrentTrackQuery.data.name,
         artist: checkCurrentTrackQuery.data.artists[0].name,
         spotifyData: checkCurrentTrackQuery.data,
       })
     }
-  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data, updateTrack])
 
   // Cancel query if app is closed and restart query when back
   useEffect(() => {
@@ -132,7 +131,7 @@ function AboutScreen() {
 
   const { isLoading, isError, data } = useQuery({
     queryKey: [`${currentlyPlaying.track}-about`],
-    queryFn: async () => await AboutScreenModel(currentlyPlaying, spotifyContext),
+    queryFn: async () => await AboutScreenModel(currentlyPlaying),
   })
 
   if (isLoading) return <Loader />

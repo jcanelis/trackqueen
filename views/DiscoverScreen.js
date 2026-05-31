@@ -35,8 +35,7 @@ function DiscoverScreen() {
   const queryClient = useQueryClient()
 
   // Context
-  const spotifyContext = useContext(SpotifyContext)
-  const { currentlyPlaying } = spotifyContext
+  const { currentlyPlaying, updateTrack } = useContext(SpotifyContext)
   const { track } = currentlyPlaying
   const { artist } = currentlyPlaying
   // const album = currentlyPlaying.spotifyData.album.name
@@ -94,13 +93,13 @@ function DiscoverScreen() {
     if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
       // Update the app
-      spotifyContext.updateTrack({
+      updateTrack({
         track: checkCurrentTrackQuery.data.name,
         artist: checkCurrentTrackQuery.data.artists[0].name,
         spotifyData: checkCurrentTrackQuery.data,
       })
     }
-  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data, updateTrack])
 
   // Cancel query if app is closed
   // Restart query when back

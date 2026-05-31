@@ -26,7 +26,7 @@ import { lightGrey } from "../../constants/Base"
 function LoadingScreen() {
   const { colors } = useTheme()
   const queryClient = useQueryClient()
-  const spotifyContext = useContext(SpotifyContext)
+  const { updateTrack } = useContext(SpotifyContext)
 
   // AppState (https://reactnative.dev/docs/appstate)
   const appState = useRef(AppState.currentState)
@@ -68,13 +68,13 @@ function LoadingScreen() {
   useEffect(() => {
     if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
-      spotifyContext.updateTrack({
+      updateTrack({
         track: checkCurrentTrackQuery.data.name,
         artist: checkCurrentTrackQuery.data.artists[0].name,
         spotifyData: checkCurrentTrackQuery.data,
       })
     }
-  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data, updateTrack])
 
   // Cancel query if app is closed and restart query when back
   useEffect(() => {

@@ -9,7 +9,7 @@ import AboutStack from "./AboutStack"
 import LyricsStack from "./LyricsStack"
 import CommentsStack from "./CommentsStack"
 import VideoStack from "./VideoStack"
-import DiscoverStack from "./DiscoverStack"
+// import DiscoverStack from "./DiscoverStack"
 
 // Design
 import { light } from "../constants/Base"

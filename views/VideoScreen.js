@@ -31,8 +31,7 @@ function VideoScreen() {
   const queryClient = useQueryClient()
 
   // Context
-  const spotifyContext = useContext(SpotifyContext)
-  const { currentlyPlaying } = spotifyContext
+  const { currentlyPlaying, updateTrack } = useContext(SpotifyContext)
 
   // State
   let [refreshing, setRefreshing] = useState(false)
@@ -81,13 +80,13 @@ function VideoScreen() {
   useEffect(() => {
     if (checkCurrentTrackQuery.isSuccess && checkCurrentTrackQuery.data) {
       setRefreshing(false)
-      spotifyContext.updateTrack({
+      updateTrack({
         track: checkCurrentTrackQuery.data.name,
         artist: checkCurrentTrackQuery.data.artists[0].name,
         spotifyData: checkCurrentTrackQuery.data,
       })
     }
-  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data])
+  }, [checkCurrentTrackQuery.isSuccess, checkCurrentTrackQuery.data, updateTrack])
 
   // Cancel query if app is closed and restart query when back
   useEffect(() => {
