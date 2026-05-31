@@ -140,6 +140,11 @@ function CommentsScreen() {
     queryKey: [`${currentlyPlaying.track}-comments-initial`, commentOrder],
     queryFn: async () => {
       const video = await YouTubeSearch(1, `${track} ${artist} official`, "");
+
+      if (!video.items || video.items.length === 0) {
+        throw new Error("No YouTube results found for this track.")
+      }
+
       const commentsData = await YouTubeComments(video.items[0].id.videoId, "", commentOrder);
 
       // Cleanup comments
@@ -168,7 +173,8 @@ function CommentsScreen() {
   useEffect(( ) => {
     if (commentsError) {
       console.error("An error occured in CommentsScreen : ", commentsError)
-  }})
+    }
+  }, [commentsError])
 
   useEffect(( ) => {
     if (isError) {
@@ -206,7 +212,7 @@ function CommentsScreen() {
     }
   }, [nextPageToken, isLoadingMore, data?.video?.videoId, commentOrder])
 
-  if (isLoading && !data) return <Loader />
+  if (isLoading || !data) return <Loader />
 
   return (
     <View

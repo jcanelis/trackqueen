@@ -53,10 +53,11 @@ function LoginScreen() {
       try {
         setLoading(true)
         const accessToken = await SpotifyGetToken(authCode)
-        setLoading(false)
         authContext.signIn(accessToken)
       } catch (error) {
         console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
 

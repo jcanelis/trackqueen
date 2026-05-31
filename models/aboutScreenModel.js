@@ -72,7 +72,7 @@ const AboutScreenModel = async ({ track, artist, spotifyData }) => {
   } catch (error) {
     console.error("Error retrieving data in AboutScreenData : \n", error)
 
-    return error
+    throw error
   }
 }
 

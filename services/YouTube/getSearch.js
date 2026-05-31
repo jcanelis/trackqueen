@@ -28,7 +28,7 @@ const YouTubeSearch = async (limit, query, nextPageToken) => {
     return data
   } catch (error) {
     console.error("YouTubeSearch error \n ", error)
-    return error
+    throw error
   }
 }
 

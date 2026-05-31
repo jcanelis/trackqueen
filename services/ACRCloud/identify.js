@@ -81,7 +81,7 @@ export default async function Identify(uri, signal) {
     return responseJSON
   } catch (error) {
     console.error(error)
-    
-    return error
+
+    throw error
   }
 }

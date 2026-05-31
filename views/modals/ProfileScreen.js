@@ -91,7 +91,7 @@ function ProfileScreen() {
         contentInset={{ bottom: baseUnit * 6 }}
         ListHeaderComponent={
           <View>
-            {data && data.recentTracks > 0 && (
+            {data && data.recentTracks.length > 0 && (
               <>
                 <View
                   style={{
@@ -117,8 +117,8 @@ function ProfileScreen() {
                         },
                       ]}
                     >
-                      <Image
-                        source={data.user.images[0].url}
+                       <Image
+                        source={data.user.images?.[0]?.url ?? null}
                         height={baseUnit * 8}
                         width={baseUnit * 8}
                         placeholder={blurhash}
@@ -194,12 +194,12 @@ function ProfileScreen() {
         }
         refreshing={false}
         data={data.recentTracks}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => {
           return (
             <Track
               artists={item.track.album.artists}
-              coverArt={item.track.album.images[2].url}
+              coverArt={item.track.album.images?.[2]?.url ?? item.track.album.images?.[0]?.url ?? null}
               link={item.track.external_urls.spotify}
               title={item.track.name}
             />

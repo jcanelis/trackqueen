@@ -25,7 +25,7 @@ const SpotifyGetSimilarTracks = async (authToken, trackID) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

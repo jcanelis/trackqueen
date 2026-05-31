@@ -247,13 +247,14 @@ function DiscoverScreen() {
                   <Track
                     key={item.id}
                     artists={item.artists}
-                    coverArt={item.album.images[2].url}
+                    coverArt={item.album.images?.[2]?.url ?? item.album.images?.[0]?.url ?? null}
                     title={item.name}
                     link={item.external_urls.spotify}
                   />
                 </View>
               )
             }
+            return null
           })}
         </>
       }
@@ -280,13 +281,14 @@ function DiscoverScreen() {
               <Track
                 key={item.id}
                 artists={item.artists}
-                coverArt={item.album.images[2].url}
+                coverArt={item.album.images?.[2]?.url ?? item.album.images?.[0]?.url ?? null}
                 title={item.name}
                 link={item.external_urls.spotify}
               />
             </View>
           )
         }
+        return null
       }}
     />
   )

@@ -16,7 +16,7 @@ import SpotifyButton from "../../components/SpotifyButton"
 import { baseUnit } from "../../constants/Base"
 
 const ArtistListScreen = ({ route }) => {
-  const colors = useTheme()
+  const { colors } = useTheme()
 
   return (
     <View
@@ -63,9 +63,9 @@ const ArtistListScreen = ({ route }) => {
         refreshing={false}
         onEndReachedThreshold={0.7}
         data={route.params.artists}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => {
-          return <ArtistLarge item={item} image={item.images[0].url} />
+          return <ArtistLarge item={item} image={item.images?.[0]?.url ?? null} />
         }}
       />
     </View>

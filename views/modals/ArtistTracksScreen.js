@@ -108,12 +108,12 @@ function ArtistTracksScreen({ route }) {
         ListEmptyComponent={<Loader />}
         refreshing={false}
         data={data.tracks}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => {
           return (
             <Track
               artists={item.artists}
-              coverArt={item.album.images[2].url}
+              coverArt={item.album.images?.[2]?.url ?? item.album.images?.[0]?.url ?? null}
               link={item.external_urls.spotify}
               title={item.name}
             />

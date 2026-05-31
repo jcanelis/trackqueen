@@ -24,7 +24,7 @@ const GeniusArtist = async (artistID) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

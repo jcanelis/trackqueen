@@ -26,7 +26,7 @@ const SpotifyGetTopTracks = async (authToken, time_range) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

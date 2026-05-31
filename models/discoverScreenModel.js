@@ -35,7 +35,7 @@ const DiscoverScreenModel = async ({ spotifyData }) => {
   } catch (error) {
     console.error("Error retrieving data in DiscoverScreenModel : \n", error)
 
-    return error
+    throw error
   }
 }
 

@@ -36,7 +36,7 @@ const VideoScreenModel = async ({ artist, track }) => {
   } catch (error) {
     console.error("Error retrieving data in VideoScreenModel : \n", error)
 
-    return error
+    throw error
   }
 }
 

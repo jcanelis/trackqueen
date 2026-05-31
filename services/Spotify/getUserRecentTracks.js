@@ -26,7 +26,7 @@ const SpotifyUserRecentTracks = async (authToken, signal) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

@@ -177,8 +177,8 @@ function SoundCheckScreen() {
             } else {
               const { spotify } = acrCloud.metadata.music[0].external_metadata
               const token = await TokenCheck()
-              const data = SpotifyGetTrack(token, spotify.track.id)
-              
+              const data = await SpotifyGetTrack(token, spotify.track.id)
+
               resolve(data)
             }
           } catch (error) {
@@ -330,19 +330,21 @@ function SoundCheckScreen() {
               paddingBottom: baseUnit * 4,
             }}
           >
-            <Pressable
-              onPress={() => {
-                _handlePressButtonAsync("https://www.acrcloud.com/")
-              }}
-              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
-              >
-                <Image
-                  style={{ opacity: 0.8 }}
-                  source={assets[0].localUri}
-                  width={500 / 7}
-                  height={106 / 7}
-                />
-              </Pressable>
+              {assets && (
+                <Pressable
+                onPress={() => {
+                  _handlePressButtonAsync("https://www.acrcloud.com/")
+                }}
+                style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+                >
+                  <Image
+                    style={{ opacity: 0.8 }}
+                    source={assets[0].localUri}
+                    width={500 / 7}
+                    height={106 / 7}
+                  />
+                </Pressable>
+              )}
             
           </View>
         </View>

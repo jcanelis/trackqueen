@@ -27,7 +27,7 @@ const SpotifyArtist = async (artistID) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

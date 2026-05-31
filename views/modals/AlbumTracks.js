@@ -27,7 +27,7 @@ const AlbumTracks = ({ route }) => {
   // Context
   const { currentlyPlaying } = useContext(SpotifyContext)
   const { artist } = currentlyPlaying
-  const album = currentlyPlaying.spotifyData.album.name
+  const album = currentlyPlaying.spotifyData?.album?.name ?? ""
 
   return (
     <View
@@ -43,7 +43,7 @@ const AlbumTracks = ({ route }) => {
         contentInsetAdjustmentBehavior={"automatic"}
         contentInset={{ bottom: baseUnit * 8 }}
         data={route.params.tracks}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => {
           return (
             <Track

@@ -30,7 +30,7 @@ function TrackListScreen({ route, navigation }) {
       }}
     >
       <FlashList
-        estimatedItemSize={route.params.tracks.length}
+        estimatedItemSize={72}
         automaticallyAdjustsScrollIndicatorInsets={true}
         automaticallyAdjustContentInsets={true}
         contentInsetAdjustmentBehavior={"automatic"}
@@ -64,11 +64,11 @@ function TrackListScreen({ route, navigation }) {
           </View>
         }
         data={route.params.tracks}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => (
           <Track
             artists={item.album.artists}
-            coverArt={item.album.images[2].url}
+            coverArt={item.album.images?.[2]?.url ?? item.album.images?.[0]?.url ?? null}
             link={item.external_urls.spotify}
             title={item.name}
           />

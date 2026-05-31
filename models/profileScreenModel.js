@@ -16,7 +16,7 @@ const ProfileScreenModel = async (signal) => {
   } catch (error) {
     console.error("Error retrieving data in ProfileScreenModel : \n", error)
 
-    return false
+    throw error
   }
 }
 

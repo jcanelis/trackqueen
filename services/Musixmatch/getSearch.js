@@ -24,22 +24,18 @@ const MusixmatchSearch = async (artist, track) => {
     const lyricsData = responseJSON
 
     // Clean up lyrics data
-    let newLyrics
+    let lyrics = []
     if (responseJSON.message.header.status_code !== 404) {
-      newLyrics = responseJSON.message.body.lyrics.lyrics_body.split("\n")
-
-      if (newLyrics.length < 1) {
-        newLyrics = []
-      }
+      lyrics = responseJSON.message.body.lyrics.lyrics_body
+        .split("\n")
+        .filter((line) => line.trim().length > 0 && !line.includes("*******"))
     }
-
-    const lyrics = newLyrics
 
     return { lyrics, lyricsData }
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 
