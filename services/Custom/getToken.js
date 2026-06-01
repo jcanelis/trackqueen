@@ -43,7 +43,7 @@ const SpotifyGetToken = async (authCode) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

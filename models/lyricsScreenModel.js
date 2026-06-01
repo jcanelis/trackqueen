@@ -73,7 +73,7 @@ const LyricsScreenModel = async ({ track, artist, spotifyData }) => {
       annotations: annotations,
       bio: bio,
       geniusTrackData: geniusTrackData,
-      geniusTrackSearch: geniusTrackSearch.response.hits[0],
+      geniusTrackSearch: geniusTrackSearch.response.hits.length > 0 ? geniusTrackSearch.response.hits[0] : null,
       instagram: instagram,
       lyrics: lyrics,
       lyricsData: lyricsData,

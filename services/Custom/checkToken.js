@@ -26,7 +26,7 @@ async function TokenCheck(signal) {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

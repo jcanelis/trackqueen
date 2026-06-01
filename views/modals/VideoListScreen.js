@@ -14,7 +14,7 @@ import YouTubes from "../../components/YouTubes"
 import { baseUnit } from "../../constants/Base"
 
 const VideoListScreen = ({ route, navigation }) => {
-  const colors = useTheme()
+  const { colors } = useTheme()
 
   useEffect(() => {
     navigation.setOptions({
@@ -35,13 +35,13 @@ const VideoListScreen = ({ route, navigation }) => {
     >
       <FlashList
         initialNumToRender={3}
-        estimatedItemSize={videosToShow.length}
+        estimatedItemSize={200}
         automaticallyAdjustsScrollIndicatorInsets={true}
         automaticallyAdjustContentInsets={true}
         contentInsetAdjustmentBehavior={"automatic"}
         contentInset={{ bottom: baseUnit * 8 }}
         data={videosToShow}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => <YouTubes fullWidth={true} item={item} />}
         refreshing={false}
         onEndReachedThreshold={0.6}

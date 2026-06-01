@@ -41,7 +41,7 @@ const Notes = ({ data }) => {
         gap: baseUnit * 3,
       }}
     >
-      {data.artists[0].genres[0] !== "classical" && (
+      {data.artists?.[0]?.genres?.[0] !== "classical" && (
         <Text
           style={{
             fontSize: baseUnit * 1.9,

@@ -21,7 +21,7 @@ const ArtistList = ({ data }) => (
     }}
     initialNumToRender={4}
     data={data}
-    keyExtractor={(item, index) => index}
+    keyExtractor={(item, index) => String(index)}
     renderItem={({ item }) => <Artist item={item} />}
   />
 )

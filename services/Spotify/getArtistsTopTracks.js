@@ -26,7 +26,7 @@ const SpotifyArtistTopTracks = async (authToken, artistID) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

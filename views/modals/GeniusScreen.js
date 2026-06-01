@@ -32,7 +32,7 @@ function GeniusScreen({ route }) {
     navigation.setOptions({
       headerBackground: () => (
         <Image
-          source={route.params.data.spotifyArtistData.images[0].url}
+          source={route.params.data.spotifyArtistData.images?.[0]?.url ?? null}
           placeholder={blurhash}
           transition={250}
           width={width}
@@ -55,8 +55,8 @@ function GeniusScreen({ route }) {
         automaticallyAdjustContentInsets={true}
         contentInsetAdjustmentBehavior={"automatic"}
         contentInset={{ top: baseUnit * 2, bottom: baseUnit * 8 }}
-        estimatedItemSize={route.params.data.annotations.length}
-        keyExtractor={(item, index) => index}
+        estimatedItemSize={100}
+        keyExtractor={(item, index) => String(index)}
         renderItem={({ item }) => (
           <Annotation key={item.annotations[0].id} data={item} />
         )}

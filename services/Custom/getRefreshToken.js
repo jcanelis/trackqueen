@@ -38,7 +38,7 @@ const SpotifyRefreshToken = async (signal) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

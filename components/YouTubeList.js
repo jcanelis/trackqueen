@@ -16,7 +16,7 @@ const YouTubeList = ({ fullWidth, videos }) => {
       directionalLockEnabled={true}
       data={videos}
       initialNumToRender={3}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => String(index)}
       renderItem={({ item }) => <YouTubes fullWidth={fullWidth} item={item} />}
       refreshing={false}
       contentContainerStyle={{

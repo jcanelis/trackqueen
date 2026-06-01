@@ -21,7 +21,7 @@ function GPTQuestions() {
   const spotifyContext = useContext(SpotifyContext)
   const { currentlyPlaying } = spotifyContext
   const { artist, track } = currentlyPlaying
-  const album = currentlyPlaying.spotifyData.album.name
+  const album = currentlyPlaying.spotifyData?.album?.name ?? ""
 
   const headerStyles = {
     fontSize: baseUnit * 2.8,

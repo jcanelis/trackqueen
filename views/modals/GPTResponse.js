@@ -44,7 +44,7 @@ function GPTResponse({ route }) {
   ])
 
   const { isLoading, isError, data, error: gptError } = useQuery({
-    queryKey: ["chat-gpt-response"],
+    queryKey: ["chat-gpt-response", route.params.query],
     queryFn: async ({ signal }) => await ChatGPT(route.params.query, signal),
     refetchOnMount: true,
     enabled: true,
@@ -62,13 +62,13 @@ function GPTResponse({ route }) {
   useEffect(() => {
     return function cleanUp() {
       queryClient.cancelQueries({
-        queryKey: ["chat-gpt-response"],
+        queryKey: ["chat-gpt-response", route.params.query],
       })
       queryClient.resetQueries({
-        queryKey: ["chat-gpt-response"],
+        queryKey: ["chat-gpt-response", route.params.query],
       })
     }
-  }, [queryClient])
+  }, [queryClient, route.params.query])
 
   // Cancel query if app is closed and restart query when back
   useEffect(() => {
@@ -78,11 +78,11 @@ function GPTResponse({ route }) {
         nextAppState === "active"
       ) {
         queryClient.resetQueries({
-          queryKey: ["chat-gpt-response"],
+          queryKey: ["chat-gpt-response", route.params.query],
         })
       } else {
         queryClient.cancelQueries({
-          queryKey: ["chat-gpt-response"],
+          queryKey: ["chat-gpt-response", route.params.query],
         })
       }
 
@@ -93,7 +93,7 @@ function GPTResponse({ route }) {
     return () => {
       subscription.remove()
     }
-  }, [queryClient])
+  }, [queryClient, route.params.query])
 
   if (isLoading)
     return (
@@ -141,7 +141,7 @@ function GPTResponse({ route }) {
           color={GOLD}
           onPress={() =>
             queryClient.resetQueries({
-              queryKey: ["chat-gpt-response"],
+              queryKey: ["chat-gpt-response", route.params.query],
             })
           }
         />
@@ -159,7 +159,7 @@ function GPTResponse({ route }) {
           color={GOLD}
           onPress={() =>
             queryClient.resetQueries({
-              queryKey: ["chat-gpt-response"],
+              queryKey: ["chat-gpt-response", route.params.query],
             })
           }
         />

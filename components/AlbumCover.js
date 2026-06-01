@@ -18,9 +18,9 @@ export default function AlbumCover({ data }) {
   return (
     <Pressable
       onPress={() => {
-        navigation.navigate(currentlyPlaying.spotifyData.album.name, {
-          tracks: data.spotifyAlbumData.tracks.items,
-          albumImage: data.spotifyAlbumData.images[0].url,
+        navigation.navigate(currentlyPlaying.spotifyData?.album?.name, {
+          tracks: data.spotifyAlbumData?.tracks?.items ?? [],
+          albumImage: data.spotifyAlbumData?.images?.[0]?.url ?? null,
         })
       }}
       style={({ pressed }) => [
@@ -31,13 +31,13 @@ export default function AlbumCover({ data }) {
       ]}
     >
       <Image
-        source={data.spotifyAlbumData.images[0].url}
+        source={data.spotifyAlbumData?.images?.[0]?.url ?? null}
         placeholder={blurhash}
         transition={250}
         width={width - baseUnit * 6}
         height={width - baseUnit * 6}
         contentFit={"contain"}
-        accessibilityLabel={currentlyPlaying.spotifyData.album.name}
+        accessibilityLabel={currentlyPlaying.spotifyData?.album?.name}
       />
     </Pressable>
   )

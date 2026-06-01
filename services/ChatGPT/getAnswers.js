@@ -32,7 +32,7 @@ const ChatGPT = async (query, signal) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

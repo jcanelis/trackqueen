@@ -82,7 +82,7 @@ function BioScreen({ route }) {
             title={"Instagram"}
             onPress={() => {
               Linking.openURL(
-                `https://instagram.com/${route.params.data.artistInfo.artist.instagram_name}`
+                `https://instagram.com/${route.params.instagram}`
               )
             }}
           />

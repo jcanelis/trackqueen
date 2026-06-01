@@ -25,7 +25,7 @@ const SpotifyUserSearch = async (user, authToken) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

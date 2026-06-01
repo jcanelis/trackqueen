@@ -56,7 +56,7 @@ const CommentsScreenModel = async ({ track, artist }) => {
   } catch (error) {
     console.error("Error retrieving data in CommentsScreenModel : \n", error)
 
-    return false
+    throw error
   }
 }
 

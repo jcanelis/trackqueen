@@ -25,7 +25,7 @@ const GeniusTrack = async (trackID) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

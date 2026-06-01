@@ -34,14 +34,16 @@ const LyricsFooter = ({ data, hasLyrics }) => {
       {hasLyrics && (
         <View>
           <Musixmatch data={data} />
-          <Image
-            accessibilityLabel={"Muixmatch pixel tracking"}
-            source={data.lyricsData.message.body.lyrics.pixel_tracking_url}
-            height={1}
-            width={1}
-            style={{ opacity: 0 }}
-            placeholder={blurhash}
-          />
+          {data.lyricsData?.message?.body?.lyrics?.pixel_tracking_url ? (
+            <Image
+              accessibilityLabel={"Muixmatch pixel tracking"}
+              source={data.lyricsData.message.body.lyrics.pixel_tracking_url}
+              height={1}
+              width={1}
+              style={{ opacity: 0 }}
+              placeholder={blurhash}
+            />
+          ) : null}
         </View>
       )}
     </View>

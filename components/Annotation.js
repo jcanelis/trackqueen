@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Button, Text, Pressable, View } from "react-native"
 import { useTheme } from "@react-navigation/native"
 import PropTypes from "prop-types"
@@ -18,20 +18,12 @@ const Annotation = ({ data }) => {
   // Setup data
   const annotation = data.annotations[0]
   const lyric = data.range.content
-  const user = data.annotations[0].authors[0]
+  const user = data.annotations[0].authors?.[0] ?? null
 
   // Links to Genius
   const _handlePressButtonAsync = async (url) => {
     await WebBrowser.openBrowserAsync(url)
   }
-
-  useEffect(() => {
-    return function cleanUp() {
-      if (expanded) {
-        setExpanded(false)
-      }
-    }
-  }, [expanded])
 
   return (
     <View
@@ -72,7 +64,7 @@ const Annotation = ({ data }) => {
 
       {expanded && (
         <View style={{ margin: baseUnit * 3 }}>
-          {annotation.verified && (
+          {annotation.verified && user && (
             <Pressable
               onPress={() => {
                 _handlePressButtonAsync(user.user.url)
@@ -87,7 +79,7 @@ const Annotation = ({ data }) => {
               }}
             >
               <Image
-                source={user.user.avatar.medium.url}
+                source={user.user.avatar?.medium?.url ?? null}
                 placeholder={blurhash}
                 transition={250}
                 height={baseUnit * 9}

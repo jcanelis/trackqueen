@@ -28,7 +28,7 @@ const SpotifyAlbumTracks = async (albumID) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

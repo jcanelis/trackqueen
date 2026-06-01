@@ -25,7 +25,7 @@ const SpotifyGetMe = async (authToken) => {
   } catch (error) {
     console.error(error)
 
-    return error
+    throw error
   }
 }
 

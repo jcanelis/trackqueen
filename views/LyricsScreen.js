@@ -170,7 +170,7 @@ function LyricsScreen() {
       scrollsToTop={true}
       scrollToOverflowEnabled={true}
       data={data.lyrics}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => String(index)}
       renderItem={({ item }) =>
         item.length > 0 ? <Lyric content={item} /> : null
       }
@@ -206,7 +206,7 @@ function LyricsScreen() {
             onPress={() => {
               navigation.navigate(currentlyPlaying.artist, {
                 data: data,
-                image: data.spotifyArtistData.images[0].url,
+                image: data.spotifyArtistData.images?.[0]?.url ?? null,
                 bio: data.bio,
                 instagram: data.instagram,
               })
@@ -219,7 +219,7 @@ function LyricsScreen() {
             ]}
           >
             <Image
-              source={data.spotifyArtistData.images[0].url}
+              source={data.spotifyArtistData.images?.[0]?.url ?? null}
               placeholder={blurhash}
               transition={250}
               height={width * 0.85}
