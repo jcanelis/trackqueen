@@ -16,7 +16,7 @@ const SpotifyUserRecentTracks = async (authToken, signal) => {
       mode: "cors",
       headers: {
         Accept: "application/json",
-        Authorization: ` Bearer ${authToken}`,
+        Authorization: `Bearer ${authToken}`,
       },
       signal,
     })

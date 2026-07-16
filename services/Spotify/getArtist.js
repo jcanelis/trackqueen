@@ -18,7 +18,7 @@ const SpotifyArtist = async (artistID) => {
       mode: "cors",
       headers: {
         Accept: "application/json",
-        Authorization: ` Bearer ${userToken}`,
+        Authorization: `Bearer ${userToken}`,
       },
     })
     let responseJSON = await response.json()

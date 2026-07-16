@@ -17,7 +17,7 @@ const SpotifyArtistTopTracks = async (authToken, artistID) => {
       mode: "cors",
       headers: {
         Accept: "application/json",
-        Authorization: ` Bearer ${authToken}`,
+        Authorization: `Bearer ${authToken}`,
       },
     })
     let responseJSON = await response.json()

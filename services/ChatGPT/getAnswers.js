@@ -21,7 +21,7 @@ const ChatGPT = async (query, signal) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: ` Bearer ${Keys.GPT}`,
+        Authorization: `Bearer ${Keys.GPT}`,
       },
       body: JSON.stringify(body),
       signal,
