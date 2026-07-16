@@ -10,17 +10,21 @@ const SpotifyCurrentTrack = async (authToken, signal) => {
   const endpoint = "me/player/currently-playing"
   const url = baseURL + endpoint
 
+  console.log("AUTHHHH", authToken)
+
   try {
     let response = await fetch(url, {
       method: "GET",
       mode: "cors",
       headers: {
         Accept: "application/json",
-        Authorization: ` Bearer ${authToken}`,
+        Authorization: `Bearer ${authToken}`,
       },
       signal,
     })
     let responseJSON = await response.json()
+
+    console.log(responseJSON)
 
     if (responseJSON.item) {
       if (responseJSON.item.name.indexOf(" (") > -1) {
