@@ -9,15 +9,6 @@ import {
 import { useNavigation, useTheme, useFocusEffect } from "@react-navigation/native"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 
-// Expo UI
-import { Button as ButtonExpoUI, Host, Text, RNHostView } from "@expo/ui/swift-ui"
-import {
-  buttonStyle,
-  controlSize,
-  tint,
-  fixedSize,
-} from "@expo/ui/swift-ui/modifiers"
-
 // Expo
 import {
   useAudioRecorder,
@@ -257,7 +248,8 @@ function SoundCheckScreen() {
             padding: baseUnit * 2,
           }}
         >
-        <View 
+
+           <View 
           style={{
             flex: 1,
             alignItems: "center",
@@ -265,6 +257,7 @@ function SoundCheckScreen() {
             padding: baseUnit * 2,
           }}
         >
+
           {screenState === "recording" && (
             <>
               <View style={{ padding: baseUnit * 2 }}>
@@ -288,24 +281,11 @@ function SoundCheckScreen() {
           )}
 
           {(screenState === "idle" || screenState === "not_found") && (
-            <Host >
-              <RNHostView matchContents>
-                <ButtonExpoUI
-                  label={"Start recording"}
-                  onPress={() => handleStartRecording()}
-                  modifiers={[
-                    controlSize("extraLarge"),
-                    buttonStyle("glassProminent"),
-                    tint(GOLD),
-                    fixedSize({
-                      horizontal: true,
-                      vertical: true,
-                  }),
-                ]}>
-                  <Text>Start recording</Text>
-                </ButtonExpoUI>
-              </RNHostView>
-            </Host>
+            <Button
+              title="Start recording"
+              color={GOLD}
+              onPress={handleStartRecording}
+            />
           )}
 
           {screenState === "recording" && (
